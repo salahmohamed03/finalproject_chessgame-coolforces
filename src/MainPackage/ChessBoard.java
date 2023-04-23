@@ -8,29 +8,27 @@ public class ChessBoard extends JFrame{
     public JButton button;
     public String current;
     JPanel ChessBoardPanel;
-    Image pawn;
     public ChessBoard(){initialize();}
 
     public void initialize() {
-        ImageIcon pawnPath = new ImageIcon("src/pieces/pawn.png");
-        pawn = pawnPath.getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        PieceIcons icon = new PieceIcons();
+        initialize_board();
+        draw_chessBoard();
+        get_button("E4").setIcon(new ImageIcon(icon.black_bishop));
+        board.setVisible(true);// show the board
+    }
+    public void initialize_board(){
         board = new JFrame();
         board.setTitle("chess");
         board.setSize(750,535);
         board.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         board.setLocationRelativeTo(null);
         board.setResizable(false);
-        ChessBoardPanel = new JPanel(new GridLayout(8 , 8 , 0 , 0));
-        table();
-        get_button("E4").setIcon(new ImageIcon(pawn));
-        board.setVisible(true);
     }
-
-    public void table(){
-
+    public void draw_chessBoard(){
+        ChessBoardPanel = new JPanel(new GridLayout(8 , 8 , 0 , 0));
         JPanel container = new JPanel(null);
         container.add(ChessBoardPanel);
-
         ChessBoardPanel.setBounds(0,0,500,500);
         JButton [][]pos = new JButton[8][8];
         for(int i = 0 ;i < 8; i++)
