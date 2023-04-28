@@ -3,25 +3,26 @@ package MainPackage;
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginPage extends JFrame {
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
+public class Register extends JFrame {
     Color mainColor =  Color.decode("#FF006E");
     Color secondColor =  Color.decode("#AE2965");
     Color black =  Color.decode("#1B1725");
     Color white =  Color.decode("#FDFFFC");
     public JFrame frame;
-    public int width, height;
-    private ImageIcon backG_image = new ImageIcon("src/Mat/BackG/loginFields.png");
+    private ImageIcon backG_image = new ImageIcon("src/Mat/BackG/registerFields.png");
     private JLabel backG = new JLabel(backG_image);
-
+    public int width,height;
     public JPasswordField passField;
     public JTextField textField;
-    public JButton loginBtn;
-    public JButton registerBtn;
-    public LoginPage(){
-        initialize();
-    }
 
-    public void  initialize(){
+    public JButton submit;
+    public JButton backBtn;
+
+    public Register(){initialize();}
+
+    public void initialize(){
         width = 1440;
         height = 1024;
 
@@ -31,76 +32,57 @@ public class LoginPage extends JFrame {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
+
 
         JLayeredPane base = new JLayeredPane();
-            base.setBounds(0,0,width,height);
+        base.setBounds(0,0,width,height);
 
 
         backG.setBounds(0, 0, width, height);
 
 
+       backBtn = create_backBtn();
+
         JPanel interactive= new JPanel();
             interactive.setOpaque(false);
-            interactive.setBackground(black);
-            interactive.setBounds(879*width/1440,236*height/1024,456*width/1440,484*height/1024);
-            interactive.setLayout(new BorderLayout(0,32));
+            interactive.setBackground(mainColor);
+            interactive.setBounds(310*width/1440,310*height/1024,820*width/1440,480*height/1024);
+            interactive.setLayout(new BorderLayout(0,25));
 
-            //interactive content
+                JLabel register = new JLabel("REGISTER");
+                     register.setHorizontalAlignment(SwingConstants.CENTER);
+                     register.setFont(new Font("Space Grotesk", Font.BOLD, 100));
+                     register.setPreferredSize(new Dimension(0,138));
+                     register.setForeground(white);
+                     //register.setPreferredSize(new Dimension());
 
-        //JPanel interHead = new JPanel();
-                JLabel loginHeader = new JLabel("LOGIN");
-                    loginHeader.setHorizontalAlignment(SwingConstants.CENTER);
-                    loginHeader.setFont(new Font("Space Grotesk", Font.BOLD, 100));
-                    loginHeader.setForeground(white);
-                    loginHeader.setPreferredSize(new Dimension(0,155));
+                 interactive.add(register,BorderLayout.NORTH);
 
+                JPanel fields = new JPanel();
+                    fields.setOpaque(false);
 
-        interactive.add(loginHeader,BorderLayout.NORTH);
+                    fields.setLayout(new GridLayout(2,1,0,75));
 
-        JPanel interBody = new JPanel();
-            interBody.setOpaque(false);
-            interBody.setLayout(new GridLayout(2,1,0,55));
-                    JTextField usernameField = createTextField("username");
-                    JPasswordField passwordField = createPassField();
+                        JTextField username = createTextField("username");
+                        JPasswordField password = createPassField();
 
+                    fields.add(username);
+                    fields.add(password);
 
-            interBody.add(usernameField);
-            interBody.add(passwordField);
+                 interactive.add(fields,BorderLayout.CENTER);
 
-
-        interactive.add(interBody,BorderLayout.CENTER);
-
-
-
-
-
-        JPanel interFoot = new JPanel();
-            interFoot.setPreferredSize(new Dimension(0,80));//112
-            interFoot.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 0));
-            interFoot.setOpaque(false);
-
-                JButton loginBtn = createButton("Login", 1);
-                JButton registerBtn = createButton("Register", 2);
-
-            interFoot.add(loginBtn);
-            interFoot.add(registerBtn);
-
-        interactive.add(interFoot,BorderLayout.SOUTH);
+                submit = createButton("Submit", 1);
+                submit.setPreferredSize(new Dimension(20,110));
+                interactive.add(submit,BorderLayout.SOUTH);
 
 
         base.add(backG, Integer.valueOf(0));
         base.add(interactive, Integer.valueOf(1));
+        base.add(backBtn, Integer.valueOf(1));
 
-        //add to frame
-        //frame.add(backG);
-        //frame.add(createTextField("username"));
-        //frame.add(createPassField());
         frame.add(base);
-
         frame.setVisible(true);
     }
-
     public void dispose (){
         frame.setVisible(false);
     }
@@ -110,7 +92,7 @@ public class LoginPage extends JFrame {
         textField = new JTextField(placeHolder);
 
         //text field design
-        textField.setFont(new Font("Space Grotesk", Font.PLAIN, 40));
+        textField.setFont(new Font("Space Grotesk", Font.PLAIN, 50));
         textField.setBackground(white);
         textField.setForeground(mainColor);
         textField.setOpaque(true);
@@ -122,7 +104,7 @@ public class LoginPage extends JFrame {
         passField = new JPasswordField("password",8);
 
         //text field design
-        passField.setFont(new Font("Space Grotesk", Font.PLAIN, 40));
+        passField.setFont(new Font("Space Grotesk", Font.PLAIN, 50));
         passField.setBackground(white);
         passField.setForeground(mainColor);
         passField.setOpaque(true);
@@ -157,12 +139,15 @@ public class LoginPage extends JFrame {
 
         return button;
     }
-    //check method and action listener
 
-
-
-
-
-
-
+    private JButton create_backBtn(){
+        ImageIcon backImg = new ImageIcon("src/Mat/Buttons/backBtn.png");
+        JButton backBtn = new JButton(backImg);
+        backBtn.setOpaque(false);
+        backBtn.setFocusable(false);
+        backBtn.setBorderPainted(false);
+        backBtn.setBackground(mainColor);
+        backBtn.setBounds(46*width/1440,39*height/1024,65*width/1440,65*height/1024);
+        return backBtn;
+    }
 }
