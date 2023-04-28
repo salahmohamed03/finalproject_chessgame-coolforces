@@ -74,7 +74,6 @@ public class LoginPage extends JFrame {
 
 
 
-
         JPanel interFoot = new JPanel();
             interFoot.setPreferredSize(new Dimension(0,80));//112
             interFoot.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 0));
@@ -158,8 +157,6 @@ public class LoginPage extends JFrame {
         return button;
     }
     //check method and action listener
-
-
     public static void main(String []args)
     {
         LoginPage c = new LoginPage();

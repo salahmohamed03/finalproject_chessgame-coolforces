@@ -1,12 +1,11 @@
 package MainPackage;
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class ChessBoard{
     private JFrame board;
-    private PieceIcons icon;
+    private IconsAndColors icon;
     public JButton button,resign,draw, resign2,draw2;
     public String current;
     public Icon drag;
@@ -15,7 +14,7 @@ public class ChessBoard{
     private JPanel ChessBoardPanel;
     public ChessBoard(){initialize();}
     private void initialize() {
-        icon = new PieceIcons();
+        icon = new IconsAndColors();
         initialize_board();
         setButtons();
         draw_chessBoard();
