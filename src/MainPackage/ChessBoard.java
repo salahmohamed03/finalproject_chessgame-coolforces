@@ -19,7 +19,6 @@ public class ChessBoard{
         setButtons();
         draw_chessBoard();
         initializePieces();
-        boardLight("E4",true);//test
         set_backgrounds();
         board.setVisible(true);// show the board
     }
@@ -53,41 +52,41 @@ public class ChessBoard{
             }
     }
     private void initializePieces(){
-        get_button("A2").setIcon(new ImageIcon(icon.white_pawn));
-        get_button("B2").setIcon(new ImageIcon(icon.white_pawn));
-        get_button("C2").setIcon(new ImageIcon(icon.white_pawn));
-        get_button("D2").setIcon(new ImageIcon(icon.white_pawn));
-        get_button("E2").setIcon(new ImageIcon(icon.white_pawn));
-        get_button("F2").setIcon(new ImageIcon(icon.white_pawn));
-        get_button("G2").setIcon(new ImageIcon(icon.white_pawn));
-        get_button("H2").setIcon(new ImageIcon(icon.white_pawn));
+        get_button("A2").setIcon((icon.white_pawn));
+        get_button("B2").setIcon((icon.white_pawn));
+        get_button("C2").setIcon((icon.white_pawn));
+        get_button("D2").setIcon((icon.white_pawn));
+        get_button("E2").setIcon((icon.white_pawn));
+        get_button("F2").setIcon((icon.white_pawn));
+        get_button("G2").setIcon((icon.white_pawn));
+        get_button("H2").setIcon((icon.white_pawn));
 
-        get_button("A7").setIcon(new ImageIcon(icon.black_pawn));
-        get_button("B7").setIcon(new ImageIcon(icon.black_pawn));
-        get_button("C7").setIcon(new ImageIcon(icon.black_pawn));
-        get_button("D7").setIcon(new ImageIcon(icon.black_pawn));
-        get_button("E7").setIcon(new ImageIcon(icon.black_pawn));
-        get_button("F7").setIcon(new ImageIcon(icon.black_pawn));
-        get_button("G7").setIcon(new ImageIcon(icon.black_pawn));
-        get_button("H7").setIcon(new ImageIcon(icon.black_pawn));
+        get_button("A7").setIcon((icon.black_pawn));
+        get_button("B7").setIcon((icon.black_pawn));
+        get_button("C7").setIcon((icon.black_pawn));
+        get_button("D7").setIcon((icon.black_pawn));
+        get_button("E7").setIcon((icon.black_pawn));
+        get_button("F7").setIcon((icon.black_pawn));
+        get_button("G7").setIcon((icon.black_pawn));
+        get_button("H7").setIcon((icon.black_pawn));
 
-        get_button("A8").setIcon(new ImageIcon(icon.black_rock));
-        get_button("B8").setIcon(new ImageIcon(icon.black_knight));
-        get_button("C8").setIcon(new ImageIcon(icon.black_bishop));
-        get_button("D8").setIcon(new ImageIcon(icon.black_queen));
-        get_button("E8").setIcon(new ImageIcon(icon.black_king));
-        get_button("F8").setIcon(new ImageIcon(icon.black_bishop));
-        get_button("G8").setIcon(new ImageIcon(icon.black_knight));
-        get_button("H8").setIcon(new ImageIcon(icon.black_rock));
+        get_button("A8").setIcon((icon.black_rock));
+        get_button("B8").setIcon(icon.black_knight);
+        get_button("C8").setIcon(icon.black_bishop);
+        get_button("D8").setIcon((icon.black_queen));
+        get_button("E8").setIcon((icon.black_king));
+        get_button("F8").setIcon(icon.black_bishop);
+        get_button("G8").setIcon(icon.black_knight);
+        get_button("H8").setIcon((icon.black_rock));
 
-        get_button("A1").setIcon(new ImageIcon(icon.white_rock));
-        get_button("B1").setIcon(new ImageIcon(icon.white_knight));
-        get_button("C1").setIcon(new ImageIcon(icon.white_bishop));
-        get_button("D1").setIcon(new ImageIcon(icon.white_queen));
-        get_button("E1").setIcon(new ImageIcon(icon.white_king));
-        get_button("F1").setIcon(new ImageIcon(icon.white_bishop));
-        get_button("G1").setIcon(new ImageIcon(icon.white_knight));
-        get_button("H1").setIcon(new ImageIcon(icon.white_rock));
+        get_button("A1").setIcon((icon.white_rock));
+        get_button("B1").setIcon(icon.white_knight);
+        get_button("C1").setIcon(icon.white_bishop);
+        get_button("D1").setIcon(icon.white_queen);
+        get_button("E1").setIcon((icon.white_king));
+        get_button("F1").setIcon(icon.white_bishop);
+        get_button("G1").setIcon(icon.white_knight);
+        get_button("H1").setIcon((icon.white_rock));
     }
     private JButton createButton(String name,String ref, String filename, int x , int y,String color) {
         JButton temp = new JButton(name);
@@ -170,6 +169,33 @@ public class ChessBoard{
         result+= (pos.charAt(0)-'A');
         return result;
     }
+    private Icon getPiece(Icon piece){
+        if(piece == icon.black_pawn)return        icon.black_pawnN   ;
+        else if(piece == icon.black_bishop)return icon.black_bishopN ;
+        else if(piece == icon.black_king)return   icon.black_kingN   ;
+        else if(piece == icon.black_knight)return icon.black_knightN ;
+        else if(piece == icon.black_rock)return   icon.black_rockN   ;
+        else if(piece == icon.black_queen)return  icon.black_queenN  ;
+        else if(piece == icon.white_pawn)return   icon.white_pawnN   ;
+        else if(piece == icon.white_bishop)return icon.white_bishopN ;
+        else if(piece == icon.white_king)return   icon.white_kingN   ;
+        else if(piece == icon.white_knight)return icon.white_knightN ;
+        else if(piece == icon.white_rock)return   icon.white_rockN   ;
+        else if(piece == icon.white_queen)return  icon.white_queenN  ;
+        else if(piece == icon.black_pawnN)return        icon.black_pawn   ;
+        else if(piece == icon.black_bishopN)return icon.black_bishop ;
+        else if(piece == icon.black_kingN)return   icon.black_king   ;
+        else if(piece == icon.black_knightN)return icon.black_knight ;
+        else if(piece == icon.black_rockN)return   icon.black_rock   ;
+        else if(piece == icon.black_queenN)return  icon.black_queen  ;
+        else if(piece == icon.white_pawnN)return   icon.white_pawn   ;
+        else if(piece == icon.white_bishopN)return icon.white_bishop ;
+        else if(piece == icon.white_kingN)return   icon.white_king   ;
+        else if(piece == icon.white_knightN)return icon.white_knight ;
+        else if(piece == icon.white_rockN)return   icon.white_rock   ;
+        else if(piece == icon.white_queenN)return  icon.white_queen  ;
+        return null;
+    }
    private JButton get_button(String pos) {
        return (JButton) ChessBoardPanel.getComponent(get_position(pos));
    }
@@ -190,17 +216,21 @@ public class ChessBoard{
             get_button(pos).setIcon(new ImageIcon(av));
         else
         {
-            //
+            get_button(pos).setIcon(getPiece(get_button(pos).getIcon()));
         }
     }
     else {
         if(empty)
             get_button(pos).setIcon(null);
         else{
-            //
+            get_button(pos).setIcon(getPiece(get_button(pos).getIcon()));
         }
 
     }
+   }
+   public boolean Empty(String pos){
+        if(get_button(pos).getIcon() == null)return true;
+        return false;
    }
    public static void main(String []args)
    {
