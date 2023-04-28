@@ -210,4 +210,8 @@ public class GameStart {
 
         return button;
     }
+    public static void main(String []args)
+    {
+        GameStart c = new GameStart();
+    }
 }

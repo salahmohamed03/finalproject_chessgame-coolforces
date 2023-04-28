@@ -150,4 +150,8 @@ public class Register extends JFrame {
         backBtn.setBounds(46*width/1440,39*height/1024,65*width/1440,65*height/1024);
         return backBtn;
     }
+    public static void main(String []args)
+    {
+        Register c = new Register();
+    }
 }

@@ -160,9 +160,10 @@ public class LoginPage extends JFrame {
     //check method and action listener
 
 
+    public static void main(String []args)
+    {
+        LoginPage c = new LoginPage();
 
-
-
-
+    }
 
 }
