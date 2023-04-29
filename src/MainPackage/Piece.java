@@ -1,5 +1,6 @@
 package MainPackage;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public abstract class Piece {
@@ -28,15 +29,54 @@ class bishop extends Piece {
     //This function returns all moves that the bishop can move
     public ArrayList<String> ValidMoves() {
         //This array list will contain all the valid moves
-        ArrayList<String> result = new ArrayList<>();
-        //Checking for the horizontal move
+        ArrayList<String> greenMove = new ArrayList<>();
+         //Checking for the horizontal move
         String horizontalRight = move(position, 0, 1);
         String horizontalLeft = move(position, 0, -1);
         if ((horizontalRight != null) && (Board.Empty(horizontalRight))) {
-            result.add(horizontalRight);
+            greenMove.add(horizontalRight);
         }
-        if ((horizontalLeft != null) && (Board.Empty(horizontalLeft))) {
-            result.add(horizontalLeft);
+        if ((horizontalLeft != null) && (Board.Empty(horizontalLeft))) { 
+            greenMove.add(horizontalLeft);
+        }
+        //Checking for diagonal moves
+        for (int i = 1; i <= 3; i++) {
+            String firstDiagonalRight = move(position, i, i);
+            String firstDiagonalLeft = move(position, -i, -i);
+            String secondDiagonalRight = move(position, -i, i);
+            String secondDiagonalLeft = move(position, i, -i);
+     
+            if ((firstDiagonalRight != null) && (Board.Empty(firstDiagonalRight))) {
+                greenMove.add(firstDiagonalRight);
+            }
+         
+            if ((firstDiagonalLeft != null) && (Board.Empty(firstDiagonalLeft))) {
+                greenMove.add(firstDiagonalLeft);
+            }
+     
+            if ((secondDiagonalRight != null) && (Board.Empty(secondDiagonalRight))) {
+                greenMove.add(secondDiagonalRight);
+            }
+     
+            if ((secondDiagonalLeft != null) && (Board.Empty(secondDiagonalLeft))) {
+                greenMove.add(secondDiagonalLeft);
+            }
+         }
+             return greenMove;
+    }
+
+    public ArrayList<String> InvalidMoves() {
+
+        //This array List will contain all the invalid moves
+        ArrayList<String> redMove = new ArrayList<>();
+        //Checking for the horizontal move
+        String horizontalRight = move(position, 0, 1);
+        String horizontalLeft = move(position, 0, -1);
+        if ((horizontalRight != null) && !(Board.Empty(horizontalRight))) {
+            redMove.add(horizontalRight);
+        }
+        if ((horizontalLeft != null) && !(Board.Empty(horizontalLeft))) { 
+            redMove.add(horizontalLeft);
         }
         //Checking for diagonal moves
         for (int i = 1; i <= 3; i++) {
@@ -45,35 +85,36 @@ class bishop extends Piece {
             String secondDiagonalRight = move(position, -i, i);
             String secondDiagonalLeft = move(position, i, -i);
     
-            if ((firstDiagonalRight != null) && (Board.Empty(firstDiagonalRight))) {
-                    result.add(firstDiagonalRight);
+            if ((firstDiagonalRight != null) && !(Board.Empty(firstDiagonalRight))) {
+                redMove.add(firstDiagonalRight);
             }
         
-            if ((firstDiagonalLeft != null) && (Board.Empty(firstDiagonalLeft))) {
-                    result.add(firstDiagonalLeft);
+            if ((firstDiagonalLeft != null) && !(Board.Empty(firstDiagonalLeft))) {
+                redMove.add(firstDiagonalLeft);
             }
     
-            if ((secondDiagonalRight != null) && (Board.Empty(secondDiagonalRight))) {
-                    result.add(secondDiagonalRight);
+            if ((secondDiagonalRight != null) && !(Board.Empty(secondDiagonalRight))) {
+                redMove.add(secondDiagonalRight);
             }
     
-            if ((secondDiagonalLeft != null) && (Board.Empty(secondDiagonalLeft))) {
-                    result.add(secondDiagonalLeft);
+            if ((secondDiagonalLeft != null) && !(Board.Empty(secondDiagonalLeft))) {
+                redMove.add(secondDiagonalLeft);
             }
         }
-            return result;
+            return redMove;
     }
         
+    //Colors the available moves green
     public void Select() {
         ArrayList<String> availableMoves = ValidMoves();
         for (String move: availableMoves) {
             Board.boardLight(move, true);
         }
     }
-
+    //Colors the unavailable moves red
     public void Unselect() {
-        ArrayList<String> availableMoves = ValidMoves();
-        for (String move: availableMoves) {
+        ArrayList<String> UnavailableMoves = InvalidMoves();
+        for (String move: UnavailableMoves) {
             Board.boardLight(move, false);
         }
     }
