@@ -39,3 +39,9 @@ class bishop extends Piece{
     }
 }
 // After that make it for all pieces
+class test{
+    public static void main(String []args )
+    {
+
+    }
+}
