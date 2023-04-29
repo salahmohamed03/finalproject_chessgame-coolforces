@@ -32,10 +32,10 @@ class bishop extends Piece {
         //Checking for the horizontal move
         String horizontalRight = move(position, 0, 1);
         String horizontalLeft = move(position, 0, -1);
-        if (Board.Empty(horizontalRight)) {
+        if ((horizontalRight != null) && (Board.Empty(horizontalRight))) {
             result.add(horizontalRight);
         }
-        if (Board.Empty(horizontalLeft)) {
+        if ((horizontalLeft != null) && (Board.Empty(horizontalLeft))) {
             result.add(horizontalLeft);
         }
         //Checking for diagonal moves
@@ -45,19 +45,19 @@ class bishop extends Piece {
             String secondDiagonalRight = move(position, -i, i);
             String secondDiagonalLeft = move(position, i, -i);
     
-            if ((Board.Empty(firstDiagonalRight))) {
+            if ((firstDiagonalRight != null) && (Board.Empty(firstDiagonalRight))) {
                     result.add(firstDiagonalRight);
             }
         
-            if ((Board.Empty(firstDiagonalLeft))) {
+            if ((firstDiagonalLeft != null) && (Board.Empty(firstDiagonalLeft))) {
                     result.add(firstDiagonalLeft);
             }
     
-            if ((Board.Empty(secondDiagonalRight))) {
+            if ((secondDiagonalRight != null) && (Board.Empty(secondDiagonalRight))) {
                     result.add(secondDiagonalRight);
             }
     
-            if ((Board.Empty(secondDiagonalLeft))) {
+            if ((secondDiagonalLeft != null) && (Board.Empty(secondDiagonalLeft))) {
                     result.add(secondDiagonalLeft);
             }
         }
