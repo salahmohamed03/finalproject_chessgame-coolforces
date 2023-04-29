@@ -32,10 +32,10 @@ class bishop extends Piece {
         //Checking for the horizontal move
         String horizontalRight = move(position, 0, 1);
         String horizontalLeft = move(position, 0, -1);
-        if (Board.Empty(horizontalRight)) {
+        if ((horizontalRight != null)) {
             result.add(horizontalRight);
         }
-        if (Board.Empty(horizontalLeft)) {
+        if ((horizontalLeft != null)) {
             result.add(horizontalLeft);
         }
         //Checking for diagonal moves
@@ -44,10 +44,18 @@ class bishop extends Piece {
             String firstDiagonalLeft = move(position, -i, -i);
             String secondDiagonalRight = move(position, -i, i);
             String secondDiagonalLeft = move(position, i, -i);
+            if (firstDiagonalRight != null) {
                 result.add(firstDiagonalRight);
+            }
+            if (firstDiagonalLeft != null) {
                 result.add(firstDiagonalLeft);
+            }
+            if (secondDiagonalRight != null) {
                 result.add(secondDiagonalRight);
+            }
+            if (secondDiagonalLeft != null) {
                 result.add(secondDiagonalLeft);
+            }
         }
         return result;
     }
@@ -71,8 +79,10 @@ class test{
     public static void main(String []args )
     {
         ChessBoard cb = new ChessBoard();
-        bishop b = new bishop(true, "E4",cb);
-        cb.move_piece("C1","E4");
+        bishop b = new bishop(true, "A3",cb);
+        cb.move_piece("C1","A3");
+        bishop c = new bishop(true, "B3", cb);
+        cb.move_piece("F1", "B3");
         b.Select();
     }
 }
