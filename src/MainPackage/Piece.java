@@ -12,6 +12,8 @@ public abstract class Piece {
         //salah: your task is to return the new position after moving
         //Anas: vertical --->number inc, horizontal--->letter increase
         //Anas: letters:A---H, numbers: 1---8
+        //Anas: up vertical ++ , right horizontal ++
+
         String newPos = "";
 
         // your code
@@ -41,4 +43,11 @@ class bishop extends Piece{
     }
 }
 // After that make it for all pieces
+
+class test{
+    public static void main(String []args )
+    {
+
+    }
+}
 
