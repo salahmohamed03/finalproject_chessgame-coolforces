@@ -7,9 +7,11 @@ public abstract class Piece {
     protected boolean pieceSide;
     protected String position;
     // mostafa or anas
-    private String move(String pos , int vertical, int horizontal){
-        // pos is represented like "A1" or "E4"
-        // your task is to return the new position after moving
+    protected String move(String pos , int vertical, int horizontal){
+        //salah: pos is represented like "A1" or "E4"
+        //salah: your task is to return the new position after moving
+        //Anas: vertical --->number inc, horizontal--->letter increase
+        //Anas: letters:A---H, numbers: 1---8
         String newPos = "";
 
         // your code
@@ -39,3 +41,4 @@ class bishop extends Piece{
     }
 }
 // After that make it for all pieces
+
