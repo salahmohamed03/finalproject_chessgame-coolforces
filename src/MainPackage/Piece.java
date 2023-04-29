@@ -8,15 +8,11 @@ public abstract class Piece {
     protected String position;
     // mostafa or anas
     protected String move(String pos , int vertical, int horizontal){
-        //salah: pos is represented like "A1" or "E4"
-        //salah: your task is to return the new position after moving
-        //Anas: vertical --->number inc, horizontal--->letter increase
-        //Anas: letters:A---H, numbers: 1---8
-        //Anas: up vertical ++ , right horizontal ++
-        String s1= String.valueOf((char)(pos.charAt(0)+horizontal));
-        String s2= String.valueOf((char)(pos.charAt(1)+vertical));
-        String newPos = s1+s2;
-        if(newPos.charAt(0)<'A'||newPos.charAt(0)>'H'||newPos.charAt(1)<'1'||newPos.charAt(0)>'8')
+        //Function provides the new position of a piece
+        String posLetter= String.valueOf((char)(pos.charAt(0)+horizontal));
+        String posNumber= String.valueOf((char)(pos.charAt(1)+vertical));
+        String newPos = posLetter+posNumber;
+        if(newPos.charAt(0)<'A'||newPos.charAt(0)>'H'||newPos.charAt(1)<'1'||newPos.charAt(1)>'8')
             return null;
         return newPos;
     }
