@@ -13,11 +13,11 @@ public abstract class Piece {
         //Anas: vertical --->number inc, horizontal--->letter increase
         //Anas: letters:A---H, numbers: 1---8
         //Anas: up vertical ++ , right horizontal ++
-
-        String newPos = "";
-
-        // your code
-
+        String s1= String.valueOf((char)(pos.charAt(0)+horizontal));
+        String s2= String.valueOf((char)(pos.charAt(1)+vertical));
+        String newPos = s1+s2;
+        if(newPos.charAt(0)<'A'||newPos.charAt(0)>'H'||newPos.charAt(1)<'1'||newPos.charAt(0)>'8')
+            return null;
         return newPos;
     }
 }
