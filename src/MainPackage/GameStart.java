@@ -2,18 +2,22 @@ package MainPackage;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class GameStart {
+public class GameStart extends JFrame implements MouseListener {
     Color mainColor =  Color.decode("#FF006E");
+
     Color secondColor =  Color.decode("#AE2965");
     Color black =  Color.decode("#1B1725");
     Color white =  Color.decode("#FDFFFC");
     public JFrame frame;
     private ImageIcon backG_image = new ImageIcon("src/Mat/BackG/nGameSettFields.png");
     private JLabel backG = new JLabel(backG_image);
-    public int width,height;
+    public int width = 1440,height = 1024;
+    public JLayeredPane base;
     public JButton backBtn;
 
     public ImageIcon whiteIcon = new ImageIcon("src/Mat/Buttons/selectWBtn.png");
@@ -31,9 +35,20 @@ public class GameStart {
     public GameStart(){initialize();}
 
     public void initialize(){
-        width = 1440;
-        height = 1024;
 
+        initializeWindow();
+        setBackG();
+        set_backBtn();
+        setHeader();
+        setBlackOrWhite();
+        setOpponentPanel();
+        setTimerPanel();
+        setStartBtn();
+
+        frame.add(base);
+        frame.setVisible(true);
+    }
+    private void initializeWindow() {
         frame = new JFrame();
         frame.setSize(width, height);
         frame.setTitle("Chess game");
@@ -41,76 +56,94 @@ public class GameStart {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        JLayeredPane base = new JLayeredPane();
-        base.setBounds(0,0,width,height);
+        base = new JLayeredPane();
+        frame.add(base);
+    }
+    private void setBackG(){
+        backG.setBounds(0,0,width,height);
+        base.add(backG, Integer.valueOf(0));
+    }
+    private void set_backBtn(){
+        ImageIcon backImg = new ImageIcon("src/Mat/Buttons/backBtn.png");
+        backBtn = new JButton(backImg);
+        backBtn.setOpaque(false);
+        backBtn.setFocusable(false);
+        backBtn.setBorderPainted(false);
+        backBtn.setBackground(mainColor);
 
+        backBtn.addMouseListener(this);
+        backBtn.setBounds(46*width/1440,39*height/1024,65*width/1440,65*height/1024);
 
-        backG.setBounds(0, 0, width, height);
+        base.add(backBtn, Integer.valueOf(1));
 
-        backBtn =  create_backBtn();
+    }
 
+    private void setHeader(){
         JLabel youPlay = createLabel("You play as", 83);
-            youPlay.setBounds(447,81,545,132);
+        youPlay.setBounds(447,81,545,132);
+        base.add(youPlay, Integer.valueOf(1));
 
+    }
 
+    private void setBlackOrWhite(){
         ButtonGroup wORb = new ButtonGroup();
 
-             whiteBtn = new JRadioButton();
-                whiteBtn.setIcon(whiteIcon);
-                whiteBtn.setBounds(186,227,508,400);
-                whiteBtn.setOpaque(false);
-        whiteBtn.addActionListener(e -> {
-            if (e.getSource()==whiteBtn){
-                whiteBtn.setIcon(whiteIconS);
-                blackBtn.setIcon(blackIcon);
-            }
-        });
+        whiteBtn = new JRadioButton();
+        whiteBtn.setIcon(whiteIcon);
+        whiteBtn.setBounds(186,227,508,400);
+        whiteBtn.setOpaque(false);
 
-             blackBtn = new JRadioButton();
-                blackBtn.setIcon(blackIcon);
-                blackBtn.setBounds(745,227,508,400);
-                blackBtn.setOpaque(false);
-        blackBtn.addActionListener(e -> {
-            if (e.getSource()==blackBtn){
-                blackBtn.setIcon(blackIconS);
-                whiteBtn.setIcon(whiteIcon);
-            }
 
-        });
+        blackBtn = new JRadioButton();
+        blackBtn.setIcon(blackIcon);
+        blackBtn.setBounds(745,227,508,400);
+        blackBtn.setOpaque(false);
 
-        //whiteBtn.addActionListener((ActionListener) this);
-        //blackBtn.addActionListener((ActionListener) this);
+
+        whiteBtn.addMouseListener(this);
+        blackBtn.addMouseListener(this);
 
         wORb.add(whiteBtn);
         wORb.add(blackBtn);
 
-        JLabel oppLabel = createLabel("Opponent",60);
-                oppLabel.setBounds(292,663,310,80);
+        base.add(whiteBtn, Integer.valueOf(1));
+        base.add(blackBtn, Integer.valueOf(1));
 
-            //should be players[]
-            String[] players = {"player1","player2","player3"};
+    }
+
+    private void setOpponentPanel(){
+        JLabel oppLabel = createLabel("Opponent",60);
+        oppLabel.setBounds(292,663,310,80);
+
+        //should be players[]
+        String[] players = {"player1","player2","player3"};
         JComboBox playerList = new JComboBox(players);
-            playerList.setBounds(765,685,340,47);
-            playerList.setForeground(mainColor);
-            playerList.setBackground(white);
+        playerList.setBounds(765,685,340,47);
+        playerList.setFont(new Font("Space Grotesk", Font.BOLD, 20));
+        playerList.setForeground(mainColor);
+        playerList.setBackground(white);
 
         ImageIcon add =  new ImageIcon ("src/Mat/Buttons/addBtn.png");
         addPlayerBtn = new JButton(add);
-            addPlayerBtn.setBounds(1150,685,82,47);
-            addPlayerBtn.setOpaque(false);
-            addPlayerBtn.setBackground(black);
-            addPlayerBtn.setBorder(BorderFactory.createEmptyBorder());
+        addPlayerBtn.setBounds(1150,685,82,47);
+        addPlayerBtn.setOpaque(false);
+        addPlayerBtn.setBackground(black);
+        addPlayerBtn.setBorder(BorderFactory.createEmptyBorder());
+
+        addPlayerBtn.addMouseListener(this);
 
 
 
-
+        base.add(oppLabel, Integer.valueOf(1));
+        base.add(playerList,Integer.valueOf(1));
+        base.add(addPlayerBtn,Integer.valueOf(1));
+    }
+    private void setTimerPanel(){
         JLabel timerLabel = createLabel("Timer",60);
-            timerLabel.setBounds(350,760,310,50);
+        timerLabel.setBounds(350,760,310,50);
 
         timerSet = createTextField("00:00:00");
-        /*Format shortTime = DateFormat.getTimeInstance(DateFormat.SHORT);
-            input = new JFormattedTextField(shortTime);*/
-            timerSet.setBounds(828,770,171,40);
+        timerSet.setBounds(828,770,171,40);
 
         ImageIcon on =  new ImageIcon ("src/Mat/Buttons/timerOnBtn.png");
         ImageIcon off =  new ImageIcon ("src/Mat/Buttons/timerOffBtn.png");
@@ -121,39 +154,23 @@ public class GameStart {
         timerOn.setBackground(black);
         timerOn.setBorder(BorderFactory.createEmptyBorder());
 
-         startBtn = createButton("START",1);
-         startBtn.setBounds(1110,900,190,55);
 
-        base.add(backG, Integer.valueOf(0));
-        base.add(backBtn, Integer.valueOf(1));
-        base.add(youPlay, Integer.valueOf(1));
-        base.add(oppLabel, Integer.valueOf(1));
-        base.add(playerList,Integer.valueOf(1));
-        base.add(addPlayerBtn,Integer.valueOf(1));
+        timerOn.addMouseListener(this);
+
+
+
+
         base.add(timerLabel, Integer.valueOf(1));
         base.add(timerOn, Integer.valueOf(1));
         base.add(timerSet, Integer.valueOf(1));
-        base.add(whiteBtn, Integer.valueOf(1));
-        base.add(blackBtn, Integer.valueOf(1));
-        base.add(startBtn, Integer.valueOf(1));
-
-
-        frame.add(base);
-        frame.setVisible(true);
     }
 
-    /*public void actionPerformed(ActionEvent e){
-        if (e.getSource()==whiteBtn){
-            whiteBtn.setIcon(whiteIconS);
-            blackBtn.setIcon(blackIcon);
-        }
-        if (e.getSource()==blackBtn){
-            blackBtn.setIcon(blackIconS);
-            whiteBtn.setIcon(whiteIcon);
-        }
-    }
-
-     */
+   private void setStartBtn(){
+       startBtn = createButton("START",1);
+       startBtn.setBounds(1200,900,190,55);
+       startBtn.addMouseListener(this);
+       base.add(startBtn, Integer.valueOf(1));
+   }
 
     private JButton create_backBtn(){
         ImageIcon backImg = new ImageIcon("src/Mat/Buttons/backBtn.png");
@@ -213,6 +230,51 @@ public class GameStart {
     public static void main(String []args)
     {
         GameStart c = new GameStart();
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (e.getSource()==blackBtn){
+            blackBtn.setIcon(blackIconS);
+            whiteBtn.setIcon(whiteIcon);
+        }
+        if (e.getSource()==whiteBtn){
+            whiteBtn.setIcon(whiteIconS);
+            blackBtn.setIcon(blackIcon);
+        }
+        if(e.getSource()==backBtn){                     // need to be changed so do not create a new page IT IS JUST FOR GUI SHOW
+            HomePage H = new HomePage();
+            frame.setVisible(false);
+        }
+        if(e.getSource()==startBtn){
+            ChessBoard C = new ChessBoard();
+            frame.setVisible(false);
+        }
+        if (e.getSource()==addPlayerBtn){
+            Register R = new Register();
+            R.setDefaultCloseOperation(DISPOSE_ON_CLOSE); //submit action need to be changed
+        }
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
 
     }
 }

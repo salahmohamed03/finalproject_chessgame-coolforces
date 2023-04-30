@@ -1,10 +1,19 @@
 package MainPackage;
 import javax.swing.*;
 import java.awt.*;
+<<<<<<< HEAD
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
+public class History extends JFrame implements MouseListener {
+=======
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class History {
+>>>>>>> cc9ffc2f04ed4d757d65d307691fea72349a34aa
     Color mainColor =  Color.decode("#FF006E");
     Color secondColor =  Color.decode("#AE2965");
     Color black =  Color.decode("#1B1725");
@@ -33,12 +42,22 @@ public class History {
     public JLabel label;
     public JPanel typePanel = new JPanel();
     public JPanel panel = new JPanel();
+<<<<<<< HEAD
+    public JLabel block;
+=======
+>>>>>>> cc9ffc2f04ed4d757d65d307691fea72349a34aa
 
 
     //matches history
     JPanel matchHistory;
 
 
+<<<<<<< HEAD
+    JLabel[] matchArray;
+
+
+=======
+>>>>>>> cc9ffc2f04ed4d757d65d307691fea72349a34aa
 
     public History(){initialize();}
 
@@ -46,10 +65,20 @@ public class History {
 
 
         initializeWindow();
+<<<<<<< HEAD
+        setMatchHistory();
+        createScroll();
+        frame.setVisible(true);
+        //setBackG();
+        //setBtns();
+        //setStats();
+       // setMatchHistory();
+=======
         setBackG();
         setBtns();
         setStats();
         setMatchHistory();
+>>>>>>> cc9ffc2f04ed4d757d65d307691fea72349a34aa
     }
     private void initializeWindow() {
         frame = new JFrame();
@@ -57,6 +86,27 @@ public class History {
         frame.setTitle("Chess game");
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
+<<<<<<< HEAD
+
+
+
+        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+    }
+
+    private void createScroll(){
+
+        scroll = new JScrollPane(matchHistory);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); //change to needed
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.getViewport().setBackground(black);
+        frame.getContentPane().add(scroll);
+
+    }
+
+
+
+=======
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         content = new JPanel();
@@ -82,6 +132,7 @@ public class History {
         base.add(backG, Integer.valueOf(0));
 
     }
+>>>>>>> cc9ffc2f04ed4d757d65d307691fea72349a34aa
     public void setBtns() {
         backBtn = createButton(null,3);
         base.add(backBtn, Integer.valueOf(1));
@@ -170,6 +221,33 @@ public class History {
         label.setOpaque(false);
 
     }
+<<<<<<< HEAD
+
+
+    public void setMatchHistory(){
+        matchHistory = new JPanel();
+        matchHistory.setBackground(black);
+        matchHistory.setLayout(new GridLayout(15+1,1,0,20)); /// rows should be variables +1 is important
+
+        matchHistory.setOpaque(true);
+        matchHistory.setBorder(BorderFactory.createEmptyBorder(20,0,0,0));
+
+        matchArray = new JLabel[15];
+
+        //setHeaderMargin();
+      //  matchHistory.add(new JLabel());
+
+        for (int i = 0 ; i<14 +1 ;i++){
+            matchArray[i]=createMatch("Opponent",1);
+            matchArray[i].addMouseListener(this);
+            matchHistory.add(matchArray[i]);
+        }
+
+        frame.add(matchHistory );
+
+
+
+=======
     public void setMatchHistory(){
         matchHistory = new JPanel();
         matchHistory.setBounds(30*width/1440,368*height/1024,1361*width/1440,600*100*height/1024); //Height should be 71 * number of matches (length of Array)
@@ -182,13 +260,18 @@ public class History {
         }
 
         base.add(matchHistory,Integer.valueOf(1));
+>>>>>>> cc9ffc2f04ed4d757d65d307691fea72349a34aa
     }
 
     private JLabel createMatch(String opp, int result){ /*String name of opponent and the result*/
         ImageIcon win = new ImageIcon("src/Mat/Comp/hist/win.png");
         ImageIcon draw = new ImageIcon("src/Mat/Comp/hist/draw.png");
         ImageIcon lose = new ImageIcon("src/Mat/Comp/hist/lose.png");
+<<<<<<< HEAD
+        block = new JLabel(opp+"                                                                                                                                  ");
+=======
         JLabel block = new JLabel(opp+"                                                                                                                                  ");
+>>>>>>> cc9ffc2f04ed4d757d65d307691fea72349a34aa
         //BE CAREFUL ITS A SPACES!!!!!!!
         //1 = win
         //0 = draw
@@ -202,7 +285,10 @@ public class History {
             block.setIcon(lose);
         }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> cc9ffc2f04ed4d757d65d307691fea72349a34aa
         setMatchLook(block);
 
 
@@ -215,6 +301,10 @@ public class History {
         subject.setOpaque(false);
         subject.setHorizontalTextPosition(JLabel.CENTER);
         subject.setVerticalTextPosition(JLabel.CENTER);
+<<<<<<< HEAD
+        subject.setHorizontalAlignment(JLabel.CENTER);
+=======
+>>>>>>> cc9ffc2f04ed4d757d65d307691fea72349a34aa
 
         subject.setFont(new Font("Space Grotesk", Font.BOLD, 31));
         subject.setForeground(white);
@@ -263,6 +353,50 @@ public class History {
 
         return button;
     }
+<<<<<<< HEAD
+    public static void main(String []args)
+    {
+        History H = new History();
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+       for (int i = 0 ; i<14 +1 ;i++){
+            if (e.getSource() == matchArray[i]) //should change
+                System.out.println("true");
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+
+
+    /*public static void main(String []args)
+    {
+        History c = new History();
+        c.frame.setVisible(true);
+
+    }*/
+=======
 
 
 
@@ -272,4 +406,5 @@ public class History {
         c.frame.setVisible(true);
 
     }
+>>>>>>> cc9ffc2f04ed4d757d65d307691fea72349a34aa
 }
