@@ -62,12 +62,12 @@ public class IconsAndColors {
         black_knightN = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/KnightN.png"),66,57);
         black_rockN   = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/rockN.png"),66,57);
         black_queenN  = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/queenN.png"),66,57);
-        white_pawnN   = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/pawnN.png"),66,57);
-        white_bishopN = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/bishopN.png"),66,57);
-        white_kingN   = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/kingN.png"),66,57);
-        white_knightN = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/KnightN.png"),66,57);
-        white_rockN   = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/rockN.png"),66,57);
-        white_queenN  = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/queenN.png"),66,57);
+        white_pawnN   = this.Resize(new ImageIcon("src/Mat/Comp/game/White/pawnN.png"),66,57);
+        white_bishopN = this.Resize(new ImageIcon("src/Mat/Comp/game/White/bishopN.png"),66,57);
+        white_kingN   = this.Resize(new ImageIcon("src/Mat/Comp/game/White/kingN.png"),66,57);
+        white_knightN = this.Resize(new ImageIcon("src/Mat/Comp/game/White/KnightN.png"),66,57);
+        white_rockN   = this.Resize(new ImageIcon("src/Mat/Comp/game/White/rockN.png"),66,57);
+        white_queenN  = this.Resize(new ImageIcon("src/Mat/Comp/game/White/queenN.png"),66,57);
         mainColor =  Color.decode("#FF006E");
         secondColor =  Color.decode("#AE2965");
         black =  Color.decode("#1B1725");
@@ -78,4 +78,9 @@ public class IconsAndColors {
         Image scaled = icon.getImage().getScaledInstance(width,height,Image.SCALE_SMOOTH);
         return new ImageIcon(scaled);
     }
+    /*public ImageIcon resizeWithRatio(ImageIcon icon){
+        ImageIcon resized = Resize(icon,icon.getIconWidth()*width/1440, icon.getIconHeight()*width/1440);
+
+        return resized;
+    }*/
 }
