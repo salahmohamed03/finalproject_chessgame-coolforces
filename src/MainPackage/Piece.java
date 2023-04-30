@@ -86,10 +86,22 @@ class pawn extends Piece {
     public ArrayList<String> ValidMoves() {
         //This array list will contain all the valid moves
         ArrayList<String> result = new ArrayList<>();
-        
+        String move_one= move(position,1,0);
+        String eat_right=move(position,1,1);
+        String eat_left=move(position,1,-1);
+        result.add(move_one);
+
+        // promotion
+
+        String move_two= move(position,2,0);
+        if(position.charAt(1)=='2'&& Board.Empty(move_one))
+            result.add(move_two);
+        if(eat_right!=null&&!Board.Empty(eat_right))
+            result.add(eat_right);
+        if(eat_left!=null&&!Board.Empty(eat_left))
+            result.add(eat_left);
         return result;
     }
-
     public void Select() {
         ArrayList<String> availableMoves = ValidMoves();
         for (String move: availableMoves) {
