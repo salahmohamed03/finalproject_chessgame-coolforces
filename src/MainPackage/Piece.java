@@ -128,7 +128,30 @@ class king extends Piece {
     public ArrayList<String> ValidMoves() {
         //This array list will contain all the valid moves
         ArrayList<String> result = new ArrayList<>();
-
+        String move_right=move(position,0,1);
+        if(move_right!=null)
+        result.add(move_right);
+        String move_left=move(position,0,-1);
+        if(move_left!=null)
+            result.add(move_left);
+        String move_up=move(position,1,0);
+        if(move_up!=null)
+            result.add(move_up);
+        String move_down=move(position,-1,0);
+        if(move_down!=null)
+            result.add(move_down);
+        String move_up_right=move(position,1,1);
+        if(move_up_right!=null)
+            result.add(move_up_right);
+        String move_up_left=move(position,1,-1);
+        if(move_up_left!=null)
+            result.add(move_up_left);
+        String move_down_right=move(position,-1,1);
+        if(move_down_right!=null)
+            result.add(move_down_right);
+        String move_down_left=move(position,-1,-1);
+        if(move_down_left!=null)
+            result.add(move_down_left);
         return result;
     }
 
