@@ -78,4 +78,9 @@ public class IconsAndColors {
         Image scaled = icon.getImage().getScaledInstance(width,height,Image.SCALE_SMOOTH);
         return new ImageIcon(scaled);
     }
+    /*public ImageIcon resizeWithRatio(ImageIcon icon){
+        ImageIcon resized = Resize(icon,icon.getIconWidth()*width/1440, icon.getIconHeight()*width/1440);
+
+        return resized;
+    }*/
 }
