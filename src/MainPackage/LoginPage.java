@@ -2,6 +2,12 @@ package MainPackage;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LoginPage extends JFrame {
     Color mainColor =  Color.decode("#FF006E");
@@ -17,6 +23,8 @@ public class LoginPage extends JFrame {
     public JTextField textField;
     public JButton loginBtn;
     public JButton registerBtn;
+    public JLabel placeHolder;
+
     public LoginPage(){
         initialize();
     }
@@ -32,12 +40,12 @@ public class LoginPage extends JFrame {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
+        frame.setFocusable(true);
+        frame.requestFocusInWindow();
 
         JLayeredPane base = new JLayeredPane();
             base.setBounds(0,0,width,height);
-
-
-        backG.setBounds(0, 0, width, height);
+            backG.setBounds(0, 0, width, height);
 
 
         JPanel interactive= new JPanel();
@@ -49,7 +57,7 @@ public class LoginPage extends JFrame {
             //interactive content
 
         //JPanel interHead = new JPanel();
-                JLabel loginHeader = new JLabel("LOGIN");
+                JLabel loginHeader = new JLabel("Welcome");
                     loginHeader.setHorizontalAlignment(SwingConstants.CENTER);
                     loginHeader.setFont(new Font("Space Grotesk", Font.BOLD, 100));
                     loginHeader.setForeground(white);
@@ -61,11 +69,13 @@ public class LoginPage extends JFrame {
         JPanel interBody = new JPanel();
             interBody.setOpaque(false);
             interBody.setLayout(new GridLayout(2,1,0,55));
-                    JTextField usernameField = createTextField("username");
+                    JTextField usernameField = createTextField();
                     JPasswordField passwordField = createPassField();
+                    JLabel placeHolderlabel =createLabel();
 
 
             interBody.add(usernameField);
+            interBody.add(placeHolderlabel);
             interBody.add(passwordField);
 
 
@@ -105,9 +115,52 @@ public class LoginPage extends JFrame {
     }
 
 
-    public JTextField createTextField(String placeHolder){
-        textField = new JTextField(placeHolder);
+    public JTextField createTextField(){
+        textField = new JTextField("Username");
+        //function to check if the initial value has changed
+        // It first checks if value of text has changed and then checks if user pressed enter
+        //boolean saveAllowed=false;
+        String initialText=textField.getText();
+        textField.addActionListener(
+            e -> {
+                if (!textField.getText().equals(initialText)) {
+                    textField.addKeyListener(new KeyAdapter() {
+                        public void keyPressed(KeyEvent e) {
+                            if (e.getKeyCode() == KeyEvent.VK_ENTER) 
+                            {
+                                String text = textField.getText();
+                                //System.out.println(text);
+                            }
+                        }
+                    });
+                }
+            }
+        );
 
+        //textField.setFocusable(false);
+        //textfield actionlistener for placeHolder
+        textField.addFocusListener(new FocusListener() 
+        {
+            @Override
+            public void focusGained(FocusEvent e) 
+            {
+                if (textField.getText().equals("Username")) {
+                    textField.setText("");
+                    //textField.setForeground(Color.BLACK);
+                }
+            }   
+
+            @Override
+            public void focusLost(FocusEvent e) 
+            {
+                if (textField.getText().isEmpty()) {
+                    textField.setText("Username");
+                    textField.setForeground(mainColor);
+                }
+            }
+            });
+
+        
         //text field design
         textField.setFont(new Font("Space Grotesk", Font.PLAIN, 40));
         textField.setBackground(white);
@@ -117,15 +170,43 @@ public class LoginPage extends JFrame {
 
         return textField;
     }
-    public JPasswordField createPassField(){
-        passField = new JPasswordField("password",8);
 
-        //text field design
+    //Create a placeHolder
+    public JLabel createLabel()
+    {
+        //placeHolder.setFocusable(false);
+        placeHolder=new JLabel();
+        placeHolder.setForeground(mainColor);
+        return placeHolder;
+    }
+
+    public JPasswordField createPassField(){
+        passField = new JPasswordField();
+
+        //passfield design
         passField.setFont(new Font("Space Grotesk", Font.PLAIN, 40));
         passField.setBackground(white);
         passField.setForeground(mainColor);
         passField.setOpaque(true);
         passField.setBorder(BorderFactory.createEmptyBorder());
+        passField.setText("Password"); // set the initial text
+        passField.setEchoChar('\u2022'); // disables masking
+        passField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                // clear the password field and temporarily disable masking
+                passField.setText("");
+                passField.setEchoChar('\u2022');
+            }
+        
+            @Override
+            public void focusLost(FocusEvent e) {
+                // restore the masking and initial text
+                passField.setEchoChar('\u0000'); //restores masking
+                passField.setText("Password");
+            }
+        });
+
 
         return passField;
     }
@@ -160,7 +241,8 @@ public class LoginPage extends JFrame {
     public static void main(String []args)
     {
         LoginPage c = new LoginPage();
-
+        //User player=new User(c.textField.getText(),c.passField.getPassword());
+        
     }
 
 }

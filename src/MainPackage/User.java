@@ -1,13 +1,20 @@
 package MainPackage;
 
 import java.util.ArrayList;
-// عملتلك الحاجات الاساسية عشان تعرف تتخيل باقي الشغل
+
 public class User {
     private String Username;
-    private String Password;
+    private char[] Password;
     public double WinRate;
     public ArrayList<Match> History;
-    // make the constructor to initialize the name and password
+    
+    //Constructor to intialize username and password
+    public User(String Username, char[] Password)
+    {
+        this.Username=Username;
+        this.Password=Password;
+    }
+    
     // make function to add match to the history
     // function to calculate the win rate
     // use json files to store the data for each instance from this class
