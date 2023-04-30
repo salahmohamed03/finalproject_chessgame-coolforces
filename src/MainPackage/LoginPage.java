@@ -6,15 +6,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class LoginPage extends JFrame implements MouseListener {
-    Color mainColor =  Color.decode("#FF006E");
-    Color secondColor =  Color.decode("#AE2965");
-    Color black =  Color.decode("#1B1725");
-    Color white =  Color.decode("#FDFFFC");
+    IconsAndColors ic = new IconsAndColors();
     public JFrame frame;
-    public int width = 1440, height = 1024;
+    public int width = 870, height = 1024 *width/1440;
+    //int u = width/1440;
+
     public  JLayeredPane  base;
-    private ImageIcon backG_image = new ImageIcon("src/Mat/BackG/loginFields.png");
-    private JLabel backG = new JLabel(backG_image);
+
 
     public JPasswordField passField;
     public JTextField textField;
@@ -40,7 +38,7 @@ public class LoginPage extends JFrame implements MouseListener {
 
     private void initializeWindow() {
         frame = new JFrame();
-        frame.setSize(width, height);
+        frame.setSize(width , height);
         frame.setTitle("Chess game");
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
@@ -51,6 +49,8 @@ public class LoginPage extends JFrame implements MouseListener {
     }
 
     private void setBackG(){
+         ImageIcon backG_image = new ImageIcon("src/Mat/BackG/loginFields.png");
+         JLabel backG = new JLabel(resizeWithRatio(backG_image));
         backG.setBounds(0,0,width,height);
         base.add(backG, Integer.valueOf(0));
     }
@@ -59,8 +59,8 @@ public class LoginPage extends JFrame implements MouseListener {
                 //LOOK
             JLabel loginHeader = new JLabel("LOGIN");
                  loginHeader.setHorizontalAlignment(SwingConstants.CENTER);
-                 loginHeader.setFont(new Font("Space Grotesk", Font.BOLD, 100));
-                 loginHeader.setForeground(white);
+                 loginHeader.setFont(new Font("Space Grotesk", Font.BOLD, 100 *width/1440));
+                 loginHeader.setForeground(ic.white);
 
             loginHeader.setBounds(941*width/1440, 277*height/1024, 320*width/1440, 80*height/1024);
             base.add(loginHeader, Integer.valueOf(1));
@@ -71,7 +71,7 @@ public class LoginPage extends JFrame implements MouseListener {
         JPanel fieldsPanel = new JPanel();
             fieldsPanel.setOpaque(false);
             fieldsPanel.setBounds(879*width/1440, 422*height/1024, 456*width/1440, 190*height/1024);
-            fieldsPanel.setLayout(new GridLayout(2,1,0,55));
+            fieldsPanel.setLayout(new GridLayout(2,1,0,55*width/1440));
 
 
             JTextField usernameField = createTextField("username");
@@ -88,9 +88,9 @@ public class LoginPage extends JFrame implements MouseListener {
         textField = new JTextField(placeHolder);
 
         //text field design
-        textField.setFont(new Font("Space Grotesk", Font.PLAIN, 40));
-        textField.setBackground(white);
-        textField.setForeground(mainColor);
+        textField.setFont(new Font("Space Grotesk", Font.PLAIN, 40*width/1440));
+        textField.setBackground(ic.white);
+        textField.setForeground(ic.mainColor);
         textField.setOpaque(true);
         textField.setBorder(BorderFactory.createEmptyBorder());
 
@@ -100,9 +100,9 @@ public class LoginPage extends JFrame implements MouseListener {
         passField = new JPasswordField("password",8);
 
         //text field design
-        passField.setFont(new Font("Space Grotesk", Font.PLAIN, 40));
-        passField.setBackground(white);
-        passField.setForeground(mainColor);
+        passField.setFont(new Font("Space Grotesk", Font.PLAIN, 40*width/1440));
+        passField.setBackground(ic.white);
+        passField.setForeground(ic.mainColor);
         passField.setOpaque(true);
         passField.setBorder(BorderFactory.createEmptyBorder());
 
@@ -110,9 +110,9 @@ public class LoginPage extends JFrame implements MouseListener {
     }
     public void setBtns(){
         btns =  new JPanel();
-        btns.setBackground(black);
+        btns.setBackground(ic.black);
         btns.setOpaque(false);
-        btns.setLayout(new GridLayout(1,2,10,0));
+        btns.setLayout(new GridLayout(1,2,10*width/1440,0));
         btns.setBounds(870*width/1440, 668*height/1024, 470*width/1440, 60*height/1024);
 
         loginBtn = createButton("Login",1);
@@ -130,20 +130,20 @@ public class LoginPage extends JFrame implements MouseListener {
         button.setFocusable(false);
 
         //design//
-        button.setFont(new Font("Space Grotesk", Font.BOLD, 36));
+        button.setFont(new Font("Space Grotesk", Font.BOLD, 36*width/1440));
         ImageIcon pinkBtn = new ImageIcon("src/Mat/Buttons/pinkBtn.png");
         ImageIcon whiteBtn = new ImageIcon("src/Mat/Buttons/whiteBtn.png");
         switch (btn) {
             case 1 -> {
-                button.setIcon(pinkBtn);
-                button.setForeground(white);
+                button.setIcon(resizeWithRatio(pinkBtn));
+                button.setForeground(ic.white);
             }
             case 2 -> {
-                button.setIcon(whiteBtn);
-                button.setForeground(mainColor);
+                button.setIcon(resizeWithRatio(whiteBtn));
+                button.setForeground(ic.mainColor);
             }
         }
-        button.setBackground(black);//any color. Just to be transparent
+        button.setBackground(ic.black);//any color. Just to be transparent
         button.setOpaque(false);
         button.setHorizontalTextPosition(JButton.CENTER);
         button.setVerticalTextPosition(JButton.CENTER);
@@ -161,12 +161,17 @@ public class LoginPage extends JFrame implements MouseListener {
     public void denyAccess(){
         JLabel incrorrect = new JLabel("Credentials are incorrect");
             incrorrect.setHorizontalAlignment(SwingConstants.CENTER);
-            incrorrect.setFont(new Font("Space Grotesk", Font.BOLD, 25));
-            incrorrect.setForeground(mainColor);
+            incrorrect.setFont(new Font("Space Grotesk", Font.BOLD, 25*width/1440));
+            incrorrect.setForeground(ic.mainColor);
 
-            incrorrect.setBounds(900*width/1440, 750*height/1024, 382*width/1440, 25*height/1024);
+            incrorrect.setBounds(920*width/1440, 750*height/1024, 382*width/1440, 25*height/1024);
         base.add(incrorrect, Integer.valueOf(1));
 
+    }
+    public ImageIcon resizeWithRatio(ImageIcon icon){
+        ImageIcon resized = ic.Resize(icon,icon.getIconWidth()*width/1440, icon.getIconHeight()*width/1440);
+
+        return resized;
     }
 
     public static void main(String []args)

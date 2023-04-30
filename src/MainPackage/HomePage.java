@@ -6,14 +6,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class HomePage extends JFrame implements MouseListener {
-    Color mainColor =  Color.decode("#FF006E");
-    Color secondColor =  Color.decode("#AE2965");
-    Color black =  Color.decode("#1B1725");
-    Color white =  Color.decode("#FDFFFC");
+    IconsAndColors ic = new IconsAndColors();
     public JFrame frame;
-    public int width = 1440, height = 1024;
-    private final ImageIcon backG_image = new ImageIcon("src/Mat/BackG/main.png");
-    private final JLabel backG = new JLabel(backG_image);
+    public int width = 870, height = 1024 * width/1440;
+    private final ImageIcon backG_image =  new ImageIcon("src/Mat/BackG/main.png");
+    private final JLabel backG = new JLabel(resizeWithRatio(backG_image));
 
     public  JLayeredPane base;
 
@@ -74,15 +71,15 @@ public class HomePage extends JFrame implements MouseListener {
     }
     public void setLogo(){
          ImageIcon logo = new ImageIcon("src/Mat/Comp/main/logo.png");
-         JLabel logoLabel = new JLabel(logo);
+         JLabel logoLabel = new JLabel(resizeWithRatio(logo));
          logoLabel.setBounds(1043*width/1440, 96*height/1024, 188*width/1440, 188*height/1024);
          base.add(logoLabel, Integer.valueOf(1));
     }
 
     public void setWelcome(){
         welcome = new JLabel("Welcome " + "username"); // username should be getUsername
-        welcome.setFont(new Font("Space Grotesk", Font.BOLD, 30));
-        welcome.setForeground(white);
+        welcome.setFont(new Font("Space Grotesk", Font.BOLD, 30*width/1440));
+        welcome.setForeground(ic.white);
         welcome.setBounds(984*width/1440, 330*height/1024, 304*width/1440, 25*height/1024);
 
         base.add(welcome, Integer.valueOf(1));
@@ -91,8 +88,8 @@ public class HomePage extends JFrame implements MouseListener {
     public void setStats(){
         stats = new JPanel();
         stats.setBounds(915*width/1440,383*height/1024,420*width/1440,80*height/1024);
-        stats.setBackground(white);
-        stats.setLayout(new GridLayout(1,3,20,0));
+        stats.setBackground(ic.white);
+        stats.setLayout(new GridLayout(1,3,20*width/1440,0));
         stats.setOpaque(false);
 
         setStatsPanel(matchesPanel);
@@ -123,7 +120,7 @@ public class HomePage extends JFrame implements MouseListener {
 
     public void setStatsPanelLook (JPanel panel){
         panel.setOpaque(false);
-        panel.setBackground(black);
+        panel.setBackground(ic.black);
         panel.setLayout(new BorderLayout(0,0));
 
         setStatsLook(label,"text");
@@ -154,18 +151,18 @@ public class HomePage extends JFrame implements MouseListener {
     public void setStatsLook( JLabel label , String type){ //type is number or type
 
         if(type.equals("number"))  {
-            label.setFont(new Font("Space Grotesk", Font.BOLD, 60));
+            label.setFont(new Font("Space Grotesk", Font.BOLD, 60*width/1440));
         }
         else if (type.equals("text")) {
-            label.setFont(new Font("Space Grotesk", Font.BOLD, 20));
+            label.setFont(new Font("Space Grotesk", Font.BOLD, 20*width/1440));
             //System.out.println("t"); //for testing
         }
 
         label.setPreferredSize(new Dimension(0,100*height/1024));
         label.setVerticalTextPosition(JLabel.CENTER);
         label.setHorizontalAlignment(JLabel.CENTER);
-        label.setForeground(mainColor);
-        label.setBackground(black);
+        label.setForeground(ic.mainColor);
+        label.setBackground(ic.black);
         label.setOpaque(false);
 
     }
@@ -173,13 +170,13 @@ public class HomePage extends JFrame implements MouseListener {
 
     public void setBtns(){
         btns =  new JPanel();
-        btns.setBackground(black);
+        btns.setBackground(ic.black);
         btns.setOpaque(false);
         btns.setBounds(915*width/1440, 486*height/1024, 442*width/1440, 273*height/1024);
 
             newGame = createButton("NEW GAME");
             history = createButton("HISTORY");
-            settings=createButton("SETTINGS");
+            settings=createButton("SETTINGS"); //------> under development SHOULD CHANGE COLORS
 
         btns.add(newGame); btns.add(history); btns.add(settings);
 
@@ -189,7 +186,7 @@ public class HomePage extends JFrame implements MouseListener {
     public  void setLogOutBtn(){
         logOut = createButton("Log out");
         logOut.setIcon(null); //to edit the btn appearance
-        logOut.setFont(new Font("Space Grotesk", Font.PLAIN, 25));
+        logOut.setFont(new Font("Space Grotesk", Font.PLAIN, 25*width/1440));
         logOut.setBounds(1086*width/1440, 750*height/1024, 101*width/1440, 30*height/1024);
 
         base.add(logOut, Integer.valueOf(1));
@@ -199,25 +196,31 @@ public class HomePage extends JFrame implements MouseListener {
         JButton button = new JButton(name);
         button.setFocusable(false);
         //design//
-        button.setFont(new Font("Space Grotesk", Font.BOLD, 55));
+        button.setFont(new Font("Space Grotesk", Font.BOLD, 55*width/1440));
         //button.setBounds(80,30,120,40);
         ImageIcon buttonBackG = new ImageIcon("src/Mat/Buttons/pinkBtn2.png");
-        button.setIcon(buttonBackG);
+        button.setIcon(resizeWithRatio(buttonBackG));
         button.setHorizontalTextPosition(JButton.CENTER);
         button.setVerticalTextPosition(JButton.CENTER);
-        button.setBackground(black);
-        button.setForeground(white);
+        button.setBackground(ic.black);
+        button.setForeground(ic.white);
         button.setOpaque(false);
         button.setBorder(BorderFactory.createEmptyBorder());
         button.addMouseListener(this);
         return button;
     }
 
+
     public static void main(String []args)
     {
         HomePage H = new HomePage();
         H.frame.setVisible(true);
 
+    }
+    public ImageIcon resizeWithRatio(ImageIcon icon){
+        ImageIcon resized = ic.Resize(icon,icon.getIconWidth()*width/1440, icon.getIconHeight()*width/1440);
+
+        return resized;
     }
 
     @Override

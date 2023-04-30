@@ -11,39 +11,18 @@ public class History extends JFrame implements MouseListener {
 
 
     private    JScrollPane scroll;
-    Color mainColor =  Color.decode("#FF006E");
+    IconsAndColors ic = new IconsAndColors();
 
-    Color secondColor =  Color.decode("#AE2965");
-    Color black =  Color.decode("#1B1725");
-    Color white =  Color.decode("#FDFFFC");
     public JFrame frame;
 
-    public int width = 1440,height = 1024;
-    public JButton backBtn;
-
-    public JLabel label;
-    public JPanel typePanel = new JPanel();
-    public JPanel panel = new JPanel();
+    public int width = 870,height = 1024 *width/1440;
 
     public JLabel block;
-
-
-
-
-
 
     //matches history
     JPanel matchHistory;
 
-
-
-
-
     JLabel[] matchArray;
-
-
-
-
 
 
     public History(){initialize();}
@@ -77,7 +56,7 @@ public class History extends JFrame implements MouseListener {
         scroll = new JScrollPane(matchHistory);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scroll.getViewport().setBackground(black);
+        scroll.getViewport().setBackground(ic.black);
         frame.getContentPane().add(scroll);
 
     }
@@ -90,11 +69,11 @@ public class History extends JFrame implements MouseListener {
 
     public void setMatchHistory() {
         matchHistory = new JPanel();
-        matchHistory.setBackground(black);
-        matchHistory.setLayout(new GridLayout(15+1 , 1, 0, 20));  //rows should be variables +1 is important
+        matchHistory.setBackground(ic.black);
+        matchHistory.setLayout(new GridLayout(15+1 , 1, 0, 20 *width/1440));  //rows should be variables +1 is important
 
         matchHistory.setOpaque(true);
-        matchHistory.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+        matchHistory.setBorder(BorderFactory.createEmptyBorder(20 *width/1440, 0, 0, 0));
 
         matchArray = new JLabel[15];
 
@@ -118,9 +97,9 @@ public class History extends JFrame implements MouseListener {
         block = new JLabel(opp+"                                                                                                                                ");
 
                 switch (result) {
-                    case 1 : block.setIcon(win); break;
-                    case 0 : block.setIcon(draw); break;
-                    case -1 : block.setIcon(lose); break;
+                    case 1 : block.setIcon(resizeWithRatio(win)); break;
+                    case 0 : block.setIcon(resizeWithRatio(draw)); break;
+                    case -1 : block.setIcon(resizeWithRatio(lose)); break;
                 }
 
         setMatchLook(block);
@@ -136,8 +115,13 @@ public class History extends JFrame implements MouseListener {
 
         subject.setHorizontalAlignment(JLabel.CENTER);
 
-        subject.setFont(new Font("Space Grotesk", Font.BOLD, 31));
-        subject.setForeground(white);
+        subject.setFont(new Font("Space Grotesk", Font.BOLD, 31 *width/1440));
+        subject.setForeground(ic.white);
+    }
+    public ImageIcon resizeWithRatio(ImageIcon icon){
+        ImageIcon resized = ic.Resize(icon,icon.getIconWidth()*width/1440, icon.getIconHeight()*width/1440);
+
+        return resized;
     }
 
     public static void main(String []args)
