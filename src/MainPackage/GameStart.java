@@ -12,7 +12,7 @@ public class GameStart extends JFrame implements MouseListener {
 
     public JFrame frame;
 
-    public int width = 870,height = 1024 *width/1440;
+    public int width = ic.width, height = ic.height;
     public JLayeredPane base;
     public JButton backBtn;
 

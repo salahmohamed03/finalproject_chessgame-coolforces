@@ -8,7 +8,7 @@ import java.awt.event.MouseListener;
 public class HomePage extends JFrame implements MouseListener {
     IconsAndColors ic = new IconsAndColors();
     public JFrame frame;
-    public int width = 870, height = 1024 * width/1440;
+    public int width = ic.width, height = ic.height;
     private final ImageIcon backG_image =  new ImageIcon("src/Mat/BackG/main.png");
     private final JLabel backG = new JLabel(resizeWithRatio(backG_image));
 

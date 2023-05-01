@@ -12,7 +12,7 @@ public class Register extends JFrame implements MouseListener {
     IconsAndColors ic = new IconsAndColors();
     public JFrame frame;
 
-    public int width=870,height=1024 *width/1440;
+    public int width = ic.width, height = ic.height;
     public JLayeredPane base;
     public JPasswordField passField;
     public JTextField textField;

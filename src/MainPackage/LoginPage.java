@@ -8,16 +8,14 @@ import java.awt.event.MouseListener;
 public class LoginPage extends JFrame implements MouseListener {
     IconsAndColors ic = new IconsAndColors();
     public JFrame frame;
-    public int width = 870, height = 1024 *width/1440;
+    public int width = ic.width, height = ic.height;
     //int u = width/1440;
-
-    public  JLayeredPane  base;
-
+    private   JLayeredPane  base;
 
     public JPasswordField passField;
     public JTextField textField;
 
-    public JPanel btns;
+    private JPanel btns;
     public JButton loginBtn;
     public JButton registerBtn;
     public LoginPage(){

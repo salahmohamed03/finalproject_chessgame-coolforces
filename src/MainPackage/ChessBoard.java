@@ -5,16 +5,17 @@ import java.awt.event.ActionEvent;
 
 public class ChessBoard{
     private JFrame board;
-    private IconsAndColors icon;
+    private IconsAndColors icon = new IconsAndColors();
     public JButton button,resign,draw, resign2,draw2;
     public String current;
     public Icon drag;
     public String previous;
     private JPanel container;
     private JPanel ChessBoardPanel;
+    private  int width = icon.width, heigth = icon.height;
     public ChessBoard(){initialize();}
     private void initialize() {
-        icon = new IconsAndColors();
+      //  icon = new IconsAndColors();
         initialize_board();
         setButtons();
         draw_chessBoard();
@@ -27,7 +28,7 @@ public class ChessBoard{
         container = new JPanel(null);
         board.add(container);
         board.setTitle("chess");
-        board.setSize(870,650);
+        board.setSize(width,heigth);
         board.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         board.setLocationRelativeTo(null);
         board.setResizable(false);
@@ -35,7 +36,7 @@ public class ChessBoard{
     private void draw_chessBoard(){
         ChessBoardPanel = new JPanel(new GridLayout(8 , 8 , 0 , 0));
         container.add(ChessBoardPanel);
-        ChessBoardPanel.setBounds(70 ,70,478,478);
+        ChessBoardPanel.setBounds(70 *width/870,70 *width/870,478 *width/870,478 *width/870);
         JButton [][]pos = new JButton[8][8];
         for(int i = 0 ;i < 8; i++)
             for(int j = 0 ; j < 8; j++)
@@ -43,9 +44,9 @@ public class ChessBoard{
                 initialize_button(i,j);
                 action();
                 if ((i + j) % 2 == 0) {
-                    button.setBackground(Color.WHITE);
+                    button.setBackground(icon.white);
                 } else {
-                    button.setBackground(new Color(160, 0, 64));
+                    button.setBackground(icon.secondColor);
                 }
                 pos[i][j] = button;
                 ChessBoardPanel.add(pos[i][j]);
@@ -92,11 +93,11 @@ public class ChessBoard{
         JButton temp = new JButton(name);
         temp.setName(ref);
         temp.setFocusable(false);
-        temp.setFont(new Font("Space Grotesk Light",Font.BOLD,20));
+        temp.setFont(new Font("Space Grotesk Light",Font.BOLD,20 *width/870));
         temp.setBackground(Color.red);
         temp.setForeground(Color.decode(color));
         ImageIcon temp1 = new ImageIcon(filename);//src/Mat/Buttons/resignBtn.png
-        Image btnBG = temp1.getImage().getScaledInstance(75,35,Image.SCALE_SMOOTH);
+        Image btnBG = temp1.getImage().getScaledInstance(75 *width/870,35 *width/870,Image.SCALE_SMOOTH);
         temp.setIcon(new ImageIcon (btnBG));
         temp.setHorizontalTextPosition(JButton.CENTER);
         temp.setVerticalTextPosition(JButton.CENTER);
@@ -108,14 +109,14 @@ public class ChessBoard{
                 System.out.println("hello world");
             }
         });
-        temp.setBounds(x,y,75,35);
+        temp.setBounds(x,y,75 *width/870,35 *width/870);
         return temp;
     }
     private void setButtons() {
-        resign = createButton("Resign","re1","src/Mat/Buttons/drawBtn.png",635,250,"#FF006E");
-        draw = createButton("Draw","dr1","src/Mat/Buttons/resignBtn.png",725,250,"#5F5F5F");//5F5F5F
-        resign2 = createButton("Resign","re2","src/Mat/Buttons/drawBtn.png",635,340,"#FF006E");
-        draw2 = createButton("Draw","dr2","src/Mat/Buttons/resignBtn.png",725,340,"#5F5F5F");
+        resign = createButton("Resign","re1","src/Mat/Buttons/drawBtn.png",635 *width/870,250 *width/870,"#FF006E");
+        draw = createButton("Draw","dr1","src/Mat/Buttons/resignBtn.png",725 *width/870,250 *width/870,"#5F5F5F");//5F5F5F
+        resign2 = createButton("Resign","re2","src/Mat/Buttons/drawBtn.png",635 *width/870,340 *width/870,"#FF006E");
+        draw2 = createButton("Draw","dr2","src/Mat/Buttons/resignBtn.png",725 *width/870,340 *width/870,"#5F5F5F");
         container.add(resign);
         container.add(draw);
         container.add(resign2);
@@ -125,8 +126,8 @@ public class ChessBoard{
 
         ImageIcon temp1 = new ImageIcon("src/Mat/BackG/rgameFields.png");
         JLabel background = new JLabel();
-        background.setIcon(temp1);
-        background.setBounds(0,0,864,614);
+        background.setIcon(icon.resizeWithRatio(temp1, 870));
+        background.setBounds(0,0,864 *width/870,614 *width/870);
         container.add(background);
     }
     private void initialize_button(int i , int j){
@@ -196,7 +197,7 @@ public class ChessBoard{
         else if(piece == icon.white_queenN)return  icon.white_queen  ;
         return null;
     }
-   private JButton get_button(String pos) {
+   public JButton get_button(String pos) {
        return (JButton) ChessBoardPanel.getComponent(get_position(pos));
    }
    public void move_piece(String p1 ,String p2) {
@@ -208,9 +209,9 @@ public class ChessBoard{
    public void boardLight(String pos , boolean flag){
        boolean empty = get_button(pos).getIcon() == null;
        ImageIcon temp1 = new ImageIcon("src/Mat/Comp/game/avMove.png");
-       Image av = temp1.getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH);
+       Image av = temp1.getImage().getScaledInstance(30 *width/870,30 *width/870,Image.SCALE_SMOOTH);
        ImageIcon temp2 = new ImageIcon("src/Mat/Comp/game/noMove.png");
-       Image no = temp2.getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH);
+       Image no = temp2.getImage().getScaledInstance(30 *width/870,30 *width/870,Image.SCALE_SMOOTH);
     if(flag){
         if(empty)
             get_button(pos).setIcon(new ImageIcon(av));
