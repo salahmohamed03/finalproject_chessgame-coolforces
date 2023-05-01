@@ -7,7 +7,7 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                ChessBoard c = new ChessBoard();
+                GameLauncher Gl = new GameLauncher();
 
             }
         });

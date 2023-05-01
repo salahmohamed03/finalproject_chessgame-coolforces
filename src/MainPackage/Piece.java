@@ -1,9 +1,13 @@
 package MainPackage;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public abstract class Piece {
     protected ChessBoard Board;
+    public int id;
+    protected Icon icon;
+    protected ArrayList<String> availableMoves;
     protected boolean pieceSide;
     protected String position;
 
@@ -16,13 +20,29 @@ public abstract class Piece {
             return null;
         return newPos;
     }
+
+    public String getPosition(){
+        return position;
+    }
+    public void transport(String p2){
+        if(p2.equals(position))return;
+        Board.move_piece(position,p2);
+        position = p2;
+    }
+    public abstract void Select();
+    public abstract void Unselect();
 }
 
 class bishop extends Piece {
+
     public bishop(boolean side, String pos, ChessBoard cb) {
         this.Board = cb;
+        id = 3;
+        this.icon = (side)?Board.icon.white_bishop:Board.icon.black_bishop;
         this.pieceSide = side;
         this.position = pos;
+        cb.get_button(pos).setIcon(icon);
+
     }
 
     //This function returns all moves that the bishop can move
@@ -61,14 +81,13 @@ class bishop extends Piece {
     }
 
     public void Select() {
-        ArrayList<String> availableMoves = ValidMoves();
+        availableMoves = ValidMoves();
         for (String move: availableMoves) {
             Board.boardLight(move, true);
         }
     }
 
     public void Unselect() {
-        ArrayList<String> availableMoves = ValidMoves();
         for (String move: availableMoves) {
             Board.boardLight(move, false);
         }
@@ -78,8 +97,11 @@ class bishop extends Piece {
 class pawn extends Piece {
     public pawn(boolean side, String pos, ChessBoard cb) {
         this.Board = cb;
+        id = 6;
+        this.icon = (side)?Board.icon.white_pawn:Board.icon.black_pawn;
         this.pieceSide = side;
         this.position = pos;
+        cb.get_button(pos).setIcon(icon);
     }
 
     //This function returns all moves that the pawn can move
@@ -103,25 +125,25 @@ class pawn extends Piece {
         return result;
     }
     public void Select() {
-        ArrayList<String> availableMoves = ValidMoves();
+        availableMoves = ValidMoves();
         for (String move: availableMoves) {
             Board.boardLight(move, true);
         }
     }
-
     public void Unselect() {
-        ArrayList<String> availableMoves = ValidMoves();
         for (String move: availableMoves) {
             Board.boardLight(move, false);
         }
     }
 }
-
 class king extends Piece {
     public king(boolean side, String pos, ChessBoard cb) {
         this.Board = cb;
+        id = 5;
+        this.icon = (side)?Board.icon.white_king:Board.icon.black_king;
         this.pieceSide = side;
         this.position = pos;
+        cb.get_button(pos).setIcon(icon);
     }
 
     //This function returns all moves that the king can move
@@ -130,7 +152,7 @@ class king extends Piece {
         ArrayList<String> result = new ArrayList<>();
         String move_right=move(position,0,1);
         if(move_right!=null)
-        result.add(move_right);
+            result.add(move_right);
         String move_left=move(position,0,-1);
         if(move_left!=null)
             result.add(move_left);
@@ -156,14 +178,14 @@ class king extends Piece {
     }
 
     public void Select() {
-        ArrayList<String> availableMoves = ValidMoves();
+        availableMoves = ValidMoves();
         for (String move: availableMoves) {
             Board.boardLight(move, true);
         }
     }
 
     public void Unselect() {
-        ArrayList<String> availableMoves = ValidMoves();
+        availableMoves = ValidMoves();
         for (String move: availableMoves) {
             Board.boardLight(move, false);
         }
@@ -173,8 +195,11 @@ class king extends Piece {
 class queen extends Piece {
     public queen(boolean side, String pos, ChessBoard cb) {
         this.Board = cb;
+        id = 4;
+        this.icon = (side)?Board.icon.white_queen:Board.icon.black_queen;
         this.pieceSide = side;
         this.position = pos;
+        cb.get_button(pos).setIcon(icon);
     }
 
     //This function returns all moves that the queen can move
@@ -244,14 +269,14 @@ class queen extends Piece {
     }
 
     public void Select() {
-        ArrayList<String> availableMoves = ValidMoves();
+        availableMoves = ValidMoves();
         for (String move: availableMoves) {
             Board.boardLight(move, true);
         }
     }
 
     public void Unselect() {
-        ArrayList<String> availableMoves = ValidMoves();
+        availableMoves = ValidMoves();
         for (String move: availableMoves) {
             Board.boardLight(move, false);
         }
@@ -261,8 +286,11 @@ class queen extends Piece {
 class rook extends Piece {
     public rook(boolean side, String pos, ChessBoard cb) {
         this.Board = cb;
+        id = 1;
+        this.icon = (side)?Board.icon.white_rook:Board.icon.black_rook;
         this.pieceSide = side;
         this.position = pos;
+        cb.get_button(pos).setIcon(icon);
     }
 
     //This function returns all moves that the rook can move
@@ -313,14 +341,14 @@ class rook extends Piece {
     }
 
     public void Select() {
-        ArrayList<String> availableMoves = ValidMoves();
+        availableMoves = ValidMoves();
         for (String move: availableMoves) {
             Board.boardLight(move, true);
         }
     }
 
     public void Unselect() {
-        ArrayList<String> availableMoves = ValidMoves();
+        availableMoves = ValidMoves();
         for (String move: availableMoves) {
             Board.boardLight(move, false);
         }
@@ -330,8 +358,11 @@ class rook extends Piece {
 class knight extends Piece {
     public knight(boolean side, String pos, ChessBoard cb) {
         this.Board = cb;
+        id = 2;
+        this.icon = (side)?Board.icon.white_knight:Board.icon.black_knight;
         this.pieceSide = side;
         this.position = pos;
+        cb.get_button(pos).setIcon(icon);
     }
 
     //This function returns all moves that the knight can move
@@ -366,14 +397,14 @@ class knight extends Piece {
     }
 
     public void Select() {
-        ArrayList<String> availableMoves = ValidMoves();
+        availableMoves = ValidMoves();
         for (String move: availableMoves) {
             Board.boardLight(move, true);
         }
     }
 
     public void Unselect() {
-        ArrayList<String> availableMoves = ValidMoves();
+        availableMoves = ValidMoves();
         for (String move: availableMoves) {
             Board.boardLight(move, false);
         }
@@ -385,10 +416,12 @@ class test{
     public static void main(String []args )
     {
         ChessBoard cb = new ChessBoard();
-        queen b = new queen(true, "D3",cb);
-        cb.move_piece("D1","D3");
-        cb.move_piece("C1", "A3");
+
+        pawn b = new pawn(true, "E2",cb);
+
+        pawn bb = new pawn(false, "E4",cb);
         b.Select();
+        //b.Unselect();
     }
 }
 
