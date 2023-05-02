@@ -22,7 +22,9 @@ public class ChessBoard{
         draw_chessBoard();
         //initializePieces();
         set_backgrounds();
-        board.setVisible(true);// show the board
+    }
+    public void show(){
+        board.setVisible(true);
     }
     private void initialize_board(){
         board = new JFrame();
@@ -275,6 +277,5 @@ public class ChessBoard{
     public static void main(String []args)
     {
         ChessBoard c = new ChessBoard();
-        Promote p = new Promote();
     }
 }

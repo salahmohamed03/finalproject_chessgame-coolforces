@@ -143,11 +143,13 @@ class pawn extends Piece {
         String eat_right=move(position,sign,sign);
         String eat_left=move(position,sign,-1*sign);
 
-        result.add(move_one);
+        if(move_one!=null)
+             result.add(move_one);
 
         String move_two= move(position,2*sign,0);
         if(position.charAt(1)==((pieceSide)?'2':'7')&& Board.Empty(move_one))
-            result.add(move_two);
+            if(move_two != null)
+                 result.add(move_two);
         if(eat_left != null)
              result.add(eat_left);
         if(eat_right!=null)
@@ -164,8 +166,6 @@ class pawn extends Piece {
             else{
                 String p1 =  move(position, sign, 1);
                 String p2 =  move(position, sign, -1);
-                boolean t1 = !Objects.equals(availableMoves.get(i), p2);
-                boolean t2 = !Objects.equals(availableMoves.get(i), p1);
                 if(Board.isAlly(position,(availableMoves.get(i))) == null)
                     if(!Objects.equals(availableMoves.get(i), p1) && !Objects.equals(availableMoves.get(i), p2))
                         moving.add(availableMoves.get(i));
