@@ -3,6 +3,7 @@ package MainPackage;
 import javax.print.attribute.standard.NumberOfInterveningJobs;
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public abstract class Piece {
     protected ChessBoard Board;
@@ -12,6 +13,7 @@ public abstract class Piece {
     protected boolean pieceSide;
     protected String position;
     public ArrayList<String> eating = new ArrayList<String>();
+    public ArrayList<String> moving = new ArrayList<String>();
 
     //Function provides the new position of a piece
     protected static String move(String pos , int vertical, int horizontal) {
@@ -29,16 +31,21 @@ public abstract class Piece {
     public void removePiece(){
         this.position = null;
     }
-    public void transport(String p2){
+    public void transport(String p2,ArrayList<Piece> pieces){
         if(p2.equals(position))return;
         Board.move_piece(position,p2);
         position = p2;
+        for(Piece p: pieces)
+        {
+            p.availableMoves = p.ValidMoves();
+            p.eating.clear();
+            p.moving.clear();
+            p.eatingMoves();
+        }
     }
     public abstract ArrayList<String> ValidMoves();
     public void Select() {
-        availableMoves = ValidMoves();
-        eatingMoves();
-        for (String move: availableMoves) {
+        for (String move: moving) {
             Board.boardLight(move, true);
         }
         for(String move : eating)
@@ -48,22 +55,23 @@ public abstract class Piece {
     }
 
     public void Unselect() {
-        for (String move: availableMoves) {
+        for (String move: moving) {
             Board.boardLight(move, false);
         }
         for(String move : eating)
         {
             Board.eatingLight(move);
         }
-        eating.clear();
-        availableMoves.clear();
     }
     public void eatingMoves(){
+        eating.clear();
+        moving.clear();
         for(int i = 0 ;i < availableMoves.size();i++){
             if(Board.isAlly(position,(availableMoves.get(i))) == (Object) false){
                 eating.add(availableMoves.get(i));
-                availableMoves.remove(i);
             }
+            else
+                moving.add(availableMoves.get(i));
         }
     }
 }
@@ -131,25 +139,38 @@ class pawn extends Piece {
         //This array list will contain all the valid moves
         ArrayList<String> result = new ArrayList<>();
         int sign =(pieceSide)?1:-1;
-        String move_one= move(position,1*sign,0);
-        String eat_right=move(position,1*sign,1*sign);
-        String eat_left=move(position,1*sign,-1*sign);
+        String move_one= move(position,sign,0);
+        String eat_right=move(position,sign,sign);
+        String eat_left=move(position,sign,-1*sign);
 
-        if(Board.isAlly(position , move_one) != (Object) true && Board.isAlly(position , move_one) != null)
-            eating.add(move_one);
-        else
-            result.add(move_one);
-
-        // promotion
+        result.add(move_one);
 
         String move_two= move(position,2*sign,0);
         if(position.charAt(1)==((pieceSide)?'2':'7')&& Board.Empty(move_one))
             result.add(move_two);
-        if(eat_right!=null&&Board.isAlly(position,eat_right) == (Object) false)
-            eating.add(eat_right);
-        if(eat_left!=null&&Board.isAlly(position,eat_left) == (Object) false)
-            eating.add(eat_left);
+        if(eat_left != null)
+             result.add(eat_left);
+        if(eat_right!=null)
+             result.add(eat_right);
         return result;
+    }
+    public void eatingMoves(){
+        int size = availableMoves.size();
+        int sign = pieceSide?1:-1;
+        for(int i = 0 ;i < size;i++){
+            if(Board.isAlly(position,(availableMoves.get(i))) == (Object) false){
+                    eating.add(availableMoves.get(i));
+            }
+            else{
+                String p1 =  move(position, sign, 1);
+                String p2 =  move(position, sign, -1);
+                boolean t1 = !Objects.equals(availableMoves.get(i), p2);
+                boolean t2 = !Objects.equals(availableMoves.get(i), p1);
+                if(Board.isAlly(position,(availableMoves.get(i))) == null)
+                    if(!Objects.equals(availableMoves.get(i), p1) && !Objects.equals(availableMoves.get(i), p2))
+                        moving.add(availableMoves.get(i));
+            }
+        }
     }
 }
 class king extends Piece {

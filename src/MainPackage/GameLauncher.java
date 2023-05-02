@@ -41,7 +41,7 @@ public class GameLauncher {
         this.pieces.add(new pawn(true, "H2", this.game));
         this.pieces.add(new bishop(false, "F8", this.game));
         this.pieces.add(new bishop(false, "C8", this.game));
-        this.pieces.add(new king(false, "E8", this.game));
+        this.pieces.add(new king(false, "E4", this.game));
         this.pieces.add(new queen(false, "D8", this.game));
         this.pieces.add(new knight(false, "G8", this.game));
         this.pieces.add(new knight(false, "B8", this.game));
@@ -54,13 +54,16 @@ public class GameLauncher {
         this.pieces.add(new pawn(false, "E7", this.game));
         this.pieces.add(new pawn(false, "F7", this.game));
         this.pieces.add(new pawn(false, "G7", this.game));
-        this.pieces.add(new pawn(false, "H7", this.game));
+        this.pieces.add(new pawn(false, "H6", this.game));
+        updateValidMoves(true);
+        updateCapture(true);
+        updateValidMoves(false);
+        updateCapture(false);
     }
-
-    public void Clock(String clickedSquare) {
+    public void handlingMove(String clickedSquare) {
         if (this.getPiece(clickedSquare) == null) {
             if (this.selected != null) {
-                if (!this.selected.availableMoves.contains(clickedSquare) && !this.selected.eating.contains(clickedSquare)) {
+                if (!this.selected.moving.contains(clickedSquare) && !this.selected.eating.contains(clickedSquare)) {
                     this.selected.Unselect();
                     this.selected = null;
                 } else {
@@ -69,7 +72,7 @@ public class GameLauncher {
                     }
 
                     this.selected.Unselect();
-                    this.selected.transport(clickedSquare);
+                    this.selected.transport(clickedSquare,pieces);
                     this.turn = !this.turn;
                     this.selected = null;
                 }
@@ -83,7 +86,7 @@ public class GameLauncher {
                     return;
                 }
 
-                if (!this.selected.availableMoves.contains(clickedSquare) && !this.selected.eating.contains(clickedSquare)) {
+                if (!this.selected.moving.contains(clickedSquare) && !this.selected.eating.contains(clickedSquare)) {
                     this.selected.Unselect();
                     this.selected = null;
                 } else {
@@ -92,7 +95,7 @@ public class GameLauncher {
                     }
 
                     this.selected.Unselect();
-                    this.selected.transport(clickedSquare);
+                    this.selected.transport(clickedSquare,pieces);
                     this.turn = !this.turn;
                     this.selected = null;
                 }
@@ -109,6 +112,11 @@ public class GameLauncher {
 
         }
     }
+    public void Clock(String clickedSquare) {
+        kingEscape(turn);
+        handlingMove(clickedSquare);
+        System.out.println(checkWinner(turn));
+    }
 
     private Piece getPiece(String pos) {
         Iterator var2 = this.pieces.iterator();
@@ -124,7 +132,65 @@ public class GameLauncher {
 
         return p;
     }
-
+        public ArrayList<String> possession(boolean side){
+        ArrayList<String> result = new ArrayList<>();
+        for(Piece p : pieces){
+            if(p.pieceSide == side)
+            {
+                ArrayList<String> temp = p.ValidMoves();
+                for(int i = 0 ; i< temp.size();i++)
+                {
+                    result.add(temp.get(i));
+                }
+            }
+        }
+        return result;
+    }
+    private ArrayList<String> kingMoves(boolean side){
+        for(Piece p : pieces){
+            if(p.pieceSide == side && p.id == 5){
+                return p.ValidMoves();
+            }
+        }
+        return null;
+    }
+    private void updateCapture(boolean turn){
+        for(Piece p : pieces){
+            if(p.pieceSide == turn){
+                p.eatingMoves();
+            }
+        }
+    }
+    private void updateValidMoves(boolean turn){
+        for(Piece p: pieces)
+        {
+            if(p.pieceSide == turn)
+            {
+                p.availableMoves = p.ValidMoves();
+            }
+        }
+    }
+    private Object checkWinner(boolean turn){
+        if(!turn){
+            if(possession(true).containsAll(Objects.requireNonNull(kingMoves(false))))
+                return true;
+        }
+        else{
+            if(possession(false).containsAll(Objects.requireNonNull(kingMoves(true))))
+                return false;
+        }
+        return null;
+    }
+    private void kingEscape(boolean side){
+        for(Piece p : pieces){
+            if(p.pieceSide == side&&p.id == 5)
+            {
+                ArrayList<String> temp = possession(!side);
+                p.availableMoves.removeAll(possession(!side));
+                p.eatingMoves();
+            }
+        }
+    }
     private void removePiece(String pos) {
         for(int i = 0; i < this.pieces.size(); ++i) {
             if (((Piece)this.pieces.get(i)).getPosition().equals(pos)) {
@@ -133,7 +199,6 @@ public class GameLauncher {
         }
 
     }
-
     private void filterAllies(Piece mine) {
         for(int i = 0; i < mine.availableMoves.size(); ++i) {
             if (this.ally(mine, (String)mine.availableMoves.get(i))) {
@@ -156,3 +221,53 @@ public class GameLauncher {
         Promote p = new Promote();
     }
 }
+
+//    public ArrayList<String> possession(boolean side){
+//        ArrayList<String> result = new ArrayList<>();
+//        for(Piece p : pieces){
+//            if(p.pieceSide == side)
+//            {
+//                ArrayList<String> temp = p.ValidMoves();
+//                for(int i = 0 ; i< temp.size();i++)
+//                {
+//                    result.add(temp.get(i));
+//                }
+//            }
+//        }
+//        return result;
+//    }
+//    private ArrayList<String> kingMoves(boolean side){
+//        for(Piece p : pieces){
+//            if(p.pieceSide == side && p.id == 5){
+//                return p.ValidMoves();
+//            }
+//        }
+//        return null;
+//    }
+//    private void updateCapture(boolean turn){
+//        for(Piece p : pieces){
+//            if(p.pieceSide == turn){
+//                p.eatingMoves();
+//            }
+//        }
+//    }
+//    private void updateValidMoves(boolean turn){
+//        for(Piece p: pieces)
+//        {
+//            if(p.pieceSide == turn)
+//            {
+//                p.availableMoves = p.ValidMoves();
+//            }
+//        }
+//    }
+//    private Object checkWinner(boolean turn){
+//        if(!turn){
+//            if(possession(true).containsAll(Objects.requireNonNull(kingMoves(false))))
+//                return true;
+//        }
+//        else{
+//            if(possession(false).containsAll(Objects.requireNonNull(kingMoves(true))))
+//                return false;
+//        }
+//        return null;
+//    }
