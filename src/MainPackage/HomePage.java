@@ -10,7 +10,7 @@ public class HomePage extends JFrame implements MouseListener {
     public JFrame frame;
     public int width = ic.width, height = ic.height;
     private final ImageIcon backG_image =  new ImageIcon("src/Mat/BackG/main.png");
-    private final JLabel backG = new JLabel(resizeWithRatio(backG_image));
+    private final JLabel backG = new JLabel(ic.resizeWithRatio(backG_image));
 
     public  JLayeredPane base;
 
@@ -71,7 +71,7 @@ public class HomePage extends JFrame implements MouseListener {
     }
     public void setLogo(){
          ImageIcon logo = new ImageIcon("src/Mat/Comp/main/logo.png");
-         JLabel logoLabel = new JLabel(resizeWithRatio(logo));
+         JLabel logoLabel = new JLabel(ic.resizeWithRatio(logo));
          logoLabel.setBounds(1043*width/1440, 96*height/1024, 188*width/1440, 188*height/1024);
          base.add(logoLabel, Integer.valueOf(1));
     }
@@ -199,7 +199,7 @@ public class HomePage extends JFrame implements MouseListener {
         button.setFont(new Font("Space Grotesk", Font.BOLD, 55*width/1440));
         //button.setBounds(80,30,120,40);
         ImageIcon buttonBackG = new ImageIcon("src/Mat/Buttons/pinkBtn2.png");
-        button.setIcon(resizeWithRatio(buttonBackG));
+        button.setIcon(ic.resizeWithRatio(buttonBackG));
         button.setHorizontalTextPosition(JButton.CENTER);
         button.setVerticalTextPosition(JButton.CENTER);
         button.setBackground(ic.black);
@@ -217,17 +217,12 @@ public class HomePage extends JFrame implements MouseListener {
         H.frame.setVisible(true);
 
     }
-    public ImageIcon resizeWithRatio(ImageIcon icon){
-        ImageIcon resized = ic.Resize(icon,icon.getIconWidth()*width/1440, icon.getIconHeight()*width/1440);
-
-        return resized;
-    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource()==newGame){
-            GameStart G = new GameStart();
             frame.setVisible(false);
+            GameStart G = new GameStart();
         }
         if (e.getSource()==history){
             History H = new History();
@@ -235,8 +230,8 @@ public class HomePage extends JFrame implements MouseListener {
        // if (e.getSource()==settings){
        // }
         if (e.getSource()==logOut){
-            LoginPage L = new LoginPage();
             frame.setVisible(false);
+            LoginPage L = new LoginPage();
         }
     }
 

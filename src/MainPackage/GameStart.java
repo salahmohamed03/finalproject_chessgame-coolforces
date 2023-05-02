@@ -57,13 +57,13 @@ public class GameStart extends JFrame implements MouseListener {
     }
     private void setBackG(){
          ImageIcon backG_image = new ImageIcon("src/Mat/BackG/nGameSettFields.png");
-         JLabel backG = new JLabel(resizeWithRatio(backG_image));
+         JLabel backG = new JLabel(ic.resizeWithRatio(backG_image));
         backG.setBounds(0,0,width,height);
         base.add(backG, Integer.valueOf(0));
     }
     private void set_backBtn(){
         ImageIcon backImg = new ImageIcon("src/Mat/Buttons/backBtn.png");
-        backBtn = new JButton(resizeWithRatio(backImg));
+        backBtn = new JButton(ic.resizeWithRatio(backImg));
         backBtn.setOpaque(false);
         backBtn.setFocusable(false);
         backBtn.setBorderPainted(false);
@@ -87,13 +87,13 @@ public class GameStart extends JFrame implements MouseListener {
         ButtonGroup wORb = new ButtonGroup();
 
         whiteBtn = new JRadioButton();
-        whiteBtn.setIcon(resizeWithRatio(whiteIcon));
+        whiteBtn.setIcon(ic.resizeWithRatio(whiteIcon));
         whiteBtn.setBounds(186 *width/1440,227 *width/1440,508 *width/1440,400 *width/1440);
         whiteBtn.setOpaque(false);
 
 
         blackBtn = new JRadioButton();
-        blackBtn.setIcon(resizeWithRatio(blackIcon));
+        blackBtn.setIcon(ic.resizeWithRatio(blackIcon));
         blackBtn.setBounds(745 *width/1440,227 *width/1440,508 *width/1440,400 *width/1440);
         blackBtn.setOpaque(false);
 
@@ -122,7 +122,7 @@ public class GameStart extends JFrame implements MouseListener {
         playerList.setBackground(ic.white);
 
         ImageIcon add =  new ImageIcon ("src/Mat/Buttons/addBtn.png");
-        addPlayerBtn = new JButton(resizeWithRatio(add));
+        addPlayerBtn = new JButton(ic.resizeWithRatio(add));
         addPlayerBtn.setBounds(1150 *width/1440,685 *width/1440,82 *width/1440,47 *width/1440);
         addPlayerBtn.setOpaque(false);
         addPlayerBtn.setBackground(ic.black);
@@ -145,8 +145,8 @@ public class GameStart extends JFrame implements MouseListener {
 
         ImageIcon on =  new ImageIcon ("src/Mat/Buttons/timerOnBtn.png");
         ImageIcon off =  new ImageIcon ("src/Mat/Buttons/timerOffBtn.png");
-        timerOn = new JCheckBox(resizeWithRatio(off));
-        timerOn.setSelectedIcon(resizeWithRatio(on));
+        timerOn = new JCheckBox(ic.resizeWithRatio(off));
+        timerOn.setSelectedIcon(ic.resizeWithRatio(on));
         timerOn.setBounds(1100 *width/1440,767 *width/1440,146 *width/1440,47 *width/1440);
         timerOn.setOpaque(false);
         timerOn.setBackground(ic.black);
@@ -172,7 +172,7 @@ public class GameStart extends JFrame implements MouseListener {
 
     private JButton create_backBtn(){
         ImageIcon backImg = new ImageIcon("src/Mat/Buttons/backBtn.png");
-        JButton backBtn = new JButton(resizeWithRatio(backImg));
+        JButton backBtn = new JButton(ic.resizeWithRatio(backImg));
         backBtn.setOpaque(false);
         backBtn.setFocusable(false);
         backBtn.setBorderPainted(false);
@@ -208,11 +208,11 @@ public class GameStart extends JFrame implements MouseListener {
         ImageIcon whiteBtn = new ImageIcon("src/Mat/Buttons/whiteBtn.png");
         switch (btn) {
             case 1 -> {
-                button.setIcon(resizeWithRatio(pinkBtn));
+                button.setIcon(ic.resizeWithRatio(pinkBtn));
                 button.setForeground(ic.white);
             }
             case 2 -> {
-                button.setIcon(resizeWithRatio(whiteBtn));
+                button.setIcon(ic.resizeWithRatio(whiteBtn));
                 button.setForeground(ic.mainColor);
             }
         }
@@ -225,11 +225,6 @@ public class GameStart extends JFrame implements MouseListener {
 
         return button;
     }
-    public ImageIcon resizeWithRatio(ImageIcon icon){
-        ImageIcon resized = ic.Resize(icon,icon.getIconWidth()*width/1440, icon.getIconHeight()*width/1440);
-
-        return resized;
-    }
     public static void main(String []args)
     {
         GameStart c = new GameStart();
@@ -239,12 +234,12 @@ public class GameStart extends JFrame implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource()==blackBtn){
-            blackBtn.setIcon(resizeWithRatio(blackIconS));
-            whiteBtn.setIcon(resizeWithRatio(whiteIcon));
+            blackBtn.setIcon(ic.resizeWithRatio(blackIconS));
+            whiteBtn.setIcon(ic.resizeWithRatio(whiteIcon));
         }
         if (e.getSource()==whiteBtn){
-            whiteBtn.setIcon(resizeWithRatio(whiteIconS));
-            blackBtn.setIcon(resizeWithRatio(blackIcon));
+            whiteBtn.setIcon(ic.resizeWithRatio(whiteIconS));
+            blackBtn.setIcon(ic.resizeWithRatio(blackIcon));
         }
         if(e.getSource()==backBtn){                     // need to be changed so do not create a new page IT IS JUST FOR GUI SHOW
             HomePage H = new HomePage();

@@ -53,13 +53,13 @@ public class Register extends JFrame implements MouseListener {
     }
     private void setBackG(){
          ImageIcon backG_image = new ImageIcon("src/Mat/BackG/registerFields.png");
-         JLabel backG = new JLabel(resizeWithRatio(backG_image));
+         JLabel backG = new JLabel(ic.resizeWithRatio(backG_image));
         backG.setBounds(0,0,width,height);
         base.add(backG, Integer.valueOf(0));
     }
     private void set_backBtn(){
         ImageIcon backImg = new ImageIcon("src/Mat/Buttons/backBtn.png");
-        backBtn = new JButton(resizeWithRatio(backImg));
+        backBtn = new JButton(ic.resizeWithRatio(backImg));
         backBtn.setOpaque(false);
         backBtn.setFocusable(false);
         backBtn.setBorderPainted(false);
@@ -138,11 +138,11 @@ public class Register extends JFrame implements MouseListener {
         ImageIcon whiteBtn = new ImageIcon("src/Mat/Buttons/whiteBtn.png");
         switch (btn) {
             case 1 -> {
-                button.setIcon(resizeWithRatio(pinkBtn));
+                button.setIcon(ic.resizeWithRatio(pinkBtn));
                 button.setForeground(ic.white);
             }
             case 2 -> {
-                button.setIcon(resizeWithRatio(whiteBtn));
+                button.setIcon(ic.resizeWithRatio(whiteBtn));
                 button.setForeground(ic.mainColor);
             }
         }
@@ -154,11 +154,6 @@ public class Register extends JFrame implements MouseListener {
         button.setBorder(BorderFactory.createEmptyBorder());
 
         return button;
-    }
-    public ImageIcon resizeWithRatio(ImageIcon icon){
-        ImageIcon resized = ic.Resize(icon,icon.getIconWidth()*width/1440, icon.getIconHeight()*width/1440);
-
-        return resized;
     }
 
 

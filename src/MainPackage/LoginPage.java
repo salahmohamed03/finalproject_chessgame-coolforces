@@ -180,6 +180,7 @@ public class LoginPage extends JFrame implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        frame.setVisible(false);
         if (e.getSource()==loginBtn){
             //check
             HomePage H = new HomePage();
@@ -188,7 +189,6 @@ public class LoginPage extends JFrame implements MouseListener {
             Register R = new Register();
             R.previousPage=0;
         }
-        frame.setVisible(false);
     }
 
     @Override

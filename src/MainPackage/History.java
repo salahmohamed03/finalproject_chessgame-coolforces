@@ -89,13 +89,13 @@ public class History extends JFrame implements MouseListener {
 
         switch (result) {
             case 1:
-                block.setIcon(resizeWithRatio(win));
+                block.setIcon(ic.resizeWithRatio(win));
                 break;
             case 0:
-                block.setIcon(resizeWithRatio(draw));
+                block.setIcon(ic.resizeWithRatio(draw));
                 break;
             case -1:
-                block.setIcon(resizeWithRatio(lose));
+                block.setIcon(ic.resizeWithRatio(lose));
                 break;
         }
 
@@ -107,7 +107,7 @@ public class History extends JFrame implements MouseListener {
         int size = 145;
         char[] spaces = new char[size];
         Arrays.fill(spaces, ' ');
-        System.out.println(opponent.length());
+        //System.out.println(opponent.length());
         for (int i = 0; i < opponent.length(); i++) {
             spaces[i] = opponent.charAt(i);
         }
@@ -125,12 +125,6 @@ public class History extends JFrame implements MouseListener {
 
         subject.setFont(new Font("Space Grotesk", Font.BOLD, 31 * width / 1440));
         subject.setForeground(ic.white);
-    }
-
-    public ImageIcon resizeWithRatio(ImageIcon icon) {
-        ImageIcon resized = ic.Resize(icon, icon.getIconWidth() * width / 1440, icon.getIconHeight() * width / 1440);
-
-        return resized;
     }
 
     @Override

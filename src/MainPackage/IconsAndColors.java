@@ -28,22 +28,20 @@ public class IconsAndColors {
     public Icon white_pawnN;
     public Icon white_queenN;
     public Icon white_rookN;
-    public Icon black_bishopE;
-    public Icon black_kingE;
-    public Icon black_knightE;
-    public Icon black_pawnE;
-    public Icon black_queenE;
-    public Icon black_rookE;
-    public Icon white_bishopE;
-    public Icon white_kingE;
-    public Icon white_knightE;
-    public Icon white_pawnE;
-    public Icon white_queenE;
-    public Icon white_rookE;
     public Color mainColor;
     public Color secondColor ;
     public Color black ;
     public Color white ;
+
+
+    public ImageIcon blackBishopP ;
+    public ImageIcon blackKnightP ;
+    public ImageIcon blackQueenP ;
+    public ImageIcon blackRookP ;
+    public ImageIcon whiteBishopP;
+    public ImageIcon whiteKnightP ;
+    public ImageIcon whiteQueenP ;
+    public ImageIcon whiteRookP ;
     public int width, height;
 
     public IconsAndColors() {
@@ -90,24 +88,20 @@ public class IconsAndColors {
         white_knightN = this.Resize(new ImageIcon("src/Mat/Comp/game/White/KnightN.png"),66 *width/870,57 *width/870);
         white_rookN = this.Resize(new ImageIcon("src/Mat/Comp/game/White/rockN.png"),66 *width/870,57 *width/870);
         white_queenN  = this.Resize(new ImageIcon("src/Mat/Comp/game/White/queenN.png"),66 *width/870,57 *width/870);
-
-        black_pawnE   = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/pawnS.png"),66  *width/870,57 *width/870);
-        black_bishopE = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/bishopS.png"),66 *width/870,57 *width/870);
-        black_kingE   = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/kingS.png"),66 *width/870,57 *width/870);
-        black_knightE = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/KnightS.png"),66 *width/870,57 *width/870);
-        black_rookE   = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/rockS.png"),66 *width/870,57 *width/870);
-        black_queenE  = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/queenS.png"),66 *width/870,57 *width/870);
-        white_pawnE   = this.Resize(new ImageIcon("src/Mat/Comp/game/White/pawnS.png"),66 *width/870,57 *width/870);
-        white_bishopE = this.Resize(new ImageIcon("src/Mat/Comp/game/White/bishopS.png"),66 *width/870,57 *width/870);
-        white_kingE   = this.Resize(new ImageIcon("src/Mat/Comp/game/White/kingS.png"),66 *width/870,57 *width/870);
-        white_knightE = this.Resize(new ImageIcon("src/Mat/Comp/game/White/KnightS.png"),66 *width/870,57 *width/870);
-        white_rookE = this.Resize(new ImageIcon("src/Mat/Comp/game/White/rockS.png"),66 *width/870,57 *width/870);
-        white_queenE  = this.Resize(new ImageIcon("src/Mat/Comp/game/White/queenS.png"),66 *width/870,57 *width/870);
-
         mainColor =  Color.decode("#FF006E");
         secondColor =  Color.decode("#AE2965");
         black =  Color.decode("#1B1725");
         white =  Color.decode("#FDFFFC");
+
+        blackBishopP = new ImageIcon("src/Mat/Comp/game/promote/BlackBishopP.png");
+        blackKnightP = new ImageIcon("src/Mat/Comp/game/promote/BlackKnightP.png");
+        blackQueenP = new ImageIcon("src/Mat/Comp/game/promote/BlackQueenP.png");
+        blackRookP = new ImageIcon("src/Mat/Comp/game/promote/BlackRookP.png");
+        whiteBishopP = new ImageIcon("src/Mat/Comp/game/promote/WhiteBishopP.png");
+        whiteKnightP = new ImageIcon("src/Mat/Comp/game/promote/WhiteKnightP.png");
+        whiteQueenP = new ImageIcon("src/Mat/Comp/game/promote/WhiteQueenP.png");
+        whiteRookP = new ImageIcon("src/Mat/Comp/game/promote/WhiteRookP.png");
+
     }
 
     public ImageIcon Resize(ImageIcon icon, int width, int height){
@@ -116,6 +110,11 @@ public class IconsAndColors {
     }
     public ImageIcon resizeWithRatio(ImageIcon icon, int refWidth){ //refWidth is the width you worked on!!
         ImageIcon resized = Resize(icon,icon.getIconWidth() *width/refWidth, icon.getIconHeight()*width/refWidth);
+
+        return resized;
+    }
+    public ImageIcon resizeWithRatio(ImageIcon icon){ //override!!
+        ImageIcon resized = Resize(icon,icon.getIconWidth() *width/1440, icon.getIconHeight()*width/1440);
 
         return resized;
     }
