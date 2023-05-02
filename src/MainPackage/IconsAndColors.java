@@ -32,7 +32,18 @@ public class IconsAndColors {
     public Color secondColor ;
     public Color black ;
     public Color white ;
-
+    public Icon black_bishopE;
+    public Icon black_kingE;
+    public Icon black_knightE;
+    public Icon black_pawnE;
+    public Icon black_queenE;
+    public Icon black_rookE;
+    public Icon white_bishopE;
+    public Icon white_kingE;
+    public Icon white_knightE;
+    public Icon white_pawnE;
+    public Icon white_queenE;
+    public Icon white_rookE;
 
     public ImageIcon blackBishopP ;
     public ImageIcon blackKnightP ;
@@ -92,6 +103,19 @@ public class IconsAndColors {
         secondColor =  Color.decode("#AE2965");
         black =  Color.decode("#1B1725");
         white =  Color.decode("#FDFFFC");
+
+        black_pawnE   = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/pawnS.png"),66  *width/870,57 *width/870);
+        black_bishopE = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/bishopS.png"),66 *width/870,57 *width/870);
+        black_kingE   = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/kingS.png"),66 *width/870,57 *width/870);
+        black_knightE = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/KnightS.png"),66 *width/870,57 *width/870);
+        black_rookE   = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/rockS.png"),66 *width/870,57 *width/870);
+        black_queenE  = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/queenS.png"),66 *width/870,57 *width/870);
+        white_pawnE   = this.Resize(new ImageIcon("src/Mat/Comp/game/White/pawnS.png"),66 *width/870,57 *width/870);
+        white_bishopE = this.Resize(new ImageIcon("src/Mat/Comp/game/White/bishopS.png"),66 *width/870,57 *width/870);
+        white_kingE   = this.Resize(new ImageIcon("src/Mat/Comp/game/White/kingS.png"),66 *width/870,57 *width/870);
+        white_knightE = this.Resize(new ImageIcon("src/Mat/Comp/game/White/KnightS.png"),66 *width/870,57 *width/870);
+        white_rookE = this.Resize(new ImageIcon("src/Mat/Comp/game/White/rockS.png"),66 *width/870,57 *width/870);
+        white_queenE  = this.Resize(new ImageIcon("src/Mat/Comp/game/White/queenS.png"),66 *width/870,57 *width/870);
 
         blackBishopP = new ImageIcon("src/Mat/Comp/game/promote/BlackBishopP.png");
         blackKnightP = new ImageIcon("src/Mat/Comp/game/promote/BlackKnightP.png");

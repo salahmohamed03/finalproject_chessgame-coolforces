@@ -15,10 +15,7 @@ public class Promote implements MouseListener {
     IconsAndColors ic = new IconsAndColors();
     private JPanel btnsPromote;
     private  int width = ic.width, height = ic.height;
-
-
-    public Promote() {}
-    public void promote() {
+    public  Promote() {
 
         promotePanel = new JFrame();
         promotePanel.setUndecorated(true);
