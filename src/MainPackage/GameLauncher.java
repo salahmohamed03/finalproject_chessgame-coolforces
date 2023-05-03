@@ -26,10 +26,10 @@ public class GameLauncher {
 
     public void initializePieces() {
         this.pieces = new ArrayList();
-        this.pieces.add(new bishop(true, "C4", game));
+        this.pieces.add(new bishop(true, "F1", game));
         this.pieces.add(new bishop(true, "C1", game));
         this.pieces.add(new king(true, "E1", game));
-        this.pieces.add(new queen(true, "F3", game));
+        this.pieces.add(new queen(true, "D1", game));
         this.pieces.add(new knight(true, "G1", game));
         this.pieces.add(new knight(true, "B1", game));
         this.pieces.add(new rook(true, "H1", game));
