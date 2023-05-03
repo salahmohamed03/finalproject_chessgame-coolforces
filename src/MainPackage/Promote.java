@@ -119,7 +119,6 @@ public class Promote implements MouseListener {
             selected = 1;
             promoteDispose();
         }
-
         gl.promote(gl.posProm,gl.turnProm,selected);
     }
 

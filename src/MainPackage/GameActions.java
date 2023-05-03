@@ -6,15 +6,8 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class GameActions {package MainPackage;
+public class GameActions implements MouseListener{
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
-    public class Promote implements MouseListener {
         JFrame frame;
         private JPanel promotePanel;
         private JLayeredPane base ;
@@ -80,12 +73,12 @@ import java.awt.event.MouseListener;
 //        frame.setAlwaysOnTop(true);
 //        frame.setVisible(true);
 //    }
-        public void promotionWindow(int color){
+        public void promotionWindow(boolean side){
             initializeWindow();
             setPromoteBackG();
             setPromotePanel();
             setpromoteHeader();
-            setBtns( color );
+            setBtns(side);
 
             frame.add(base);
             frame.setVisible(true);
@@ -133,15 +126,15 @@ import java.awt.event.MouseListener;
             //System.out.println("55");
 
         }
-        private void setBtns( int color ){
+        private void setBtns(boolean side){
             btnsPromote = new JPanel();
             btnsPromote.setBorder(new EmptyBorder(20 *width/1440,20 *width/1440,20 *width/1440,20 *width/1440));
             btnsPromote.setLayout(new GridLayout(0,4, 10 *width/1440, 0));
             btnsPromote.setOpaque(false);
             //Should be if statement to decide wether they are black or white
-            if(color == 1)
+            if(side)
                 makeWhiteBtns();
-            else if(color == 2)
+            else if(side)
                 makeBlackBtns();
             promotePanel.add(btnsPromote, BorderLayout.SOUTH);
             System.out.println("322");
@@ -180,7 +173,6 @@ import java.awt.event.MouseListener;
             initializeResultFrame();
             checkResult(i);
             frame.setVisible(true);
-
         }
         private void initializeResultFrame(){
             frame = new JFrame();
@@ -205,15 +197,7 @@ import java.awt.event.MouseListener;
                     resultLabel.setIcon(ic.resizeWithRatio(ic.bWin));
                     break;
             }
-
             frame.add(resultLabel);
-        }
-
-
-
-        public static void main(String[] args) {
-            MainPackage.Promote P = new MainPackage.Promote();
-            P.promotionWindow(1);
         }
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -236,9 +220,10 @@ import java.awt.event.MouseListener;
                 System.out.println("Rook");
                 selected = 1;
                 promoteDispose();
-            }if ((e.getSource()== resultLabel)){
+            }if ((e.getSource() == resultLabel)){
                 frame.dispose();
                 System.out.println("aaa");
+                return;
             }
 
             gl.promote(gl.posProm,gl.turnProm,selected);
@@ -263,6 +248,9 @@ import java.awt.event.MouseListener;
         public void mouseExited(MouseEvent e) {
 
         }
+        public static void main(String[] args)
+        {
+            GameActions g = new GameActions();
+            g.showResult(0);
+        }
     }
-
-}

@@ -75,6 +75,14 @@ public abstract class Piece {
                 moving.add(availableMoves.get(i));
         }
     }
+    public ArrayList<String> movable(){
+        ArrayList<String> result = new ArrayList<String>();
+        for(String m : moving){
+            if(Board.isAlly(position,m) == null)
+                result.add(m);
+        }
+        return result;
+    }
 }
 
 class bishop extends Piece {

@@ -128,10 +128,8 @@ public class IconsAndColors {
         whiteRookP = new ImageIcon("src/Mat/Comp/game/promote/WhiteRookP.png");
 
         wWin = new ImageIcon("src/Mat/Comp/game/Wwin.png");
-        bWin = new ImageIcon("src/Mat/Comp/game/Bwin.png");
+        bWin = new ImageIcon("src/Mat/Comp/game/bWin.png");
         draw = new ImageIcon("src/Mat/Comp/game/draw.png");
-
-
     }
 
     public ImageIcon Resize(ImageIcon icon, int width, int height){

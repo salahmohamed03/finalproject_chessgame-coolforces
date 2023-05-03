@@ -5,9 +5,7 @@
 
 package MainPackage;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Objects;
+import java.util.*;
 
 public class GameLauncher {
     static public ChessBoard game = new ChessBoard();
@@ -15,7 +13,8 @@ public class GameLauncher {
     public Piece selected;
     public String posProm;
     public boolean turnProm;
-    public Promote promotion;
+    public GameActions promotion;
+    public GameActions result;
     public boolean turn;
     public GameLauncher() {
         this.game.setClock(this);
@@ -111,7 +110,15 @@ public class GameLauncher {
         kingEscape(turn);
         handlingMove(clickedSquare);
         checkPromotion(!turn);
-        System.out.println(checkWinner(turn));
+        isEndGame(turn);
+    }
+    private void isEndGame(boolean turn){
+        if(checkWinner(turn) == (Object) true){
+            promotion.showResult(1);
+        }
+        else if(checkWinner(turn) == (Object) false){
+            promotion.showResult(-1);
+        }
     }
     private Piece getPiece(String pos){
         for(Piece p : pieces){
@@ -121,14 +128,14 @@ public class GameLauncher {
         return null;
     }
     private void checkPromotion(boolean turn){
-        promotion = new Promote(turn);
+        promotion = new GameActions();
         this.promotion.gl = this;
         if(getPromoted(turn) != null)
         {
             posProm = Objects.requireNonNull(getPromoted(turn)).position;
             turnProm = turn;
             removePiece(posProm);
-            promotion.promotionWindow();
+            promotion.promotionWindow(turn);
         }
     }
     public void promote(String pos,boolean side,int id){
@@ -151,7 +158,6 @@ public class GameLauncher {
         }
         return null;
     }
-
     public ArrayList<String> possession(boolean side){
         ArrayList<String> result = new ArrayList<>();
         for(Piece p : pieces){
@@ -169,7 +175,10 @@ public class GameLauncher {
     private ArrayList<String> kingMoves(boolean side){
         for(Piece p : pieces){
             if(p.pieceSide == side && p.id == 5){
-                return p.ValidMoves();
+                ArrayList<String> result =  new ArrayList<String>();
+                result.addAll(p.eating);
+                result.addAll(p.movable());
+                return result;
             }
         }
         return null;
