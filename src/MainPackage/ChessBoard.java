@@ -228,10 +228,34 @@ public class ChessBoard{
         else if(piece == icon.white_knight)return  true;
         else if(piece == icon.white_rook)return  true;
         else if(piece == icon.white_queen)return  true;
+        else if(piece == icon.black_pawnN)return  false;
+        else if(piece == icon.black_bishopN)return false;
+        else if(piece == icon.black_kingN)return false;
+        else if(piece == icon.black_knightN)return false;
+        else if(piece == icon.black_rookN)return false;
+        else if(piece == icon.black_queenN)return false;
+        else if(piece == icon.white_pawnN)return  true;
+        else if(piece == icon.white_bishopN)return  true;
+        else if(piece == icon.white_kingN)return  true;
+        else if(piece == icon.white_knightN)return  true;
+        else if(piece == icon.white_rookN)return  true;
+        else if(piece == icon.white_queenN)return  true;
+        else if(piece == icon.black_pawnE)return  false;
+        else if(piece == icon.black_bishopE)return false;
+        else if(piece == icon.black_kingE)return false;
+        else if(piece == icon.black_knightE)return false;
+        else if(piece == icon.black_rookE)return false;
+        else if(piece == icon.black_queenE)return false;
+        else if(piece == icon.white_pawnE)return  true;
+        else if(piece == icon.white_bishopE)return  true;
+        else if(piece == icon.white_kingE)return  true;
+        else if(piece == icon.white_knightE)return  true;
+        else if(piece == icon.white_rookE)return  true;
+        else if(piece == icon.white_queenE)return  true;
         return null;
     }
     public Object isAlly(String p1, String p2){
-        if(getSide(p2) == null )return null;
+        if(getSide(p2) == null)return null;
         return (boolean) (getSide(p1) == getSide(p2));
     }
     public JButton getButton(String pos) {

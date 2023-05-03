@@ -67,6 +67,7 @@ public abstract class Piece {
         eating.clear();
         moving.clear();
         for(int i = 0 ;i < availableMoves.size();i++){
+           Object t = Board.isAlly(position,(availableMoves.get(i)));
             if(Board.isAlly(position,(availableMoves.get(i))) == (Object) false){
                 eating.add(availableMoves.get(i));
             }

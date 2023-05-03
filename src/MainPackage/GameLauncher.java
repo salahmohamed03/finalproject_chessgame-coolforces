@@ -21,7 +21,7 @@ public class GameLauncher {
         this.game.setClock(this);
         this.promotion.gl = this;
         this.initializePieces();
-        this.turn = false;
+        this.turn = true;
     }
 
     public void initializePieces() {
@@ -29,7 +29,7 @@ public class GameLauncher {
         this.pieces.add(new bishop(true, "F1", this.game));
         this.pieces.add(new bishop(true, "C1", this.game));
         this.pieces.add(new king(true, "E1", this.game));
-        this.pieces.add(new queen(true, "D1", this.game));
+        this.pieces.add(new queen(true, "F3", this.game));
         this.pieces.add(new knight(true, "G1", this.game));
         this.pieces.add(new knight(true, "B1", this.game));
         this.pieces.add(new rook(true, "H1", this.game));
@@ -44,7 +44,7 @@ public class GameLauncher {
         this.pieces.add(new pawn(true, "H2", this.game));
         this.pieces.add(new bishop(false, "F8", this.game));
         this.pieces.add(new bishop(false, "C8", this.game));
-        this.pieces.add(new king(false, "E4", this.game));
+        this.pieces.add(new king(false, "E6", this.game));
         this.pieces.add(new queen(false, "D8", this.game));
         this.pieces.add(new knight(false, "G8", this.game));
         this.pieces.add(new knight(false, "B8", this.game));
@@ -81,7 +81,7 @@ public class GameLauncher {
 
             }
         } else {
-            boolean side = ((Piece)Objects.requireNonNull(this.getPiece(clickedSquare))).pieceSide;
+            boolean side = (Objects.requireNonNull(this.getPiece(clickedSquare))).pieceSide;
             Piece piece = this.getPiece(clickedSquare);
             if (side != this.turn) {
                 if (this.selected == null) {
