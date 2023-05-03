@@ -225,7 +225,7 @@ public class GameActions implements MouseListener{
                 System.out.println("aaa");
                 return;
             }
-            gl.promotionStatus = true;
+            gl.gameStatus = true;
             gl.promote(gl.posProm,gl.turnProm,selected);
         }
 

@@ -13,55 +13,57 @@ public class GameLauncher {
     public Piece selected;
     public String posProm;
     public boolean turnProm;
-    public boolean promotionStatus;
+    public boolean gameStatus;
     public GameActions promotion;
     public GameActions result;
     public boolean turn;
     public GameLauncher() {
-        this.game.setClock(this);
+        game.setClock(this);
         this.initializePieces();
         this.turn = true;
-        promotionStatus = true;
+        gameStatus = true;
     }
 
     public void initializePieces() {
         this.pieces = new ArrayList();
-        this.pieces.add(new bishop(true, "F1", this.game));
-        this.pieces.add(new bishop(true, "C1", this.game));
-        this.pieces.add(new king(true, "E1", this.game));
-        this.pieces.add(new queen(true, "F3", this.game));
-        this.pieces.add(new knight(true, "G1", this.game));
-        this.pieces.add(new knight(true, "B1", this.game));
-        this.pieces.add(new rook(true, "H1", this.game));
-        this.pieces.add(new rook(true, "A1", this.game));
-        this.pieces.add(new pawn(true, "A2", this.game));
-        this.pieces.add(new pawn(true, "B2", this.game));
-        this.pieces.add(new pawn(true, "C2", this.game));
-        this.pieces.add(new pawn(true, "D2", this.game));
-        this.pieces.add(new pawn(true, "E2", this.game));
-        this.pieces.add(new pawn(true, "F2", this.game));
-        this.pieces.add(new pawn(true, "G2", this.game));
-        this.pieces.add(new pawn(true, "H2", this.game));
-        this.pieces.add(new bishop(false, "F8", this.game));
-        this.pieces.add(new bishop(false, "C8", this.game));
-        this.pieces.add(new king(false, "E6", this.game));
-        this.pieces.add(new queen(false, "D8", this.game));
-        this.pieces.add(new knight(false, "G8", this.game));
-        this.pieces.add(new knight(false, "B8", this.game));
-        this.pieces.add(new rook(false, "H8", this.game));
-        this.pieces.add(new rook(false, "A8", this.game));
-        this.pieces.add(new pawn(false, "A7", this.game));
-        this.pieces.add(new pawn(false, "B7", this.game));
-        this.pieces.add(new pawn(false, "C7", this.game));
-        this.pieces.add(new pawn(false, "D7", this.game));
-        this.pieces.add(new pawn(false, "E7", this.game));
-        this.pieces.add(new pawn(false, "F7", this.game));
-        this.pieces.add(new pawn(false, "G7", this.game));
-        this.pieces.add(new pawn(false, "H7", this.game));
+        this.pieces.add(new bishop(true, "C4", game));
+        this.pieces.add(new bishop(true, "C1", game));
+        this.pieces.add(new king(true, "E1", game));
+        this.pieces.add(new queen(true, "F3", game));
+        this.pieces.add(new knight(true, "G1", game));
+        this.pieces.add(new knight(true, "B1", game));
+        this.pieces.add(new rook(true, "H1", game));
+        this.pieces.add(new rook(true, "A1", game));
+        this.pieces.add(new pawn(true, "A2", game));
+        this.pieces.add(new pawn(true, "B2", game));
+        this.pieces.add(new pawn(true, "C2", game));
+        this.pieces.add(new pawn(true, "D2", game));
+        this.pieces.add(new pawn(true, "E2", game));
+        this.pieces.add(new pawn(true, "F2", game));
+        this.pieces.add(new pawn(true, "G2", game));
+        this.pieces.add(new pawn(true, "H2", game));
+        this.pieces.add(new bishop(false, "F8",game));
+        this.pieces.add(new bishop(false, "C8",game));
+        this.pieces.add(new king(false, "E8", game));
+        this.pieces.add(new queen(false, "D8", game));
+        this.pieces.add(new knight(false, "G8",game));
+        this.pieces.add(new knight(false, "B8",game));
+        this.pieces.add(new rook(false, "H8", game));
+        this.pieces.add(new rook(false, "A8", game));
+        this.pieces.add(new pawn(false, "A7", game));
+        this.pieces.add(new pawn(false, "B7", game));
+        this.pieces.add(new pawn(false, "C7", game));
+        this.pieces.add(new pawn(false, "D7", game));
+        this.pieces.add(new pawn(false, "E7", game));
+        this.pieces.add(new pawn(false, "F7", game));
+        this.pieces.add(new pawn(false, "G7", game));
+        this.pieces.add(new pawn(false, "H7", game));
         updateValidMoves(true);
         updateCapture(true);
         updateValidMoves(false);
         updateCapture(false);
+        kingEscape(turn);
+        kingChecked(turn);
     }
     public void handlingMove(String clickedSquare) {
         if (this.getPiece(clickedSquare) == null) {
@@ -109,18 +111,21 @@ public class GameLauncher {
         }
     }
     public void Clock(String clickedSquare) {
-        if(!promotionStatus)return;
-        kingEscape(turn);
+        if(!gameStatus)return;
         handlingMove(clickedSquare);
         checkPromotion(!turn);
+        kingEscape(turn);
+        kingChecked(turn);
         isEndGame(turn);
     }
     private void isEndGame(boolean turn){
         if(checkWinner(turn) == (Object) true){
             promotion.showResult(1);
+            gameStatus = false;
         }
         else if(checkWinner(turn) == (Object) false){
             promotion.showResult(-1);
+            gameStatus = false;
         }
     }
     private Piece getPiece(String pos){
@@ -135,7 +140,7 @@ public class GameLauncher {
         this.promotion.gl = this;
         if(getPromoted(turn) != null)
         {
-            promotionStatus = false;
+            gameStatus = false;
             posProm = Objects.requireNonNull(getPromoted(turn)).position;
             turnProm = turn;
             removePiece(posProm);
@@ -167,11 +172,11 @@ public class GameLauncher {
         for(Piece p : pieces){
             if(p.pieceSide == side)
             {
-                ArrayList<String> temp = p.ValidMoves();
-                for(int i = 0 ; i< temp.size();i++)
-                {
-                    result.add(temp.get(i));
-                }
+                ArrayList<String> temp = new ArrayList<String>();
+                temp.addAll(p.eating);
+                temp.addAll(p.moving);
+                result.addAll(temp);
+                System.out.println();
             }
         }
         return result;
@@ -182,6 +187,7 @@ public class GameLauncher {
                 ArrayList<String> result =  new ArrayList<String>();
                 result.addAll(p.eating);
                 result.addAll(p.movable());
+                result.add(p.position);
                 return result;
             }
         }
@@ -205,12 +211,98 @@ public class GameLauncher {
     }
     private Object checkWinner(boolean turn){
         if(!turn){
-            if(possession(true).containsAll(Objects.requireNonNull(kingMoves(false))))
+            ArrayList<String> temp = new ArrayList<String>(possession(false));
+            temp.removeAll(getPiece(false,5).moving);
+            if(temp.size() == 0&& getPiece(false,5).movable().size() == 0)
                 return true;
         }
         else{
-            if(possession(false).containsAll(Objects.requireNonNull(kingMoves(true))))
+            ArrayList<String> temp = new ArrayList<String>(possession(true));
+            temp.removeAll(getPiece(true,5).moving);
+            if(temp.size() == 0&& getPiece(true,5).movable().size() == 0)
                 return false;
+        }
+        return null;
+    }
+    private Piece getPiece(boolean side , int id){
+        for(Piece p :pieces){
+            if(p.pieceSide == side && p.id == id){
+                return p;
+            }
+        }
+        return null;
+    }
+    private void kingChecked(boolean side){
+        if(threateningKing(side).size()  == 0)return;
+        if(threateningKing(side).size() == 1){
+            Piece attacker = threateningKing(side).get(0);
+            if(attacker.id == 2 || attacker.id == 3 || attacker.id == 6)
+                eatThreat(attacker.position,side);
+            else if(attacker.id == 4 || attacker.id == 1){
+                if(attacker.position.charAt(0) == kingPosition(side).charAt(0)){
+                    blockCheck(1,attacker.position,side);
+                    kingWay(0,attacker.position,side);
+                }
+                else if(attacker.position.charAt(1) == kingPosition(side).charAt(1)){
+                    blockCheck(0,attacker.position,side);
+                    kingWay(1,attacker.position,side);
+                }
+                else if(attacker.id == 4){
+                    eatThreat(attacker.position,side);
+                }
+            }
+        }
+    }
+    private  void kingWay(int axis,String position ,boolean side){
+        ArrayList<String> notAllowed = new ArrayList<String>();
+        for(Piece p:pieces){
+            if(p.id == 5 &&p.pieceSide == side){
+                for(String pos:p.moving){if(pos.charAt(axis)==position.charAt(axis))notAllowed.add(pos);}
+                p.moving.removeAll(notAllowed);
+            }
+        }
+    }
+    private void eatThreat(String pos, boolean side){
+        for(Piece p :pieces)
+            if(p.pieceSide == side&&p.id != 5) {
+                p.moving.clear();
+                p.eating.retainAll(Collections.singletonList(pos));
+            }
+    }
+    private void blockCheck(int axis, String pos , boolean side){
+        ArrayList<String> allowed = new ArrayList<String>();
+        int dist = pos.charAt(axis) - kingPosition(side).charAt(axis);
+        if(dist == 1){
+            eatThreat(pos,side);
+        }
+        else {
+            dist += -Math.signum(dist);
+            while(Math.abs(dist) != 0){
+                allowed.add(Piece.move(pos,(axis == 0)?0:dist*((int)Math.signum(dist)*-1),(axis == 0)?dist*((int)Math.signum(dist)*-1):0));
+                dist += -Math.signum(dist);
+            }
+            for(Piece p:pieces){
+                if(p.pieceSide == side&&p.id != 5) {
+                    p.eating.retainAll(Collections.singletonList(pos));
+                    p.moving.retainAll(allowed);
+                }
+            }
+        }
+    }
+    private ArrayList<Piece> threateningKing(boolean side){
+        ArrayList<Piece> threat = new ArrayList<Piece>();
+        for(Piece p: pieces){
+            if(p.eating.contains(kingPosition(side))){
+                threat.add(p);
+            }
+        }
+        return threat;
+    }
+    private String kingPosition(boolean side){
+        for(Piece p : pieces){
+            if(p.pieceSide == side && p.id == 5){
+                return p.position;
+            }
         }
         return null;
     }
@@ -238,6 +330,9 @@ public class GameLauncher {
         } else {
             return ((Piece)Objects.requireNonNull(this.getPiece(pos))).pieceSide == mine.pieceSide;
         }
+    }
+    public void start(){
+        game.show();
     }
     public static void main(String[] args) {
         new GameLauncher();

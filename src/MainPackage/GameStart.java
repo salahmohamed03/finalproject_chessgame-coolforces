@@ -246,7 +246,8 @@ public class GameStart extends JFrame implements MouseListener {
             frame.setVisible(false);
         }
         if(e.getSource()==startBtn){
-            ChessBoard C = new ChessBoard();
+            GameLauncher gl = new GameLauncher();
+            gl.start();
             frame.setVisible(false);
         }
         if (e.getSource()==addPlayerBtn){
