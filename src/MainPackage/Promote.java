@@ -27,7 +27,7 @@ public class Promote implements MouseListener {
 //        setpromoteHeader();
 //        setBtns();
 //    }
-    public  Promote(int color) {
+    public  Promote(boolean side) {
         promotePanel = new JFrame();
         promotePanel.setUndecorated(true);
         promotePanel.setLocation(500 *width/1440, 397 *width/1440);
@@ -36,7 +36,7 @@ public class Promote implements MouseListener {
         promotePanel.getContentPane().setBackground( Color.white );
         promotePanel.setAlwaysOnTop(true);
         setpromoteHeader();
-        setBtns( color );
+        setBtns(side);
     }
     private void setPromoteBackG(){
         ImageIcon pBackG = new ImageIcon("src/Mat/Comp/game/promote/BackG.png");
@@ -58,15 +58,15 @@ public class Promote implements MouseListener {
         promotePanel.add(header, BorderLayout.NORTH);
 
     }
-    private void setBtns( int color ){
+    private void setBtns(boolean side){
         btnsPromote = new JPanel();
         btnsPromote.setBorder(new EmptyBorder(20 *width/1440,20 *width/1440,20 *width/1440,20 *width/1440));
         btnsPromote.setLayout(new GridLayout(0,4, 10 *width/1440, 0));
         btnsPromote.setOpaque(false);
         //Should be if statement to decide wether they are black or white
-        if(color == 1)
+        if(side)
             makeWhiteBtns();
-        else if(color == 2)
+        else if(side)
             makeBlackBtns();
         promotePanel.add(btnsPromote, BorderLayout.SOUTH);
     }
@@ -96,9 +96,6 @@ public class Promote implements MouseListener {
     }
     void promoteDispose(){
         promotePanel.setVisible(false);
-    }
-    public static void main(String[] args) {
-       Promote P= new Promote(1);
     }
     @Override
     public void mouseClicked(MouseEvent e) {

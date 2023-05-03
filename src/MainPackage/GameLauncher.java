@@ -15,11 +15,10 @@ public class GameLauncher {
     public Piece selected;
     public String posProm;
     public boolean turnProm;
-    public Promote promotion = new Promote();
+    public Promote promotion;
     public boolean turn;
     public GameLauncher() {
         this.game.setClock(this);
-        this.promotion.gl = this;
         this.initializePieces();
         this.turn = true;
     }
@@ -122,6 +121,8 @@ public class GameLauncher {
         return null;
     }
     private void checkPromotion(boolean turn){
+        promotion = new Promote(turn);
+        this.promotion.gl = this;
         if(getPromoted(turn) != null)
         {
             posProm = Objects.requireNonNull(getPromoted(turn)).position;
