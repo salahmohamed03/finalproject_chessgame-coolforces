@@ -53,6 +53,7 @@ public class IconsAndColors {
     public ImageIcon whiteKnightP ;
     public ImageIcon whiteQueenP ;
     public ImageIcon whiteRookP ;
+    public ImageIcon bWin,wWin,draw;
     public int width, height;
 
     public IconsAndColors() {
@@ -125,6 +126,11 @@ public class IconsAndColors {
         whiteKnightP = new ImageIcon("src/Mat/Comp/game/promote/WhiteKnightP.png");
         whiteQueenP = new ImageIcon("src/Mat/Comp/game/promote/WhiteQueenP.png");
         whiteRookP = new ImageIcon("src/Mat/Comp/game/promote/WhiteRookP.png");
+
+        wWin = new ImageIcon("src/Mat/Comp/game/Wwin.png");
+        bWin = new ImageIcon("src/Mat/Comp/game/Bwin.png");
+        draw = new ImageIcon("src/Mat/Comp/game/draw.png");
+
 
     }
 
