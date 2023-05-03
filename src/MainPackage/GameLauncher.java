@@ -13,6 +13,7 @@ public class GameLauncher {
     public Piece selected;
     public String posProm;
     public boolean turnProm;
+    public boolean promotionStatus;
     public GameActions promotion;
     public GameActions result;
     public boolean turn;
@@ -20,6 +21,7 @@ public class GameLauncher {
         this.game.setClock(this);
         this.initializePieces();
         this.turn = true;
+        promotionStatus = true;
     }
 
     public void initializePieces() {
@@ -107,6 +109,7 @@ public class GameLauncher {
         }
     }
     public void Clock(String clickedSquare) {
+        if(!promotionStatus)return;
         kingEscape(turn);
         handlingMove(clickedSquare);
         checkPromotion(!turn);
@@ -132,6 +135,7 @@ public class GameLauncher {
         this.promotion.gl = this;
         if(getPromoted(turn) != null)
         {
+            promotionStatus = false;
             posProm = Objects.requireNonNull(getPromoted(turn)).position;
             turnProm = turn;
             removePiece(posProm);
