@@ -16,15 +16,27 @@ public class Promote implements MouseListener {
     IconsAndColors ic = new IconsAndColors();
     private JPanel btnsPromote;
     private  int width = ic.width, height = ic.height;
-    public  Promote() {
+//    public  Promote() {
+//        promotePanel = new JFrame();
+//        promotePanel.setUndecorated(true);
+//        promotePanel.setLocation(500 *width/1440, 397 *width/1440);
+//        promotePanel.setLayout(new BorderLayout());
+//        promotePanel.setSize(435 *width/1440, 256 *width/1440);
+//        promotePanel.getContentPane().setBackground( Color.white );
+//        promotePanel.setAlwaysOnTop(true);
+//        setpromoteHeader();
+//        setBtns();
+//    }
+    public  Promote(int color) {
         promotePanel = new JFrame();
         promotePanel.setUndecorated(true);
         promotePanel.setLocation(500 *width/1440, 397 *width/1440);
         promotePanel.setLayout(new BorderLayout());
         promotePanel.setSize(435 *width/1440, 256 *width/1440);
         promotePanel.getContentPane().setBackground( Color.white );
+        promotePanel.setAlwaysOnTop(true);
         setpromoteHeader();
-        setBtns();
+        setBtns( color );
     }
     private void setPromoteBackG(){
         ImageIcon pBackG = new ImageIcon("src/Mat/Comp/game/promote/BackG.png");
@@ -46,18 +58,29 @@ public class Promote implements MouseListener {
         promotePanel.add(header, BorderLayout.NORTH);
 
     }
-    private void setBtns(){
+    private void setBtns( int color ){
         btnsPromote = new JPanel();
         btnsPromote.setBorder(new EmptyBorder(20 *width/1440,20 *width/1440,20 *width/1440,20 *width/1440));
         btnsPromote.setLayout(new GridLayout(0,4, 10 *width/1440, 0));
         btnsPromote.setOpaque(false);
         //Should be if statement to decide wether they are black or white
+        if(color == 1)
+            makeWhiteBtns();
+        else if(color == 2)
+            makeBlackBtns();
+        promotePanel.add(btnsPromote, BorderLayout.SOUTH);
+    }
+    private void makeBlackBtns(){
         bishopP = makePromoteBtn(ic.blackBishopP);
         queenP = makePromoteBtn(ic.blackQueenP);
         knightP = makePromoteBtn(ic.blackKnightP);
         rookP = makePromoteBtn(ic.blackRookP);
-
-        promotePanel.add(btnsPromote, BorderLayout.SOUTH);
+    }
+    private void makeWhiteBtns(){
+        bishopP = makePromoteBtn(ic.whiteBishopP);
+        queenP = makePromoteBtn(ic.whiteQueenP);
+        knightP = makePromoteBtn(ic.whiteKnightP);
+        rookP = makePromoteBtn(ic.whiteRookP);
     }
     private JButton makePromoteBtn(ImageIcon piece){
         JButton button = new JButton(ic.resizeWithRatio(piece));
@@ -73,6 +96,9 @@ public class Promote implements MouseListener {
     }
     void promoteDispose(){
         promotePanel.setVisible(false);
+    }
+    public static void main(String[] args) {
+       Promote P= new Promote(1);
     }
     @Override
     public void mouseClicked(MouseEvent e) {
