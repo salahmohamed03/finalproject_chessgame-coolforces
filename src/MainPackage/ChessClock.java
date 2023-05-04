@@ -95,4 +95,12 @@ public class ChessClock {
 	public long timeElapsed() {
 		return elapsedSeconds;
 	}
+	
+	//Checks if the timer is running
+	boolean runningCheck() {
+		if(timer.isRunning()) {
+			return true;
+		}
+		return false;
+	}
 }
