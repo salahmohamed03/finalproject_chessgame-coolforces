@@ -1,1 +1,96 @@
-{"Username":"wow","Password":["c","o","o","l"],"WinRate":0.0}
+[
+  {
+    "Username": "first",
+    "Password": [
+      "o",
+      "n",
+      "e"
+    ],
+    "WinRate": 0.0
+  }
+][
+  {
+    "Username": "first",
+    "Password": [
+      "o",
+      "n",
+      "e"
+    ],
+    "WinRate": 0.0
+  },
+  {
+    "Username": "second",
+    "Password": [
+      "t",
+      "w",
+      "o"
+    ],
+    "WinRate": 0.0
+  }
+][
+  {
+    "Username": "third",
+    "Password": [
+      "t",
+      "h",
+      "r",
+      "e",
+      "e"
+    ],
+    "WinRate": 0.0
+  }
+][
+  {
+    "Username": "third",
+    "Password": [
+      "t",
+      "h",
+      "r",
+      "e",
+      "e"
+    ],
+    "WinRate": 0.0
+  },
+  {
+    "Username": "fourth",
+    "Password": [
+      "f",
+      "o",
+      "u",
+      "r"
+    ],
+    "WinRate": 0.0
+  }
+][
+  {
+    "Username": "third",
+    "Password": [
+      "t",
+      "h",
+      "r",
+      "e",
+      "e"
+    ],
+    "WinRate": 0.0
+  },
+  {
+    "Username": "fourth",
+    "Password": [
+      "f",
+      "o",
+      "u",
+      "r"
+    ],
+    "WinRate": 0.0
+  },
+  {
+    "Username": "fifth",
+    "Password": [
+      "f",
+      "i",
+      "v",
+      "e"
+    ],
+    "WinRate": 0.0
+  }
+]

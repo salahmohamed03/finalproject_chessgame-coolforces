@@ -1,5 +1,7 @@
 package MainPackage;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -8,8 +10,14 @@ import java.awt.event.MouseListener;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.stream.JsonWriter;
+
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 
 public class Register extends JFrame implements MouseListener {
     public int previousPage  ;
@@ -24,6 +32,15 @@ public class Register extends JFrame implements MouseListener {
     public JButton submit;
     public JButton backBtn;
 
+    List<JsonObject> dataObjs = new ArrayList<>();   
+    Gson jsonArr = new GsonBuilder().setPrettyPrinting().create(); 
+    JsonArray jsonArray = jsonArr.toJsonTree(dataObjs).getAsJsonArray();
+    Gson gsonObj = new Gson(); // each user will be converted to a jsonobj
+    JsonObject jsonObj =new JsonObject();
+
+    FileWriter writer;
+    //JsonWriter arrWriter=new JsonWriter(writer);
+    //Gson gsonWriter =  new Gson(); // object used to writer the array
 
     public Register(){initialize();}
 
@@ -182,26 +199,28 @@ public class Register extends JFrame implements MouseListener {
             }
         }
 
+        //this block saves the data to a json file upon clicking on submit
+        
         if(e.getSource()== submit)
         {
             if (!textField.getText().equals("username") &&
             !String.valueOf(passField.getPassword()).equals(String.valueOf("password")))
            {
                User user=new User(textField.getText(), passField.getPassword());
-               System.out.println(user.getUsername());
-               Gson gson=new Gson();
-               String jsonString = gson.toJson(user);
+               jsonObj=gsonObj.toJsonTree(user).getAsJsonObject();
+               jsonArray.add(jsonObj); 
                try {
-                   FileWriter writer= new FileWriter("data.json");
-                   writer.write(jsonString);
+                   writer=new FileWriter("data.json",true);
+                   jsonArr.toJson(jsonArray, writer);
                    writer.close();
                } catch (Exception error) {
                    System.out.println("error happened");
+                   error.getStackTrace();
                }
            }
         }
         
-
+        //
 
 
     }
