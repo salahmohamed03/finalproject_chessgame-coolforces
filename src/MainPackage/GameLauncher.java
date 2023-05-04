@@ -23,7 +23,6 @@ public class GameLauncher {
         this.turn = true;
         gameStatus = true;
     }
-
     public void initializePieces() {
         this.pieces = new ArrayList();
         this.pieces.add(new bishop(true, "F1", game));
@@ -58,6 +57,14 @@ public class GameLauncher {
         this.pieces.add(new pawn(false, "F7", game));
         this.pieces.add(new pawn(false, "G7", game));
         this.pieces.add(new pawn(false, "H7", game));
+
+        // test
+        //this.pieces.add(new queen(true,"F4",game));
+//        this.pieces.add(new queen(true,"E5",game));
+//        this.pieces.add(new king(false,"E6",game));
+//        this.pieces.add(new pawn(true,"D4",game));
+//        this.pieces.add(new king(true,"F8",game));
+//        this.pieces.add(new bishop(false,"C8",game));
         updateValidMoves(true);
         updateCapture(true);
         updateValidMoves(false);
@@ -112,10 +119,12 @@ public class GameLauncher {
     }
     public void Clock(String clickedSquare) {
         if(!gameStatus)return;
-        handlingMove(clickedSquare);
-        checkPromotion(!turn);
         kingEscape(turn);
         kingChecked(turn);
+        handlingMove(clickedSquare);
+        kingEscape(turn);
+        kingChecked(turn);
+        checkPromotion(!turn);
         isEndGame(turn);
     }
     private void isEndGame(boolean turn){
@@ -154,6 +163,8 @@ public class GameLauncher {
             case 3 -> {pieces.add(new bishop(side, pos, game));}
             case 4 -> {pieces.add(new queen(side, pos, game));}
         }
+        updateValidMoves(side);
+        updateCapture(side);
     }
     private Piece getPromoted(boolean side){
         char row = side?'8':'1';
@@ -173,25 +184,13 @@ public class GameLauncher {
             if(p.pieceSide == side)
             {
                 ArrayList<String> temp = new ArrayList<String>();
-                temp.addAll(p.eating);
-                temp.addAll(p.moving);
+                    temp.addAll(p.eating);
+                    temp.addAll(p.moving);
+                    temp.addAll(p.pawnDiagonal);
                 result.addAll(temp);
-                System.out.println();
             }
         }
         return result;
-    }
-    private ArrayList<String> kingMoves(boolean side){
-        for(Piece p : pieces){
-            if(p.pieceSide == side && p.id == 5){
-                ArrayList<String> result =  new ArrayList<String>();
-                result.addAll(p.eating);
-                result.addAll(p.movable());
-                result.add(p.position);
-                return result;
-            }
-        }
-        return null;
     }
     private void updateCapture(boolean turn){
         for(Piece p : pieces){
@@ -209,18 +208,22 @@ public class GameLauncher {
             }
         }
     }
-    private Object checkWinner(boolean turn){
-        if(!turn){
-            ArrayList<String> temp = new ArrayList<String>(possession(false));
-            temp.removeAll(getPiece(false,5).moving);
-            if(temp.size() == 0&& getPiece(false,5).movable().size() == 0)
+    private Object checkWinner(boolean turn) {
+        ArrayList temp;
+        if (!turn) {
+            kingChecked(false);
+            temp = new ArrayList(this.possession(false));
+            temp.removeAll(this.getPiece(false, 5).moving);
+            if (temp.size() == 0 && this.getPiece(false, 5).movable().size() == 0) {
                 return true;
-        }
-        else{
-            ArrayList<String> temp = new ArrayList<String>(possession(true));
-            temp.removeAll(getPiece(true,5).moving);
-            if(temp.size() == 0&& getPiece(true,5).movable().size() == 0)
+            }
+        } else {
+            kingChecked(true);
+            temp = new ArrayList(this.possession(true));
+            temp.removeAll(this.getPiece(true, 5).moving);
+            if (temp.size() == 0 && this.getPiece(true, 5).movable().size() == 0) {
                 return false;
+            }
         }
         return null;
     }
@@ -267,6 +270,7 @@ public class GameLauncher {
             if(p.pieceSide == side&&p.id != 5) {
                 p.moving.clear();
                 p.eating.retainAll(Collections.singletonList(pos));
+                p.pawnDiagonal.retainAll(Collections.singletonList(pos));
             }
     }
     private void blockCheck(int axis, String pos , boolean side){
@@ -278,7 +282,7 @@ public class GameLauncher {
         else {
             dist += -Math.signum(dist);
             while(Math.abs(dist) != 0){
-                allowed.add(Piece.move(pos,(axis == 0)?0:dist*((int)Math.signum(dist)*-1),(axis == 0)?dist*((int)Math.signum(dist)*-1):0));
+                allowed.add(Piece.move(pos,(axis == 0)?0:dist*-1,(axis == 0)?dist*-1:0));
                 dist += -Math.signum(dist);
             }
             for(Piece p:pieces){

@@ -14,6 +14,7 @@ public abstract class Piece {
     protected String position;
     public ArrayList<String> eating = new ArrayList<String>();
     public ArrayList<String> moving = new ArrayList<String>();
+    public ArrayList<String> pawnDiagonal = new ArrayList<String>();
 
     //Function provides the new position of a piece
     protected static String move(String pos , int vertical, int horizontal) {
@@ -40,6 +41,7 @@ public abstract class Piece {
             p.availableMoves = p.ValidMoves();
             p.eating.clear();
             p.moving.clear();
+            p.pawnDiagonal.clear();
             p.eatingMoves();
         }
     }
@@ -66,6 +68,7 @@ public abstract class Piece {
     public void eatingMoves(){
         eating.clear();
         moving.clear();
+        pawnDiagonal.clear();
         for(int i = 0 ;i < availableMoves.size();i++){
            Object t = Board.isAlly(position,(availableMoves.get(i)));
             if(Board.isAlly(position,(availableMoves.get(i))) == (Object) false){
@@ -175,9 +178,16 @@ class pawn extends Piece {
             else{
                 String p1 =  move(position, sign, 1);
                 String p2 =  move(position, sign, -1);
-                if(Board.isAlly(position,(availableMoves.get(i))) == null)
-                    if(!Objects.equals(availableMoves.get(i), p1) && !Objects.equals(availableMoves.get(i), p2))
+                String s = availableMoves.get(i);
+                if(Board.isAlly(position,(availableMoves.get(i))) == null){
+                    if(!Objects.equals(availableMoves.get(i), p1) && !Objects.equals(availableMoves.get(i), p2)){
                         moving.add(availableMoves.get(i));
+                    }
+                    else {
+                        pawnDiagonal.add(availableMoves.get(i));
+                    }
+                }
+                else pawnDiagonal.add(availableMoves.get(i));
             }
         }
     }
