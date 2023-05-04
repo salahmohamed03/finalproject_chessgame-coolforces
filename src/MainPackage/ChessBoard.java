@@ -18,6 +18,7 @@ public class ChessBoard{
     private int xPosInfo = 1015;
     private JPanel blackDeadPanel;
     private JPanel whiteDeadPanel;
+    int wP=0, wB=0,  wK=0, wQ=0,  wR=0, bP=0, bB=0, bK=0, bQ=0, bR=0;
     private  int width = icon.width, heigth = icon.height;
     public ChessBoard(){initialize();}
     private void initialize() {
@@ -27,6 +28,8 @@ public class ChessBoard{
         draw_chessBoard();
         //initializePieces();
         set_backgrounds();
+
+        setTimer();
     }
     public void show(){
         board.setVisible(true);
@@ -36,6 +39,7 @@ public class ChessBoard{
         container = new JPanel(null);
         container.setBounds(0,0,width,heigth);
         setPlayerInfo("Talal","Rahaal", 38); //should get the usernames
+
         base.add(container, Integer.valueOf(0));
         board.setTitle("chess");
         board.setSize(width,heigth);
@@ -338,7 +342,14 @@ public class ChessBoard{
         base.add(label, 1);
     }
 
-    private void setDeadPanels(){
+    public void setDead(int id , boolean side){
+
+        setDeadpanels();
+       addDead ( id ,side);
+       showDeadIcons();
+
+    }
+    private void setDeadpanels(){
         blackDeadPanel = new JPanel();
         blackDeadPanel.setBounds(1012 *width/1440, 314 *width/1440, 354 * width/1440, 71 *width/1440);
         blackDeadPanel.setLayout(new GridLayout(1,5));
@@ -351,13 +362,51 @@ public class ChessBoard{
         whiteDeadPanel.setOpaque(false);
 
 
-        showDeadIcons(1,2,0,4,5,5,1,2,3,4);
-
         base.add(blackDeadPanel, Integer.valueOf(1));
         base.add(whiteDeadPanel, Integer.valueOf(1));
-
     }
-    private void showDeadIcons(int wP, int wB, int wK, int wQ, int wR, int bP, int bB, int bK, int bQ, int bR){
+
+    private void addDead (int id , boolean side){
+        if(side){
+            switch (id){
+                case 1:
+                    wR++;
+                    break;
+                case 2:
+                    wK++;
+                    break;
+                case 3:
+                    wB++;
+                    break;
+                case 4:
+                    wQ++;
+                    break;
+                case 6:
+                    wP++;
+                    break;
+            }
+        } else {
+            switch (id){
+                case 1:
+                    bR++;
+                    break;
+                case 2:
+                    bK++;
+                    break;
+                case 3:
+                    bB++;
+                    break;
+                case 4:
+                    bQ++;
+                    break;
+                case 6:
+                    bP++;
+                    break;
+            }
+
+        }
+    }
+    public void showDeadIcons(){
 //        //white
         whiteDeadPanel.add(setDeadIcon(icon.white_pawnD,wP));
         whiteDeadPanel.add(setDeadIcon(icon.white_bishopD,wB));
@@ -385,10 +434,37 @@ public class ChessBoard{
         dLabel.setOpaque(false);
         return dLabel;
     }
+    // Timer set
+    private void setTimer(){
+        //create 2 ChessClock Objects here one for white & the other for white
+        //set Font .setFont(new Font("Space Grotesk", Font.BOLD, 70 *width/1440));
+        // for the black set Bounds (1031 *width/1440, 191 *width/1440, 334 *width/1440, 92 *width/1440)
+        // for the black set Bounds (1031 *width/1440, 753 *width/1440, 334 *width/1440, 92 *width/1440)
+        // in the end base.add(nameOfTimer, Integer.valueOf(1)) for the white and the black // to show on board
+    }
+
+    // a method fot time start & stop take the arguments (boolean side , boolean start ) //true to start and false to stop
+
+
+
+
+    // a method to reset take the argument (boolean side)
+
+
+
+    // a method for finished check takes the argument (){
+    // if white chessCloak finished
+    //        return the boolean true
+    // if the black
+    //      return the boolean false
+    // }
     public static void main(String []args)
     {
         ChessBoard c = new ChessBoard();
-        c.setDeadPanels();
+        c.setDead(6,true);
+        c.setDead(2,false);
+        c.setDead(4,true);
+        c.setDead(3,false);
         c.show();
     }
 }
