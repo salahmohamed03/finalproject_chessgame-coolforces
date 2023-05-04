@@ -7,6 +7,10 @@ import java.awt.event.MouseListener;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
+import com.google.gson.Gson;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Register extends JFrame implements MouseListener {
     public int previousPage  ;
     IconsAndColors ic = new IconsAndColors();
@@ -178,10 +182,25 @@ public class Register extends JFrame implements MouseListener {
             }
         }
 
-        if(e.getSource()== submit){
-            HomePage H = new HomePage();
-            frame.setVisible(false);
+        if(e.getSource()== submit)
+        {
+            if (!textField.getText().equals("username") &&
+            !String.valueOf(passField.getPassword()).equals(String.valueOf("password")))
+           {
+               User user=new User(textField.getText(), passField.getPassword());
+               System.out.println(user.getUsername());
+               Gson gson=new Gson();
+               String jsonString = gson.toJson(user);
+               try {
+                   FileWriter writer= new FileWriter("data.json");
+                   writer.write(jsonString);
+                   writer.close();
+               } catch (Exception error) {
+                   System.out.println("error happened");
+               }
+           }
         }
+        
 
 
 

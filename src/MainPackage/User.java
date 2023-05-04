@@ -14,6 +14,17 @@ public class User {
         this.Username=Username;
         this.Password=Password;
     }
+
+    public String getUsername()
+    {
+        return Username;
+    }
+
+    public char[] getPassword()
+    {
+        return Password;
+    }
+
     
     // make function to add match to the history
     // function to calculate the win rate

@@ -2,6 +2,8 @@ package MainPackage;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -82,9 +84,16 @@ public class LoginPage extends JFrame implements MouseListener {
     }
 
 
-    public JTextField createTextField(String placeHolder){
+    public JTextField createTextField(String placeHolder)
+    {
         textField = new JTextField(placeHolder);
 
+        //Function to retrieve data from text field
+        // A function to check if value changed and user pressed enter
+        
+            
+        
+        
         //text field design
         textField.setFont(new Font("Space Grotesk", Font.PLAIN, 40*width/1440));
         textField.setBackground(ic.white);
@@ -92,7 +101,7 @@ public class LoginPage extends JFrame implements MouseListener {
         textField.setOpaque(true);
         textField.setBorder(BorderFactory.createEmptyBorder());
 
-        return textField;
+        return textField;   
     }
     public JPasswordField createPassField(){
         passField = new JPasswordField("password",8);
