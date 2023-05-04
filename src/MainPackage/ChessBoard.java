@@ -351,25 +351,25 @@ public class ChessBoard{
         whiteDeadPanel.setOpaque(false);
 
 
-        showDeadIcons();
+        showDeadIcons(1,2,0,4,5,5,1,2,3,4);
 
         base.add(blackDeadPanel, Integer.valueOf(1));
         base.add(whiteDeadPanel, Integer.valueOf(1));
 
     }
-    private void showDeadIcons(){
+    private void showDeadIcons(int wP, int wB, int wK, int wQ, int wR, int bP, int bB, int bK, int bQ, int bR){
 //        //white
-        whiteDeadPanel.add(setDeadIcon(icon.white_pawnD,5));
-        whiteDeadPanel.add(setDeadIcon(icon.white_bishopD,2));
-        whiteDeadPanel.add(setDeadIcon(icon.white_knightD,2));
-        whiteDeadPanel.add(setDeadIcon(icon.white_queenD,2));
-        whiteDeadPanel.add(setDeadIcon(icon.white_rookD,2));
+        whiteDeadPanel.add(setDeadIcon(icon.white_pawnD,wP));
+        whiteDeadPanel.add(setDeadIcon(icon.white_bishopD,wB));
+        whiteDeadPanel.add(setDeadIcon(icon.white_knightD,wK));
+        whiteDeadPanel.add(setDeadIcon(icon.white_queenD,wQ));
+        whiteDeadPanel.add(setDeadIcon(icon.white_rookD,wR));
         //black
-        blackDeadPanel.add(setDeadIcon(icon.black_pawnD,2));
-        blackDeadPanel.add(setDeadIcon(icon.black_bishopD,2));
-        blackDeadPanel.add(setDeadIcon(icon.black_knightD,2));
-        blackDeadPanel.add(setDeadIcon(icon.black_queenD,2));
-        blackDeadPanel.add(setDeadIcon(icon.black_rookD,2));
+        blackDeadPanel.add(setDeadIcon(icon.black_pawnD,bP));
+        blackDeadPanel.add(setDeadIcon(icon.black_bishopD,bB));
+        blackDeadPanel.add(setDeadIcon(icon.black_knightD,bK));
+        blackDeadPanel.add(setDeadIcon(icon.black_queenD,bQ));
+        blackDeadPanel.add(setDeadIcon(icon.black_rookD,bR));
     }
     private JLabel setDeadIcon(ImageIcon dIcon , int number){
 
