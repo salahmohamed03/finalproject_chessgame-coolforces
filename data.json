@@ -1,95 +1,65 @@
 [
   {
-    "Username": "first",
+    "Username": "1111",
     "Password": [
-      "o",
-      "n",
-      "e"
-    ],
-    "WinRate": 0.0
-  }
-][
-  {
-    "Username": "first",
-    "Password": [
-      "o",
-      "n",
-      "e"
-    ],
-    "WinRate": 0.0
-  },
-  {
-    "Username": "second",
-    "Password": [
-      "t",
-      "w",
-      "o"
-    ],
-    "WinRate": 0.0
-  }
-][
-  {
-    "Username": "third",
-    "Password": [
-      "t",
-      "h",
-      "r",
-      "e",
-      "e"
-    ],
-    "WinRate": 0.0
-  }
-][
-  {
-    "Username": "third",
-    "Password": [
-      "t",
-      "h",
-      "r",
-      "e",
-      "e"
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1"
     ],
     "WinRate": 0.0
   },
   {
-    "Username": "fourth",
+    "Username": "2222",
     "Password": [
-      "f",
-      "o",
-      "u",
-      "r"
-    ],
-    "WinRate": 0.0
-  }
-][
-  {
-    "Username": "third",
-    "Password": [
-      "t",
-      "h",
-      "r",
-      "e",
-      "e"
-    ],
-    "WinRate": 0.0
-  },
-  {
-    "Username": "fourth",
-    "Password": [
-      "f",
-      "o",
-      "u",
-      "r"
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2",
+      "2"
     ],
     "WinRate": 0.0
   },
   {
-    "Username": "fifth",
+    "Username": "33333",
     "Password": [
-      "f",
-      "i",
-      "v",
-      "e"
+      "3",
+      "3",
+      "3",
+      "3",
+      "3",
+      "3",
+      "3",
+      "3",
+      "3",
+      "3",
+      "3",
+      "3",
+      "3",
+      "3",
+      "3",
+      "3",
+      "3",
+      "3",
+      "3",
+      "3"
     ],
     "WinRate": 0.0
   }
