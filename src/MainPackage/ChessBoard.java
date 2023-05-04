@@ -27,6 +27,8 @@ public class ChessBoard{
         draw_chessBoard();
         //initializePieces();
         set_backgrounds();
+
+        setTimer();
     }
     public void show(){
         board.setVisible(true);
@@ -385,6 +387,30 @@ public class ChessBoard{
         dLabel.setOpaque(false);
         return dLabel;
     }
+    // Timer set
+    private void setTimer(){
+        //create 2 ChessClock Objects here one for white & the other for white
+        //set Font .setFont(new Font("Space Grotesk", Font.BOLD, 70 *width/1440));
+        // for the black set Bounds (1031 *width/1440, 191 *width/1440, 334 *width/1440, 92 *width/1440)
+        // for the black set Bounds (1031 *width/1440, 753 *width/1440, 334 *width/1440, 92 *width/1440)
+        // in the end base.add(nameOfTimer, Integer.valueOf(1)) for the white and the black // to show on board
+    }
+
+    // a method fot time start & stop take the arguments (boolean side , boolean start ) //true to start and false to stop
+
+
+
+
+    // a method to reset take the argument (boolean side)
+
+
+
+    // a method for finished check takes the argument (){
+    // if white chessCloak finished
+    //        return the boolean true
+    // if the black
+    //      return the boolean false
+    // }
     public static void main(String []args)
     {
         ChessBoard c = new ChessBoard();
