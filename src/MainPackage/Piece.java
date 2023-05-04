@@ -172,7 +172,9 @@ class pawn extends Piece {
         int size = availableMoves.size();
         int sign = pieceSide?1:-1;
         for(int i = 0 ;i < size;i++){
+            String twoMoves = move(position,2*sign,0);
             if(Board.isAlly(position,(availableMoves.get(i))) == (Object) false){
+                if(Objects.equals(availableMoves.get(i), twoMoves))continue;
                     eating.add(availableMoves.get(i));
             }
             else{
