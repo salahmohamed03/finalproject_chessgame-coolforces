@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 
 public class ChessBoard{
     private JFrame board;
+    private JLayeredPane base = new JLayeredPane();
     private GameLauncher game;
     public IconsAndColors icon = new IconsAndColors();
     public JButton button,resign,draw, resign2,draw2;
@@ -13,6 +14,10 @@ public class ChessBoard{
     public String previous;
     private JPanel container;
     private JPanel ChessBoardPanel;
+
+    private int xPosInfo = 1015;
+    private JPanel blackDeadPanel;
+    private JPanel whiteDeadPanel;
     private  int width = icon.width, heigth = icon.height;
     public ChessBoard(){initialize();}
     private void initialize() {
@@ -29,12 +34,15 @@ public class ChessBoard{
     private void initialize_board(){
         board = new JFrame();
         container = new JPanel(null);
-        board.add(container);
+        container.setBounds(0,0,width,heigth);
+        setPlayerInfo("Talal","Rahaal", 38); //should get the usernames
+        base.add(container, Integer.valueOf(0));
         board.setTitle("chess");
         board.setSize(width,heigth);
         board.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         board.setLocationRelativeTo(null);
         board.setResizable(false);
+        board.add(base);
     }
     private void draw_chessBoard(){
         ChessBoardPanel = new JPanel(new GridLayout(8 , 8 , 0 , 0));
@@ -298,8 +306,89 @@ public class ChessBoard{
         if(getButton(pos).getIcon() == null)return true;
         return false;
     }
+    public void setPlayerInfo(String w, String b, int size /* double wRate , double bRate*/){
+        createNameLabel(b, size , false );
+        createWinRateLabel(50,20,false);
+        createNameLabel(w,size , true);
+        createWinRateLabel(36.55,20,true);
+    }
+    private  void createNameLabel(String text, int s , boolean side ){
+        JLabel label = new JLabel(text);
+        int yPosition ;
+        label.setFont(new Font("Space Grotesk", Font.BOLD, s *width/1440));
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setVerticalAlignment(JLabel.CENTER);
+        if(side){ yPosition = 883;}
+        else {yPosition = 58;}
+        label.setBounds(xPosInfo *width/1440, yPosition *width/1440, 349 *width/1440 , 88 *width/1440);
+        label.setForeground(icon.mainColor);
+        base.add(label, 1);
+    }
+    private  void createWinRateLabel(double rate, int s , boolean side){
+        JLabel label = new JLabel("Win Rate: "+rate + "%");
+        int yPosition ;
+        label.setFont(new Font("Space Grotesk", Font.BOLD, s *width/1440));
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setVerticalAlignment(JLabel.CENTER);
+        int gap = 43;
+        if(side){ yPosition = 883 -gap ;}
+        else {yPosition = 58 +gap;}
+        label.setBounds(xPosInfo *width/1440, yPosition *width/1440, 349 *width/1440 , 88 *width/1440);
+        label.setForeground(icon.white);
+        base.add(label, 1);
+    }
+
+    private void setDeadPanels(){
+        blackDeadPanel = new JPanel();
+        blackDeadPanel.setBounds(1012 *width/1440, 314 *width/1440, 354 * width/1440, 71 *width/1440);
+        blackDeadPanel.setLayout(new GridLayout(1,5));
+        blackDeadPanel.setOpaque(false);
+
+
+        whiteDeadPanel = new JPanel();
+        whiteDeadPanel.setBounds(1012 *width/1440, 644 *width/1440, 354 * width/1440, 71 *width/1440);
+        whiteDeadPanel.setLayout(new GridLayout(1,5));
+        whiteDeadPanel.setOpaque(false);
+
+
+        showDeadIcons();
+
+        base.add(blackDeadPanel, Integer.valueOf(1));
+        base.add(whiteDeadPanel, Integer.valueOf(1));
+
+    }
+    private void showDeadIcons(){
+//        //white
+        whiteDeadPanel.add(setDeadIcon(icon.white_pawnD,5));
+        whiteDeadPanel.add(setDeadIcon(icon.white_bishopD,2));
+        whiteDeadPanel.add(setDeadIcon(icon.white_knightD,2));
+        whiteDeadPanel.add(setDeadIcon(icon.white_queenD,2));
+        whiteDeadPanel.add(setDeadIcon(icon.white_rookD,2));
+        //black
+        blackDeadPanel.add(setDeadIcon(icon.black_pawnD,2));
+        blackDeadPanel.add(setDeadIcon(icon.black_bishopD,2));
+        blackDeadPanel.add(setDeadIcon(icon.black_knightD,2));
+        blackDeadPanel.add(setDeadIcon(icon.black_queenD,2));
+        blackDeadPanel.add(setDeadIcon(icon.black_rookD,2));
+    }
+    private JLabel setDeadIcon(ImageIcon dIcon , int number){
+
+        if (number == 0) return  new JLabel();
+
+        JLabel dLabel = new JLabel("X" + String.valueOf(number));
+        dLabel.setIcon(icon.resizeWithRatio(dIcon));
+        dLabel.setFont(new Font("Space Grotesk", Font.BOLD, 20 *width/1440));
+        dLabel.setHorizontalTextPosition(JLabel.RIGHT);
+        dLabel.setVerticalTextPosition(JLabel.BOTTOM);
+        dLabel.setForeground(icon.white);
+
+        dLabel.setOpaque(false);
+        return dLabel;
+    }
     public static void main(String []args)
     {
         ChessBoard c = new ChessBoard();
+        c.setDeadPanels();
+        c.show();
     }
 }

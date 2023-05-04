@@ -45,6 +45,19 @@ public class IconsAndColors {
     public Icon white_queenE;
     public Icon white_rookE;
 
+    public ImageIcon black_pawnD  ;
+    public ImageIcon black_bishopD ;
+    public ImageIcon black_kingD ;
+    public ImageIcon black_knightD;
+    public ImageIcon black_rookD ;
+    public ImageIcon black_queenD ;
+    public ImageIcon white_pawnD  ;
+    public ImageIcon white_bishopD ;
+    public ImageIcon white_kingD;
+    public ImageIcon white_knightD;
+    public ImageIcon white_rookD ;
+    public ImageIcon white_queenD;
+
     public ImageIcon blackBishopP ;
     public ImageIcon blackKnightP ;
     public ImageIcon blackQueenP ;
@@ -117,6 +130,20 @@ public class IconsAndColors {
         white_knightE = this.Resize(new ImageIcon("src/Mat/Comp/game/White/KnightS.png"),66 *width/870,57 *width/870);
         white_rookE = this.Resize(new ImageIcon("src/Mat/Comp/game/White/rockS.png"),66 *width/870,57 *width/870);
         white_queenE  = this.Resize(new ImageIcon("src/Mat/Comp/game/White/queenS.png"),66 *width/870,57 *width/870);
+
+        int widthD = 36  *width/1440, heightD =38 *width/1440;
+
+
+        black_pawnD   = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/pawn.png"),(int)(widthD *.85), heightD);
+        black_bishopD = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/bishop.png"),widthD,heightD);
+        black_knightD = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/Knight.png"),widthD,heightD);
+        black_rookD   = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/rock.png"),widthD,heightD);
+        black_queenD  = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/queen.png"),widthD,heightD);
+        white_pawnD   = this.Resize(new ImageIcon("src/Mat/Comp/game/White/pawn.png"),(int)(widthD *.85),heightD);
+        white_bishopD = this.Resize(new ImageIcon("src/Mat/Comp/game/White/bishop.png"),widthD,heightD);
+        white_knightD = this.Resize(new ImageIcon("src/Mat/Comp/game/White/Knight.png"),widthD,heightD);
+        white_rookD = this.Resize(new ImageIcon("src/Mat/Comp/game/White/rock.png"),widthD,heightD);
+        white_queenD  = this.Resize(new ImageIcon("src/Mat/Comp/game/White/queen.png"),widthD,heightD);
 
         blackBishopP = new ImageIcon("src/Mat/Comp/game/promote/BlackBishopP.png");
         blackKnightP = new ImageIcon("src/Mat/Comp/game/promote/BlackKnightP.png");
