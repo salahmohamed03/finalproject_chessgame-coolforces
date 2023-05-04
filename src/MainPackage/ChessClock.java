@@ -91,16 +91,16 @@ public class ChessClock {
 		return false;
 	}
 
-	//Returns total time elapsed by the clock in seconds
-	public long timeElapsed() {
-		return elapsedSeconds;
-	}
-	
 	//Checks if the timer is running
-	boolean runningCheck() {
+	public boolean runningCheck() {
 		if(timer.isRunning()) {
 			return true;
 		}
 		return false;
+	}
+
+	//Returns total time elapsed by the clock in seconds
+	public long timeElapsed() {
+		return elapsedSeconds;
 	}
 }
