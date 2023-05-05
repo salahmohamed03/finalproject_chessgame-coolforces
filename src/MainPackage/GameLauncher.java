@@ -32,6 +32,7 @@ public class GameLauncher {
         kingEscape(turn);
         kingChecked(turn);
         checkPromotion(!turn);
+        blockingPiece(turn);
         isEndGame(turn);
     }
     public void initializePieces() {
@@ -70,10 +71,16 @@ public class GameLauncher {
         this.pieces.add(new pawn(false, "H7", game));
 
         // test
-      //  this.pieces.add(new queen(true,"A4",game));
-//        this.pieces.add(new rook(true,"E1",game));
-//        this.pieces.add(new king(false,"E4",game));
-//        this.pieces.add(new queen(false,"E2",game));
+//        this.pieces.add(new queen(true,"F4",game));
+//        this.pieces.add(new pawn(true,"D4",game));
+//        this.pieces.add(new king(false,"A4",game));
+//        this.pieces.add(new pawn(false,"E4",game));
+//        this.pieces.add(new king(true,"F8",game));
+
+//        this.pieces.add(new queen(true,"D1",game));
+//        this.pieces.add(new bishop(true,"D4",game));
+//        this.pieces.add(new king(false,"D6",game));
+//        this.pieces.add(new bishop(false,"D3",game));
 //        this.pieces.add(new king(true,"F8",game));
 
         updateValidMoves(true);
@@ -90,6 +97,7 @@ public class GameLauncher {
                 assert king != null;
                 Piece attacker = p;
                 if(p.position.charAt(0) == king.position.charAt(0)){
+                    boolean no = true;
                     int blockers = 0;
                     String pos = "";
                     int dist =king.position.charAt(1) - attacker.position.charAt(1);
@@ -102,11 +110,21 @@ public class GameLauncher {
                         }
                         dist += -Math.signum(dist);
                     }
-                    if(blockers == 1) {
+                    dist =king.position.charAt(1) - attacker.position.charAt(1);
+                    dist += -Math.signum(dist);
+                    while(Math.abs(dist) != 0){
+                        String temp = Piece.move(attacker.position,dist,0);
+                        if(ally(attacker,temp)){
+                            no = false;
+                        }
+                        dist += -Math.signum(dist);
+                    }
+                    if(blockers == 1&&no) {
                         freezingPiece(pos,side,0);
                     }
                 }
                 else if(p.position.charAt(1) == king.position.charAt(1)){
+                    boolean no = true;
                     int blockers = 0;
                     String pos = "";
                     int dist =king.position.charAt(0) - attacker.position.charAt(0);
@@ -119,7 +137,16 @@ public class GameLauncher {
                         }
                         dist += -Math.signum(dist);
                     }
-                    if(blockers == 1) {
+                    dist =king.position.charAt(0) - attacker.position.charAt(0);
+                    dist += -Math.signum(dist);
+                    while(Math.abs(dist) != 0){
+                        String temp = Piece.move(attacker.position,0,dist);
+                        if(ally(attacker,temp)){
+                            no = false;
+                        }
+                        dist += -Math.signum(dist);
+                    }
+                    if(blockers == 1&&no) {
                         freezingPiece(pos,side,1);
                     }
                 }
@@ -130,6 +157,7 @@ public class GameLauncher {
         for(Piece p : pieces){
             if(p.pieceSide == side && Objects.equals(p.position, pos)){
                 ArrayList<String> notAllowed = new ArrayList<String>();
+                p.eatingMoves();
             for(String s:p.availableMoves){
                 if(s.charAt(axis) != p.position.charAt(axis)){
                     notAllowed.add(s);
