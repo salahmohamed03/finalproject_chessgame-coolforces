@@ -6,8 +6,9 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class Promote implements MouseListener {
-    private JFrame promotePanel;
+public class Promote implements MouseListener { JFrame frame;
+    private JPanel promotePanel;
+    private JLayeredPane base ;
     private JLabel promoteBackG;
     private JLabel header;
     public GameLauncher gl;
@@ -15,8 +16,26 @@ public class Promote implements MouseListener {
     public int selected = 4;
     IconsAndColors ic = new IconsAndColors();
     private JPanel btnsPromote;
+    private  JLabel resultLabel;
     private  int width = ic.width, height = ic.height;
-//    public  Promote() {
+
+    /*public  promotio(int color){
+
+        initializeWindow();
+        setPromoteBackG();
+        setPromotePanel();
+        setpromoteHeader();
+        setBtns( color );
+
+
+        frame.add(base);
+
+
+        frame.setVisible(true);
+
+    }*/
+
+    //    public  Promote() {
 //        promotePanel = new JFrame();
 //        promotePanel.setUndecorated(true);
 //        promotePanel.setLocation(500 *width/1440, 397 *width/1440);
@@ -27,26 +46,71 @@ public class Promote implements MouseListener {
 //        setpromoteHeader();
 //        setBtns();
 //    }
-    public  Promote(boolean side) {
-        promotePanel = new JFrame();
-        promotePanel.setUndecorated(true);
-        promotePanel.setLocation(500 *width/1440, 397 *width/1440);
-        promotePanel.setLayout(new BorderLayout());
-        promotePanel.setSize(435 *width/1440, 256 *width/1440);
-        promotePanel.getContentPane().setBackground( Color.white );
-        promotePanel.setAlwaysOnTop(true);
+//    public  Promote(int color) {
+//
+//        frame = new JFrame();
+//        frame.setUndecorated(true);
+//        frame.setSize(435 *width/1440, 256 *width/1440);
+//        //frame.setBackground(new Color(1.0f,1.0f,1.0f,0.5f));
+//        frame.setLocation(500 *width/1440, 397 *width/1440);
+//
+//        //base.setBounds(0,0,width,height);
+//
+//        promotePanel = new JPanel();
+//        promotePanel.setBounds(0,0,width,height);
+//        promotePanel.setBackground(new Color(1.0f,1.0f,1.0f,0.5f));
+//        promotePanel.setLocation(500 *width/1440, 397 *width/1440);
+//        promotePanel.setLayout(new BorderLayout());
+//        //promotePanel.getContentPane().setBackground( Color.white );
+//
+//        setPromoteBackG();
+//        setpromoteHeader();
+//        setBtns( color );
+//        frame.add(base);
+//        //base.add(promotePanel, Integer.valueOf(1));
+//        frame.setAlwaysOnTop(true);
+//        frame.setVisible(true);
+//    }
+    Promote(boolean side){
+        initializeWindow();
+        setPromoteBackG();
+        setPromotePanel();
         setpromoteHeader();
         setBtns(side);
+
+        frame.add(base);
+        frame.setVisible(true);
+    }
+    private void initializeWindow(){
+
+        frame = new JFrame();
+        frame.setUndecorated(true);
+        frame.setSize(435 *width/1440, 256 *width/1440);
+        frame.setBackground(new Color(1.0f,1.0f,1.0f,0));
+        frame.setLocation(500 *width/1440, 397 *width/1440);
+        frame.setAlwaysOnTop(true);
+
+        base = new JLayeredPane();
+        frame.add(base);
+
+    }
+    private void setPromotePanel(){
+        promotePanel = new JPanel();
+        promotePanel.setLayout(new BorderLayout());
+        promotePanel.setBounds(0,0, 435 *width/1440, 256 *width/1440);
+        promotePanel.setOpaque(false);
+
+        base.add(promotePanel, Integer.valueOf(3));
+
+
     }
     private void setPromoteBackG(){
         ImageIcon pBackG = new ImageIcon("src/Mat/Comp/game/promote/BackG.png");
         promoteBackG = new JLabel();
         promoteBackG.setIcon(ic.resizeWithRatio(pBackG));
-        promoteBackG.setBounds(266 *width/1440,390 *width/1440, 498 *width/1440, 243 *width/1440);
-        //base.add(promoteBackG, Integer.valueOf(2));
-    }
-    public void promotionWindow(){
-        promotePanel.setVisible(true);
+        promoteBackG.setBounds(0,0, 435 *width/1440, 256 *width/1440);
+        base.add(promoteBackG, Integer.valueOf(0));
+        //System.out.println("ss");
     }
     private void setpromoteHeader(){
         header = new JLabel("Select a piece to promote to");
@@ -54,8 +118,10 @@ public class Promote implements MouseListener {
         header.setHorizontalAlignment(JLabel.CENTER);
         header.setVerticalAlignment(JLabel.CENTER);
         header.setForeground(ic.mainColor);
-        header.setPreferredSize(new Dimension(0, 45 *width/1440));
+        header.setPreferredSize(new Dimension(0, 100 *width/1440));
         promotePanel.add(header, BorderLayout.NORTH);
+
+        //System.out.println("55");
 
     }
     private void setBtns(boolean side){
@@ -66,9 +132,10 @@ public class Promote implements MouseListener {
         //Should be if statement to decide wether they are black or white
         if(side)
             makeWhiteBtns();
-        else if(side)
+        else
             makeBlackBtns();
         promotePanel.add(btnsPromote, BorderLayout.SOUTH);
+        System.out.println("322");
     }
     private void makeBlackBtns(){
         bishopP = makePromoteBtn(ic.blackBishopP);
@@ -95,31 +162,36 @@ public class Promote implements MouseListener {
         return button;
     }
     void promoteDispose(){
-        promotePanel.setVisible(false);
+        frame.setVisible(false);
     }
+    public static void main(String[] args)
+    {
+        Promote P = new Promote(true);
+        Promote S = new Promote(false);
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
-
-        if(e.getSource()==bishopP){
+        if (e.getSource() == bishopP) {
             System.out.println("Bishop");
             selected = 3;
             promoteDispose();
-        } else if(e.getSource()==queenP){
+        } else if (e.getSource() == queenP) {
             System.out.println("Queen");
             selected = 4;
             promoteDispose();
-        }
-        else if(e.getSource()==knightP){
+        } else if (e.getSource() == knightP) {
             System.out.println("Knight");
             selected = 2;
             promoteDispose();
-        }
-        else if(e.getSource()==rookP){
+        } else if (e.getSource() == rookP) {
             System.out.println("Rook");
             selected = 1;
             promoteDispose();
         }
-        gl.promote(gl.posProm,gl.turnProm,selected);
+
+            gl.gameStatus = true;
+            gl.promote(gl.posProm,gl.turnProm,selected);
     }
 
     @Override

@@ -21,6 +21,7 @@ public class ChessBoard{
     private JPanel blackDeadPanel;
     private JPanel whiteDeadPanel;
     int wP=0, wB=0,  wK=0, wQ=0,  wR=0, bP=0, bB=0, bK=0, bQ=0, bR=0;
+    JLabel wPawnDead ,wBishopDead ,wKnightDead ,wQueenDead ,wRookDead, bPawnDead ,bBishopDead ,bKnightDead ,bQueenDead ,bRookDead ;
     private  int width = icon.width, heigth = icon.height;
     public ChessBoard(){initialize();}
     private void initialize() {
@@ -41,6 +42,7 @@ public class ChessBoard{
         container = new JPanel(null);
         container.setBounds(0,0,width,heigth);
         setPlayerInfo("Talal","Rahaal", 38); //should get the usernames
+        setD();
 
         base.add(container, Integer.valueOf(0));
         board.setTitle("chess");
@@ -385,11 +387,62 @@ public class ChessBoard{
         base.add(label, 1);
     }
 
+    public  void setD(){
+        setDeadpanels();
+
+        showDeadIcons();
+    }
     public void setDead(int id , boolean side){
 
-        setDeadpanels();
-       addDead ( id ,side);
-       showDeadIcons();
+        if(side){
+            switch (id){
+                case 1:
+                    wR++;
+                    wRookDead.setText("X" + String.valueOf(wR));
+                    break;
+                case 2:
+                    wK++;
+                    wKnightDead.setText("X" + String.valueOf(wK));
+                    break;
+                case 3:
+                    wB++;
+                    wBishopDead.setText("X" + String.valueOf(wB));
+                    break;
+                case 4:
+                    wQ++;
+                    wQueenDead.setText("X" + String.valueOf(wQ));
+                    break;
+                case 6:
+                    wP++;
+                    wPawnDead.setText("X" + String.valueOf(wP));
+
+                    break;
+            }
+        } else {
+            switch (id){
+                case 1:
+                    bR++;
+                    bRookDead.setText("X" + String.valueOf(bR));
+                    break;
+                case 2:
+                    bK++;
+                    bKnightDead.setText("X" + String.valueOf(bK));
+                    break;
+                case 3:
+                    bB++;
+                    bBishopDead.setText("X" + String.valueOf(bB));
+                    break;
+                case 4:
+                    bQ++;
+                    bQueenDead.setText("X" + String.valueOf(bQ));
+                    break;
+                case 6:
+                    bP++;
+                    bPawnDead.setText("X" + String.valueOf(bP));
+                    break;
+            }
+
+        }
 
     }
     private void setDeadpanels(){
@@ -409,70 +462,45 @@ public class ChessBoard{
         base.add(whiteDeadPanel, Integer.valueOf(1));
     }
 
-    private void addDead (int id , boolean side){
-        if(side){
-            switch (id){
-                case 1:
-                    wR++;
-                    break;
-                case 2:
-                    wK++;
-                    break;
-                case 3:
-                    wB++;
-                    break;
-                case 4:
-                    wQ++;
-                    break;
-                case 6:
-                    wP++;
-                    break;
-            }
-        } else {
-            switch (id){
-                case 1:
-                    bR++;
-                    break;
-                case 2:
-                    bK++;
-                    break;
-                case 3:
-                    bB++;
-                    break;
-                case 4:
-                    bQ++;
-                    break;
-                case 6:
-                    bP++;
-                    break;
-            }
-
-        }
-    }
     public void showDeadIcons(){
 //        //white
-        whiteDeadPanel.add(setDeadIcon(icon.white_pawnD,wP));
-        whiteDeadPanel.add(setDeadIcon(icon.white_bishopD,wB));
-        whiteDeadPanel.add(setDeadIcon(icon.white_knightD,wK));
-        whiteDeadPanel.add(setDeadIcon(icon.white_queenD,wQ));
-        whiteDeadPanel.add(setDeadIcon(icon.white_rookD,wR));
+        wPawnDead = setDeadIcon(icon.white_pawnD,wP);
+        wBishopDead = setDeadIcon(icon.white_bishopD,wB);
+        wKnightDead = setDeadIcon(icon.white_knightD,wK);
+        wQueenDead = setDeadIcon(icon.white_queenD,wQ);
+        wRookDead = setDeadIcon(icon.white_rookD,wR);
+
+        whiteDeadPanel.add(wPawnDead);
+        whiteDeadPanel.add(wBishopDead);
+        whiteDeadPanel.add(wKnightDead);
+        whiteDeadPanel.add(wQueenDead);
+        whiteDeadPanel.add(wRookDead);
         //black
-        blackDeadPanel.add(setDeadIcon(icon.black_pawnD,bP));
-        blackDeadPanel.add(setDeadIcon(icon.black_bishopD,bB));
-        blackDeadPanel.add(setDeadIcon(icon.black_knightD,bK));
-        blackDeadPanel.add(setDeadIcon(icon.black_queenD,bQ));
-        blackDeadPanel.add(setDeadIcon(icon.black_rookD,bR));
+
+        bPawnDead = setDeadIcon(icon.black_pawnD,bP);
+        bBishopDead = setDeadIcon(icon.black_bishopD,bB);
+        bKnightDead = setDeadIcon(icon.black_knightD,bK);
+        bQueenDead =setDeadIcon(icon.black_queenD,bQ);
+        bRookDead = setDeadIcon(icon.black_rookD,bR);
+
+
+        blackDeadPanel.add(bPawnDead);
+        blackDeadPanel.add(bBishopDead);
+        blackDeadPanel.add(bKnightDead);
+        blackDeadPanel.add(bQueenDead);
+        blackDeadPanel.add(bRookDead);
     }
     private JLabel setDeadIcon(ImageIcon dIcon , int number){
 
-        if (number == 0) return  new JLabel();
 
         JLabel dLabel = new JLabel("X" + String.valueOf(number));
+
         dLabel.setIcon(icon.resizeWithRatio(dIcon));
         dLabel.setFont(new Font("Space Grotesk", Font.BOLD, 20 *width/1440));
         dLabel.setHorizontalTextPosition(JLabel.RIGHT);
         dLabel.setVerticalTextPosition(JLabel.BOTTOM);
         dLabel.setForeground(icon.white);
+
 
         dLabel.setOpaque(false);
         return dLabel;
@@ -498,14 +526,14 @@ public class ChessBoard{
         //Creates 2 ChessClock objects for white & the other for black
         whiteClock = new ChessClock(minutesInput, secondsInput);
         JLabel whiteClockLabel = whiteClock.getLabel();
-        whiteClockLabel.setFont(new Font("Space Grotesk", Font.BOLD, 70 *width/1440));
-        whiteClockLabel.setBounds(1020 *width/1440, 745 *width/1440, 334 *width/1440, 92 *width/1440);
+        whiteClockLabel.setFont(new Font("Space Grotesk", Font.BOLD, 80 *width/1440));
+        whiteClockLabel.setBounds(1020 *width/1440, 750*width/1440, 334 *width/1440, 92 *width/1440);
         whiteClockLabel.setForeground(icon.white);
 
         blackClock = new ChessClock(minutesInput, secondsInput);
         JLabel blackClockLabel = blackClock.getLabel();
-        blackClockLabel.setFont(new Font("Space Grotesk", Font.BOLD, 70 *width/1440));
-        blackClockLabel.setBounds(1020 *width/1440, 185 *width/1440, 334 *width/1440, 92 *width/1440);
+        blackClockLabel.setFont(new Font("Space Grotesk", Font.BOLD, 80 *width/1440));
+        blackClockLabel.setBounds(1020 *width/1440, 192 *width/1440, 334 *width/1440, 92 *width/1440);
         blackClockLabel.setForeground(icon.white);
 
         base.add(whiteClockLabel, Integer.valueOf(1));
@@ -560,7 +588,7 @@ public class ChessBoard{
         ChessBoard c = new ChessBoard();
         c.setDead(6,true);
         c.setDead(2,false);
-        c.setDead(4,true);
+        c.setDead(6,true);
         c.setDead(3,false);
         c.show();
     }

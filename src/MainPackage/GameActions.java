@@ -134,7 +134,7 @@ public class GameActions implements MouseListener{
             //Should be if statement to decide wether they are black or white
             if(side)
                 makeWhiteBtns();
-            else if(side)
+            else
                 makeBlackBtns();
             promotePanel.add(btnsPromote, BorderLayout.SOUTH);
             System.out.println("322");
@@ -202,31 +202,30 @@ public class GameActions implements MouseListener{
         @Override
         public void mouseClicked(MouseEvent e) {
 
-            if(e.getSource()==bishopP){
-                System.out.println("Bishop");
-                selected = 3;
-                promoteDispose();
-            } else if(e.getSource()==queenP){
-                System.out.println("Queen");
-                selected = 4;
-                promoteDispose();
-            }
-            else if(e.getSource()==knightP){
-                System.out.println("Knight");
-                selected = 2;
-                promoteDispose();
-            }
-            else if(e.getSource()==rookP){
-                System.out.println("Rook");
-                selected = 1;
-                promoteDispose();
-            }if ((e.getSource() == resultLabel)){
-                frame.dispose();
-                System.out.println("aaa");
-                return;
-            }
-            gl.gameStatus = true;
-            gl.promote(gl.posProm,gl.turnProm,selected);
+
+                if (e.getSource() == bishopP) {
+                    System.out.println("Bishop");
+                    selected = 3;
+                    //promoteDispose();
+                } else if (e.getSource() == queenP) {
+                    System.out.println("Queen");
+                    selected = 4;
+                    promoteDispose();
+                } else if (e.getSource() == knightP) {
+                    System.out.println("Knight");
+                    selected = 2;
+                    promoteDispose();
+                } else if (e.getSource() == rookP) {
+                    System.out.println("Rook");
+                    selected = 1;
+                    promoteDispose();
+                }
+                if ((e.getSource() == resultLabel)) {
+                    frame.dispose();
+                    System.out.println("aaa");
+                }
+//            gl.gameStatus = true;
+//            gl.promote(gl.posProm,gl.turnProm,selected);
         }
 
         @Override
@@ -251,6 +250,7 @@ public class GameActions implements MouseListener{
         public static void main(String[] args)
         {
             GameActions g = new GameActions();
-            g.showResult(0);
+            g.promotionWindow(false);
+            g.promotionWindow(true);
         }
     }
