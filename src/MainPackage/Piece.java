@@ -46,6 +46,7 @@ public abstract class Piece {
             p.eating.clear();
             p.moving.clear();
             p.pawnDiagonal.clear();
+            p.twoMoves= null;
             p.eatingMoves();
         }
     }

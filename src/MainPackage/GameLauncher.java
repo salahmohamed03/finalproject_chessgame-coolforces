@@ -71,10 +71,10 @@ public class GameLauncher {
         this.pieces.add(new pawn(false, "H7", game));
 
         // test
-//        this.pieces.add(new queen(true,"F4",game));
-//        this.pieces.add(new pawn(true,"D4",game));
-//        this.pieces.add(new king(false,"A4",game));
-//        this.pieces.add(new pawn(false,"E4",game));
+//        this.pieces.add(new queen(true,"G1",game));
+//        this.pieces.add(new rook(true,"H4",game));
+//        this.pieces.add(new king(false,"G6",game));
+//        this.pieces.add(new pawn(true,"G2",game));
 //        this.pieces.add(new king(true,"F8",game));
 
 //        this.pieces.add(new queen(true,"D1",game));
@@ -382,6 +382,7 @@ public class GameLauncher {
             for(Piece p:pieces){
                 if(p.pieceSide == side&&p.id != 5) {
                     p.eating.retainAll(Collections.singletonList(pos));
+                    p.pawnDiagonal.retainAll(Collections.singletonList(pos));
                     p.moving.retainAll(allowed);
                 }
             }
