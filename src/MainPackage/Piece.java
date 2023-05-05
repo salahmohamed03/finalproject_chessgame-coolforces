@@ -12,6 +12,7 @@ public abstract class Piece {
     protected ArrayList<String> availableMoves;
     protected boolean pieceSide;
     protected String position;
+    public String twoMoves;
     public ArrayList<String> eating = new ArrayList<String>();
     public ArrayList<String> moving = new ArrayList<String>();
     public ArrayList<String> pawnDiagonal = new ArrayList<String>();
@@ -34,6 +35,9 @@ public abstract class Piece {
     }
     public void transport(String p2,ArrayList<Piece> pieces){
         if(p2.equals(position))return;
+        if(Board.isAlly(p2,position) == (Object) false){
+            Board.setDead(Board.getPieceInfo(p2).id,Board.getPieceInfo(p2).side);
+        }
         Board.move_piece(position,p2);
         position = p2;
         for(Piece p: pieces)
@@ -161,7 +165,7 @@ class pawn extends Piece {
         String move_two= move(position,2*sign,0);
         if(position.charAt(1)==((pieceSide)?'2':'7')&& Board.Empty(move_one))
             if(move_two != null)
-                 result.add(move_two);
+            {result.add(move_two);twoMoves = move_two;}
         if(eat_left != null)
              result.add(eat_left);
         if(eat_right!=null)

@@ -20,51 +20,61 @@ public class GameLauncher {
     public GameLauncher() {
         game.setClock(this);
         this.initializePieces();
-        this.turn = true;
+        this.turn = false;
         gameStatus = true;
+    }
+    public void Clock(String clickedSquare) {
+        if(!gameStatus)return;
+        kingEscape(turn);
+        kingChecked(turn);
+        handlingMove(clickedSquare);
+        kingEscape(turn);
+        kingChecked(turn);
+        checkPromotion(!turn);
+        isEndGame(turn);
     }
     public void initializePieces() {
         this.pieces = new ArrayList();
-        this.pieces.add(new bishop(true, "F1", game));
-        this.pieces.add(new bishop(true, "C1", game));
-        this.pieces.add(new king(true, "E1", game));
-        this.pieces.add(new queen(true, "D1", game));
-        this.pieces.add(new knight(true, "G1", game));
-        this.pieces.add(new knight(true, "B1", game));
-        this.pieces.add(new rook(true, "H1", game));
-        this.pieces.add(new rook(true, "A1", game));
-        this.pieces.add(new pawn(true, "A2", game));
-        this.pieces.add(new pawn(true, "B2", game));
-        this.pieces.add(new pawn(true, "C2", game));
-        this.pieces.add(new pawn(true, "D2", game));
-        this.pieces.add(new pawn(true, "E2", game));
-        this.pieces.add(new pawn(true, "F2", game));
-        this.pieces.add(new pawn(true, "G2", game));
-        this.pieces.add(new pawn(true, "H2", game));
-        this.pieces.add(new bishop(false, "F8",game));
-        this.pieces.add(new bishop(false, "C8",game));
-        this.pieces.add(new king(false, "E8", game));
-        this.pieces.add(new queen(false, "D8", game));
-        this.pieces.add(new knight(false, "G8",game));
-        this.pieces.add(new knight(false, "B8",game));
-        this.pieces.add(new rook(false, "H8", game));
-        this.pieces.add(new rook(false, "A8", game));
-        this.pieces.add(new pawn(false, "A7", game));
-        this.pieces.add(new pawn(false, "B7", game));
-        this.pieces.add(new pawn(false, "C7", game));
-        this.pieces.add(new pawn(false, "D7", game));
-        this.pieces.add(new pawn(false, "E7", game));
-        this.pieces.add(new pawn(false, "F7", game));
-        this.pieces.add(new pawn(false, "G7", game));
-        this.pieces.add(new pawn(false, "H7", game));
+//        this.pieces.add(new bishop(true, "F1", game));
+//        this.pieces.add(new bishop(true, "C1", game));
+//        this.pieces.add(new king(true, "E1", game));
+//        this.pieces.add(new queen(true, "D1", game));
+//        this.pieces.add(new knight(true, "G1", game));
+//        this.pieces.add(new knight(true, "B1", game));
+//        this.pieces.add(new rook(true, "H1", game));
+//        this.pieces.add(new rook(true, "A1", game));
+//        this.pieces.add(new pawn(true, "A2", game));
+//        this.pieces.add(new pawn(true, "B2", game));
+//        this.pieces.add(new pawn(true, "C2", game));
+//        this.pieces.add(new pawn(true, "D2", game));
+//        this.pieces.add(new pawn(true, "E2", game));
+//        this.pieces.add(new pawn(true, "F2", game));
+//        this.pieces.add(new pawn(true, "G2", game));
+//        this.pieces.add(new pawn(true, "H2", game));
+//        this.pieces.add(new bishop(false, "F8",game));
+//        this.pieces.add(new bishop(false, "C8",game));
+//        this.pieces.add(new king(false, "E8", game));
+//        this.pieces.add(new queen(false, "D8", game));
+//        this.pieces.add(new knight(false, "G8",game));
+//        this.pieces.add(new knight(false, "B8",game));
+//        this.pieces.add(new rook(false, "H8", game));
+//        this.pieces.add(new rook(false, "A8", game));
+//        this.pieces.add(new pawn(false, "A7", game));
+//        this.pieces.add(new pawn(false, "B7", game));
+//        this.pieces.add(new pawn(false, "C7", game));
+//        this.pieces.add(new pawn(false, "D7", game));
+//        this.pieces.add(new pawn(false, "E7", game));
+//        this.pieces.add(new pawn(false, "F7", game));
+//        this.pieces.add(new pawn(false, "G7", game));
+//        this.pieces.add(new pawn(false, "H7", game));
 
         // test
-        //this.pieces.add(new queen(true,"F4",game));
+//        this.pieces.add(new queen(true,"F4",game));
 //        this.pieces.add(new queen(true,"E5",game));
-//        this.pieces.add(new king(false,"E6",game));
-//        this.pieces.add(new pawn(true,"D4",game));
-//        this.pieces.add(new king(true,"F8",game));
-//        this.pieces.add(new bishop(false,"C8",game));
+        this.pieces.add(new king(false,"E5",game));
+        this.pieces.add(new pawn(true,"E2",game));
+        this.pieces.add(new king(true,"F8",game));
+
         updateValidMoves(true);
         updateCapture(true);
         updateValidMoves(false);
@@ -116,16 +126,6 @@ public class GameLauncher {
                 this.selected = piece;
             }
         }
-    }
-    public void Clock(String clickedSquare) {
-        if(!gameStatus)return;
-        kingEscape(turn);
-        kingChecked(turn);
-        handlingMove(clickedSquare);
-        kingEscape(turn);
-        kingChecked(turn);
-        checkPromotion(!turn);
-        isEndGame(turn);
     }
     private void isEndGame(boolean turn){
         if(checkWinner(turn) == (Object) true){
@@ -315,7 +315,19 @@ public class GameLauncher {
             if(p.pieceSide == side&&p.id == 5)
             {
                 ArrayList<String> temp = possession(!side);
-                p.availableMoves.removeAll(possession(!side));
+                for(Piece pp : pieces){
+                    if(pp.pieceSide == !side &&pp.id == 6){
+                        if(pp.twoMoves != null){
+                            for(int i = 0 ;i < temp.size();i++){
+                                if(Objects.equals(temp.get(i), pp.twoMoves)){
+                                    temp.remove(i);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                p.availableMoves.removeAll(temp);
                 p.eatingMoves();
             }
         }

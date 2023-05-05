@@ -266,6 +266,47 @@ public class ChessBoard{
         else if(piece == icon.white_queenE)return  true;
         return null;
     }
+    public pieceIcon getPieceInfo(String pos){
+        pieceIcon res = new pieceIcon();
+        Icon i = getButton(pos).getIcon();
+               if(i == icon.black_pawn ){res.id = 6;res.side = false;}
+          else if(i == icon.black_bishop ){res.id = 3;res.side = false;}
+          else if(i == icon.black_king ){res.id = 5;res.side = false;}
+          else if(i == icon.black_knight ){res.id = 2;res.side = false;}
+          else if(i == icon.black_rook ){res.id = 1;res.side = false;}
+          else if(i == icon.black_queen ){res.id = 4;res.side = false;}
+          else if(i == icon.white_pawn ) {res.id = 6;res.side =true ;}
+          else if(i == icon.white_bishop ) {res.id = 3;res.side =true ;}
+          else if(i == icon.white_king ) {res.id = 5;res.side =true ;}
+          else if(i == icon.white_knight ) {res.id = 2;res.side =true ;}
+          else if(i == icon.white_rook ) {res.id = 1;res.side =true ;}
+          else if(i == icon.white_queen ) {res.id = 4;res.side =true ;}
+        else if(i == icon.black_pawnN ){res.id = 6;res.side = false;}
+        else if(i == icon.black_bishopN ){res.id = 3;res.side = false;}
+        else if(i == icon.black_kingN ){res.id = 5;res.side = false;}
+        else if(i == icon.black_knightN ){res.id = 2;res.side = false;}
+        else if(i == icon.black_rookN ){res.id = 1;res.side = false;}
+        else if(i == icon.black_queenN ){res.id = 4;res.side = false;}
+        else if(i == icon.white_pawnN ) {res.id = 6;res.side =true ;}
+        else if(i == icon.white_bishopN ) {res.id = 3;res.side =true ;}
+        else if(i == icon.white_kingN ) {res.id = 5;res.side =true ;}
+        else if(i == icon.white_knightN ) {res.id = 2;res.side =true ;}
+        else if(i == icon.white_rookN ) {res.id = 1;res.side =true ;}
+        else if(i == icon.white_queenN ) {res.id = 4;res.side =true ;}
+        else if(i == icon.black_pawnE ){res.id = 6;res.side = false;}
+        else if(i == icon.black_bishopE ){res.id = 3;res.side = false;}
+        else if(i == icon.black_kingE ){res.id = 5;res.side = false;}
+        else if(i == icon.black_knightE ){res.id = 2;res.side = false;}
+        else if(i == icon.black_rookE ){res.id = 1;res.side = false;}
+        else if(i == icon.black_queenE ){res.id = 4;res.side = false;}
+        else if(i == icon.white_pawnE ) {res.id = 6;res.side =true ;}
+        else if(i == icon.white_bishopE ) {res.id = 3;res.side =true ;}
+        else if(i == icon.white_kingE ) {res.id = 5;res.side =true ;}
+        else if(i == icon.white_knightE ) {res.id = 2;res.side =true ;}
+        else if(i == icon.white_rookE ) {res.id = 1;res.side =true ;}
+        else if(i == icon.white_queenE ) {res.id = 4;res.side =true ;}
+        return res;
+    }
     public Object isAlly(String p1, String p2){
         if(getSide(p2) == null)return null;
         return (boolean) (getSide(p1) == getSide(p2));
@@ -467,4 +508,8 @@ public class ChessBoard{
         c.setDead(3,false);
         c.show();
     }
+}
+class pieceIcon{
+    int id;
+    boolean side;
 }
