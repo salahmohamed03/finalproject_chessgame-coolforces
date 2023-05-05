@@ -35,43 +35,43 @@ public class GameLauncher {
     }
     public void initializePieces() {
         this.pieces = new ArrayList();
-//        this.pieces.add(new bishop(true, "F1", game));
-//        this.pieces.add(new bishop(true, "C1", game));
-//        this.pieces.add(new king(true, "E1", game));
-//        this.pieces.add(new queen(true, "D1", game));
-//        this.pieces.add(new knight(true, "G1", game));
-//        this.pieces.add(new knight(true, "B1", game));
-//        this.pieces.add(new rook(true, "H1", game));
-//        this.pieces.add(new rook(true, "A1", game));
-//        this.pieces.add(new pawn(true, "A2", game));
-//        this.pieces.add(new pawn(true, "B2", game));
-//        this.pieces.add(new pawn(true, "C2", game));
-//        this.pieces.add(new pawn(true, "D2", game));
-//        this.pieces.add(new pawn(true, "E2", game));
-//        this.pieces.add(new pawn(true, "F2", game));
-//        this.pieces.add(new pawn(true, "G2", game));
-//        this.pieces.add(new pawn(true, "H2", game));
-//        this.pieces.add(new bishop(false, "F8",game));
-//        this.pieces.add(new bishop(false, "C8",game));
-//        this.pieces.add(new king(false, "E8", game));
-//        this.pieces.add(new queen(false, "D8", game));
-//        this.pieces.add(new knight(false, "G8",game));
-//        this.pieces.add(new knight(false, "B8",game));
-//        this.pieces.add(new rook(false, "H8", game));
-//        this.pieces.add(new rook(false, "A8", game));
-//        this.pieces.add(new pawn(false, "A7", game));
-//        this.pieces.add(new pawn(false, "B7", game));
-//        this.pieces.add(new pawn(false, "C7", game));
-//        this.pieces.add(new pawn(false, "D7", game));
-//        this.pieces.add(new pawn(false, "E7", game));
-//        this.pieces.add(new pawn(false, "F7", game));
-//        this.pieces.add(new pawn(false, "G7", game));
-//        this.pieces.add(new pawn(false, "H7", game));
+        this.pieces.add(new bishop(true, "F1", game));
+        this.pieces.add(new bishop(true, "C1", game));
+        this.pieces.add(new king(true, "E1", game));
+        this.pieces.add(new queen(true, "D1", game));
+        this.pieces.add(new knight(true, "G1", game));
+        this.pieces.add(new knight(true, "B1", game));
+        this.pieces.add(new rook(true, "H1", game));
+        this.pieces.add(new rook(true, "A1", game));
+        this.pieces.add(new pawn(true, "A2", game));
+        this.pieces.add(new pawn(true, "B2", game));
+        this.pieces.add(new pawn(true, "C2", game));
+        this.pieces.add(new pawn(true, "D2", game));
+        this.pieces.add(new pawn(true, "E2", game));
+        this.pieces.add(new pawn(true, "F2", game));
+        this.pieces.add(new pawn(true, "G2", game));
+        this.pieces.add(new pawn(true, "H2", game));
+        this.pieces.add(new bishop(false, "F8",game));
+        this.pieces.add(new bishop(false, "C8",game));
+        this.pieces.add(new king(false, "E8", game));
+        this.pieces.add(new queen(false, "D8", game));
+        this.pieces.add(new knight(false, "G8",game));
+        this.pieces.add(new knight(false, "B8",game));
+        this.pieces.add(new rook(false, "H8", game));
+        this.pieces.add(new rook(false, "A8", game));
+        this.pieces.add(new pawn(false, "A7", game));
+        this.pieces.add(new pawn(false, "B7", game));
+        this.pieces.add(new pawn(false, "C7", game));
+        this.pieces.add(new pawn(false, "D7", game));
+        this.pieces.add(new pawn(false, "E7", game));
+        this.pieces.add(new pawn(false, "F7", game));
+        this.pieces.add(new pawn(false, "G7", game));
+        this.pieces.add(new pawn(false, "H7", game));
 
         // test
-//        this.pieces.add(new queen(true,"F4",game));
-//        this.pieces.add(new queen(true,"E5",game));
-        this.pieces.add(new king(false,"E5",game));
+        this.pieces.add(new queen(true,"A4",game));
+        this.pieces.add(new rook(true,"E1",game));
+        this.pieces.add(new king(false,"E4",game));
         this.pieces.add(new pawn(true,"E2",game));
         this.pieces.add(new king(true,"F8",game));
 
@@ -235,23 +235,31 @@ public class GameLauncher {
         }
         return null;
     }
-    private void kingChecked(boolean side){
-        if(threateningKing(side).size()  == 0)return;
-        if(threateningKing(side).size() == 1){
+    private void kingChecked(boolean side) {
+        if (threateningKing(side).size() == 0) return;
+        if (threateningKing(side).size() == 1) {
             Piece attacker = threateningKing(side).get(0);
-            if(attacker.id == 2 || attacker.id == 3 || attacker.id == 6)
-                eatThreat(attacker.position,side);
-            else if(attacker.id == 4 || attacker.id == 1){
-                if(attacker.position.charAt(0) == kingPosition(side).charAt(0)){
-                    blockCheck(1,attacker.position,side);
-                    kingWay(0,attacker.position,side);
+            if (attacker.id == 2 || attacker.id == 3 || attacker.id == 6)
+                eatThreat(attacker.position, side);
+            else if (attacker.id == 4 || attacker.id == 1) {
+                if (attacker.position.charAt(0) == kingPosition(side).charAt(0)) {
+                    blockCheck(1, attacker.position, side);
+                    kingWay(0, attacker.position, side);
+                } else if (attacker.position.charAt(1) == kingPosition(side).charAt(1)) {
+                    blockCheck(0, attacker.position, side);
+                    kingWay(1, attacker.position, side);
+                } else if (attacker.id == 4) {
+                    eatThreat(attacker.position, side);
                 }
-                else if(attacker.position.charAt(1) == kingPosition(side).charAt(1)){
-                    blockCheck(0,attacker.position,side);
-                    kingWay(1,attacker.position,side);
-                }
-                else if(attacker.id == 4){
-                    eatThreat(attacker.position,side);
+            }
+        } else {
+            for(Piece attacker: threateningKing(side)) {
+                if (attacker.id == 4 || attacker.id == 1) {
+                    if (attacker.position.charAt(0) == kingPosition(side).charAt(0)) {
+                        kingWay(0, attacker.position, side);
+                    } else if (attacker.position.charAt(1) == kingPosition(side).charAt(1)) {
+                        kingWay(1, attacker.position, side);
+                    }
                 }
             }
         }
