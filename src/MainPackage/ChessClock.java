@@ -74,18 +74,12 @@ public class ChessClock {
 
 	//Checks if the clock has run out
 	public boolean finishedCheck() {
-		if ((elapsedMinutes == startMinutes) && ((elapsedSeconds % 60) == startSeconds)) {
-			return true;
-		}
-		return false;
+		return (elapsedMinutes == startMinutes) && ((elapsedSeconds % 60) == startSeconds);
 	}
 
 	//Checks if the timer is running
 	public boolean runningCheck() {
-		if(timer.isRunning()) {
-			return true;
-		}
-		return false;
+		return timer.isRunning();
 	}
 
 	//Returns total time elapsed by the clock in seconds

@@ -181,6 +181,7 @@ public class GameLauncher {
                     this.selected.Unselect();
                     this.selected.transport(clickedSquare,pieces);
                     this.turn = !this.turn;
+                    game.controlTimer(turn);
                     this.selected = null;
                 }
 
@@ -201,6 +202,7 @@ public class GameLauncher {
                     this.selected.Unselect();
                     this.selected.transport(clickedSquare,pieces);
                     this.turn = !this.turn;
+                    game.controlTimer(turn);
                 }
                 this.selected = null;
             } else {
@@ -216,10 +218,14 @@ public class GameLauncher {
     private void isEndGame(boolean turn){
         if(checkWinner(turn) == (Object) true){
             promotion.showResult(1);
+            game.whiteClock.stop();
+            game.blackClock.stop();
             gameStatus = false;
         }
         else if(checkWinner(turn) == (Object) false){
             promotion.showResult(-1);
+            game.whiteClock.stop();
+            game.blackClock.stop();
             gameStatus = false;
         }
     }

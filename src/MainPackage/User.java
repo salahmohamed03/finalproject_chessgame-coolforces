@@ -15,12 +15,12 @@ public class User {
         this.Password=Password;
     }
 
-    public String getUsername()
+    public String getName()
     {
         return Username;
     }
 
-    public char[] getPassword()
+    public char[] getPass()
     {
         return Password;
     }

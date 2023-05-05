@@ -541,23 +541,15 @@ public class ChessBoard{
     }
 
     //Starts and Stops the timer of each clock
-    public void controlTimer(boolean side, boolean start) {
-        if (side) {
-            if (start) {
+    public void controlTimer(boolean side) {
+            if (side) {
                 whiteClock.start();
+                blackClock.stop();
             }
             else {
                 whiteClock.stop();
-            }
-        }
-        else {
-            if (start) {
                 blackClock.start();
             }
-            else {
-                blackClock.stop();
-            }
-        }
     }
 
     public void resetTimer(boolean side) {

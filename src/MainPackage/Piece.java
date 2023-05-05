@@ -42,11 +42,12 @@ public abstract class Piece {
         position = p2;
         for(Piece p: pieces)
         {
+
             p.availableMoves = p.ValidMoves();
             p.eating.clear();
             p.moving.clear();
             p.pawnDiagonal.clear();
-            p.twoMoves= null;
+            if(!Objects.equals(p.position, p.twoMoves))twoMoves= null;
             p.eatingMoves();
         }
     }
@@ -75,7 +76,7 @@ public abstract class Piece {
         moving.clear();
         pawnDiagonal.clear();
         for(int i = 0 ;i < availableMoves.size();i++){
-           Object t = Board.isAlly(position,(availableMoves.get(i)));
+            Object t = Board.isAlly(position,(availableMoves.get(i)));
             if(Board.isAlly(position,(availableMoves.get(i))) == (Object) false){
                 eating.add(availableMoves.get(i));
             }
@@ -161,16 +162,16 @@ class pawn extends Piece {
         String eat_left=move(position,sign,-1*sign);
 
         if(move_one!=null)
-             result.add(move_one);
+            result.add(move_one);
 
         String move_two= move(position,2*sign,0);
         if(position.charAt(1)==((pieceSide)?'2':'7')&& Board.Empty(move_one))
             if(move_two != null)
             {result.add(move_two);twoMoves = move_two;}
         if(eat_left != null)
-             result.add(eat_left);
+            result.add(eat_left);
         if(eat_right!=null)
-             result.add(eat_right);
+            result.add(eat_right);
         return result;
     }
     public void eatingMoves(){
@@ -180,7 +181,7 @@ class pawn extends Piece {
             String twoMoves = move(position,2*sign,0);
             if(Board.isAlly(position,(availableMoves.get(i))) == (Object) false){
                 if(Objects.equals(availableMoves.get(i), twoMoves))continue;
-                    eating.add(availableMoves.get(i));
+                eating.add(availableMoves.get(i));
             }
             else{
                 String p1 =  move(position, sign, 1);

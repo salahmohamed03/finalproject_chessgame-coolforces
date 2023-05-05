@@ -206,26 +206,32 @@ public class GameActions implements MouseListener{
                 if (e.getSource() == bishopP) {
                     System.out.println("Bishop");
                     selected = 3;
-                    //promoteDispose();
+                    gl.gameStatus = true;
+                    gl.promote(gl.posProm,gl.turnProm,selected);
+                    promoteDispose();
                 } else if (e.getSource() == queenP) {
                     System.out.println("Queen");
                     selected = 4;
+                    gl.gameStatus = true;
+                    gl.promote(gl.posProm,gl.turnProm,selected);
                     promoteDispose();
                 } else if (e.getSource() == knightP) {
                     System.out.println("Knight");
                     selected = 2;
+                    gl.gameStatus = true;
+                    gl.promote(gl.posProm,gl.turnProm,selected);
                     promoteDispose();
                 } else if (e.getSource() == rookP) {
                     System.out.println("Rook");
                     selected = 1;
+                    gl.gameStatus = true;
+                    gl.promote(gl.posProm,gl.turnProm,selected);
                     promoteDispose();
                 }
                 if ((e.getSource() == resultLabel)) {
                     frame.dispose();
                     System.out.println("aaa");
                 }
-//            gl.gameStatus = true;
-//            gl.promote(gl.posProm,gl.turnProm,selected);
         }
 
         @Override

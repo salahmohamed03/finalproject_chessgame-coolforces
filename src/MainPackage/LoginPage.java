@@ -2,8 +2,6 @@ package MainPackage;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -196,7 +194,7 @@ public class LoginPage extends dataHandling implements MouseListener {
             while (enter) 
             {
                 User user=new User(textField.getText(),passField.getPassword());
-            if ((checkCredentials(user.getUsername(), user.getPassword()))) 
+            if ((checkCredentials(user.getName(), user.getPass())))
             {
                 HomePage H = new HomePage();
                 break;    
