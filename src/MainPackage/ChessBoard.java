@@ -489,9 +489,9 @@ public class ChessBoard{
         }
         else {
             char[] input = GameStart.timerInput.toCharArray();
-            String minuteString = new StringBuilder().append(input[3]).append(input[4]).toString();
+            String minuteString = new StringBuilder().append(input[0]).append(input[1]).toString();
             minutesInput = Integer.parseInt(minuteString);
-            String secondString = new StringBuilder().append(input[6]).append(input[7]).toString();
+            String secondString = new StringBuilder().append(input[3]).append(input[4]).toString();
             secondsInput = Integer.parseInt(secondString);
         }
 

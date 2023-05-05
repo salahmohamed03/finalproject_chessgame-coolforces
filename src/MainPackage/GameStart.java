@@ -141,8 +141,8 @@ public class GameStart extends JFrame implements MouseListener {
         JLabel timerLabel = createLabel("Timer",60 *width/1440);
         timerLabel.setBounds(350 *width/1440,760 *width/1440,310 *width/1440,50 *width/1440);
 
-        timerSet = createTextField("00:00:00");
-        timerSet.setBounds(828 *width/1440,770 *width/1440,171 *width/1440,40 *width/1440);
+        timerSet = createTextField("00:00");
+        timerSet.setBounds(865 *width/1440,770 *width/1440,171 *width/1440,40 *width/1440);
 
         ImageIcon on =  new ImageIcon ("src/Mat/Buttons/timerOnBtn.png");
         ImageIcon off =  new ImageIcon ("src/Mat/Buttons/timerOffBtn.png");
