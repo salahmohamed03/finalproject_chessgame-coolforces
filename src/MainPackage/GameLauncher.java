@@ -23,6 +23,18 @@ public class GameLauncher {
         this.turn = true;
         gameStatus = true;
     }
+    public void Clock(String clickedSquare) {
+        if(!gameStatus)return;
+        blockingPiece(turn);
+        kingEscape(turn);
+        kingChecked(turn);
+        handlingMove(clickedSquare);
+        kingEscape(turn);
+        kingChecked(turn);
+        checkPromotion(!turn);
+        blockingPiece(turn);
+        isEndGame(turn);
+    }
     public void initializePieces() {
         this.pieces = new ArrayList();
         this.pieces.add(new bishop(true, "F1", game));
@@ -59,18 +71,102 @@ public class GameLauncher {
         this.pieces.add(new pawn(false, "H7", game));
 
         // test
-        //this.pieces.add(new queen(true,"F4",game));
-//        this.pieces.add(new queen(true,"E5",game));
-//        this.pieces.add(new king(false,"E6",game));
-//        this.pieces.add(new pawn(true,"D4",game));
+//        this.pieces.add(new queen(true,"G1",game));
+//        this.pieces.add(new rook(true,"H4",game));
+//        this.pieces.add(new king(false,"G6",game));
+//        this.pieces.add(new pawn(true,"G2",game));
 //        this.pieces.add(new king(true,"F8",game));
-//        this.pieces.add(new bishop(false,"C8",game));
+
+//        this.pieces.add(new queen(true,"D1",game));
+//        this.pieces.add(new bishop(true,"D4",game));
+//        this.pieces.add(new king(false,"D6",game));
+//        this.pieces.add(new bishop(false,"D3",game));
+//        this.pieces.add(new king(true,"F8",game));
+
         updateValidMoves(true);
         updateCapture(true);
         updateValidMoves(false);
         updateCapture(false);
         kingEscape(turn);
         kingChecked(turn);
+    }
+    private void blockingPiece(boolean side){
+        Piece king = getPiece(side, 5);
+        for(Piece p : pieces){
+            if((p.id == 4 || p.id == 1)&& p.pieceSide == !side){
+                assert king != null;
+                Piece attacker = p;
+                if(p.position.charAt(0) == king.position.charAt(0)){
+                    boolean no = true;
+                    int blockers = 0;
+                    String pos = "";
+                    int dist =king.position.charAt(1) - attacker.position.charAt(1);
+                    dist += -Math.signum(dist);
+                    while(Math.abs(dist) != 0){
+                        if(ally(king,Piece.move(attacker.position,dist,0)))
+                        {
+                            blockers++;
+                            pos = Piece.move(attacker.position,dist,0);
+                        }
+                        dist += -Math.signum(dist);
+                    }
+                    dist =king.position.charAt(1) - attacker.position.charAt(1);
+                    dist += -Math.signum(dist);
+                    while(Math.abs(dist) != 0){
+                        String temp = Piece.move(attacker.position,dist,0);
+                        if(ally(attacker,temp)){
+                            no = false;
+                        }
+                        dist += -Math.signum(dist);
+                    }
+                    if(blockers == 1&&no) {
+                        freezingPiece(pos,side,0);
+                    }
+                }
+                else if(p.position.charAt(1) == king.position.charAt(1)){
+                    boolean no = true;
+                    int blockers = 0;
+                    String pos = "";
+                    int dist =king.position.charAt(0) - attacker.position.charAt(0);
+                    dist += -Math.signum(dist);
+                    while(Math.abs(dist) != 0){
+                        if(ally(king,Piece.move(attacker.position,0,dist)))
+                        {
+                            blockers++;
+                            pos = Piece.move(attacker.position,0,dist);
+                        }
+                        dist += -Math.signum(dist);
+                    }
+                    dist =king.position.charAt(0) - attacker.position.charAt(0);
+                    dist += -Math.signum(dist);
+                    while(Math.abs(dist) != 0){
+                        String temp = Piece.move(attacker.position,0,dist);
+                        if(ally(attacker,temp)){
+                            no = false;
+                        }
+                        dist += -Math.signum(dist);
+                    }
+                    if(blockers == 1&&no) {
+                        freezingPiece(pos,side,1);
+                    }
+                }
+            }
+        }
+    }
+    public void freezingPiece(String pos, boolean side, int axis){
+        for(Piece p : pieces){
+            if(p.pieceSide == side && Objects.equals(p.position, pos)){
+                ArrayList<String> notAllowed = new ArrayList<String>();
+                p.eatingMoves();
+            for(String s:p.availableMoves){
+                if(s.charAt(axis) != p.position.charAt(axis)){
+                    notAllowed.add(s);
+                }
+            }
+            p.availableMoves.removeAll(notAllowed);
+            p.eatingMoves();
+            }
+        }
     }
     public void handlingMove(String clickedSquare) {
         if (this.getPiece(clickedSquare) == null) {
@@ -116,16 +212,6 @@ public class GameLauncher {
                 this.selected = piece;
             }
         }
-    }
-    public void Clock(String clickedSquare) {
-        if(!gameStatus)return;
-        kingEscape(turn);
-        kingChecked(turn);
-        handlingMove(clickedSquare);
-        kingEscape(turn);
-        kingChecked(turn);
-        checkPromotion(!turn);
-        isEndGame(turn);
     }
     private void isEndGame(boolean turn){
         if(checkWinner(turn) == (Object) true){
@@ -235,23 +321,31 @@ public class GameLauncher {
         }
         return null;
     }
-    private void kingChecked(boolean side){
-        if(threateningKing(side).size()  == 0)return;
-        if(threateningKing(side).size() == 1){
+    private void kingChecked(boolean side) {
+        if (threateningKing(side).size() == 0) return;
+        if (threateningKing(side).size() == 1) {
             Piece attacker = threateningKing(side).get(0);
-            if(attacker.id == 2 || attacker.id == 3 || attacker.id == 6)
-                eatThreat(attacker.position,side);
-            else if(attacker.id == 4 || attacker.id == 1){
-                if(attacker.position.charAt(0) == kingPosition(side).charAt(0)){
-                    blockCheck(1,attacker.position,side);
-                    kingWay(0,attacker.position,side);
+            if (attacker.id == 2 || attacker.id == 3 || attacker.id == 6)
+                eatThreat(attacker.position, side);
+            else if (attacker.id == 4 || attacker.id == 1) {
+                if (attacker.position.charAt(0) == kingPosition(side).charAt(0)) {
+                    blockCheck(1, attacker.position, side);
+                    kingWay(0, attacker.position, side);
+                } else if (attacker.position.charAt(1) == kingPosition(side).charAt(1)) {
+                    blockCheck(0, attacker.position, side);
+                    kingWay(1, attacker.position, side);
+                } else if (attacker.id == 4) {
+                    eatThreat(attacker.position, side);
                 }
-                else if(attacker.position.charAt(1) == kingPosition(side).charAt(1)){
-                    blockCheck(0,attacker.position,side);
-                    kingWay(1,attacker.position,side);
-                }
-                else if(attacker.id == 4){
-                    eatThreat(attacker.position,side);
+            }
+        } else {
+            for(Piece attacker: threateningKing(side)) {
+                if (attacker.id == 4 || attacker.id == 1) {
+                    if (attacker.position.charAt(0) == kingPosition(side).charAt(0)) {
+                        kingWay(0, attacker.position, side);
+                    } else if (attacker.position.charAt(1) == kingPosition(side).charAt(1)) {
+                        kingWay(1, attacker.position, side);
+                    }
                 }
             }
         }
@@ -288,6 +382,7 @@ public class GameLauncher {
             for(Piece p:pieces){
                 if(p.pieceSide == side&&p.id != 5) {
                     p.eating.retainAll(Collections.singletonList(pos));
+                    p.pawnDiagonal.retainAll(Collections.singletonList(pos));
                     p.moving.retainAll(allowed);
                 }
             }
@@ -315,7 +410,19 @@ public class GameLauncher {
             if(p.pieceSide == side&&p.id == 5)
             {
                 ArrayList<String> temp = possession(!side);
-                p.availableMoves.removeAll(possession(!side));
+                for(Piece pp : pieces){
+                    if(pp.pieceSide == !side &&pp.id == 6){
+                        if(pp.twoMoves != null){
+                            for(int i = 0 ;i < temp.size();i++){
+                                if(Objects.equals(temp.get(i), pp.twoMoves)){
+                                    temp.remove(i);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                p.availableMoves.removeAll(temp);
                 p.eatingMoves();
             }
         }
