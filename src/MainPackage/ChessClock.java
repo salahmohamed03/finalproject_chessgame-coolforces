@@ -1,12 +1,12 @@
 package MainPackage;
+
 import java.awt.*;
 
 import java.awt.event.*;
 import javax.swing.*;
 
 public class ChessClock {
-	
-	JFrame frame = new JFrame();
+
 	JLabel timeLabel = new JLabel();
 
 	//Initial values of the chess clock inputted by the player and the elapsed time from that timer
@@ -50,18 +50,7 @@ public class ChessClock {
 		seconds_string = String.format("%02d", this.seconds);
 
 		timeLabel.setText(minutes_string + ":" + seconds_string);
-		timeLabel.setBounds(100,100,200,100);
-		timeLabel.setFont(new Font("Verdana",Font.PLAIN,35));
-		timeLabel.setBorder(BorderFactory.createBevelBorder(1));
-		timeLabel.setOpaque(true);
 		timeLabel.setHorizontalAlignment(JTextField.CENTER);
-		
-		frame.add(timeLabel);
-		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(420,420);
-		frame.setLayout(null);
-		frame.setVisible(true);
 	}
 	
 	public void start() {
@@ -102,5 +91,10 @@ public class ChessClock {
 	//Returns total time elapsed by the clock in seconds
 	public long timeElapsed() {
 		return elapsedSeconds;
+	}
+
+	//Returns JLabel of our chessclock so that we can modify its appereance in the chessboard
+	public JLabel getLabel() {
+		return this.timeLabel;
 	}
 }

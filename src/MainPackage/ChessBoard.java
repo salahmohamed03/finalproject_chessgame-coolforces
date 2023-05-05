@@ -10,6 +10,8 @@ public class ChessBoard{
     public IconsAndColors icon = new IconsAndColors();
     public JButton button,resign,draw, resign2,draw2;
     public String current;
+    public ChessClock whiteClock;
+    public ChessClock blackClock;
     public Icon drag;
     public String previous;
     private JPanel container;
@@ -475,30 +477,84 @@ public class ChessBoard{
         dLabel.setOpaque(false);
         return dLabel;
     }
-    // Timer set
-    private void setTimer(){
-        //create 2 ChessClock Objects here one for white & the other for white
-        //set Font .setFont(new Font("Space Grotesk", Font.BOLD, 70 *width/1440));
-        // for the black set Bounds (1031 *width/1440, 191 *width/1440, 334 *width/1440, 92 *width/1440)
-        // for the black set Bounds (1031 *width/1440, 753 *width/1440, 334 *width/1440, 92 *width/1440)
-        // in the end base.add(nameOfTimer, Integer.valueOf(1)) for the white and the black // to show on board
+
+    private void setTimer() {
+        long minutesInput;
+        long secondsInput;
+
+        //Checks if we got input from the user in the game menu
+        if (GameStart.timerInput == null) {
+            minutesInput = 0;
+            secondsInput = 0;
+        }
+        else {
+            char[] input = GameStart.timerInput.toCharArray();
+            String minuteString = new StringBuilder().append(input[3]).append(input[4]).toString();
+            minutesInput = Integer.parseInt(minuteString);
+            String secondString = new StringBuilder().append(input[6]).append(input[7]).toString();
+            secondsInput = Integer.parseInt(secondString);
+        }
+
+        //Creates 2 ChessClock objects for white & the other for black
+        whiteClock = new ChessClock(minutesInput, secondsInput);
+        JLabel whiteClockLabel = whiteClock.getLabel();
+        whiteClockLabel.setFont(new Font("Space Grotesk", Font.BOLD, 70 *width/1440));
+        whiteClockLabel.setBounds(1020 *width/1440, 745 *width/1440, 334 *width/1440, 92 *width/1440);
+        whiteClockLabel.setForeground(icon.white);
+
+        blackClock = new ChessClock(minutesInput, secondsInput);
+        JLabel blackClockLabel = blackClock.getLabel();
+        blackClockLabel.setFont(new Font("Space Grotesk", Font.BOLD, 70 *width/1440));
+        blackClockLabel.setBounds(1020 *width/1440, 185 *width/1440, 334 *width/1440, 92 *width/1440);
+        blackClockLabel.setForeground(icon.white);
+
+        base.add(whiteClockLabel, Integer.valueOf(1));
+        base.add(blackClockLabel, Integer.valueOf(1));
     }
 
-    // a method fot time start & stop take the arguments (boolean side , boolean start ) //true to start and false to stop
+    //Starts and Stops the timer of each clock
+    public void controlTimer(boolean side, boolean start) {
+        if (side) {
+            if (start) {
+                whiteClock.start();
+            }
+            else {
+                whiteClock.stop();
+            }
+        }
+        else {
+            if (start) {
+                blackClock.start();
+            }
+            else {
+                blackClock.stop();
+            }
+        }
+    }
 
-
-
-
-    // a method to reset take the argument (boolean side)
-
-
-
-    // a method for finished check takes the argument (){
-    // if white chessCloak finished
-    //        return the boolean true
-    // if the black
-    //      return the boolean false
-    // }
+    public void resetTimer(boolean side) {
+        if (side) {
+            whiteClock.reset();
+        }
+        else {
+            blackClock.reset();
+        }
+    }
+    
+    //Returns true if either clock is finished, argument decides which clock we are checking
+    public boolean checkTimer(boolean side) {
+        if (side) {
+            if (whiteClock.finishedCheck()) {
+                return true;
+            }
+            return false;
+        }
+        if (blackClock.finishedCheck()) {
+            return true;
+        }
+        return false;
+    }
+    
     public static void main(String []args)
     {
         ChessBoard c = new ChessBoard();

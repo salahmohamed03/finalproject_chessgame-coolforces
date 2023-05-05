@@ -26,6 +26,7 @@ public class GameStart extends JFrame implements MouseListener {
     public JButton addPlayerBtn;
     public JTextField timerSet;
     public JCheckBox timerOn;
+    public static String timerInput;
     public JButton startBtn;
 
     public GameStart(){initialize();}
@@ -246,6 +247,13 @@ public class GameStart extends JFrame implements MouseListener {
             frame.setVisible(false);
         }
         if(e.getSource()==startBtn){
+            //Checks if the timer is on or off so we choose to use the input or not
+            if (timerOn.getSelectedObjects() == null) {
+                timerInput = null;
+            }
+            else {
+                timerInput = timerSet.getText();
+            }
             GameLauncher gl = new GameLauncher();
             gl.start();
             frame.setVisible(false);
