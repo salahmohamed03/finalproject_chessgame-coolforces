@@ -90,19 +90,37 @@ public class GameLauncher {
                 assert king != null;
                 Piece attacker = p;
                 if(p.position.charAt(0) == king.position.charAt(0)){
+                    int blockers = 0;
+                    String pos = "";
                     int dist =king.position.charAt(1) - attacker.position.charAt(1);
                     dist += -Math.signum(dist);
                     while(Math.abs(dist) != 0){
-                        freezingPiece(Piece.move(attacker.position,dist,0),side,0);
+                        if(ally(king,Piece.move(attacker.position,dist,0)))
+                        {
+                            blockers++;
+                            pos = Piece.move(attacker.position,dist,0);
+                        }
                         dist += -Math.signum(dist);
+                    }
+                    if(blockers == 1) {
+                        freezingPiece(pos,side,0);
                     }
                 }
                 else if(p.position.charAt(1) == king.position.charAt(1)){
+                    int blockers = 0;
+                    String pos = "";
                     int dist =king.position.charAt(0) - attacker.position.charAt(0);
                     dist += -Math.signum(dist);
                     while(Math.abs(dist) != 0){
-                        freezingPiece(Piece.move(attacker.position,0,dist),side,1);
+                        if(ally(king,Piece.move(attacker.position,0,dist)))
+                        {
+                            blockers++;
+                            pos = Piece.move(attacker.position,0,dist);
+                        }
                         dist += -Math.signum(dist);
+                    }
+                    if(blockers == 1) {
+                        freezingPiece(pos,side,1);
                     }
                 }
             }
