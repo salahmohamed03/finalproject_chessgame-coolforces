@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class LoginPage extends JFrame implements MouseListener {
+public class LoginPage extends dataHandling implements MouseListener {
     IconsAndColors ic = new IconsAndColors();
     public JFrame frame;
     public int width = ic.width, height = ic.height;
@@ -190,9 +190,23 @@ public class LoginPage extends JFrame implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         frame.setVisible(false);
+        boolean enter;
         if (e.getSource()==loginBtn){
-            //check
-            HomePage H = new HomePage();
+            enter=true;
+            while (enter) 
+            {
+                User user=new User(textField.getText(),passField.getPassword());
+            if ((checkCredentials(user.getUsername(), user.getPassword()))) 
+            {
+                HomePage H = new HomePage();
+                break;    
+            }
+            else
+            {
+                System.out.println("try again");
+                enter=false;
+            }    
+            }
         }
         if (e.getSource()==registerBtn){
             Register R = new Register();

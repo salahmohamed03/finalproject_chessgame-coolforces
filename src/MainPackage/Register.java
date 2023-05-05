@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
+//imports needed to deal with JSON
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -25,7 +26,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 
-public class Register extends JFrame implements MouseListener {
+public class Register extends dataHandling implements MouseListener{
     public int previousPage  ;
     IconsAndColors ic = new IconsAndColors();
     public JFrame frame;
@@ -39,20 +40,16 @@ public class Register extends JFrame implements MouseListener {
     public JButton backBtn;
 
     // The following three code will create an empty JSON array of objects
-    List<JsonObject> dataObjs = new ArrayList<>();   
-    Gson jsonArr = new GsonBuilder().setPrettyPrinting().create(); 
-    JsonArray jsonArray = jsonArr.toJsonTree(dataObjs).getAsJsonArray();
-    //////////////////////////////////////////////////////////////////////////
-    Gson gsonObj = new Gson(); // each user will be converted to a gsonobj
-    JsonObject jsonObj =new JsonObject();
-
-    FileWriter writer;
-    FileReader reader;
+    
     
     //JsonWriter arrWriter=new JsonWriter(writer);
     //Gson gsonWriter =  new Gson(); // object used to writer the array
 
-    public Register(){initialize();}
+   
+    
+    public Register(){
+        initialize();
+    }
 
     public void initialize(){
         initializeWindow();
@@ -215,43 +212,17 @@ public class Register extends JFrame implements MouseListener {
         {
             if (!textField.getText().equals("username"))
            {
+               User user=new User(textField.getText(),passField.getPassword());
+               addUser(user); 
                readExistingData();
                addAndWriteNewData();
            }
         }
-        
-
-
     }
 
-    //function to read the JSON file
-    public void readExistingData()
-    {
-        try {
-            reader=new FileReader("data.json");
-            jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
-            //writeJsonArray=readJsonArray;
-            reader.close();
-        } catch (Exception readError) {
-            System.out.println("Reading error occured");
-        }
-        
-    }
+    
 
-    //function to write the data
-    public void addAndWriteNewData()
-    {
-        User user=new User(textField.getText(), passField.getPassword());       
-        jsonObj=gsonObj.toJsonTree(user).getAsJsonObject();
-        jsonArray.add(jsonObj); 
-        try {
-            writer=new FileWriter("data.json");
-            jsonArr.toJson(jsonArray, writer);
-            writer.close();
-            } catch (Exception writeError) {
-                System.out.println("Writing error happened");
-            }
-    }
+    
 
     @Override
     public void mousePressed(MouseEvent e) {
