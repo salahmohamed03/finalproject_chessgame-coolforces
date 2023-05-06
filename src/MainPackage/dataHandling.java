@@ -38,12 +38,7 @@ public abstract class dataHandling extends JFrame {
     FileReader reader;
 
     
-    //Function to add new user
-    User user;
-    public void addUser(User user)
-    {
-        this.user=user;
-    }
+    
     //function to read the JSON file
     public void readExistingData()
     {
@@ -57,7 +52,7 @@ public abstract class dataHandling extends JFrame {
         }   
     }
     //function to write the data after adding new credentials
-    public void addAndWriteNewData()
+    public void addAndWriteNewData(User user)
     {      
         jsonObj=gsonObj.toJsonTree(user).getAsJsonObject();
         jsonArray.add(jsonObj); 
@@ -71,12 +66,12 @@ public abstract class dataHandling extends JFrame {
     }
 
     //function to check credentials
-    public Boolean checkCredentials(String username, char[] password)
+    public Boolean checkCredentials(String inputUsername, char[] inputPassword)
     {
         readExistingData();
-        String inspectedUsername="";
-        String inspectedPassword="";
-        String passwordStr = new String(password);
+        String inspectedUsername;
+        String inspectedPassword;
+        String passwordStr = new String(inputPassword);
         try {
             for (JsonElement jsonElement : jsonArray)
             {
@@ -87,20 +82,34 @@ public abstract class dataHandling extends JFrame {
                 for (JsonElement element : passwordArray) {
                     inspectedPassword += element.getAsString();
                 }
-            }
-            /*System.out.println(username);
-            System.out.println(inspectedUsername);
-            System.out.println(passwordStr);
-            System.out.println(inspectedPassword);*/
-            if (inspectedUsername.equals(username) && inspectedPassword.equals(passwordStr))
-            {
-                return true;
-            }
-            
+                if (inspectedUsername.equals(inputUsername) && inspectedPassword.equals(passwordStr))
+                {
+                    return true;
+                }
+            }   
         } catch (Exception credentials) {
-            System.out.println("incorrect credentials");
+            //
         }
         return false;
     }
-    
-} 
+
+    //finction to check if user name exists when registering
+    public Boolean checkUsername(String inputUsername)
+    {
+        readExistingData();
+        String inspectedUsername="";
+        try {
+            for (JsonElement jsonElement : jsonArray)
+            {
+                inspectedUsername=jsonElement.getAsJsonObject().get("Username").getAsString();
+                if (inspectedUsername.equals(inputUsername))
+                {
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("user");
+        }
+        return true;
+    }
+}

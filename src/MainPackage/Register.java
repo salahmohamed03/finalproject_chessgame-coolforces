@@ -213,9 +213,20 @@ public class Register extends dataHandling implements MouseListener{
             if (!textField.getText().equals("username"))
            {
                User user=new User(textField.getText(),passField.getPassword());
-               addUser(user); 
-               readExistingData();
-               addAndWriteNewData();
+               if (checkCredentials(user.getName(), user.getPass())) 
+               {
+                    System.out.println("This player already exists.Login instead."); 
+               }
+               else if (checkUsername(user.getName())) 
+               {
+                    addAndWriteNewData(user);
+                    HomePage H=new HomePage();
+                    this.dispose(); 
+               }
+               else 
+               {
+                    System.out.println("Username is taken.Try using another username");
+               }
            }
         }
     }

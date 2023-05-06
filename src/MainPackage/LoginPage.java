@@ -188,23 +188,18 @@ public class LoginPage extends dataHandling implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         frame.setVisible(false);
-        boolean enter;
         if (e.getSource()==loginBtn){
-            enter=true;
-            while (enter) 
+            User user=new User(textField.getText(),passField.getPassword());
+            if (checkCredentials(user.getName(), user.getPass())) 
             {
-                User user=new User(textField.getText(),passField.getPassword());
-            if ((checkCredentials(user.getName(), user.getPass())))
-            {
-                HomePage H = new HomePage();
-                break;    
+                HomePage H = new HomePage();  
             }
             else
             {
-                System.out.println("try again");
-                enter=false;
-            }    
+                //frame.setVisible(true);
+                System.out.println("Credentials are not correct");
             }
+            
         }
         if (e.getSource()==registerBtn){
             Register R = new Register();
