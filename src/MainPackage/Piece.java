@@ -13,6 +13,12 @@ public abstract class Piece {
     protected boolean pieceSide;
     protected String position;
     public String twoMoves;
+    public String castlingRight;
+    public boolean castlingRightSelected;
+    public String castlingLift;
+    public boolean castlingLiftSelected;
+    public boolean canCastleRight;
+    public boolean canCastleLift;
     public ArrayList<String> eating = new ArrayList<String>();
     public ArrayList<String> moving = new ArrayList<String>();
     public ArrayList<String> pawnDiagonal = new ArrayList<String>();
@@ -38,16 +44,76 @@ public abstract class Piece {
         if(Board.isAlly(p2,position) == (Object) false){
             Board.setDead(Board.getPieceInfo(p2).id,Board.getPieceInfo(p2).side);
         }
+        if(id == 6)twoMoves = null;
+        else if(id == 1){
+            if(pieceSide){
+                for(Piece p:pieces)
+                {
+                    if(p.id == 5)
+                    {
+                        if(Objects.equals(position, "H1"))
+                        {p.castlingRight = null;p.canCastleRight = false;}
+                        else if(Objects.equals(position, "A1"))
+                        {p.castlingLift = null;p.canCastleLift = false;}
+                    }
+                }
+            }
+            else{
+                for(Piece p:pieces)
+                {
+                    if(p.id == 5)
+                    {
+                        if(Objects.equals(position, "H8"))
+                        {p.castlingRight = null;p.canCastleRight = false;}
+                        else if(Objects.equals(position, "A8"))
+                        {p.castlingLift = null;p.canCastleLift = false;}
+                    }
+                }
+            }
+        }
+        if(canCastleRight && p2.equals(castlingRight)){
+            String rookPos = pieceSide?"H1":"H8";
+            String rookPosA = pieceSide?"F1":"F8";
+            Board.move_piece(rookPos,rookPosA);
+            for(Piece p:pieces){
+                if(pieceSide == p.pieceSide && p.position.equals(rookPos)){
+                    p.position = rookPosA;
+                }
+            }
+            castlingLift = null;
+            castlingRight = null;
+            canCastleLift = false;
+            canCastleRight = false;
+        }
+        else if(canCastleLift && p2.equals(castlingLift)){
+            String rookPos = pieceSide?"A1":"A8";
+            String rookPosA = pieceSide?"D1":"D8";
+            Board.move_piece(rookPos,rookPosA);
+            for(Piece p:pieces){
+                if(pieceSide == p.pieceSide && p.position.equals(rookPos)){
+                    p.position = rookPosA;
+                }
+            }
+            castlingLift = null;
+            castlingRight = null;
+            canCastleLift = false;
+            canCastleRight = false;
+        }
+        if(id == 5){
+            castlingLift = null;
+            castlingRight = null;
+            canCastleLift = false;
+            canCastleRight = false;
+        }
         Board.move_piece(position,p2);
         position = p2;
         for(Piece p: pieces)
         {
-
             p.availableMoves = p.ValidMoves();
             p.eating.clear();
             p.moving.clear();
             p.pawnDiagonal.clear();
-            if(!Objects.equals(p.position, p.twoMoves))twoMoves= null;
+            //if(!Objects.equals(p.position, p.twoMoves))twoMoves= null;
             p.eatingMoves();
         }
     }
@@ -61,7 +127,6 @@ public abstract class Piece {
             Board.eatingLight(move);
         }
     }
-
     public void Unselect() {
         for (String move: moving) {
             Board.boardLight(move, false);
@@ -187,7 +252,7 @@ class pawn extends Piece {
                 String p1 =  move(position, sign, 1);
                 String p2 =  move(position, sign, -1);
                 String s = availableMoves.get(i);
-                if(Board.isAlly(position,(availableMoves.get(i))) == null){
+                if(Board.isAlly(position,(availableMoves.get(i))) != (Object) false){
                     if(!Objects.equals(availableMoves.get(i), p1) && !Objects.equals(availableMoves.get(i), p2)){
                         moving.add(availableMoves.get(i));
                     }
@@ -195,7 +260,6 @@ class pawn extends Piece {
                         pawnDiagonal.add(availableMoves.get(i));
                     }
                 }
-                else pawnDiagonal.add(availableMoves.get(i));
             }
         }
     }
@@ -208,6 +272,26 @@ class king extends Piece {
         this.pieceSide = side;
         this.position = pos;
         cb.getButton(pos).setIcon(icon);
+        if(side){
+            if(position.equals("E1")){
+            castlingRight = "G1";
+            castlingLift = "C1";
+            canCastleRight = true;
+            canCastleLift = true;
+            }
+            else{canCastleRight = false;
+                canCastleLift = false;}
+        }
+        else{
+            if(position.equals("E8")){
+            castlingRight = "G8";
+            castlingLift = "C8";
+            canCastleRight = true;
+            canCastleLift = true;
+            }
+            else{canCastleRight = false;
+                canCastleLift = false;}
+        }
     }
 
     //This function returns all moves that the king can move
@@ -239,6 +323,39 @@ class king extends Piece {
         if(move_down_left!=null)
             result.add(move_down_left);
         return result;
+    }
+    public void Select() {
+        String rightWay1 = move(position,0,1);
+        String rightWay2 = move(position,0,2);
+        String liftWay1 = move(position,0,-1);
+        String liftWay2 = move(position,0,-2);
+        String liftWay3 = move(position,0,-3);
+        if(castlingLift != null && Board.isAlly(position,liftWay1) == null&& Board.isAlly(position,liftWay2) == null&& Board.isAlly(position,liftWay3) == null&&canCastleLift)
+        {Board.boardLight(castlingLift,true);castlingLiftSelected = true;}
+        else canCastleLift = false;
+        if(castlingRight != null && Board.isAlly(position,rightWay1) == null&& Board.isAlly(position,rightWay2) == null &&canCastleRight)
+        {Board.boardLight(castlingRight,true);castlingRightSelected = true;}
+        else canCastleRight = false;
+        for (String move: moving) {
+            Board.boardLight(move, true);
+        }
+        for(String move : eating)
+        {
+            Board.eatingLight(move);
+        }
+    }
+    public void Unselect() {
+        if(castlingLiftSelected)
+        {Board.boardLight(castlingLift,false);castlingLiftSelected = false;}
+        if(castlingRightSelected)
+        { Board.boardLight(castlingRight,false);castlingRightSelected = false;}
+        for (String move: moving) {
+            Board.boardLight(move, false);
+        }
+        for(String move : eating)
+        {
+            Board.eatingLight(move);
+        }
     }
 }
 
@@ -420,20 +537,4 @@ class knight extends Piece {
     }
 
 }
-
-
-class test{
-    public static void main(String []args )
-    {
-        ChessBoard cb = new ChessBoard();
-
-        pawn b = new pawn(true, "E2",cb);
-        pawn c = new pawn(true, "D2",cb);
-        cb.eatingLight("E2");
-        //pawn bb = new pawn(false, "E4",cb);
-        // b.Select();
-        //b.Unselect();
-    }
-}
-
 
