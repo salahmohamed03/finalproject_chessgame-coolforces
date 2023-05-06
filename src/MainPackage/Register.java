@@ -119,7 +119,7 @@ public class Register extends dataHandling implements MouseListener{
     public void setFields(){
         JPanel fieldsPanel = new JPanel();
         fieldsPanel.setOpaque(false);
-        fieldsPanel.setBounds(310*width/1440, 467*height/1024, 820*width/1440, 199*height/1024);
+        fieldsPanel.setBounds(310*width/1440, 468*height/1024, 820*width/1440, 199*height/1024);
         fieldsPanel.setLayout(new GridLayout(2,1,0,58 *width/1440));
 
 
@@ -183,6 +183,19 @@ public class Register extends dataHandling implements MouseListener{
 
         return button;
     }
+    public void denyAccess(int i){
+        JLabel incrorrect = new JLabel();
+        incrorrect.setHorizontalAlignment(SwingConstants.CENTER);
+        incrorrect.setFont(new Font("Space Grotesk", Font.BOLD, 25*width/1440));
+        incrorrect.setForeground(ic.white);
+
+        if (i == 0) incrorrect.setText("Username is taken.Try using another username");
+        else if (i == 1) incrorrect.setText("Username should have 9 characters Maximum");
+
+        incrorrect.setBounds(310*width/1440, 655*height/1024, 820*width/1440, 80*height/1024);
+        base.add(incrorrect, Integer.valueOf(2));
+
+    }
 
 
     public static void main(String []args)
@@ -213,18 +226,19 @@ public class Register extends dataHandling implements MouseListener{
             if (!textField.getText().equals("username"))
            {
                User user=new User(textField.getText(),passField.getPassword());
-               if (checkCredentials(user.getName(), user.getPass())) 
+               if (checkCredentials(user.getName(), user.getPass()))
                {
                     System.out.println("This player already exists.Login instead."); 
                }
-               else if (checkUsername(user.getName())) 
+               else if (checkUsername(user.getName()))
                {
                     addAndWriteNewData(user);
                     HomePage H=new HomePage();
-                    this.dispose(); 
+                    this.dispose();
                }
-               else 
+               else
                {
+                   denyAccess(0);
                     System.out.println("Username is taken.Try using another username");
                }
            }

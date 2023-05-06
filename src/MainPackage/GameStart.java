@@ -171,16 +171,6 @@ public class GameStart extends JFrame implements MouseListener {
        base.add(startBtn, Integer.valueOf(1));
    }
 
-    private JButton create_backBtn(){
-        ImageIcon backImg = new ImageIcon("src/Mat/Buttons/backBtn.png");
-        JButton backBtn = new JButton(ic.resizeWithRatio(backImg));
-        backBtn.setOpaque(false);
-        backBtn.setFocusable(false);
-        backBtn.setBorderPainted(false);
-        backBtn.setBackground(ic.mainColor);
-        backBtn.setBounds(46*width/1440,39*height/1024,65*width/1440,65*height/1024);
-        return backBtn;
-    }
     private  JLabel createLabel(String text, int s){
         JLabel label = new JLabel(text);
         label.setFont(new Font("Space Grotesk", Font.BOLD, s *width/1440));

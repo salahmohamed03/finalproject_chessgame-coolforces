@@ -29,7 +29,7 @@ public class LoginPage extends dataHandling implements MouseListener {
         setHeader();
         setFields();
         setBtns();
-        checkInput();
+//        checkInput();
 
         frame.setVisible(true);
     }
@@ -48,7 +48,7 @@ public class LoginPage extends dataHandling implements MouseListener {
 
     private void setBackG(){
         ImageIcon backG_image = new ImageIcon("src/Mat/BackG/loginFields.png");
-        JLabel backG = new JLabel(resizeWithRatio(backG_image));
+        JLabel backG = new JLabel(ic.resizeWithRatio(backG_image));
         backG.setBounds(0,0,width,height);
         base.add(backG, Integer.valueOf(0));
     }
@@ -140,11 +140,11 @@ public class LoginPage extends dataHandling implements MouseListener {
         ImageIcon whiteBtn = new ImageIcon("src/Mat/Buttons/whiteBtn.png");
         switch (btn) {
             case 1 -> {
-                button.setIcon(resizeWithRatio(pinkBtn));
+                button.setIcon(ic.resizeWithRatio(pinkBtn));
                 button.setForeground(ic.white);
             }
             case 2 -> {
-                button.setIcon(resizeWithRatio(whiteBtn));
+                button.setIcon(ic.resizeWithRatio(whiteBtn));
                 button.setForeground(ic.mainColor);
             }
         }
@@ -158,10 +158,10 @@ public class LoginPage extends dataHandling implements MouseListener {
         return button;
     }
 
-    public void checkInput(){
-        //should be if statement
-        denyAccess();
-    }
+//    public void checkInput(){
+//        //should be if statement
+//        denyAccess();
+//    }
 
     public void denyAccess(){
         JLabel incrorrect = new JLabel("Credentials are incorrect");
@@ -173,11 +173,6 @@ public class LoginPage extends dataHandling implements MouseListener {
         base.add(incrorrect, Integer.valueOf(1));
 
     }
-    public ImageIcon resizeWithRatio(ImageIcon icon){
-        ImageIcon resized = ic.Resize(icon,icon.getIconWidth()*width/1440, icon.getIconHeight()*width/1440);
-
-        return resized;
-    }
 
     public static void main(String []args)
     {
@@ -187,17 +182,20 @@ public class LoginPage extends dataHandling implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        frame.setVisible(false);
+
         if (e.getSource()==loginBtn){
             User user=new User(textField.getText(),passField.getPassword());
-            if (checkCredentials(user.getName(), user.getPass())) 
+            if (checkCredentials(user.getName(), user.getPass()))
             {
+                frame.setVisible(false);
+                System.out.println("true");
                 HomePage H = new HomePage();  
             }
             else
             {
                 //frame.setVisible(true);
-                System.out.println("Credentials are not correct");
+                denyAccess();
+                System.out.println("deny");
             }
             
         }
