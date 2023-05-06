@@ -16,6 +16,9 @@ public class ChessClock {
 	private long seconds;
 	private long startMinutes;
 	private long startSeconds;
+	public ChessBoardBASE game;
+	public int side;
+	public GameActions result = new GameActions();
 
 	//Formats the mintues and seconds to appear as 2 digits
 	String minutes_string = String.format("%02d", minutes);
@@ -37,10 +40,15 @@ public class ChessClock {
 			minutes_string = String.format("%02d", minutes);
 			seconds_string = String.format("%02d", seconds);
 			timeLabel.setText(minutes_string + ":" + seconds_string);
+			if(finishedCheck())
+			{
+				game.gameResult = false;
+				result.showResult(-side);
+			}
 		}
 	});
 
-	ChessClock(long m, long s) {
+	ChessClock(long m, long s,int side ,ChessBoardBASE game) {
 		
 		this.minutes = m;
 		this.seconds = s;
@@ -48,11 +56,11 @@ public class ChessClock {
 		startSeconds = s;
 		minutes_string = String.format("%02d", this.minutes);
 		seconds_string = String.format("%02d", this.seconds);
-
+		this.game = game;
+		this.side = side;
 		timeLabel.setText(minutes_string + ":" + seconds_string);
 		timeLabel.setHorizontalAlignment(JTextField.CENTER);
 	}
-	
 	public void start() {
 		timer.start();
 	}

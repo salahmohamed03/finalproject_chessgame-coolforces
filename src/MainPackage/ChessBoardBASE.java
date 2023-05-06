@@ -8,6 +8,7 @@ public abstract class ChessBoardBASE {
     protected JFrame board;
     protected JLayeredPane base = new JLayeredPane();
     private GameLauncher game;
+    public boolean gameResult;
     public IconsAndColors icon = new IconsAndColors();
     public JButton button,resign,draw, resign2,draw2;
     public String current;
@@ -517,13 +518,13 @@ public abstract class ChessBoardBASE {
         }
 
         //Creates 2 ChessClock objects for white & the other for black
-        whiteClock = new ChessClock(minutesInput, secondsInput);
+        whiteClock = new ChessClock(minutesInput, secondsInput,1,this);
         JLabel whiteClockLabel = whiteClock.getLabel();
         whiteClockLabel.setFont(new Font("Space Grotesk", Font.BOLD, 80 *width/1440));
         whiteClockLabel.setBounds(1020 *width/1440, 750*width/1440, 334 *width/1440, 92 *width/1440);
         whiteClockLabel.setForeground(icon.white);
 
-        blackClock = new ChessClock(minutesInput, secondsInput);
+        blackClock = new ChessClock(minutesInput, secondsInput,-1,this);
         JLabel blackClockLabel = blackClock.getLabel();
         blackClockLabel.setFont(new Font("Space Grotesk", Font.BOLD, 80 *width/1440));
         blackClockLabel.setBounds(1020 *width/1440, 192 *width/1440, 334 *width/1440, 92 *width/1440);
