@@ -19,6 +19,7 @@ public class GameLauncher {
     public GameActions promotion;
     public GameActions result;
     public boolean turn;
+    
     public GameLauncher() {
         game.setClock(this);
         if(game.blackClock.finishedCheck())

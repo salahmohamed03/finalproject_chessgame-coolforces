@@ -184,12 +184,15 @@ public class LoginPage extends dataHandling implements MouseListener {
     public void mouseClicked(MouseEvent e) {
 
         if (e.getSource()==loginBtn){
-            User user=new User(textField.getText(),passField.getPassword());
-            if (checkCredentials(user.getName(), user.getPass()))
+            //this user is simply the one logging in and will always be the main user
+            // because no need for the user who wants to be added from gamestart to log in
+            // If he already exists, his name will be in the combobox
+            User logUser=new User(textField.getText(),passField.getPassword());
+            if (checkCredentials(logUser.getName(), logUser.getPass()))
             {
                 frame.setVisible(false);
                 System.out.println("true");
-                HomePage H = new HomePage(user);  
+                HomePage H = new HomePage(logUser);  
             }
             else
             {

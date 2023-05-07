@@ -31,13 +31,15 @@ public class GameStart extends dataHandling implements MouseListener {
     public JButton startBtn;
     private User mainUser;
     private User oppUser;
-    public GameStart(User mainUser)
+    public GameStart(User mainUser) // this constructor will accept the main user who just came from homepage
     {
         this.mainUser=mainUser;
         initialize();
     }
     
-    public GameStart(User mainUser,User oppUser)
+    public GameStart(User mainUser,User oppUser) // this one will be called from register instead
+    //it accepts the user who just registered (the one who wanted to be added from game start)
+    // it also accepts the main user to keep his control
     {
         this.mainUser=mainUser;
         this.oppUser=oppUser;

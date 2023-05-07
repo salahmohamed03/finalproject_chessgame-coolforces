@@ -28,7 +28,7 @@ import java.io.Writer;
 
 public class Register extends dataHandling implements MouseListener{
     public String previousPage="";
-    public User mainUser;
+    private User mainUser;
     IconsAndColors ic = new IconsAndColors();
     public JFrame frame;
 
@@ -50,13 +50,14 @@ public class Register extends dataHandling implements MouseListener{
     {
         initialize();
         this.mainUser = mainUser;
-        //previousPage="GameStart";
+        //this constructor will be called from GameStart
+        //it takes the main user so it keeps his authority
     }
     
 
     public Register(){
         initialize();
-        //previousPage="LoginPage";
+        //this one will be called from LoginPage
     }
 
     public void initialize(){
@@ -244,11 +245,19 @@ public class Register extends dataHandling implements MouseListener{
                else if (checkUsername(regUser.getName()))
                {
                     addAndWriteNewData(regUser);
+                    
+                    // If coming from gamestart main user is passed again to keep his authority 
+                    //and the regUser is also passed as an opponent
                     if (previousPage.equals("GameStart")) 
                     {
-                        GameStart c = new GameStart(mainUser,regUser);    
+                        GameStart c = new GameStart(mainUser,regUser);
+                        // here we could have also passed the main user only
+                        // but we passed the reg so his name could be shown first
+                        //but his name will be shown in the combo box even if 
+                        // the constructor new GameStart (mainUser) is called    
                     }
-                    else 
+                    else  // here this is the typical registration
+                    //the regUser will be the mainUser
                     {
                         HomePage H=new HomePage(regUser);
                     }
