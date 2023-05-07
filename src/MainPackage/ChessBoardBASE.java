@@ -8,8 +8,9 @@ public abstract class ChessBoardBASE {
     protected JFrame board;
     protected JLayeredPane base = new JLayeredPane();
     private GameLauncher game;
+    public boolean gameResult;
     public IconsAndColors icon = new IconsAndColors();
-    public JButton button,resign,draw, resign2,draw2;
+    public JButton button;
     public String current;
     public ChessClock whiteClock;
     public ChessClock blackClock;
@@ -23,6 +24,8 @@ public abstract class ChessBoardBASE {
     private JPanel whiteDeadPanel;
     int wP=0, wB=0,  wK=0, wQ=0,  wR=0, bP=0, bB=0, bK=0, bQ=0, bR=0;
     JLabel wPawnDead ,wBishopDead ,wKnightDead ,wQueenDead ,wRookDead, bPawnDead ,bBishopDead ,bKnightDead ,bQueenDead ,bRookDead ;
+
+    public JButton backBtn = new JButton();
     protected   int width = icon.width, heigth = icon.height;
 
     public void initialize() {
@@ -30,6 +33,7 @@ public abstract class ChessBoardBASE {
         initialize_board();
         setButtons();
         draw_chessBoard();
+        set_backBtn();
         //initializePieces();
         set_backgrounds();
 
@@ -123,12 +127,6 @@ public abstract class ChessBoardBASE {
         temp.setVerticalTextPosition(JButton.CENTER);
         temp.setOpaque(false);
         temp.setBorder(BorderFactory.createEmptyBorder());
-        temp.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("hello world");
-            }
-        });
         temp.setBounds(x,y,75 *width/870,35 *width/870);
         return temp;
     }
@@ -517,13 +515,13 @@ public abstract class ChessBoardBASE {
         }
 
         //Creates 2 ChessClock objects for white & the other for black
-        whiteClock = new ChessClock(minutesInput, secondsInput);
+        whiteClock = new ChessClock(minutesInput, secondsInput,1,this);
         JLabel whiteClockLabel = whiteClock.getLabel();
         whiteClockLabel.setFont(new Font("Space Grotesk", Font.BOLD, 80 *width/1440));
         whiteClockLabel.setBounds(1020 *width/1440, 750*width/1440, 334 *width/1440, 92 *width/1440);
         whiteClockLabel.setForeground(icon.white);
 
-        blackClock = new ChessClock(minutesInput, secondsInput);
+        blackClock = new ChessClock(minutesInput, secondsInput,-1,this);
         JLabel blackClockLabel = blackClock.getLabel();
         blackClockLabel.setFont(new Font("Space Grotesk", Font.BOLD, 80 *width/1440));
         blackClockLabel.setBounds(1020 *width/1440, 192 *width/1440, 334 *width/1440, 92 *width/1440);
@@ -566,6 +564,20 @@ public abstract class ChessBoardBASE {
             return true;
         }
         return false;
+    }
+    private void set_backBtn(){
+        ImageIcon backImg = new ImageIcon("src/Mat/Buttons/backBtn.png");
+        backBtn = new JButton(icon.resizeWithRatio(backImg));
+        backBtn.setOpaque(false);
+        backBtn.setFocusable(false);
+        backBtn.setBorderPainted(false);
+        backBtn.setBackground(icon.mainColor);
+
+        //backBtn.addMouseListener(this);
+        backBtn.setBounds(25*width/1440,20 *width/1440 ,65*width/1440,65 *width/1440);
+
+        base.add(backBtn, Integer.valueOf(1));
+
     }
 
 }

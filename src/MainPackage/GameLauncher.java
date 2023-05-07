@@ -28,7 +28,7 @@ public class GameLauncher {
         else isTimer = true;
         this.initializePieces();
         this.turn = true;
-        gameStatus = true;
+        game.gameResult = true;
     }
     public void initializePieces() {
         this.pieces = new ArrayList();
@@ -89,6 +89,7 @@ public class GameLauncher {
         kingChecked(turn);
     }
     public void Clock(String clickedSquare) {
+        gameStatus = game.gameResult;
         if(!gameStatus)return;
         blockingPiece(turn);
         kingEscape(turn);
@@ -232,13 +233,13 @@ public class GameLauncher {
             promotion.showResult(1);
             game.whiteClock.stop();
             game.blackClock.stop();
-            gameStatus = false;
+            game.gameResult = false;
         }
         else if(checkWinner(turn) == (Object) false || (game.whiteClock.finishedCheck()&&isTimer)){
             promotion.showResult(-1);
             game.whiteClock.stop();
             game.blackClock.stop();
-            gameStatus = false;
+            game.gameResult = false;
         }
         else if(isDraw(turn)){
             promotion.showResult(0);
