@@ -93,7 +93,7 @@ public abstract class dataHandling extends JFrame {
         return false;
     }
 
-    //finction to check if user name exists when registering
+    //function to check if user name exists when registering
     public Boolean checkUsername(String inputUsername)
     {
         readExistingData();
@@ -111,5 +111,21 @@ public abstract class dataHandling extends JFrame {
             System.out.println("user");
         }
         return true;
+    }
+
+    //function to get usernames of all players
+    public ArrayList<String> getOpponentsArrList(User user)
+    {
+        ArrayList<String> opponents = new ArrayList<String>();
+        readExistingData();
+        for (JsonElement jsonElement : jsonArray)
+        {
+            if (user.getName().equals(jsonElement.getAsJsonObject().get("Username").getAsString())) 
+            {
+                continue;   
+            }
+            opponents.add(jsonElement.getAsJsonObject().get("Username").getAsString());
+        }
+        return opponents;
     }
 }

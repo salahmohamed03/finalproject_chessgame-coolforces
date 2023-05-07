@@ -189,7 +189,7 @@ public class LoginPage extends dataHandling implements MouseListener {
             {
                 frame.setVisible(false);
                 System.out.println("true");
-                HomePage H = new HomePage();  
+                HomePage H = new HomePage(user);  
             }
             else
             {

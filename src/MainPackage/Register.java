@@ -233,7 +233,8 @@ public class Register extends dataHandling implements MouseListener{
                else if (checkUsername(user.getName()))
                {
                     addAndWriteNewData(user);
-                    HomePage H=new HomePage();
+                    HomePage H=new HomePage(user);
+
                     this.dispose();
                }
                else

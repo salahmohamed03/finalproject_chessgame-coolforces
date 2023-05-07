@@ -4,10 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class GameStart extends JFrame implements MouseListener {
+public class GameStart extends dataHandling implements MouseListener {
     IconsAndColors ic = new IconsAndColors();
 
     public JFrame frame;
@@ -28,7 +29,13 @@ public class GameStart extends JFrame implements MouseListener {
     public JCheckBox timerOn;
     public static String timerInput;
     public JButton startBtn;
-
+    private User user;
+    public GameStart(User user)
+    {
+        this.user=user;
+        initialize();
+    }
+    
     public GameStart(){initialize();}
 
     public void initialize(){
@@ -78,7 +85,7 @@ public class GameStart extends JFrame implements MouseListener {
     }
 
     private void setHeader(){
-        JLabel youPlay = createLabel("You play as", 83 );
+        JLabel youPlay = createLabel(String.valueOf(user.getName())+" color", 83 );
         youPlay.setBounds(470 *width/1440,81 *width/1440,545 *width/1440,132 *width/1440);
         base.add(youPlay, Integer.valueOf(1));
 
@@ -115,8 +122,10 @@ public class GameStart extends JFrame implements MouseListener {
         oppLabel.setBounds(292 *width/1440,663 *width/1440,310 *width/1440,80 *width/1440);
 
         //should be players[]
-        String[] players = {"player1","player2","player3"};
-        JComboBox playerList = new JComboBox(players);
+        ArrayList <String> opponents=new ArrayList<>();
+        opponents=getOpponentsArrList(user);
+        String [] players = opponents.toArray(new String[opponents.size()]);
+        JComboBox<String> playerList = new JComboBox<>(players);
         playerList.setBounds(765 *width/1440,685 *width/1440,340 *width/1440,50 *width/1440);
         playerList.setFont(new Font("Space Grotesk", Font.BOLD, 20 *width/1440));
         playerList.setForeground(ic.mainColor);

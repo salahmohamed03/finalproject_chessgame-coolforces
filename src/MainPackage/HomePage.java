@@ -33,6 +33,13 @@ public class HomePage extends JFrame implements MouseListener {
     public  JButton settings;
     public JButton logOut;
 
+    private User user;
+    public HomePage(User user)
+    {
+        this.user=user;
+        initialize();
+    }
+    
     public HomePage(){
         initialize();
     }
@@ -77,7 +84,7 @@ public class HomePage extends JFrame implements MouseListener {
     }
 
     public void setWelcome(){
-        welcome = new JLabel("Welcome " + "username"); // username should be getUsername
+        welcome = new JLabel("Welcome " + String.valueOf(user.getName())); // username should be getUsername
         welcome.setFont(new Font("Space Grotesk", Font.BOLD, 30*width/1440));
         welcome.setForeground(ic.white);
         welcome.setBounds(984*width/1440, 330*height/1024, 304*width/1440, 25*height/1024);
@@ -130,7 +137,7 @@ public class HomePage extends JFrame implements MouseListener {
     }
     public void getStats (JLabel type){
         if (type == matches) {
-            matches = new JLabel("30"); //Just a value for Gui (needs to be changed)
+            matches = new JLabel("# matches"); //Just a value for Gui (needs to be changed)
             setStatsLook(matches, "number");
 
             matchesPanel.add(matches,BorderLayout.CENTER);
@@ -222,7 +229,7 @@ public class HomePage extends JFrame implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         if (e.getSource()==newGame){
             frame.setVisible(false);
-            GameStart G = new GameStart();
+            GameStart G = new GameStart(user);
         }
         if (e.getSource()==history){
             History H = new History();

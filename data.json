@@ -33,5 +33,50 @@
       "d"
     ],
     "WinRate": 0.0
+  },
+  {
+    "Username": "testUser",
+    "Password": [
+      "v",
+      "e",
+      "r",
+      "y",
+      "c",
+      "o",
+      "o",
+      "l"
+    ],
+    "WinRate": 0.0
+  },
+  {
+    "Username": "sldkjfksdfksdnf",
+    "Password": [
+      "a",
+      "j",
+      "k",
+      "s",
+      "k",
+      "s",
+      "k",
+      "f",
+      "j",
+      "k",
+      "f"
+    ],
+    "WinRate": 0.0
+  },
+  {
+    "Username": "talal",
+    "Password": [
+      "d",
+      "e",
+      "s",
+      "i",
+      "g",
+      "n",
+      "e",
+      "r"
+    ],
+    "WinRate": 0.0
   }
 ]
