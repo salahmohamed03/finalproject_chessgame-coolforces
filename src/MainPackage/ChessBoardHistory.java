@@ -11,7 +11,6 @@ public class ChessBoardHistory extends ChessBoardBASE implements MouseListener {
     private int movesCount = 0;
     public JButton nextMove;
     public JButton previousMove;
-    public JButton backBtn;
     public ChessBoardHistory(){initialize(); setMovesText(); setButtons(); }
 
 
@@ -36,20 +35,7 @@ public class ChessBoardHistory extends ChessBoardBASE implements MouseListener {
         System.out.println(movesCount);
         if(movesCount == 8 ) movesText.append("\n");
     }
-    private void set_backBtn(){
-        ImageIcon backImg = new ImageIcon("src/Mat/Buttons/backBtn.png");
-        backBtn = new JButton(icon.resizeWithRatio(backImg));
-        backBtn.setOpaque(false);
-        backBtn.setFocusable(false);
-        backBtn.setBorderPainted(false);
-        backBtn.setBackground(icon.mainColor);
 
-        backBtn.addMouseListener(this);
-        backBtn.setBounds(25*width/1440,20 *width/1440 ,65*width/1440,65 *width/1440);
-
-        base.add(backBtn, Integer.valueOf(1));
-
-    }
 
     public static void main(String []args)
     {
@@ -78,7 +64,7 @@ public class ChessBoardHistory extends ChessBoardBASE implements MouseListener {
     }
     @Override
     protected void setButtons() {
-        set_backBtn();
+
 //        JPanel btns = new JPanel();
 //        btns.setLayout(new GridLayout(1, 2 ,10 * width/1440,0));
 //
