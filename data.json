@@ -22,19 +22,6 @@
     "WinRate": 0.0
   },
   {
-    "Username": "salah",
-    "Password": [
-      "m",
-      "o",
-      "h",
-      "a",
-      "m",
-      "e",
-      "d"
-    ],
-    "WinRate": 0.0
-  },
-  {
     "Username": "testUser",
     "Password": [
       "v",
@@ -76,6 +63,57 @@
       "n",
       "e",
       "r"
+    ],
+    "WinRate": 0.0
+  },
+  {
+    "Username": "mostafa",
+    "Password": [
+      "e",
+      "n",
+      "g",
+      "i",
+      "n",
+      "e",
+      "e",
+      "r"
+    ],
+    "WinRate": 0.0
+  },
+  {
+    "Username": "instantUser",
+    "Password": [
+      "n",
+      "o",
+      "w"
+    ],
+    "WinRate": 0.0
+  },
+  {
+    "Username": "previousTest",
+    "Password": [
+      "p",
+      "r",
+      "e",
+      "v",
+      "i",
+      "o",
+      "u",
+      "s"
+    ],
+    "WinRate": 0.0
+  },
+  {
+    "Username": "threadTest",
+    "Password": [
+      "v",
+      "e",
+      "r",
+      "y",
+      "c",
+      "o",
+      "o",
+      "l"
     ],
     "WinRate": 0.0
   }

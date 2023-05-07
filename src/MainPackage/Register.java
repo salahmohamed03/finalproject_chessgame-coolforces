@@ -27,7 +27,8 @@ import java.io.Reader;
 import java.io.Writer;
 
 public class Register extends dataHandling implements MouseListener{
-    public int previousPage  ;
+    public String previousPage="";
+    public User mainUser;
     IconsAndColors ic = new IconsAndColors();
     public JFrame frame;
 
@@ -45,10 +46,17 @@ public class Register extends dataHandling implements MouseListener{
     //JsonWriter arrWriter=new JsonWriter(writer);
     //Gson gsonWriter =  new Gson(); // object used to writer the array
 
-   
+    public Register(User mainUser)
+    {
+        initialize();
+        this.mainUser = mainUser;
+        //previousPage="GameStart";
+    }
     
+
     public Register(){
         initialize();
+        //previousPage="LoginPage";
     }
 
     public void initialize(){
@@ -71,7 +79,7 @@ public class Register extends dataHandling implements MouseListener{
         frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         //System.out.println(previousPage);
-            if (previousPage == 0){
+            if (previousPage.equals("LoginPage")){
                 frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
             }
 
@@ -209,12 +217,15 @@ public class Register extends dataHandling implements MouseListener{
         if(e.getSource() == backBtn){
             // 0 for login page
             // 1 for Game start
-            if( previousPage == 0){
-                System.out.println("tt");
-            LoginPage L = new LoginPage();
-            frame.setVisible(false);
+            if( previousPage.equals("LoginPage"))
+            {
+                //System.out.println("tt");
+                LoginPage L = new LoginPage();
+                frame.setVisible(false);
             }
-            if( previousPage == 1){
+            if( previousPage.equals("GameStart"))
+            {
+                GameStart c =new GameStart(mainUser);
                 frame.setVisible(false);
             }
         }
@@ -225,16 +236,22 @@ public class Register extends dataHandling implements MouseListener{
         {
             if (!textField.getText().equals("username"))
            {
-               User user=new User(textField.getText(),passField.getPassword());
-               if (checkCredentials(user.getName(), user.getPass()))
+               User regUser=new User(textField.getText(),passField.getPassword());
+               if (checkCredentials(regUser.getName(), regUser.getPass()))
                {
                     System.out.println("This player already exists.Login instead."); 
                }
-               else if (checkUsername(user.getName()))
+               else if (checkUsername(regUser.getName()))
                {
-                    addAndWriteNewData(user);
-                    HomePage H=new HomePage(user);
-
+                    addAndWriteNewData(regUser);
+                    if (previousPage.equals("GameStart")) 
+                    {
+                        GameStart c = new GameStart(mainUser,regUser);    
+                    }
+                    else 
+                    {
+                        HomePage H=new HomePage(regUser);
+                    }
                     this.dispose();
                }
                else

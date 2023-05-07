@@ -201,7 +201,7 @@ public class LoginPage extends dataHandling implements MouseListener {
         }
         if (e.getSource()==registerBtn){
             Register R = new Register();
-            R.previousPage=0;
+            R.previousPage="LoginPage";
         }
     }
 

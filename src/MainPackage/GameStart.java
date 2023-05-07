@@ -29,13 +29,20 @@ public class GameStart extends dataHandling implements MouseListener {
     public JCheckBox timerOn;
     public static String timerInput;
     public JButton startBtn;
-    private User user;
-    public GameStart(User user)
+    private User mainUser;
+    private User oppUser;
+    public GameStart(User mainUser)
     {
-        this.user=user;
+        this.mainUser=mainUser;
         initialize();
     }
     
+    public GameStart(User mainUser,User oppUser)
+    {
+        this.mainUser=mainUser;
+        this.oppUser=oppUser;
+        initialize();
+    }
     public GameStart(){initialize();}
 
     public void initialize(){
@@ -85,7 +92,7 @@ public class GameStart extends dataHandling implements MouseListener {
     }
 
     private void setHeader(){
-        JLabel youPlay = createLabel(String.valueOf(user.getName())+" color", 83 );
+        JLabel youPlay = createLabel(String.valueOf(mainUser.getName())+" color", 83 );
         youPlay.setBounds(470 *width/1440,81 *width/1440,545 *width/1440,132 *width/1440);
         base.add(youPlay, Integer.valueOf(1));
 
@@ -123,7 +130,7 @@ public class GameStart extends dataHandling implements MouseListener {
 
         //should be players[]
         ArrayList <String> opponents=new ArrayList<>();
-        opponents=getOpponentsArrList(user);
+        opponents=getOpponentsArrList(mainUser);
         String [] players = opponents.toArray(new String[opponents.size()]);
         JComboBox<String> playerList = new JComboBox<>(players);
         playerList.setBounds(765 *width/1440,685 *width/1440,340 *width/1440,50 *width/1440);
@@ -257,9 +264,11 @@ public class GameStart extends dataHandling implements MouseListener {
             gl.start();
             frame.setVisible(false);
         }
-        if (e.getSource()==addPlayerBtn){
-            Register R = new Register();
-            R.previousPage = 1;  //should be in main
+        if (e.getSource()==addPlayerBtn)
+        {
+            //User mainUser=user;
+            Register R = new Register(mainUser);
+            R.previousPage="GameStart";
             R.setDefaultCloseOperation(DISPOSE_ON_CLOSE); //submit action need to be changed
         }
 
