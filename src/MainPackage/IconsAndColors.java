@@ -73,7 +73,7 @@ public class IconsAndColors {
 
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        height = (int) screenSize.getHeight();
+        height = 700;//(int) screenSize.getHeight();
         width = 1440 *height/1024 ;
 
 
