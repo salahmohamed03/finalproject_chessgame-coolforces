@@ -7,50 +7,25 @@
       "o",
       "l"
     ],
-    "WinRate": 0.0
-  },
-  {
-    "Username": "salah",
-    "Password": [
-      "o",
-      "h",
-      "y",
-      "e",
-      "a",
-      "h"
-    ],
-    "WinRate": 0.0
-  },
-  {
-    "Username": "testUser",
-    "Password": [
-      "v",
-      "e",
-      "r",
-      "y",
-      "c",
-      "o",
-      "o",
-      "l"
-    ],
-    "WinRate": 0.0
-  },
-  {
-    "Username": "sldkjfksdfksdnf",
-    "Password": [
-      "a",
-      "j",
-      "k",
-      "s",
-      "k",
-      "s",
-      "k",
-      "f",
-      "j",
-      "k",
-      "f"
-    ],
-    "WinRate": 0.0
+    "WinRate": 0.0,
+    "matches": [
+      {
+        "oppUserStr": "VS talal",
+        "result": "waiting"
+      },
+      {
+        "oppUserStr": "VS boda",
+        "result": "waiting"
+      },
+      {
+        "oppUserStr": "VS boda",
+        "result": "waiting"
+      },
+      {
+        "oppUserStr": "VS boda",
+        "result": "waiting"
+      }
+    ]
   },
   {
     "Username": "talal",
@@ -64,57 +39,7 @@
       "e",
       "r"
     ],
-    "WinRate": 0.0
-  },
-  {
-    "Username": "mostafa",
-    "Password": [
-      "e",
-      "n",
-      "g",
-      "i",
-      "n",
-      "e",
-      "e",
-      "r"
-    ],
-    "WinRate": 0.0
-  },
-  {
-    "Username": "instantUser",
-    "Password": [
-      "n",
-      "o",
-      "w"
-    ],
-    "WinRate": 0.0
-  },
-  {
-    "Username": "previousTest",
-    "Password": [
-      "p",
-      "r",
-      "e",
-      "v",
-      "i",
-      "o",
-      "u",
-      "s"
-    ],
-    "WinRate": 0.0
-  },
-  {
-    "Username": "threadTest",
-    "Password": [
-      "v",
-      "e",
-      "r",
-      "y",
-      "c",
-      "o",
-      "o",
-      "l"
-    ],
-    "WinRate": 0.0
+    "WinRate": 0.0,
+    "matches": []
   }
 ]

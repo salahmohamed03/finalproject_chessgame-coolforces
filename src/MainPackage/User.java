@@ -6,7 +6,8 @@ public class User {
     private String Username;
     private char[] Password;
     public double WinRate;
-    public ArrayList<Match> matches;
+    //public ArrayList<String> matches = new ArrayList<>();
+    public ArrayList<Match> matches = new ArrayList<>();
     
     //Constructor to intialize username and password
     public User(String Username, char[] Password)
@@ -31,11 +32,15 @@ public class User {
     // use json files to store the data for each instance from this class
 }
 class Match {
-    private String ID;
-    private int index;
-    public ArrayList<Move> moves;
-
+    private String oppUserStr ="";
+    private String result="";
+    //public ArrayList<Move> moves; 
     
+    public Match(String oppUserStr)
+    {
+        this.oppUserStr= "VS " + oppUserStr;
+        result="waiting";
+    }
     // make the constructor to initialize the players.
     // make function to add move to the arraylist moves.
     // arraylist moves is array to store the flow of the game like -  1.E4 , E5 - so that the fist one

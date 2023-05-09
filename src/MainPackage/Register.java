@@ -250,7 +250,10 @@ public class Register extends dataHandling implements MouseListener{
                     //and the regUser is also passed as an opponent
                     if (previousPage.equals("GameStart")) 
                     {
-                        GameStart c = new GameStart(mainUser,regUser);
+                        //create the match for the mainUser
+                        createMatch(mainUser,regUser);
+                        GameLauncher g = new GameLauncher();
+                        this.dispose();
                         // here we could have also passed the main user only
                         // but we passed the reg so his name could be shown first
                         //but his name will be shown in the combo box even if 

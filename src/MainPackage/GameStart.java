@@ -2,6 +2,8 @@ package MainPackage;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -37,14 +39,7 @@ public class GameStart extends dataHandling implements MouseListener {
         initialize();
     }
     
-    public GameStart(User mainUser,User oppUser) // this one will be called from register instead
-    //it accepts the user who just registered (the one who wanted to be added from game start)
-    // it also accepts the main user to keep his control
-    {
-        this.mainUser=mainUser;
-        this.oppUser=oppUser;
-        initialize();
-    }
+    
     public GameStart(){initialize();}
 
     public void initialize(){
@@ -135,6 +130,19 @@ public class GameStart extends dataHandling implements MouseListener {
         opponents=getOpponentsArrList(mainUser);
         String [] players = opponents.toArray(new String[opponents.size()]);
         JComboBox<String> playerList = new JComboBox<>(players);
+        playerList.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String selectedOption = (String) playerList.getSelectedItem();
+        oppUser=findOppUser(selectedOption);
+        //addMatch(mainUser, oppUser);
+    }
+});
+
+
+
+            
+
         playerList.setBounds(765 *width/1440,685 *width/1440,340 *width/1440,50 *width/1440);
         playerList.setFont(new Font("Space Grotesk", Font.BOLD, 20 *width/1440));
         playerList.setForeground(ic.mainColor);
@@ -262,8 +270,8 @@ public class GameStart extends dataHandling implements MouseListener {
             else {
                 timerInput = timerSet.getText();
             }
+            createMatch(mainUser, oppUser);
             GameLauncher gl = new GameLauncher();
-            gl.start();
             frame.setVisible(false);
         }
         if (e.getSource()==addPlayerBtn)
