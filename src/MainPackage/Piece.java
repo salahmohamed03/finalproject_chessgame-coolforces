@@ -99,11 +99,43 @@ public abstract class Piece {
             canCastleLift = false;
             canCastleRight = false;
         }
-        if(id == 5){
+        if(id == 5 ){
             castlingLift = null;
             castlingRight = null;
             canCastleLift = false;
             canCastleRight = false;
+        }
+        if(p2.equals("H8")){
+            for(Piece p : pieces){
+                if(!p.pieceSide &&p.id == 5){
+                    p.castlingRight = null;
+                    p.canCastleRight = false;
+                }
+            }
+        }
+        if(p2.equals("H1")){
+            for(Piece p : pieces){
+                if(p.pieceSide &&p.id == 5){
+                    p.castlingRight = null;
+                    p.canCastleRight = false;
+                }
+            }
+        }
+        if(p2.equals("A8")){
+            for(Piece p : pieces){
+                if(!p.pieceSide &&p.id == 5){
+                    p.castlingLift = null;
+                    p.canCastleLift = false;
+                }
+            }
+        }
+        if(p2.equals("A1")){
+            for(Piece p : pieces){
+                if(p.pieceSide && p.id == 5){
+                    p.castlingLift = null;
+                    p.canCastleLift = false;
+                }
+            }
         }
         Board.move_piece(position,p2);
         position = p2;
@@ -274,20 +306,20 @@ class king extends Piece {
         cb.getButton(pos).setIcon(icon);
         if(side){
             if(position.equals("E1")){
-            castlingRight = "G1";
-            castlingLift = "C1";
-            canCastleRight = true;
-            canCastleLift = true;
+                castlingRight = "G1";
+                castlingLift = "C1";
+                canCastleRight = true;
+                canCastleLift = true;
             }
             else{canCastleRight = false;
                 canCastleLift = false;}
         }
         else{
             if(position.equals("E8")){
-            castlingRight = "G8";
-            castlingLift = "C8";
-            canCastleRight = true;
-            canCastleLift = true;
+                castlingRight = "G8";
+                castlingLift = "C8";
+                canCastleRight = true;
+                canCastleLift = true;
             }
             else{canCastleRight = false;
                 canCastleLift = false;}
