@@ -159,12 +159,12 @@ public class Register extends Window implements MouseListener{
                     
                     // If coming from gamestart main user is passed again to keep his authority 
                     //and the regUser is also passed as an opponent
+                        frame.setVisible(false);
                     if (previousPage==1)
                     {
                         //create the match for the mainUser
                         createMatch(mainUser,regUser);
-                        GameLauncher g = new GameLauncher();
-                        this.dispose();
+                        g.initializeWithUser(mainUser);
                         // here we could have also passed the main user only
                         // but we passed the reg so his name could be shown first
                         //but his name will be shown in the combo box even if 
@@ -173,6 +173,7 @@ public class Register extends Window implements MouseListener{
                     else  // here this is the typical registration
                     //the regUser will be the mainUser
                     {
+
 //                        HomePage H=new HomePage(regUser);
                         h.initializeWithUser(regUser);
 

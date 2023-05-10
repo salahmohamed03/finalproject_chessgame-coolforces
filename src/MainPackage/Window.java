@@ -13,6 +13,7 @@ public abstract class Window extends dataHandling implements MouseListener {
     Register r;
     HomePage h;
     GameStart g;
+    String test = "ss";
     public JFrame frame;
     public int width = ic.width, height = ic.height;
     //int u = width/1440;
@@ -25,6 +26,7 @@ public abstract class Window extends dataHandling implements MouseListener {
 
     protected void initialize(){
         initializeWindow();
+        System.out.println(test);
         setupWindow();
         putBackG();
         frame.setVisible(true);

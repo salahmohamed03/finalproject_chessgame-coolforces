@@ -6,8 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-public class GameStart extends Window implements MouseListener {
-
+public class GameStart extends Window implements MouseListener{
     public ImageIcon whiteIcon = new ImageIcon("src/Mat/Buttons/selectWBtn.png");
     public ImageIcon whiteIconS = new ImageIcon("src/Mat/Buttons/selectedWBtn.png");
     public ImageIcon blackIcon = new ImageIcon("src/Mat/Buttons/selectBBtn.png");
@@ -169,6 +168,7 @@ public class GameStart extends Window implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource()==backBtn){
+            frame.setVisible(false);
             System.out.println("yy");
             h.initializeWithUser(mainUser);
         }
@@ -179,10 +179,6 @@ public class GameStart extends Window implements MouseListener {
         if (e.getSource()==whiteBtn){
             whiteBtn.setIcon(ic.resizeWithRatio(whiteIconS));
             blackBtn.setIcon(ic.resizeWithRatio(blackIcon));
-        }
-        if(e.getSource()==backBtn){                     // need to be changed so do not create a new page IT IS JUST FOR GUI SHOW
-            HomePage H = new HomePage();
-            frame.setVisible(false);
         }
         if(e.getSource()==startBtn){
             //Checks if the timer is on or off so we choose to use the input or not
@@ -198,6 +194,7 @@ public class GameStart extends Window implements MouseListener {
         }
         if (e.getSource()==addPlayerBtn)
         {
+            r.initialize();
             //User mainUser=user;
 //            Register R = new Register(mainUser);
 //            R.previousPage="GameStart";
