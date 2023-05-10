@@ -39,10 +39,15 @@ public abstract class Piece {
     public void removePiece(){
         this.position = null;
     }
-    public void transport(String p2,ArrayList<Piece> pieces){
-        if(p2.equals(position))return;
-        if(Board.isAlly(p2,position) == (Object) false){
-            Board.setDead(Board.getPieceInfo(p2).id,Board.getPieceInfo(p2).side);
+    public String transport(String p2,ArrayList<Piece> pieces){
+        String move = position;
+        boolean ally = Board.isAlly(p2,position) == (Object) false;
+        if(ally){
+            int Id = Board.getPieceInfo(p2).id;
+            boolean Side = Board.getPieceInfo(p2).side;
+            int myId =Board.getPieceInfo(position).id;
+            Board.setDead(Id,Side);
+            move+= "," + Board.toPieceChar(myId,!Side) +"x"+ p2;
         }
         if(id == 6)twoMoves = null;
         else if(id == 1){
@@ -139,8 +144,7 @@ public abstract class Piece {
         }
         Board.move_piece(position,p2);
         position = p2;
-        for(Piece p: pieces)
-        {
+        for(Piece p: pieces) {
             p.availableMoves = p.ValidMoves();
             p.eating.clear();
             p.moving.clear();
@@ -148,6 +152,10 @@ public abstract class Piece {
             //if(!Objects.equals(p.position, p.twoMoves))twoMoves= null;
             p.eatingMoves();
         }
+        if(ally){
+            move += "," + position;
+        }
+        return move;
     }
     public abstract ArrayList<String> ValidMoves();
     public void Select() {

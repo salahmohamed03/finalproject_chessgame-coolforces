@@ -17,7 +17,8 @@ public class GameLauncher {
     public boolean turnProm;
     public boolean gameStatus;
     public GameActions promotion;
-    public GameActions result;
+    public boolean result;
+    public ArrayList<String> gameMoves;
     public boolean turn;
     
     public GameLauncher() 
@@ -194,7 +195,7 @@ public class GameLauncher {
                         this.removePiece(clickedSquare);
                     }
                     this.selected.Unselect();
-                    this.selected.transport(clickedSquare,pieces);
+                    gameMoves.add(this.selected.transport(clickedSquare,pieces));
                     this.turn = !this.turn;
                     if(isTimer)
                         game.controlTimer(turn);
@@ -215,7 +216,7 @@ public class GameLauncher {
                         this.removePiece(clickedSquare);
                     }
                     this.selected.Unselect();
-                    this.selected.transport(clickedSquare,pieces);
+                    gameMoves.add(this.selected.transport(clickedSquare,pieces));
                     this.turn = !this.turn;
                     if(isTimer)
                         game.controlTimer(turn);
@@ -237,12 +238,14 @@ public class GameLauncher {
             game.whiteClock.stop();
             game.blackClock.stop();
             game.gameResult = false;
+            result = true;
         }
         else if(checkWinner(turn) == (Object) false || (game.whiteClock.finishedCheck()&&isTimer)){
             promotion.showResult(-1);
             game.whiteClock.stop();
             game.blackClock.stop();
             game.gameResult = false;
+            result = false;
         }
         else if(isDraw(turn)){
             promotion.showResult(0);

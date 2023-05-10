@@ -76,43 +76,6 @@ public abstract class ChessBoardBASE {
                 ChessBoardPanel.add(pos[i][j]);
             }
     }
-    private void initializePieces(){
-        getButton("A2").setIcon((icon.white_pawn));
-        getButton("B2").setIcon((icon.white_pawn));
-        getButton("C2").setIcon((icon.white_pawn));
-        getButton("D2").setIcon((icon.white_pawn));
-        getButton("E2").setIcon((icon.white_pawn));
-        getButton("F2").setIcon((icon.white_pawn));
-        getButton("G2").setIcon((icon.white_pawn));
-        getButton("H2").setIcon((icon.white_pawn));
-
-        getButton("A7").setIcon((icon.black_pawn));
-        getButton("B7").setIcon((icon.black_pawn));
-        getButton("C7").setIcon((icon.black_pawn));
-        getButton("D7").setIcon((icon.black_pawn));
-        getButton("E7").setIcon((icon.black_pawn));
-        getButton("F7").setIcon((icon.black_pawn));
-        getButton("G7").setIcon((icon.black_pawn));
-        getButton("H7").setIcon((icon.black_pawn));
-
-        getButton("A8").setIcon((icon.black_rook));
-        getButton("B8").setIcon(icon.black_knight);
-        getButton("C8").setIcon(icon.black_bishop);
-        getButton("D8").setIcon((icon.black_queen));
-        getButton("E8").setIcon((icon.black_king));
-        getButton("F8").setIcon(icon.black_bishop);
-        getButton("G8").setIcon(icon.black_knight);
-        getButton("H8").setIcon((icon.black_rook));
-
-        getButton("A1").setIcon((icon.white_rook));
-        getButton("B1").setIcon(icon.white_knight);
-        getButton("C1").setIcon(icon.white_bishop);
-        getButton("D1").setIcon(icon.white_queen);
-        getButton("E1").setIcon((icon.white_king));
-        getButton("F1").setIcon(icon.white_bishop);
-        getButton("G1").setIcon(icon.white_knight);
-        getButton("H1").setIcon((icon.white_rook));
-    }
     protected JButton createButton(String name,String ref, String filename, int x , int y,String color) {
         JButton temp = new JButton(name);
         temp.setName(ref);
@@ -542,29 +505,6 @@ public abstract class ChessBoardBASE {
             blackClock.start();
         }
     }
-
-    public void resetTimer(boolean side) {
-        if (side) {
-            whiteClock.reset();
-        }
-        else {
-            blackClock.reset();
-        }
-    }
-
-    //Returns true if either clock is finished, argument decides which clock we are checking
-    public boolean checkTimer(boolean side) {
-        if (side) {
-            if (whiteClock.finishedCheck()) {
-                return true;
-            }
-            return false;
-        }
-        if (blackClock.finishedCheck()) {
-            return true;
-        }
-        return false;
-    }
     private void set_backBtn(){
         ImageIcon backImg = new ImageIcon("src/Mat/Buttons/backBtn.png");
         backBtn = new JButton(icon.resizeWithRatio(backImg));
@@ -578,6 +518,23 @@ public abstract class ChessBoardBASE {
 
         base.add(backBtn, Integer.valueOf(1));
 
+    }
+    public String toPieceChar(int id,boolean side){
+        if(!side){
+             if(id == 1)return "♖";
+             else if(id == 2)return "♘";
+             else if(id == 3)return "♗";
+             else if(id == 4)return "♕";
+             else if(id == 5)return "♔";
+        }
+        else{
+            if(id == 1)return "♜";
+            else if(id == 2)return "♞";
+            else if(id == 3)return "♝";
+            else if(id == 4)return "♛";
+            else if(id == 5)return "♚";
+        }
+        return "";
     }
 
 }
