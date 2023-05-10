@@ -5,53 +5,29 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class LoginPage extends dataHandling implements MouseListener {
-    IconsAndColors ic = new IconsAndColors();
-    public JFrame frame;
-    public int width = ic.width, height = ic.height;
-    //int u = width/1440;
-    private   JLayeredPane  base;
+public class LoginPage extends Window implements MouseListener {
 
-    public JPasswordField passField;
-    public JTextField textField;
+//    Register r ;
+//    HomePage h ;
 
-    private JPanel btns;
+    public JTextField usernameField;
+    public JPasswordField passwordField;
+
     public JButton loginBtn;
     public JButton registerBtn;
-    public LoginPage(){
-        initialize();
-    }
+//    public LoginPage(){
+//        initialize();
+//    }
 
-    public void  initialize(){
-
-        initializeWindow();
-        setBackG();
+    @Override
+    protected void setupWindow() {
+        setBackG("src/Mat/BackG/loginFields.png");
         setHeader();
         setFields();
         setBtns();
 //        checkInput();
-
-        frame.setVisible(true);
     }
 
-    private void initializeWindow() {
-        frame = new JFrame();
-        frame.setSize(width , height);
-        frame.setTitle("Chess game");
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        base = new JLayeredPane();
-        frame.add(base);
-    }
-
-    private void setBackG(){
-        ImageIcon backG_image = new ImageIcon("src/Mat/BackG/loginFields.png");
-        JLabel backG = new JLabel(ic.resizeWithRatio(backG_image));
-        backG.setBounds(0,0,width,height);
-        base.add(backG, Integer.valueOf(0));
-    }
 
     public void setHeader(){
         //LOOK
@@ -72,8 +48,8 @@ public class LoginPage extends dataHandling implements MouseListener {
         fieldsPanel.setLayout(new GridLayout(2,1,0,55*width/1440));
 
 
-        JTextField usernameField = createTextField("username");
-        JPasswordField passwordField = createPassField();
+         usernameField = createTextField("username", 40);
+         passwordField = createPassField();
         fieldsPanel.add(usernameField);
         fieldsPanel.add(passwordField);
 
@@ -82,82 +58,22 @@ public class LoginPage extends dataHandling implements MouseListener {
     }
 
 
-    public JTextField createTextField(String placeHolder)
-    {
-        textField = new JTextField(placeHolder);
 
-        //Function to retrieve data from text field
-        // A function to check if value changed and user pressed enter
-        
-            
-        
-        
-        //text field design
-        textField.setFont(new Font("Space Grotesk", Font.PLAIN, 40*width/1440));
-        textField.setBackground(ic.white);
-        textField.setForeground(ic.mainColor);
-        textField.setOpaque(true);
-        textField.setBorder(BorderFactory.createEmptyBorder());
-
-        return textField;   
-    }
-    public JPasswordField createPassField(){
-        passField = new JPasswordField("password",8);
-
-        //text field design
-        passField.setFont(new Font("Space Grotesk", Font.PLAIN, 40*width/1440));
-        passField.setBackground(ic.white);
-        passField.setForeground(ic.mainColor);
-        passField.setOpaque(true);
-        passField.setBorder(BorderFactory.createEmptyBorder());
-
-        return passField;
-    }
+    @Override
     public void setBtns(){
-        btns =  new JPanel();
-        btns.setBackground(ic.black);
-        btns.setOpaque(false);
-        btns.setLayout(new GridLayout(1,2,10*width/1440,0));
-        btns.setBounds(870*width/1440, 668*height/1024, 470*width/1440, 60*height/1024);
+        JPanel btnsPanel = new JPanel();
+        btnsPanel.setBackground(ic.black);
+        btnsPanel.setOpaque(false);
+        btnsPanel.setLayout(new GridLayout(1,2,10*width/1440,0));
+        btnsPanel.setBounds(870*width/1440, 668*height/1024, 470*width/1440, 60*height/1024);
 
         loginBtn = createButton("Login",1);
-        loginBtn.addMouseListener(this);
-
         registerBtn = createButton("Register",2);
-        registerBtn.addMouseListener(this);
 
-        btns.add(loginBtn); btns.add(registerBtn);
+        btnsPanel.add(loginBtn); btnsPanel.add(registerBtn);
 
-        base.add(btns, Integer.valueOf(2));
+        base.add(btnsPanel, Integer.valueOf(2));
     }
-    private JButton createButton(String name, int btn){
-        JButton button = new JButton(name);
-        button.setFocusable(false);
-
-        //design//
-        button.setFont(new Font("Space Grotesk", Font.BOLD, 36*width/1440));
-        ImageIcon pinkBtn = new ImageIcon("src/Mat/Buttons/pinkBtn.png");
-        ImageIcon whiteBtn = new ImageIcon("src/Mat/Buttons/whiteBtn.png");
-        switch (btn) {
-            case 1 -> {
-                button.setIcon(ic.resizeWithRatio(pinkBtn));
-                button.setForeground(ic.white);
-            }
-            case 2 -> {
-                button.setIcon(ic.resizeWithRatio(whiteBtn));
-                button.setForeground(ic.mainColor);
-            }
-        }
-        button.setBackground(ic.black);//any color. Just to be transparent
-        button.setOpaque(false);
-        button.setHorizontalTextPosition(JButton.CENTER);
-        button.setVerticalTextPosition(JButton.CENTER);
-
-        button.setBorder(BorderFactory.createEmptyBorder());
-
-        return button;
-    }
-
 //    public void checkInput(){
 //        //should be if statement
 //        denyAccess();
@@ -187,12 +103,12 @@ public class LoginPage extends dataHandling implements MouseListener {
             //this user is simply the one logging in and will always be the main user
             // because no need for the user who wants to be added from gamestart to log in
             // If he already exists, his name will be in the combobox
-            User logUser=new User(textField.getText(),passField.getPassword());
+            User logUser=new User(usernameField.getText(),passwordField.getPassword());
             if (checkCredentials(logUser.getName(), logUser.getPass()))
             {
                 frame.setVisible(false);
                 System.out.println("true");
-                HomePage H = new HomePage(logUser);  
+                h.initializeWithUser(logUser);
             }
             else
             {
@@ -203,8 +119,10 @@ public class LoginPage extends dataHandling implements MouseListener {
             
         }
         if (e.getSource()==registerBtn){
-            Register R = new Register();
-            R.previousPage="LoginPage";
+            frame.setVisible(false);
+            r.initialize();
+            r.previousPage=0;
+            System.out.println(r.previousPage);
         }
     }
 

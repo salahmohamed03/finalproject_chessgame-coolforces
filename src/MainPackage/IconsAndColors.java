@@ -71,10 +71,10 @@ public class IconsAndColors {
 
     public IconsAndColors() {
 
-
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        height = 700;//(int) screenSize.getHeight();
+        height = (int) screenSize.getHeight();
         width = 1440 *height/1024 ;
+
 
 
         ImageIcon temp1 = new ImageIcon("src/Mat/Comp/game/Black/bishop.png");

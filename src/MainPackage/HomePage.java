@@ -5,15 +5,8 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class HomePage extends JFrame implements MouseListener {
-    IconsAndColors ic = new IconsAndColors();
-    public JFrame frame;
-    public int width = ic.width, height = ic.height;
-    private final ImageIcon backG_image =  new ImageIcon("src/Mat/BackG/main.png");
-    private final JLabel backG = new JLabel(ic.resizeWithRatio(backG_image));
-
-    public  JLayeredPane base;
-
+public class HomePage extends Window implements MouseListener {
+    //LoginPage l;
     public JLabel welcome;
     //STATS
     public JPanel stats;
@@ -33,49 +26,34 @@ public class HomePage extends JFrame implements MouseListener {
     public  JButton settings;
     public JButton logOut;
 
-    private User mainUser;
-    public HomePage(User mainUser) // This constructor will always accept a main user
-    {
-        this.mainUser=mainUser;
-        initialize();
-    }
-    
-    public HomePage(){
-        initialize();
-    }
+//    private User mainUser;
 
-    public void  initialize(){
 
-        initializeWindow();
-        setBackG();
+//    public HomePage(User mainUser) // This constructor will always accept a main user
+//    {
+//        this.mainUser=mainUser;
+//        initialize();
+//    }
+//    public void initializeWithUser(User mainUser) // This constructor will always accept a main user
+//    {
+//        this.mainUser=mainUser;
+//        initialize();
+//    }
+//
+//    public HomePage(){
+//        initialize();
+//    }
+
+    @Override
+    protected void setupWindow() {
+        setBackG("src/Mat/BackG/main.png");
         setLogo();
         setWelcome();
         setStats();
         setBtns();
         setLogOutBtn();
-
-        frame.setVisible(true);
-
     }
 
-    private void initializeWindow() {
-        frame = new JFrame();
-        frame.setSize(width, height);
-        frame.setTitle("Chess game");
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        base = new JLayeredPane();
-        frame.add(base);
-
-    }
-
-    public void setBackG(){
-        backG.setBounds(0,0,width,height);
-        base.add(backG, Integer.valueOf(0));
-
-    }
     public void setLogo(){
          ImageIcon logo = new ImageIcon("src/Mat/Comp/main/logo.png");
          JLabel logoLabel = new JLabel(ic.resizeWithRatio(logo));
@@ -84,11 +62,10 @@ public class HomePage extends JFrame implements MouseListener {
     }
 
     public void setWelcome(){
-        welcome = new JLabel("Welcome " + String.valueOf(mainUser.getName())); // username should be getUsername
+        welcome = new JLabel("Welcome " + String.valueOf(mainUser.getName()), SwingConstants.CENTER); // username should be getUsername
         welcome.setFont(new Font("Space Grotesk", Font.BOLD, 30*width/1440));
         welcome.setForeground(ic.white);
         welcome.setBounds(984*width/1440, 330*height/1024, 304*width/1440, 25*height/1024);
-
         base.add(welcome, Integer.valueOf(1));
     }
 
@@ -181,9 +158,9 @@ public class HomePage extends JFrame implements MouseListener {
         btns.setOpaque(false);
         btns.setBounds(915*width/1440, 486*height/1024, 442*width/1440, 273*height/1024);
 
-            newGame = createButton("NEW GAME");
-            history = createButton("HISTORY");
-            settings=createButton("SETTINGS"); //------> under development SHOULD CHANGE COLORS
+            newGame = createButton("NEW GAME",3);
+            history = createButton("HISTORY",3);
+            settings=createButton("SETTINGS",3); //------> under development SHOULD CHANGE COLORS
 
         btns.add(newGame); btns.add(history); btns.add(settings);
 
@@ -191,7 +168,7 @@ public class HomePage extends JFrame implements MouseListener {
     }
 
     public  void setLogOutBtn(){
-        logOut = createButton("Log out");
+        logOut = createButton("Log out",3);
         logOut.setIcon(null); //to edit the btn appearance
         logOut.setFont(new Font("Space Grotesk", Font.PLAIN, 25*width/1440));
         logOut.setBounds(1086*width/1440, 750*height/1024, 101*width/1440, 30*height/1024);
@@ -199,37 +176,36 @@ public class HomePage extends JFrame implements MouseListener {
         base.add(logOut, Integer.valueOf(1));
 
     }
-    private JButton createButton(String name){
-        JButton button = new JButton(name);
-        button.setFocusable(false);
-        //design//
-        button.setFont(new Font("Space Grotesk", Font.BOLD, 55*width/1440));
-        //button.setBounds(80,30,120,40);
-        ImageIcon buttonBackG = new ImageIcon("src/Mat/Buttons/pinkBtn2.png");
-        button.setIcon(ic.resizeWithRatio(buttonBackG));
-        button.setHorizontalTextPosition(JButton.CENTER);
-        button.setVerticalTextPosition(JButton.CENTER);
-        button.setBackground(ic.black);
-        button.setForeground(ic.white);
-        button.setOpaque(false);
-        button.setBorder(BorderFactory.createEmptyBorder());
-        button.addMouseListener(this);
-        return button;
-    }
+//    private JButton createButton(String name){
+//        JButton button = new JButton(name);
+//        button.setFocusable(false);
+//        //design//
+//        button.setFont(new Font("Space Grotesk", Font.BOLD, 55*width/1440));
+//        //button.setBounds(80,30,120,40);
+//        ImageIcon buttonBackG = new ImageIcon("src/Mat/Buttons/pinkBtn2.png");
+//        button.setIcon(ic.resizeWithRatio(buttonBackG));
+//        button.setHorizontalTextPosition(JButton.CENTER);
+//        button.setVerticalTextPosition(JButton.CENTER);
+//        button.setBackground(ic.black);
+//        button.setForeground(ic.white);
+//        button.setOpaque(false);
+//        button.setBorder(BorderFactory.createEmptyBorder());
+//        button.addMouseListener(this);
+//        return button;
+//    }
 
 
     public static void main(String []args)
     {
         HomePage H = new HomePage();
-        H.frame.setVisible(true);
-
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getSource()==newGame){
             frame.setVisible(false);
-            GameStart G = new GameStart(mainUser);
+        if (e.getSource()==newGame){
+            GameStart G = new GameStart();
+            G.initializeWithUser(mainUser);
         }
         if (e.getSource()==history){
             History H = new History();
@@ -237,7 +213,6 @@ public class HomePage extends JFrame implements MouseListener {
        // if (e.getSource()==settings){
        // }
         if (e.getSource()==logOut){
-            frame.setVisible(false);
             LoginPage L = new LoginPage();
         }
     }

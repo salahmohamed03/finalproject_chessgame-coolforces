@@ -2,22 +2,11 @@ package MainPackage;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-
-public class GameStart extends dataHandling implements MouseListener {
-    IconsAndColors ic = new IconsAndColors();
-
-    public JFrame frame;
-
-    public int width = ic.width, height = ic.height;
-    public JLayeredPane base;
-    public JButton backBtn;
+public class GameStart extends Window implements MouseListener {
 
     public ImageIcon whiteIcon = new ImageIcon("src/Mat/Buttons/selectWBtn.png");
     public ImageIcon whiteIconS = new ImageIcon("src/Mat/Buttons/selectedWBtn.png");
@@ -31,21 +20,21 @@ public class GameStart extends dataHandling implements MouseListener {
     public JCheckBox timerOn;
     public static String timerInput;
     public JButton startBtn;
-    private User mainUser;
+//    private User mainUser;
     private User oppUser;
-    public GameStart(User mainUser) // this constructor will accept the main user who just came from homepage
-    {
-        this.mainUser=mainUser;
-        initialize();
-    }
-    
-    
-    public GameStart(){initialize();}
+//    public GameStart(User mainUser) // this constructor will accept the main user who just came from homepage
+//    {
+//        this.mainUser=mainUser;
+//        initialize();
+//    }
+//
+//
+//    public GameStart(){initialize();}
 
-    public void initialize(){
 
-        initializeWindow();
-        setBackG();
+    @Override
+    protected void setupWindow() {
+        setBackG("src/Mat/BackG/nGameSettFields.png");
         set_backBtn();
         setHeader();
         setBlackOrWhite();
@@ -53,43 +42,19 @@ public class GameStart extends dataHandling implements MouseListener {
         setTimerPanel();
         setStartBtn();
 
-        frame.add(base);
-        frame.setVisible(true);
-    }
-    private void initializeWindow() {
-        frame = new JFrame();
-        frame.setSize(width, height);
-        frame.setTitle("Chess game");
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        base = new JLayeredPane();
-        frame.add(base);
-    }
-    private void setBackG(){
-         ImageIcon backG_image = new ImageIcon("src/Mat/BackG/nGameSettFields.png");
-         JLabel backG = new JLabel(ic.resizeWithRatio(backG_image));
-        backG.setBounds(0,0,width,height);
-        base.add(backG, Integer.valueOf(0));
-    }
-    private void set_backBtn(){
-        ImageIcon backImg = new ImageIcon("src/Mat/Buttons/backBtn.png");
-        backBtn = new JButton(ic.resizeWithRatio(backImg));
-        backBtn.setOpaque(false);
-        backBtn.setFocusable(false);
-        backBtn.setBorderPainted(false);
-        backBtn.setBackground(ic.mainColor);
-
-        backBtn.addMouseListener(this);
-        backBtn.setBounds(46*width/1440,39*height/1024,65*width/1440,65*height/1024);
-
-        base.add(backBtn, Integer.valueOf(1));
 
     }
+
+
+    @Override
+    public void setBtns() {
+
+    }
+
 
     private void setHeader(){
-        JLabel youPlay = createLabel(String.valueOf(mainUser.getName())+" color", 83 );
+        JLabel youPlay = createLabel(mainUser.getName() +" color", 83 ); // testing for main user
+        youPlay.setHorizontalAlignment(JLabel.CENTER);
         youPlay.setBounds(470 *width/1440,81 *width/1440,545 *width/1440,132 *width/1440);
         base.add(youPlay, Integer.valueOf(1));
 
@@ -130,14 +95,11 @@ public class GameStart extends dataHandling implements MouseListener {
         opponents=getOpponentsArrList(mainUser);
         String [] players = opponents.toArray(new String[opponents.size()]);
         JComboBox<String> playerList = new JComboBox<>(players);
-        playerList.addActionListener(new ActionListener() {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String selectedOption = (String) playerList.getSelectedItem();
-        oppUser=findOppUser(selectedOption);
-        //addMatch(mainUser, oppUser);
-    }
-});
+        playerList.addActionListener(e -> {
+            String selectedOption = (String) playerList.getSelectedItem();
+            oppUser=findOppUser(selectedOption);
+            //addMatch(mainUser, oppUser);
+        });
 
 
 
@@ -167,7 +129,7 @@ public class GameStart extends dataHandling implements MouseListener {
         JLabel timerLabel = createLabel("Timer",60 *width/1440);
         timerLabel.setBounds(350 *width/1440,760 *width/1440,310 *width/1440,50 *width/1440);
 
-        timerSet = createTextField("00:00");
+        timerSet = createTextField("00:00", 40);
         timerSet.setBounds(865 *width/1440,770 *width/1440,171 *width/1440,40 *width/1440);
 
         ImageIcon on =  new ImageIcon ("src/Mat/Buttons/timerOnBtn.png");
@@ -197,51 +159,7 @@ public class GameStart extends dataHandling implements MouseListener {
        base.add(startBtn, Integer.valueOf(1));
    }
 
-    private  JLabel createLabel(String text, int s){
-        JLabel label = new JLabel(text);
-        label.setFont(new Font("Space Grotesk", Font.BOLD, s *width/1440));
-        label.setForeground(ic.white);
-        return label;
-    }
-    public JTextField createTextField(String placeHolder){
-        JTextField textField = new JTextField(placeHolder);
 
-        //text field design
-        textField.setFont(new Font("Space Grotesk", Font.PLAIN, 40 *width/1440));
-        textField.setBackground(ic.white);
-        textField.setForeground(ic.mainColor);
-        textField.setOpaque(true);
-        textField.setBorder(BorderFactory.createEmptyBorder());
-
-        return textField;
-    }
-    private JButton createButton(String name, int btn){
-        JButton button = new JButton(name);
-        button.setFocusable(false);
-
-        //design//
-        button.setFont(new Font("Space Grotesk", Font.BOLD, 36 *width/1440));
-        ImageIcon pinkBtn = new ImageIcon("src/Mat/Buttons/pinkBtn.png");
-        ImageIcon whiteBtn = new ImageIcon("src/Mat/Buttons/whiteBtn.png");
-        switch (btn) {
-            case 1 -> {
-                button.setIcon(ic.resizeWithRatio(pinkBtn));
-                button.setForeground(ic.white);
-            }
-            case 2 -> {
-                button.setIcon(ic.resizeWithRatio(whiteBtn));
-                button.setForeground(ic.mainColor);
-            }
-        }
-        button.setBackground(ic.black);//any color. Just to be transparent
-        button.setOpaque(false);
-        button.setHorizontalTextPosition(JButton.CENTER);
-        button.setVerticalTextPosition(JButton.CENTER);
-
-        button.setBorder(BorderFactory.createEmptyBorder());
-
-        return button;
-    }
     public static void main(String []args)
     {
         GameStart c = new GameStart();
@@ -250,6 +168,10 @@ public class GameStart extends dataHandling implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        if(e.getSource()==backBtn){
+            System.out.println("yy");
+            h.initializeWithUser(mainUser);
+        }
         if (e.getSource()==blackBtn){
             blackBtn.setIcon(ic.resizeWithRatio(blackIconS));
             whiteBtn.setIcon(ic.resizeWithRatio(whiteIcon));
@@ -277,9 +199,9 @@ public class GameStart extends dataHandling implements MouseListener {
         if (e.getSource()==addPlayerBtn)
         {
             //User mainUser=user;
-            Register R = new Register(mainUser);
-            R.previousPage="GameStart";
-            R.setDefaultCloseOperation(DISPOSE_ON_CLOSE); //submit action need to be changed
+//            Register R = new Register(mainUser);
+//            R.previousPage="GameStart";
+//            R.setDefaultCloseOperation(DISPOSE_ON_CLOSE); //submit action need to be changed
         }
 
     }
