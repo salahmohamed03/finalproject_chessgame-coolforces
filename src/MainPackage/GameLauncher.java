@@ -24,6 +24,7 @@ public class GameLauncher {
     public GameLauncher() 
     {
         start();
+        gameMoves = new ArrayList<>();
         game.setClock(this);
         if(game.blackClock.finishedCheck())
         {
