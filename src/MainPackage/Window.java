@@ -8,11 +8,14 @@ import java.awt.event.MouseListener;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public abstract class Window extends dataHandling implements MouseListener {
-    IconsAndColors ic = new IconsAndColors();
+    IconsAndColors ic = new IconsAndColors() ;
     LoginPage l;
     Register r;
     HomePage h;
     GameStart g;
+    ChessBoard c;
+    GameLauncher gL;
+    History hist;
     String test = "ss";
     public JFrame frame;
     public int width = ic.width, height = ic.height;
@@ -24,6 +27,9 @@ public abstract class Window extends dataHandling implements MouseListener {
     protected JButton backBtn;
     public User mainUser;
 
+    private int refDim = 1440;
+    protected JLabel backG;
+
     protected void initialize(){
         initializeWindow();
         System.out.println(test);
@@ -31,6 +37,7 @@ public abstract class Window extends dataHandling implements MouseListener {
         putBackG();
         frame.setVisible(true);
     }
+
     public void initializeWithUser(User mainUser)
     {
         this.mainUser=mainUser;
@@ -51,11 +58,21 @@ public abstract class Window extends dataHandling implements MouseListener {
     }
      public void setBackG(String fileName){
          backG_image = new ImageIcon(fileName);
+         System.out.println("ss");
      }
+    public void setBackG(String fileName, int ref){ //overloading for diffrent dimensions
+        backG_image = new ImageIcon(fileName);
+        System.out.println("backg window");
+        refDim = ref;
+    }
     protected void putBackG(){
-        JLabel backG = new JLabel(ic.resizeWithRatio(backG_image));
-        backG.setBounds(0,0,width,height);
+        backG = new JLabel(ic.resizeWithRatio(backG_image, refDim));
+        if(refDim==870)
+            backG.setBounds(-10,-5,width,height);
+        else
+            backG.setBounds(0,0,width,height);
         base.add(backG, Integer.valueOf(0));
+        refDim = 1440;
     }
 
     public abstract void setBtns();
@@ -133,6 +150,24 @@ public abstract class Window extends dataHandling implements MouseListener {
         button.addMouseListener(this);
 
         return button;
+    }
+    //Salah method (OverLoading)
+    protected JButton createButton(String name,String ref, String filename, int x , int y,String color) {
+        JButton temp = new JButton(name);
+        temp.setName(ref);
+        temp.setFocusable(false);
+        temp.setFont(new Font("Space Grotesk Light",Font.BOLD,20 *width/870));
+        temp.setBackground(Color.red);
+        temp.setForeground(Color.decode(color));
+        ImageIcon temp1 = new ImageIcon(filename);//src/Mat/Buttons/resignBtn.png
+        Image btnBG = temp1.getImage().getScaledInstance(75 *width/870,35 *width/870,Image.SCALE_SMOOTH);
+        temp.setIcon(new ImageIcon (btnBG));
+        temp.setHorizontalTextPosition(JButton.CENTER);
+        temp.setVerticalTextPosition(JButton.CENTER);
+        temp.setOpaque(false);
+        temp.setBorder(BorderFactory.createEmptyBorder());
+        temp.setBounds(x,y,75 *width/870,35 *width/870);
+        return temp;
     }
     protected void set_backBtn(){
         ImageIcon backImg = new ImageIcon("src/Mat/Buttons/backBtn.png");

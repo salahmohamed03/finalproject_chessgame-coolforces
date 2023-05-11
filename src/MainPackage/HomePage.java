@@ -62,7 +62,7 @@ public class HomePage extends Window implements MouseListener {
     }
 
     public void setWelcome(){
-        welcome = new JLabel("Welcome " + String.valueOf(mainUser.getName()), SwingConstants.CENTER); // username should be getUsername
+        welcome = new JLabel("Welcome " + mainUser.getName(), SwingConstants.CENTER); // username should be getUsername
         welcome.setFont(new Font("Space Grotesk", Font.BOLD, 30*width/1440));
         welcome.setForeground(ic.white);
         welcome.setBounds(984*width/1440, 330*height/1024, 304*width/1440, 25*height/1024);
@@ -207,7 +207,7 @@ public class HomePage extends Window implements MouseListener {
             g.initializeWithUser(mainUser);
         }
         if (e.getSource()==history){
-            History H = new History();
+            hist.initialize();
         }
        // if (e.getSource()==settings){
        // }

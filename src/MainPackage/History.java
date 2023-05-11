@@ -19,9 +19,6 @@ public class History extends JFrame implements MouseListener {
     JLabel[] matchArray;
 
 
-    public History() {
-        initialize();
-    }
 
     public static void main(String[] args) {
         History H = new History();

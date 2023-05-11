@@ -5,20 +5,20 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class ChessBoard extends ChessBoardBASE implements MouseListener {
-    private GameActions GA = new GameActions();
+    private final GameActions GA = new GameActions();
     public JButton resign,draw, resign2,draw2;
-    public ChessBoard(){initialize();}
+    //public ChessBoard(){initialize();}
 
     public static void main(String []args)
     {
         ChessBoard c = new ChessBoard();
+
+        c.initialize();
         c.setDead(6,true);
         c.setDead(6,true);
         c.setDead(2,false);
         c.setDead(6,true);
         c.setDead(3,false);
-
-        c.show();
     }
 
     @Override
@@ -50,6 +50,9 @@ public class ChessBoard extends ChessBoardBASE implements MouseListener {
             GA.showResult(-1);
         }else if(e.getSource() == draw || e.getSource() == draw2){
             GA.showResult(0);
+        }else if(e.getSource() == backBtn){
+            frame.setVisible(false);
+            g.initialize();
         }
     }
 
@@ -70,6 +73,16 @@ public class ChessBoard extends ChessBoardBASE implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    protected void setupWindow() {
+        setupChessBoard();
+    }
+
+    @Override
+    public void setBtns() {
 
     }
 }

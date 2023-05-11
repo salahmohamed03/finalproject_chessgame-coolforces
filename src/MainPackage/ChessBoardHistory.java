@@ -20,8 +20,8 @@ public class ChessBoardHistory extends ChessBoardBASE implements MouseListener {
         movesText = new JTextArea("",5,1);
         movesText.setEditable(false);
         movesText.setBounds(615 *width/870, 245 *width/870,205 *width/870,90 *width/870);
-        movesText.setBackground(icon.white);
-        movesText.setForeground(icon.mainColor);
+        movesText.setBackground(ic.white);
+        movesText.setForeground(ic.mainColor);
         movesText.setFont(new Font("Space Grotesk", Font.BOLD, 15*width/1440));
 
 //        JScrollPane scroll = new JScrollPane (movesText,
@@ -68,7 +68,7 @@ public class ChessBoardHistory extends ChessBoardBASE implements MouseListener {
 //        JPanel btns = new JPanel();
 //        btns.setLayout(new GridLayout(1, 2 ,10 * width/1440,0));
 //
-//        btns.setBackground(icon.black);
+//        btns.setBackground(ic.black);
         previousMove = createButton("Back","pM","src/Mat/Buttons/drawBtn.png",635 *width/870,340 *width/870,"#FF006E");
         nextMove = createButton("Next","nM","src/Mat/Buttons/resignBtn.png",725 *width/870,340 *width/870,"#FF006E");
 //        movesPanel.add(nextMove);
@@ -100,6 +100,16 @@ public class ChessBoardHistory extends ChessBoardBASE implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    protected void setupWindow() {
+        setupChessBoard();
+    }
+
+    @Override
+    public void setBtns() {
 
     }
 }

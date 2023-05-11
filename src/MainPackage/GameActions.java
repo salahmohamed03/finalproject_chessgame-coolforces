@@ -19,7 +19,8 @@ public class GameActions implements MouseListener{
         IconsAndColors ic = new IconsAndColors();
         private JPanel btnsPromote;
         private  JLabel resultLabel;
-        private  int width = ic.width, height = ic.height;
+        private final int width = ic.width;
+    private final int height = ic.height;
 
     /*public  promotio(int color){
 
