@@ -8,7 +8,7 @@ import java.util.Objects;
 public abstract class Piece {
     protected ChessBoard Board;
     public int id;
-    protected Icon icon;
+    protected Icon ic;
     protected ArrayList<String> availableMoves;
     protected boolean pieceSide;
     protected String position;
@@ -204,10 +204,10 @@ class bishop extends Piece {
     public bishop(boolean side, String pos, ChessBoard cb) {
         this.Board = cb;
         id = 3;
-        this.icon = (side)?Board.icon.white_bishop:Board.icon.black_bishop;
+        this.ic = (side)?Board.ic.white_bishop:Board.ic.black_bishop;
         this.pieceSide = side;
         this.position = pos;
-        cb.getButton(pos).setIcon(icon);
+        cb.getButton(pos).setIcon(ic);
 
     }
 
@@ -252,10 +252,10 @@ class pawn extends Piece {
     public pawn(boolean side, String pos, ChessBoard cb) {
         this.Board = cb;
         id = 6;
-        this.icon = (side)?Board.icon.white_pawn:Board.icon.black_pawn;
+        this.ic = (side)?Board.ic.white_pawn:Board.ic.black_pawn;
         this.pieceSide = side;
         this.position = pos;
-        cb.getButton(pos).setIcon(icon);
+        cb.getButton(pos).setIcon(ic);
     }
     //This function returns all moves that the pawn can move
     public ArrayList<String> ValidMoves() {
@@ -308,10 +308,10 @@ class king extends Piece {
     public king(boolean side, String pos, ChessBoard cb) {
         this.Board = cb;
         id = 5;
-        this.icon = (side)?Board.icon.white_king:Board.icon.black_king;
+        this.ic = (side)?Board.ic.white_king:Board.ic.black_king;
         this.pieceSide = side;
         this.position = pos;
-        cb.getButton(pos).setIcon(icon);
+        cb.getButton(pos).setIcon(ic);
         if(side){
             if(position.equals("E1")){
                 castlingRight = "G1";
@@ -403,10 +403,10 @@ class queen extends Piece {
     public queen(boolean side, String pos, ChessBoard cb) {
         this.Board = cb;
         id = 4;
-        this.icon = (side)?Board.icon.white_queen:Board.icon.black_queen;
+        this.ic = (side)?Board.ic.white_queen:Board.ic.black_queen;
         this.pieceSide = side;
         this.position = pos;
-        cb.getButton(pos).setIcon(icon);
+        cb.getButton(pos).setIcon(ic);
     }
 
     //This function returns all moves that the queen can move
@@ -481,10 +481,10 @@ class rook extends Piece {
     public rook(boolean side, String pos, ChessBoard cb) {
         this.Board = cb;
         id = 1;
-        this.icon = (side)?Board.icon.white_rook:Board.icon.black_rook;
+        this.ic = (side)?Board.ic.white_rook:Board.ic.black_rook;
         this.pieceSide = side;
         this.position = pos;
-        cb.getButton(pos).setIcon(icon);
+        cb.getButton(pos).setIcon(ic);
     }
 
     //This function returns all moves that the rook can move
@@ -539,10 +539,10 @@ class knight extends Piece {
     public knight(boolean side, String pos, ChessBoard cb) {
         this.Board = cb;
         id = 2;
-        this.icon = (side)?Board.icon.white_knight:Board.icon.black_knight;
+        this.ic = (side)?Board.ic.white_knight:Board.ic.black_knight;
         this.pieceSide = side;
         this.position = pos;
-        cb.getButton(pos).setIcon(icon);
+        cb.getButton(pos).setIcon(ic);
     }
 
     //This function returns all moves that the knight can move
