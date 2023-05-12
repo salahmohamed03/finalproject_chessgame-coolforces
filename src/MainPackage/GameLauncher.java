@@ -8,7 +8,7 @@ package MainPackage;
 import java.util.*;
 
 public class GameLauncher {
-    static public ChessBoard game = new ChessBoard();
+    public ChessBoard game ;
     public boolean isTimer;
     public ArrayList<Piece> pieces;
     public Piece selected;
@@ -20,6 +20,7 @@ public class GameLauncher {
     public ArrayList<String> gameMoves;
     public boolean turn;
     private User mainUser;
+    private User oppUser;
 
     public GameLauncher()
     {
@@ -35,9 +36,11 @@ public class GameLauncher {
         this.turn = true;
         game.gameResult = true;
     }
-    public GameLauncher(User mainUser)
+    public GameLauncher(User mainUser, User oopUser)
     {
-     this.mainUser=mainUser;
+        this.mainUser=mainUser;
+        this.oppUser = oopUser;
+        game = new ChessBoard(mainUser,oopUser);
         start();
         gameMoves = new ArrayList<>();
         game.setClock(this);
@@ -505,10 +508,8 @@ public class GameLauncher {
     }
     public void start(){
         game.show();
-        game.setUser(mainUser);
     }
     public static void main(String[] args) {
         new GameLauncher();
-        game.show();
     }
 }

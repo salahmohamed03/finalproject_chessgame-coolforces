@@ -9,20 +9,12 @@ public class ChessBoard extends ChessBoardBASE implements MouseListener {
     protected LoginPage l = new LoginPage();
     static protected GameStart gs = new GameStart();
     public JButton resign,draw, resign2,draw2;
-    private User mainUser;
 
-    public ChessBoard(){initialize();}
-    protected void setUser(User mainUser){this.mainUser=mainUser;  }
-    public static void main(String []args)
+    public ChessBoard(User p1, User p2)
     {
-        ChessBoard c = new ChessBoard();
-        c.setDead(6,true);
-        c.setDead(6,true);
-        c.setDead(2,false);
-        c.setDead(6,true);
-        c.setDead(3,false);
-
-        c.show();
+        mainUser = p1;
+        oppUser = p2;
+        initialize();
     }
 
     @Override
@@ -56,6 +48,9 @@ public class ChessBoard extends ChessBoardBASE implements MouseListener {
             actions.showResult(0);
         }else  if(e.getSource()==backBtn){
             board.setVisible(false);
+            GameStart.gameRunning = false;
+            whiteClock.stop();
+            blackClock.stop();
             System.out.println("yy");
             gs.initializeWithUser(mainUser);
         }

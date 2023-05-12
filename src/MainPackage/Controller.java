@@ -18,7 +18,6 @@ public class Controller {
         GameActions gameActionsControl = new GameActions();
 
         setLink(loginControl , registerControl, icC , homePageControl , gameStartControl, gameActionsControl, historyControl );
-
         icC.mainColor=new Color(44, 98, 12);
         loginControl.initialize();
 

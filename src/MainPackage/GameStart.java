@@ -11,7 +11,7 @@ public class GameStart extends Window implements MouseListener{
     public ImageIcon whiteIconS = new ImageIcon("src/Mat/Buttons/selectedWBtn.png");
     public ImageIcon blackIcon = new ImageIcon("src/Mat/Buttons/selectBBtn.png");
     public ImageIcon blackIconS = new ImageIcon("src/Mat/Buttons/selectedBBtn.png") ;
-
+    static public boolean gameRunning = false;
     JRadioButton whiteBtn;
     JRadioButton blackBtn;
     public JButton addPlayerBtn;
@@ -188,10 +188,12 @@ public class GameStart extends Window implements MouseListener{
             else {
                 timerInput = timerSet.getText();
             }
+            if(gameRunning)return;
+            else gameRunning = true;
             createMatch(mainUser, oppUser);
             frame.setVisible(false);
             System.out.println("start btn click");
-            GameLauncher gL =new GameLauncher(mainUser);
+            GameLauncher gL =new GameLauncher(mainUser,oppUser);
             System.out.println("start btn done");
         }
         if (e.getSource()==addPlayerBtn)

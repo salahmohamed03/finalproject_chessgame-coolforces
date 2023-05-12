@@ -25,6 +25,7 @@ public abstract class ChessBoardBASE implements MouseListener {
     private JPanel whiteDeadPanel;
     int wP=0, wB=0,  wK=0, wQ=0,  wR=0, bP=0, bB=0, bK=0, bQ=0, bR=0;
     public User mainUser;
+    public User oppUser;
     JLabel wPawnDead ,wBishopDead ,wKnightDead ,wQueenDead ,wRookDead, bPawnDead ,bBishopDead ,bKnightDead ,bQueenDead ,bRookDead ;
 
     public JButton backBtn = new JButton();
@@ -52,7 +53,7 @@ public abstract class ChessBoardBASE implements MouseListener {
         board = new JFrame();
         container = new JPanel(null);
         container.setBounds(0,0,width,heigth);
-        setPlayerInfo("Talal","Rahaal", 38); //should get the usernames
+        setPlayerInfo(mainUser.getName(),oppUser.getName(), 38); //should get the usernames
         setD(); // for dead panels
 
         base.add(container, Integer.valueOf(0));
