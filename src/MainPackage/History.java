@@ -24,6 +24,7 @@ public class History extends JFrame implements MouseListener {
         History H = new History();
 
     }
+    public History (){}
 
     public void initialize() {
 

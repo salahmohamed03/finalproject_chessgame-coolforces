@@ -191,7 +191,7 @@ public class GameStart extends Window implements MouseListener{
             createMatch(mainUser, oppUser);
             frame.setVisible(false);
             System.out.println("start btn click");
-            gL.initialize();
+            GameLauncher gL =new GameLauncher(mainUser);
             System.out.println("start btn done");
         }
         if (e.getSource()==addPlayerBtn)

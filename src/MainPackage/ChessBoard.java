@@ -5,20 +5,24 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class ChessBoard extends ChessBoardBASE implements MouseListener {
-    private final GameActions GA = new GameActions();
+    private GameActions actions = new GameActions();
+    protected LoginPage l = new LoginPage();
+    static protected GameStart gs = new GameStart();
     public JButton resign,draw, resign2,draw2;
-    //public ChessBoard(){initialize();}
+    private User mainUser;
 
+    public ChessBoard(){initialize();}
+    protected void setUser(User mainUser){this.mainUser=mainUser;  }
     public static void main(String []args)
     {
         ChessBoard c = new ChessBoard();
-
-        c.initialize();
         c.setDead(6,true);
         c.setDead(6,true);
         c.setDead(2,false);
         c.setDead(6,true);
         c.setDead(3,false);
+
+        c.show();
     }
 
     @Override
@@ -45,14 +49,15 @@ public class ChessBoard extends ChessBoardBASE implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource() == resign){
-            GA.showResult(1);
+            actions.showResult(1);
         } else if(e.getSource() == resign2){
-            GA.showResult(-1);
+            actions.showResult(-1);
         }else if(e.getSource() == draw || e.getSource() == draw2){
-            GA.showResult(0);
-        }else if(e.getSource() == backBtn){
-            frame.setVisible(false);
-            g.initialize();
+            actions.showResult(0);
+        }else  if(e.getSource()==backBtn){
+            board.setVisible(false);
+            System.out.println("yy");
+            gs.initializeWithUser(mainUser);
         }
     }
 
@@ -73,16 +78,6 @@ public class ChessBoard extends ChessBoardBASE implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
-
-    }
-
-    @Override
-    protected void setupWindow() {
-        setupChessBoard();
-    }
-
-    @Override
-    public void setBtns() {
 
     }
 }

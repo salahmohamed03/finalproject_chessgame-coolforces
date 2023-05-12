@@ -3,48 +3,65 @@ package MainPackage;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseListener;
 
-public abstract class ChessBoardBASE extends Window {
+public abstract class ChessBoardBASE implements MouseListener {
+    protected JFrame board;
+    protected JLayeredPane base = new JLayeredPane();
     private GameLauncher game;
     public boolean gameResult;
+    public static IconsAndColors ic = new IconsAndColors();
     public JButton button;
     public String current;
     public ChessClock whiteClock;
     public ChessClock blackClock;
+    public Icon drag;
+    public String previous;
     protected JPanel container;
     private JPanel ChessBoardPanel;
 
-    private final int xPosInfo = 1015;
+    private int xPosInfo = 1015;
     private JPanel blackDeadPanel;
     private JPanel whiteDeadPanel;
     int wP=0, wB=0,  wK=0, wQ=0,  wR=0, bP=0, bB=0, bK=0, bQ=0, bR=0;
+    public User mainUser;
     JLabel wPawnDead ,wBishopDead ,wKnightDead ,wQueenDead ,wRookDead, bPawnDead ,bBishopDead ,bKnightDead ,bQueenDead ,bRookDead ;
 
-    protected   int width = ic.width, heigth = ic.height;
+    public JButton backBtn = new JButton();
+    protected   int width , heigth ;
 
-    public void setupChessBoard() {
-        setBackG("src/Mat/BackG/rgameFields.png", 870);
+    public static void setIconsAndColors(IconsAndColors newIconsAndColors){
+        ic = newIconsAndColors;
+    }
+    public void initialize() {
+        this.mainUser=mainUser;
         initialize_board();
-        draw_chessBoard();
-        setPlayerInfo("Talal","Rahaal", 38); //should get the usernames
-        setD(); // for dead panels
         setButtons();
+        draw_chessBoard();
         set_backBtn();
-        setTimer();
         //initializePieces();
-//        set_backgrounds();
+        set_backgrounds();
 
+        setTimer();
     }
     public void show(){
-        frame.setVisible(true);
+        board.setVisible(true);
     }
     private void initialize_board(){
-
+        width = ic.width; heigth = ic.height;
+        board = new JFrame();
         container = new JPanel(null);
         container.setBounds(0,0,width,heigth);
-        container.setOpaque(false);
-        base.add(container, Integer.valueOf(1));
+        setPlayerInfo("Talal","Rahaal", 38); //should get the usernames
+        setD(); // for dead panels
 
+        base.add(container, Integer.valueOf(0));
+        board.setTitle("chess");
+        board.setSize(width,heigth);
+        board.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        board.setLocationRelativeTo(null);
+        board.setResizable(false);
+        board.add(base);
     }
     private void draw_chessBoard(){
         ChessBoardPanel = new JPanel(new GridLayout(8 , 8 , 0 , 0));
@@ -65,10 +82,33 @@ public abstract class ChessBoardBASE extends Window {
                 ChessBoardPanel.add(pos[i][j]);
             }
     }
-
+    protected JButton createButton(String name,String ref, String filename, int x , int y,String color) {
+        JButton temp = new JButton(name);
+        temp.setName(ref);
+        temp.setFocusable(false);
+        temp.setFont(new Font("Space Grotesk Light",Font.BOLD,20 *width/870));
+        temp.setBackground(Color.red);
+        temp.setForeground(Color.decode(color));
+        ImageIcon temp1 = new ImageIcon(filename);//src/Mat/Buttons/resignBtn.png
+        Image btnBG = temp1.getImage().getScaledInstance(75 *width/870,35 *width/870,Image.SCALE_SMOOTH);
+        temp.setIcon(new ImageIcon (btnBG));
+        temp.setHorizontalTextPosition(JButton.CENTER);
+        temp.setVerticalTextPosition(JButton.CENTER);
+        temp.setOpaque(false);
+        temp.setBorder(BorderFactory.createEmptyBorder());
+        temp.setBounds(x,y,75 *width/870,35 *width/870);
+        return temp;
+    }
 
     protected abstract void setButtons();
+    private void set_backgrounds() {
 
+        ImageIcon temp1 = new ImageIcon("src/Mat/BackG/rgameFields.png");
+        JLabel background = new JLabel();
+        background.setIcon(ic.resizeWithRatio(temp1, 870));
+        background.setBounds(0,0,864 *width/870,614 *width/870);
+        container.add(background);
+    }
     private void initialize_button(int i , int j){
         button = new JButton();
         char name = (char)(65+j);
@@ -233,7 +273,7 @@ public abstract class ChessBoardBASE extends Window {
     }
     public Object isAlly(String p1, String p2){
         if(getSide(p2) == null)return null;
-        return getSide(p1) == getSide(p2);
+        return (boolean) (getSide(p1) == getSide(p2));
     }
     public JButton getButton(String pos) {
         return (JButton) ChessBoardPanel.getComponent(getPosition(pos));
@@ -272,7 +312,8 @@ public abstract class ChessBoardBASE extends Window {
         getButton(pos).setIcon(threatened(getButton(pos).getIcon()));
     }
     public boolean Empty(String pos){
-        return getButton(pos).getIcon() == null;
+        if(getButton(pos).getIcon() == null)return true;
+        return false;
     }
     public void setPlayerInfo(String w, String b, int size /* double wRate , double bRate*/){
         createNameLabel(b, size , false );
@@ -290,7 +331,7 @@ public abstract class ChessBoardBASE extends Window {
         else {yPosition = 58;}
         label.setBounds(xPosInfo *width/1440, yPosition *width/1440, 349 *width/1440 , 88 *width/1440);
         label.setForeground(ic.mainColor);
-        base.add(label, 2);
+        base.add(label, 1);
     }
     private  void createWinRateLabel(double rate, int s , boolean side){
         JLabel label = new JLabel("Win Rate: "+rate + "%");
@@ -303,7 +344,7 @@ public abstract class ChessBoardBASE extends Window {
         else {yPosition = 58 +gap;}
         label.setBounds(xPosInfo *width/1440, yPosition *width/1440, 349 *width/1440 , 88 *width/1440);
         label.setForeground(ic.white);
-        base.add(label, 2);
+        base.add(label, 1);
     }
 
     public  void setD(){
@@ -317,23 +358,23 @@ public abstract class ChessBoardBASE extends Window {
             switch (id){
                 case 1:
                     wR++;
-                    wRookDead.setText("X" + wR);
+                    wRookDead.setText("X" + String.valueOf(wR));
                     break;
                 case 2:
                     wK++;
-                    wKnightDead.setText("X" + wK);
+                    wKnightDead.setText("X" + String.valueOf(wK));
                     break;
                 case 3:
                     wB++;
-                    wBishopDead.setText("X" + wB);
+                    wBishopDead.setText("X" + String.valueOf(wB));
                     break;
                 case 4:
                     wQ++;
-                    wQueenDead.setText("X" + wQ);
+                    wQueenDead.setText("X" + String.valueOf(wQ));
                     break;
                 case 6:
                     wP++;
-                    wPawnDead.setText("X" + wP);
+                    wPawnDead.setText("X" + String.valueOf(wP));
 
                     break;
             }
@@ -341,23 +382,23 @@ public abstract class ChessBoardBASE extends Window {
             switch (id){
                 case 1:
                     bR++;
-                    bRookDead.setText("X" + bR);
+                    bRookDead.setText("X" + String.valueOf(bR));
                     break;
                 case 2:
                     bK++;
-                    bKnightDead.setText("X" + bK);
+                    bKnightDead.setText("X" + String.valueOf(bK));
                     break;
                 case 3:
                     bB++;
-                    bBishopDead.setText("X" + bB);
+                    bBishopDead.setText("X" + String.valueOf(bB));
                     break;
                 case 4:
                     bQ++;
-                    bQueenDead.setText("X" + bQ);
+                    bQueenDead.setText("X" + String.valueOf(bQ));
                     break;
                 case 6:
                     bP++;
-                    bPawnDead.setText("X" + bP);
+                    bPawnDead.setText("X" + String.valueOf(bP));
                     break;
             }
 
@@ -377,8 +418,8 @@ public abstract class ChessBoardBASE extends Window {
         whiteDeadPanel.setOpaque(false);
 
 
-        base.add(blackDeadPanel, Integer.valueOf(2));
-        base.add(whiteDeadPanel, Integer.valueOf(2));
+        base.add(blackDeadPanel, Integer.valueOf(1));
+        base.add(whiteDeadPanel, Integer.valueOf(1));
     }
 
     public void showDeadIcons(){
@@ -412,7 +453,7 @@ public abstract class ChessBoardBASE extends Window {
     private JLabel setDeadIcon(ImageIcon dIcon , int number){
 
 
-        JLabel dLabel = new JLabel("X" + number);
+        JLabel dLabel = new JLabel("X" + String.valueOf(number));
 
         dLabel.setIcon(ic.resizeWithRatio(dIcon));
         dLabel.setFont(new Font("Space Grotesk", Font.BOLD, 20 *width/1440));
@@ -436,9 +477,9 @@ public abstract class ChessBoardBASE extends Window {
         }
         else {
             char[] input = GameStart.timerInput.toCharArray();
-            String minuteString = String.valueOf(input[0]) + input[1];
+            String minuteString = new StringBuilder().append(input[0]).append(input[1]).toString();
             minutesInput = Integer.parseInt(minuteString);
-            String secondString = String.valueOf(input[3]) + input[4];
+            String secondString = new StringBuilder().append(input[3]).append(input[4]).toString();
             secondsInput = Integer.parseInt(secondString);
         }
 
@@ -455,8 +496,8 @@ public abstract class ChessBoardBASE extends Window {
         blackClockLabel.setBounds(1020 *width/1440, 192 *width/1440, 334 *width/1440, 92 *width/1440);
         blackClockLabel.setForeground(ic.white);
 
-        base.add(whiteClockLabel, Integer.valueOf(2));
-        base.add(blackClockLabel, Integer.valueOf(2));
+        base.add(whiteClockLabel, Integer.valueOf(1));
+        base.add(blackClockLabel, Integer.valueOf(1));
     }
 
     //Starts and Stops the timer of each clock
@@ -470,7 +511,20 @@ public abstract class ChessBoardBASE extends Window {
             blackClock.start();
         }
     }
+    protected void set_backBtn(){
+        ImageIcon backImg = new ImageIcon("src/Mat/Buttons/backBtn.png");
+        backBtn = new JButton(ic.resizeWithRatio(backImg));
+        backBtn.setOpaque(false);
+        backBtn.setFocusable(false);
+        backBtn.setBorderPainted(false);
+        backBtn.setBackground(ic.mainColor);
 
+        backBtn.addMouseListener(this);
+        backBtn.setBounds(25*width/1440,20*width/1024,65*width/1440,65*width/1024);
+
+        base.add(backBtn, Integer.valueOf(1));
+
+    }
     public String toPieceChar(int id,boolean side){
         if(!side){
              if(id == 1)return "♖";

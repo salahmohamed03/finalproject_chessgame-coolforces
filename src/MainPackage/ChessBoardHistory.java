@@ -102,14 +102,4 @@ public class ChessBoardHistory extends ChessBoardBASE implements MouseListener {
     public void mouseExited(MouseEvent e) {
 
     }
-
-    @Override
-    protected void setupWindow() {
-        setupChessBoard();
-    }
-
-    @Override
-    public void setBtns() {
-
-    }
 }

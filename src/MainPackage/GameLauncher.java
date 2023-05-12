@@ -1,10 +1,14 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package MainPackage;
 
-import javax.management.ListenerNotFoundException;
 import java.util.*;
 
 public class GameLauncher {
-    static public ChessBoard game ;
+    static public ChessBoard game = new ChessBoard();
     public boolean isTimer;
     public ArrayList<Piece> pieces;
     public Piece selected;
@@ -15,8 +19,9 @@ public class GameLauncher {
     public boolean result;
     public ArrayList<String> gameMoves;
     public boolean turn;
+    private User mainUser;
 
-    public void initialize()
+    public GameLauncher()
     {
         start();
         gameMoves = new ArrayList<>();
@@ -30,7 +35,21 @@ public class GameLauncher {
         this.turn = true;
         game.gameResult = true;
     }
-
+    public GameLauncher(User mainUser)
+    {
+     this.mainUser=mainUser;
+        start();
+        gameMoves = new ArrayList<>();
+        game.setClock(this);
+        if(game.blackClock.finishedCheck())
+        {
+            isTimer = false;
+        }
+        else isTimer = true;
+        this.initializePieces();
+        this.turn = true;
+        game.gameResult = true;
+    }
     public void initializePieces() {
         this.pieces = new ArrayList();
         this.pieces.add(new bishop(true, "F1", game));
@@ -170,13 +189,13 @@ public class GameLauncher {
             if(p.pieceSide == side && Objects.equals(p.position, pos)){
                 ArrayList<String> notAllowed = new ArrayList<String>();
                 p.eatingMoves();
-                for(String s:p.availableMoves){
-                    if(s.charAt(axis) != p.position.charAt(axis)){
-                        notAllowed.add(s);
-                    }
+            for(String s:p.availableMoves){
+                if(s.charAt(axis) != p.position.charAt(axis)){
+                    notAllowed.add(s);
                 }
-                p.availableMoves.removeAll(notAllowed);
-                p.eatingMoves();
+            }
+            p.availableMoves.removeAll(notAllowed);
+            p.eatingMoves();
             }
         }
     }
@@ -264,7 +283,8 @@ public class GameLauncher {
         return null;
     }
     private void checkPromotion(boolean turn){
-
+        actions = new GameActions();
+        this.actions.gl = this;
         if(getPromoted(turn) != null)
         {
             gameStatus = false;
@@ -302,9 +322,9 @@ public class GameLauncher {
             if(p.pieceSide == side)
             {
                 ArrayList<String> temp = new ArrayList<String>();
-                temp.addAll(p.eating);
-                temp.addAll(p.moving);
-                temp.addAll(p.pawnDiagonal);
+                    temp.addAll(p.eating);
+                    temp.addAll(p.moving);
+                    temp.addAll(p.pawnDiagonal);
                 result.addAll(temp);
             }
         }
@@ -484,10 +504,11 @@ public class GameLauncher {
         }
     }
     public void start(){
-        game.initialize();
+        game.show();
+        game.setUser(mainUser);
     }
     public static void main(String[] args) {
-      GameLauncher g =  new GameLauncher();
-      g.initialize();
+        new GameLauncher();
+        game.show();
     }
 }
