@@ -17,6 +17,7 @@ public class ChessBoard extends ChessBoardBASE{
         //this.oppUser = oppUser;
         //Passing users to chess board
         takeUsers(mainUser,oppUser);
+        initialize();
     }
 
     @Override
