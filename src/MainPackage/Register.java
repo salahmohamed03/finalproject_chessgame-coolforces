@@ -156,27 +156,20 @@ public class Register extends Window implements MouseListener{
                else if (checkUsername(regUser.getName()))
                {
                     addAndWriteNewData(regUser);
-                    
+                    //g.initializeWithUser(mainUser);
                     // If coming from gamestart main user is passed again to keep his authority 
                     //and the regUser is also passed as an opponent
                         frame.setVisible(false);
                     if (previousPage==1)
                     {
-                        //create the match for the mainUser
-                        createMatch(mainUser,regUser);
-                        g.initializeWithUser(mainUser);
-                        // here we could have also passed the main user only
-                        // but we passed the reg so his name could be shown first
-                        //but his name will be shown in the combo box even if 
-                        // the constructor new GameStart (mainUser) is called    
+                        //program will go to gameStart again
+                        g.initializeWithUser(mainUser);         
                     }
                     else  // here this is the typical registration
                     //the regUser will be the mainUser
                     {
-
-//                        HomePage H=new HomePage(regUser);
+                      //HomePage H=new HomePage(regUser);
                         h.initializeWithUser(regUser);
-
                     }
                     this.dispose();
                }

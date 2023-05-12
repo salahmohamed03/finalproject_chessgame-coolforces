@@ -151,7 +151,7 @@ public abstract class dataHandling extends JFrame {
         for (JsonElement jsonElement : jsonArray)
         {
             userObject=jsonElement.getAsJsonObject();
-            if (oppUserName.equals(userObject.get("Username").getAsString()));
+            if (oppUserName.equals(userObject.get("Username").getAsString()))
             {
                 Gson convert = new Gson();
                 User convertedUser = convert.fromJson(userObject, User.class);
@@ -165,24 +165,24 @@ public abstract class dataHandling extends JFrame {
     //function to update the match then write back modification
     public void addMatch(String userName, Match m)
     {
-        System.out.println("accessed addMatch");
+        //System.out.println("accessed addMatch");
         readExistingData();
         JsonObject objectToModify = null;
         for (int i = 0 ; i < jsonArray.size();i++) 
         {
         JsonObject obj = (JsonObject) jsonArray.get(i);
-        if (obj.get("Username").getAsString().equals(userName)); 
+        if (obj.get("Username").getAsString().equals(userName))
         {
             objectToModify = obj;
-            System.out.println("found a user of username");
-            System.out.println(objectToModify.get("Username").getAsString());
-            System.out.printf("index is %d\n", i);
+            //System.out.println("found a user of username");
+            //System.out.println(objectToModify.get("Username").getAsString());
+            //System.out.printf("index is %d\n", i);
             JsonArray matchesJsonArray = objectToModify.getAsJsonArray("matches");
             Gson convert = new Gson();
             JsonObject matchJsonObj=convert.toJsonTree(m).getAsJsonObject();
             matchesJsonArray.add(matchJsonObj);
             jsonArray.set(i, objectToModify);
-            System.out.println("match added");
+            //System.out.println("match added");
             break;
         }
         }
@@ -195,15 +195,7 @@ public abstract class dataHandling extends JFrame {
         }
     }
 
-
-    public void createMatch(User mainUser, User oppUser)
-    {
-        System.out.println("accessed createMatch");
-        Match m1 = new Match(oppUser.getName());
-        addMatch(mainUser.getName(), m1);
-        Match m2 = new Match(mainUser.getName());
-        addMatch(oppUser.getName(), m2);
-    }
+    //function to create the match
 
 
   

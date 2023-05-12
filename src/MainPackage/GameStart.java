@@ -190,7 +190,6 @@ public class GameStart extends Window implements MouseListener{
             }
             if(gameRunning)return;
             else gameRunning = true;
-            createMatch(mainUser, oppUser);
             frame.setVisible(false);
             System.out.println("start btn click");
             GameLauncher gL =new GameLauncher(mainUser,oppUser);
@@ -198,7 +197,8 @@ public class GameStart extends Window implements MouseListener{
         }
         if (e.getSource()==addPlayerBtn)
         {
-            r.initialize();
+            r.previousPage=1;
+            r.initializeWithUser(mainUser);
             //User mainUser=user;
 //            Register R = new Register(mainUser);
 //            R.previousPage="GameStart";

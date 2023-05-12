@@ -1,12 +1,12 @@
 package MainPackage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class User {
     private String Username;
     private char[] Password;
     public double WinRate;
-    //public ArrayList<String> matches = new ArrayList<>();
     public ArrayList<Match> matches = new ArrayList<>();
     
     //Constructor to intialize username and password
@@ -34,20 +34,39 @@ public class User {
 class Match {
     private String oppUserStr ="";
     private String result="";
-    //public ArrayList<Move> moves; 
+    String moves[] ;
     
-    public Match(String oppUserStr)
+    public Match(String oppUserStr,int result, ArrayList <String> moves)
     {
         this.oppUserStr= "VS " + oppUserStr;
-        result="waiting";
+        if (result==1) 
+        {
+            this.result= "Win";    
+        }
+        else if (result==-1)
+        {
+            this.result="Defeat";
+        }
+        else
+        {
+            this.result="Draw";
+        }
+        this.moves = moves.toArray(new String[moves.size()]);
     }
+
+    public void addResultandMoves()
+    {
+
+    }
+
+    
     // make the constructor to initialize the players.
     // make function to add move to the arraylist moves.
     // arraylist moves is array to store the flow of the game like -  1.E4 , E5 - so that the fist one
     // is the white move and the second is the black move.
     // use json files to store the data for each instance from this class
 }
-class Move{
+/*class Move{
     String WhiteMove;
     String BlackMove;
     public Move MakeMove(String white, String black) { // use this method to add moves to the array list moves
@@ -56,4 +75,4 @@ class Move{
         move.BlackMove = black;
         return move;
     }
-}
+}*/

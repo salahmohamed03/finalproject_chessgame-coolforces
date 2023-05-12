@@ -2,19 +2,21 @@ package MainPackage;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-public class ChessBoard extends ChessBoardBASE implements MouseListener {
+
+public class ChessBoard extends ChessBoardBASE{
     private GameActions actions = new GameActions();
     protected LoginPage l = new LoginPage();
     static protected GameStart gs = new GameStart();
     public JButton resign,draw, resign2,draw2;
-
-    public ChessBoard(User p1, User p2)
+    private User mainUser;
+    //private User oppUser;
+    public ChessBoard(User mainUser, User oppUser)
     {
-        mainUser = p1;
-        oppUser = p2;
-        initialize();
+        this.mainUser = mainUser;
+        //this.oppUser = oppUser;
+        //Passing users to chess board
+        takeUsers(mainUser,oppUser);
     }
 
     @Override

@@ -35,14 +35,14 @@ public abstract class ChessBoardBASE implements MouseListener {
         ic = newIconsAndColors;
     }
     public void initialize() {
-        this.mainUser=mainUser;
+        
         initialize_board();
         setButtons();
         draw_chessBoard();
         set_backBtn();
         //initializePieces();
         set_backgrounds();
-
+        //show();
         setTimer();
     }
     public void show(){
@@ -543,6 +543,16 @@ public abstract class ChessBoardBASE implements MouseListener {
         }
         return "";
     }
+
+
+
+    // Functions to take users from chessboard
+    public void takeUsers(User mainUser,User oppUser)
+    {
+        this.mainUser=mainUser;
+        this.oppUser=oppUser;
+    }
+
 
 }
 

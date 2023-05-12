@@ -7,7 +7,7 @@ package MainPackage;
 
 import java.util.*;
 
-public class GameLauncher {
+public class GameLauncher{
     public ChessBoard game ;
     public boolean isTimer;
     public ArrayList<Piece> pieces;
@@ -36,11 +36,11 @@ public class GameLauncher {
         this.turn = true;
         game.gameResult = true;
     }
-    public GameLauncher(User mainUser, User oopUser)
+    public GameLauncher(User mainUser, User oppUser)
     {
         this.mainUser=mainUser;
-        this.oppUser = oopUser;
-        game = new ChessBoard(mainUser,oopUser);
+        this.oppUser = oppUser;
+        game = new ChessBoard(mainUser,oppUser);
         start();
         gameMoves = new ArrayList<>();
         game.setClock(this);
@@ -54,7 +54,7 @@ public class GameLauncher {
         game.gameResult = true;
     }
     public void initializePieces() {
-        this.pieces = new ArrayList();
+        this.pieces = new ArrayList<Piece>();
         this.pieces.add(new bishop(true, "F1", game));
         this.pieces.add(new bishop(true, "C1", game));
         this.pieces.add(new king(true, "E1", game));
@@ -258,6 +258,10 @@ public class GameLauncher {
             game.blackClock.stop();
             game.gameResult = false;
             result = true;
+         /*   Match m1 = new Match(oppUser.getName(), 1, gameMoves);
+            Match m2 = new Match(mainUser.getName(), -1, gameMoves);
+            addMatch(mainUser.getName(), m1);
+            addMatch(oppUser.getName(), m2);*/ 
         }
         else if(checkWinner(turn) == (Object) false || (game.whiteClock.finishedCheck()&&isTimer)){
             actions.showResult(-1);
@@ -265,12 +269,22 @@ public class GameLauncher {
             game.blackClock.stop();
             game.gameResult = false;
             result = false;
+
+            //Match m1 = new Match(oppUser.getName(), -1, gameMoves);
+            //Match m2 = new Match(mainUser.getName(), 1, gameMoves);
+            ///addMatch(mainUser.getName(), m1);
+            //addMatch(oppUser.getName(), m2);
         }
         else if(isDraw(turn)){
             actions.showResult(0);
             game.whiteClock.stop();
             game.blackClock.stop();
             gameStatus = false;
+
+            //Match m1 = new Match(oppUser.getName(), 0, gameMoves);
+            //Match m2 = new Match(mainUser.getName(), 0, gameMoves);
+            //addMatch(mainUser.getName(), m1);
+            ///addMatch(oppUser.getName(), m2);
         }
     }
     public boolean isDraw(boolean turn){
@@ -508,6 +522,7 @@ public class GameLauncher {
     }
     public void start(){
         game.show();
+        
     }
     public static void main(String[] args) {
         new GameLauncher();
