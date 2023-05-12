@@ -122,11 +122,16 @@ public abstract class Window extends dataHandling implements MouseListener {
 
         //design//
         button.setFont(new Font("Space Grotesk", Font.BOLD, 36*width/1440));
+        ImageIcon settingsBtn = new ImageIcon("src/Mat/Buttons/settingsBtn.png");
         ImageIcon pinkBtn = new ImageIcon("src/Mat/Buttons/pinkBtn.png");
         ImageIcon whiteBtn = new ImageIcon("src/Mat/Buttons/whiteBtn.png");
         ImageIcon homeBtn = new ImageIcon("src/Mat/Buttons/pinkBtn2.png");
 
         switch (btn) {
+            case 0 -> {
+                button.setIcon(ic.resizeWithRatio(settingsBtn));
+                button.setForeground(ic.white);
+            }
             case 1 -> {
                 button.setIcon(ic.resizeWithRatio(pinkBtn));
                 button.setForeground(ic.white);
