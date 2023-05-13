@@ -16,26 +16,11 @@ public class GameLauncher extends dataHandling{
     public boolean turnProm;
     public boolean gameStatus;
     public GameActions actions;
-    public boolean result;
+    public int result;
     public ArrayList<String> gameMoves;
     public boolean turn;
     private User mainUser;
     private User oppUser;
-
-    public GameLauncher()
-    {
-        start();
-        gameMoves = new ArrayList<>();
-        game.setClock(this);
-        if(game.blackClock.finishedCheck())
-        {
-            isTimer = false;
-        }
-        else isTimer = true;
-        this.initializePieces();
-        this.turn = true;
-        game.gameResult = true;
-    }
     public GameLauncher(User mainUser, User oppUser)
     {
         this.mainUser=mainUser;
@@ -264,9 +249,9 @@ public class GameLauncher extends dataHandling{
             game.whiteClock.stop();
             game.blackClock.stop();
             game.gameResult = false;
-            result = true;
-            Match m1 = new Match(oppUser.getName(), 1, gameMoves);
-            Match m2 = new Match(mainUser.getName(), -1, gameMoves);
+            result = GameStart.selectedColor?1:-1;
+            Match m1 = new Match(oppUser.getName(), -result, gameMoves);
+            Match m2 = new Match(mainUser.getName(), result, gameMoves);
             addMatch(mainUser.getName(), m1);
             addMatch(oppUser.getName(), m2);
         }
@@ -275,10 +260,9 @@ public class GameLauncher extends dataHandling{
             game.whiteClock.stop();
             game.blackClock.stop();
             game.gameResult = false;
-            result = false;
-
-            Match m1 = new Match(oppUser.getName(), -1, gameMoves);
-            Match m2 = new Match(mainUser.getName(), 1, gameMoves);
+            result = GameStart.selectedColor?-1:1;
+            Match m1 = new Match(oppUser.getName(), -result, gameMoves);
+            Match m2 = new Match(mainUser.getName(), result, gameMoves);
             addMatch(mainUser.getName(), m1);
             addMatch(oppUser.getName(), m2);
         }
@@ -538,6 +522,6 @@ public class GameLauncher extends dataHandling{
         game.show();
     }
     public static void main(String[] args) {
-        new GameLauncher();
+
     }
 }

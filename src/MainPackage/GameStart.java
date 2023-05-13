@@ -19,6 +19,7 @@ public class GameStart extends Window implements MouseListener{
     public JCheckBox timerOn;
     public static String timerInput;
     public JButton startBtn;
+    static boolean selectedColor = true;
 //    private User mainUser;
     private User oppUser;
 //    public GameStart(User mainUser) // this constructor will accept the main user who just came from homepage
@@ -40,8 +41,6 @@ public class GameStart extends Window implements MouseListener{
         setOpponentPanel();
         setTimerPanel();
         setStartBtn();
-
-
     }
 
 
@@ -63,7 +62,7 @@ public class GameStart extends Window implements MouseListener{
         ButtonGroup wORb = new ButtonGroup();
 
         whiteBtn = new JRadioButton();
-        whiteBtn.setIcon(ic.resizeWithRatio(whiteIcon));
+        whiteBtn.setIcon(ic.resizeWithRatio(whiteIconS));
         whiteBtn.setBounds(186 *width/1440,227 *width/1440,508 *width/1440,400 *width/1440);
         whiteBtn.setOpaque(false);
 
@@ -94,6 +93,7 @@ public class GameStart extends Window implements MouseListener{
         opponents=getOpponentsArrList(mainUser);
         String [] players = opponents.toArray(new String[opponents.size()]);
         JComboBox<String> playerList = new JComboBox<>(players);
+        oppUser = findOppUser("gust");
         playerList.addActionListener(e -> {
             String selectedOption = (String) playerList.getSelectedItem();
             oppUser=findOppUser(selectedOption);
@@ -175,10 +175,12 @@ public class GameStart extends Window implements MouseListener{
         if (e.getSource()==blackBtn){
             blackBtn.setIcon(ic.resizeWithRatio(blackIconS));
             whiteBtn.setIcon(ic.resizeWithRatio(whiteIcon));
+            selectedColor = false;
         }
         if (e.getSource()==whiteBtn){
             whiteBtn.setIcon(ic.resizeWithRatio(whiteIconS));
             blackBtn.setIcon(ic.resizeWithRatio(blackIcon));
+            selectedColor = true;
         }
         if(e.getSource()==startBtn){
             //Checks if the timer is on or off so we choose to use the input or not
@@ -191,9 +193,7 @@ public class GameStart extends Window implements MouseListener{
             if(gameRunning)return;
             else gameRunning = true;
             frame.setVisible(false);
-            System.out.println("start btn click");
-            GameLauncher gL =new GameLauncher(mainUser,oppUser);
-            System.out.println("start btn done");
+            GameLauncher gL =new GameLauncher((selectedColor)?mainUser:oppUser,(selectedColor)?oppUser:mainUser);
         }
         if (e.getSource()==addPlayerBtn)
         {
