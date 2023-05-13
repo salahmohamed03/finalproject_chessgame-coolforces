@@ -12,7 +12,7 @@ public class History extends JFrame implements MouseListener {
     public JFrame frame;
     public JLabel block;
     IconsAndColors ic = new IconsAndColors();
-    public int width = ic.width, height = ic.height;
+    public int width , height;
     //matches history
     JPanel matchHistory;
 
@@ -28,8 +28,10 @@ public class History extends JFrame implements MouseListener {
 
     public void initialize() {
 
-        initializeWindow();
+        width = (int) (ic.width -50);
+        height = (int) (ic.height -50);
 
+        initializeWindow();
         setMatchHistory();
         createScroll();
         frame.setVisible(true);
