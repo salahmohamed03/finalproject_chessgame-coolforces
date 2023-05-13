@@ -93,7 +93,7 @@ public class GameStart extends Window implements MouseListener{
         opponents=getOpponentsArrList(mainUser);
         String [] players = opponents.toArray(new String[opponents.size()]);
         JComboBox<String> playerList = new JComboBox<>(players);
-        oppUser = findOppUser("gust");
+        oppUser = findOppUser("guest");
         playerList.addActionListener(e -> {
             String selectedOption = (String) playerList.getSelectedItem();
             oppUser=findOppUser(selectedOption);
