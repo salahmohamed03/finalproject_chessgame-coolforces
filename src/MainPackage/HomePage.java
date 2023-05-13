@@ -10,9 +10,9 @@ public class HomePage extends Window implements MouseListener {
     public JLabel welcome;
     //STATS
     public JPanel stats;
-    public JPanel matchesPanel = new JPanel();
-    public JPanel winCountPanel = new JPanel();
-    public JPanel winRatePanel = new JPanel();
+    public JPanel matchesPanel;
+    public JPanel winCountPanel;
+    public JPanel winRatePanel;
     public JLabel matches;
     public JLabel winCount;
     public JLabel winRate;
@@ -76,6 +76,10 @@ public class HomePage extends Window implements MouseListener {
         stats.setLayout(new GridLayout(1,3,20*width/1440,0));
         stats.setOpaque(false);
 
+        matchesPanel =  new JPanel();
+        winCountPanel = new JPanel();
+        winRatePanel =  new JPanel();
+
         setStatsPanel(matchesPanel);
         setStatsPanel(winCountPanel);
         setStatsPanel(winRatePanel);
@@ -102,16 +106,6 @@ public class HomePage extends Window implements MouseListener {
         stats.add(typePanel);
     }
 
-    public void setStatsPanelLook (JPanel panel){
-        panel.setOpaque(false);
-        panel.setBackground(ic.black);
-        panel.setLayout(new BorderLayout(0,0));
-
-        setStatsLook(label,"text");
-        label.setPreferredSize(new Dimension(0,30*height/1024));
-        panel.add(label,BorderLayout.SOUTH);
-
-    }
     public void getStats (JLabel type){
         if (type == matches) {
             matches = new JLabel("# matches"); //Just a value for Gui (needs to be changed)
@@ -130,6 +124,16 @@ public class HomePage extends Window implements MouseListener {
 
             winRatePanel.add(winRate,BorderLayout.CENTER);
         }
+
+    }
+    public void setStatsPanelLook (JPanel panel){
+        panel.setOpaque(false);
+        panel.setBackground(ic.black);
+        panel.setLayout(new BorderLayout(0,0));
+
+        setStatsLook(label,"text");
+        label.setPreferredSize(new Dimension(0,30*height/1024));
+        panel.add(label,BorderLayout.SOUTH);
 
     }
     public void setStatsLook( JLabel label , String type){ //type is number or type
