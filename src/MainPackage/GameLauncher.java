@@ -92,10 +92,13 @@ public class GameLauncher extends dataHandling{
 //        this.pieces.add(new rook(true,"H1",game));
 //        this.pieces.add(new rook(true,"A1",game));
 //        this.pieces.add(new king(true,"E1",game));
-//        this.pieces.add(new rook(false,"H8",game));
-//        this.pieces.add(new rook(false,"A8",game));
+//        //this.pieces.add(new rook(false,"H8",game));
+//       // this.pieces.add(new rook(false,"A8",game));
 //        this.pieces.add(new king(false,"E8",game));
-//        this.pieces.add(new queen(false,"D3",game));
+//        this.pieces.add(new queen(true,"E1",game));
+//        this.pieces.add(new bishop(true,"E7",game));
+//        this.pieces.add(new pawn(false,"F7",game));
+
 
 
 //        this.pieces.add(new queen(true,"D1",game));
@@ -210,11 +213,13 @@ public class GameLauncher extends dataHandling{
                 if (!this.selected.moving.contains(clickedSquare) && !this.selected.eating.contains(clickedSquare)&&casR&&casL) {
                     this.selected.Unselect();
                 } else {
+                    boolean enemy = false;
                     if (this.selected.eating.contains(clickedSquare)) {
                         this.removePiece(clickedSquare);
+                        enemy = true;
                     }
                     this.selected.Unselect();
-                    gameMoves.add(this.selected.transport(clickedSquare,pieces));
+                    gameMoves.add(this.selected.transport(clickedSquare,pieces, enemy));
                     this.turn = !this.turn;
                     if(isTimer)
                         game.controlTimer(turn);
@@ -231,11 +236,13 @@ public class GameLauncher extends dataHandling{
                 if (!this.selected.moving.contains(clickedSquare) && !this.selected.eating.contains(clickedSquare)) {
                     this.selected.Unselect();
                 } else {
+                    boolean enemy = false;
                     if (this.selected.eating.contains(clickedSquare)) {
                         this.removePiece(clickedSquare);
+                        enemy = true;
                     }
                     this.selected.Unselect();
-                    gameMoves.add(this.selected.transport(clickedSquare,pieces));
+                    gameMoves.add(this.selected.transport(clickedSquare,pieces,enemy));
                     this.turn = !this.turn;
                     if(isTimer)
                         game.controlTimer(turn);
@@ -415,6 +422,13 @@ public class GameLauncher extends dataHandling{
                 }
             }
         } else {
+            for(Piece p : pieces){
+                if(p.pieceSide == side && p.id != 5){
+                    p.moving.clear();
+                    p.eating.clear();
+                    p.pawnDiagonal.clear();
+                }
+            }
             for(Piece attacker: threateningKing(side)) {
                 if (attacker.id == 4 || attacker.id == 1) {
                     if (attacker.position.charAt(0) == kingPosition(side).charAt(0)) {

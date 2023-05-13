@@ -526,22 +526,13 @@ public abstract class ChessBoardBASE implements MouseListener {
         base.add(backBtn, Integer.valueOf(1));
 
     }
-    public String toPieceChar(int id,boolean side){
-        if(!side){
-             if(id == 1)return "♖";
-             else if(id == 2)return "♘";
-             else if(id == 3)return "♗";
-             else if(id == 4)return "♕";
-             else if(id == 5)return "♔";
-        }
-        else{
-            if(id == 1)return "♜";
-            else if(id == 2)return "♞";
-            else if(id == 3)return "♝";
-            else if(id == 4)return "♛";
-            else if(id == 5)return "♚";
-        }
-        return "";
+    public String toPieceChar(int id){
+             if(id == 1)return "R";
+             else if(id == 2)return "k";
+             else if(id == 3)return "B";
+             else if(id == 4)return "Q";
+             else if(id == 5)return "K";
+        return "P";
     }
 
 

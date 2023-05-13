@@ -1,261 +1,224 @@
 [
   {
-    "Username": "boda",
+    "Username": "salo7a",
     "Password": [
-      "c",
+      "m",
       "o",
-      "o",
-      "l"
+      "h",
+      "a",
+      "m",
+      "e",
+      "d"
     ],
     "WinRate": 0.0,
     "matches": [
       {
-        "oppUserStr": "VS talal",
+        "oppUserStr": "VS salah",
         "result": "Win",
         "moves": [
-          "E2,xE4,E4",
-          "E7,xE5,E5",
-          "D1,?xG4,G4",
-          "E8,?xE7,E7",
-          "E4,xE5,E5",
-          "D8,?xE8,E8",
-          "D2,xD4,D4",
-          "A7,xA5,A5",
-          "C1,?xF4,F4",
-          "A5,xA4,A4",
-          "F4,?xG5,G5"
+          "D1,♛xF3,F3",
+          "A7,xA6,A6",
+          "F1,♝xC4,C4",
+          "A8,♜xA7,A7",
+          "F3,♛xF7,F7"
+        ]
+      },
+      {
+        "oppUserStr": "VS salah",
+        "result": "Win",
+        "moves": [
+          "D1",
+          "A7",
+          "F1",
+          "A8",
+          "F3"
+        ]
+      },
+      {
+        "oppUserStr": "VS salah",
+        "result": "Win",
+        "moves": [
+          "D1,F3",
+          "A7,A5",
+          "A2,A4",
+          "A5,A4",
+          "F3,H5"
+        ]
+      },
+      {
+        "oppUserStr": "VS salah",
+        "result": "Win",
+        "moves": [
+          "D1,♛xG4,G4",
+          "G7,xG5,G5",
+          "G4,♛xG5,G5",
+          "G8,♞xD6,D6",
+          "G5,♛xH5,H5"
+        ]
+      },
+      {
+        "oppUserStr": "VS salah",
+        "result": "Win",
+        "moves": [
+          "D1,♛xF3",
+          "A7,xA5",
+          "F3,♛xG4",
+          "A5,xA4",
+          "G4,♛xA4",
+          "B7,xB5",
+          "A4,♛xH4",
+          "A8,♖xA2",
+          "H4,♛xH5"
+        ]
+      },
+      {
+        "oppUserStr": "VS salah",
+        "result": "Win",
+        "moves": [
+          "D1,F3",
+          "A7,A5",
+          "A2,A4",
+          "A5,xA4",
+          "F3,H5"
+        ]
+      },
+      {
+        "oppUserStr": "VS salah",
+        "result": "Win",
+        "moves": [
+          "D1,F3",
+          "A7,A5",
+          "A2,A4",
+          "A5,xA4",
+          "A1,ExA4",
+          "A8,ExA4",
+          "F3,H5"
+        ]
+      },
+      {
+        "oppUserStr": "VS salah",
+        "result": "Win",
+        "moves": [
+          "D1,F3",
+          "A7,A5",
+          "A2,A4",
+          "A5,xA4,",
+          "A1,RxA4,",
+          "A8,RxA4,R",
+          "F3,H5"
+        ]
+      }
+    ]
+  },
+  {
+    "Username": "salah",
+    "Password": [
+      "m",
+      "o",
+      "h",
+      "a",
+      "m",
+      "e",
+      "d"
+    ],
+    "WinRate": 0.0,
+    "matches": [
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": [
+          "D1,♛xF3,F3",
+          "A7,xA6,A6",
+          "F1,♝xC4,C4",
+          "A8,♜xA7,A7",
+          "F3,♛xF7,F7"
         ]
       },
       {
         "oppUserStr": "VS salo7a",
-        "result": "Draw",
-        "moves": [
-          "E2,xE4,E4",
-          "E7,xE5,E5",
-          "D1,?xG4,G4",
-          "D7,xD5,D5",
-          "G4,?xG5,G5",
-          "C7,xC5,C5",
-          "D2,xD4,D4",
-          "G7,xG6,G6",
-          "C1,?xD2,D2",
-          "H7,xH5,H5",
-          "D2,?xA5,A5",
-          "H5,xH4,H4",
-          "H2,xH3,H3",
-          "F7,xF5,F5",
-          "A2,xA4,A4",
-          "H8,?xH5,H5",
-          "A1,?xA3,A3",
-          "F5,xE4,E4",
-          "A3,?xE3,E3",
-          "H4,xH3,H3",
-          "E3,?xE4,E4",
-          "C5,xC4,C4",
-          "E4,?xE5,E5",
-          "F8,?xE7,E7",
-          "E5,?xE7,E7",
-          "D8,?xE7,E7",
-          "G5,?xE7,E7",
-          "E8,?xE7,E7",
-          "D4,xD5,D5",
-          "G6,xG5,G5",
-          "B1,?xE3,E3",
-          "B7,xB5,B5",
-          "E3,?xH5,H5",
-          "E7,?xD7,D7",
-          "A5,?xB5,B5",
-          "D7,?xD8,D8",
-          "F2,xF4,F4",
-          "G5,xG4,G4",
-          "F1,?xC4,C4",
-          "G8,?xE5,E5",
-          "C4,?xF7,F7",
-          "G4,xG3,G3",
-          "B5,?xA5,A5",
-          "D8,?xD7,D7",
-          "A5,?xC7,C7",
-          "D7,?xC7,C7",
-          "F7,?xE7,E7",
-          "G3,xG2,G2",
-          "G1,?xE4,E4",
-          "C7,?xB7,B7",
-          "F4,xE5,E5",
-          "B7,?xA6,A6",
-          "E7,?xD8,D8",
-          "H3,xH2,H2",
-          "H1,?xH2,H2",
-          "C8,?xF5,F5",
-          "H2,?xG2,G2",
-          "F5,?xG4,G4",
-          "G2,?xG4,G4",
-          "B8,?xE6,E6",
-          "G4,?xG6,G6",
-          "A8,?xB8,B8",
-          "G6,?xE6,E6",
-          "B8,?xB6,B6",
-          "E6,?xB6,B6",
-          "A7,xB6,B6",
-          "E4,?xB6,B6",
-          "A6,?xA7,A7",
-          "D8,?xC8,C8",
-          "A7,?xA8,A8",
-          "B6,?xD3,D3",
-          "A8,?xA7,A7",
-          "A4,xA5,A5",
-          "A7,?xA8,A8",
-          "H5,?xE3,E3",
-          "A8,?xA7,A7",
-          "A5,xA6,A6",
-          "A7,?xA8,A8",
-          "B2,xB4,B4"
-        ]
-      }
-    ]
-  },
-  {
-    "Username": "salo7a",
-    "Password": [
-      "l",
-      "e",
-      "a",
-      "d",
-      "e",
-      "r"
-    ],
-    "WinRate": 0.0,
-    "matches": [
-      {
-        "oppUserStr": "VS boda",
-        "result": "Draw",
-        "moves": [
-          "E2,xE4,E4",
-          "E7,xE5,E5",
-          "D1,?xG4,G4",
-          "D7,xD5,D5",
-          "G4,?xG5,G5",
-          "C7,xC5,C5",
-          "D2,xD4,D4",
-          "G7,xG6,G6",
-          "C1,?xD2,D2",
-          "H7,xH5,H5",
-          "D2,?xA5,A5",
-          "H5,xH4,H4",
-          "H2,xH3,H3",
-          "F7,xF5,F5",
-          "A2,xA4,A4",
-          "H8,?xH5,H5",
-          "A1,?xA3,A3",
-          "F5,xE4,E4",
-          "A3,?xE3,E3",
-          "H4,xH3,H3",
-          "E3,?xE4,E4",
-          "C5,xC4,C4",
-          "E4,?xE5,E5",
-          "F8,?xE7,E7",
-          "E5,?xE7,E7",
-          "D8,?xE7,E7",
-          "G5,?xE7,E7",
-          "E8,?xE7,E7",
-          "D4,xD5,D5",
-          "G6,xG5,G5",
-          "B1,?xE3,E3",
-          "B7,xB5,B5",
-          "E3,?xH5,H5",
-          "E7,?xD7,D7",
-          "A5,?xB5,B5",
-          "D7,?xD8,D8",
-          "F2,xF4,F4",
-          "G5,xG4,G4",
-          "F1,?xC4,C4",
-          "G8,?xE5,E5",
-          "C4,?xF7,F7",
-          "G4,xG3,G3",
-          "B5,?xA5,A5",
-          "D8,?xD7,D7",
-          "A5,?xC7,C7",
-          "D7,?xC7,C7",
-          "F7,?xE7,E7",
-          "G3,xG2,G2",
-          "G1,?xE4,E4",
-          "C7,?xB7,B7",
-          "F4,xE5,E5",
-          "B7,?xA6,A6",
-          "E7,?xD8,D8",
-          "H3,xH2,H2",
-          "H1,?xH2,H2",
-          "C8,?xF5,F5",
-          "H2,?xG2,G2",
-          "F5,?xG4,G4",
-          "G2,?xG4,G4",
-          "B8,?xE6,E6",
-          "G4,?xG6,G6",
-          "A8,?xB8,B8",
-          "G6,?xE6,E6",
-          "B8,?xB6,B6",
-          "E6,?xB6,B6",
-          "A7,xB6,B6",
-          "E4,?xB6,B6",
-          "A6,?xA7,A7",
-          "D8,?xC8,C8",
-          "A7,?xA8,A8",
-          "B6,?xD3,D3",
-          "A8,?xA7,A7",
-          "A4,xA5,A5",
-          "A7,?xA8,A8",
-          "H5,?xE3,E3",
-          "A8,?xA7,A7",
-          "A5,xA6,A6",
-          "A7,?xA8,A8",
-          "B2,xB4,B4"
-        ]
-      }
-    ]
-  },
-  {
-    "Username": "talal",
-    "Password": [
-      "d",
-      "e",
-      "s",
-      "i",
-      "g",
-      "n",
-      "e",
-      "r"
-    ],
-    "WinRate": 0.0,
-    "matches": [
-      {
-        "oppUserStr": "VS boda",
         "result": "Defeat",
         "moves": [
-          "E2,xE4,E4",
-          "E7,xE5,E5",
-          "D1,?xG4,G4",
-          "E8,?xE7,E7",
-          "E4,xE5,E5",
-          "D8,?xE8,E8",
-          "D2,xD4,D4",
-          "A7,xA5,A5",
-          "C1,?xF4,F4",
-          "A5,xA4,A4",
-          "F4,?xG5,G5"
+          "D1",
+          "A7",
+          "F1",
+          "A8",
+          "F3"
+        ]
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": [
+          "D1,F3",
+          "A7,A5",
+          "A2,A4",
+          "A5,A4",
+          "F3,H5"
+        ]
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": [
+          "D1,♛xG4,G4",
+          "G7,xG5,G5",
+          "G4,♛xG5,G5",
+          "G8,♞xD6,D6",
+          "G5,♛xH5,H5"
+        ]
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": [
+          "D1,♛xF3",
+          "A7,xA5",
+          "F3,♛xG4",
+          "A5,xA4",
+          "G4,♛xA4",
+          "B7,xB5",
+          "A4,♛xH4",
+          "A8,♖xA2",
+          "H4,♛xH5"
+        ]
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": [
+          "D1,F3",
+          "A7,A5",
+          "A2,A4",
+          "A5,xA4",
+          "F3,H5"
+        ]
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": [
+          "D1,F3",
+          "A7,A5",
+          "A2,A4",
+          "A5,xA4",
+          "A1,ExA4",
+          "A8,ExA4",
+          "F3,H5"
+        ]
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": [
+          "D1,F3",
+          "A7,A5",
+          "A2,A4",
+          "A5,xA4,",
+          "A1,RxA4,",
+          "A8,RxA4,R",
+          "F3,H5"
         ]
       }
     ]
-  },
-  {
-    "Username": "mostafa",
-    "Password": [
-      "o",
-      "h",
-      "y",
-      "e",
-      "a",
-      "h"
-    ],
-    "WinRate": 0.0,
-    "matches": []
   }
 ]
