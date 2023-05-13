@@ -13,21 +13,166 @@
         "oppUserStr": "VS salo7a",
         "result": "Defeat",
         "moves": [
-          "E2,E4",
-          "A7,A6",
-          "D1,G4",
-          "A6,A5",
-          "G4,H5"
+          "F2,F4"
+        ]
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": []
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": []
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": []
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": [
+          "F2,F4"
+        ]
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": [
+          "G2,G4"
         ]
       },
       {
         "oppUserStr": "VS salo7a",
         "result": "Win",
         "moves": [
+          "G2,G3",
+          "G7,G6"
+        ]
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": [
           "D1,F3",
           "A7,A6",
           "F3,H5"
         ]
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": [
+          "G2,G3"
+        ]
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": [
+          "D1,F3",
+          "A7,A6",
+          "F3,H5"
+        ]
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": [
+          "D1,F3",
+          "A7,A6",
+          "F3,H5"
+        ]
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Win",
+        "moves": [
+          "D1,F3"
+        ]
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": [
+          "D1,F3",
+          "A7,A6",
+          "F3,H5"
+        ]
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": [
+          "E2,E3"
+        ]
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Win",
+        "moves": [
+          "E2,E3"
+        ]
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": []
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": []
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Draw",
+        "moves": []
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Draw",
+        "moves": [
+          "H2,H4",
+          "H7,H5",
+          "G2,G3",
+          "F7,F6"
+        ]
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Draw",
+        "moves": []
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Win",
+        "moves": []
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Draw",
+        "moves": []
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Win",
+        "moves": []
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Draw",
+        "moves": [
+          "H2,H3"
+        ]
+      },
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": []
       }
     ]
   },
@@ -48,21 +193,166 @@
         "oppUserStr": "VS gust",
         "result": "Win",
         "moves": [
-          "E2,E4",
-          "A7,A6",
-          "D1,G4",
-          "A6,A5",
-          "G4,H5"
+          "F2,F4"
+        ]
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Win",
+        "moves": []
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Win",
+        "moves": []
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Win",
+        "moves": []
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Win",
+        "moves": [
+          "F2,F4"
+        ]
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Win",
+        "moves": [
+          "G2,G4"
         ]
       },
       {
         "oppUserStr": "VS gust",
         "result": "Defeat",
         "moves": [
+          "G2,G3",
+          "G7,G6"
+        ]
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Win",
+        "moves": [
           "D1,F3",
           "A7,A6",
           "F3,H5"
         ]
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Win",
+        "moves": [
+          "G2,G3"
+        ]
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Win",
+        "moves": [
+          "D1,F3",
+          "A7,A6",
+          "F3,H5"
+        ]
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Win",
+        "moves": [
+          "D1,F3",
+          "A7,A6",
+          "F3,H5"
+        ]
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Defeat",
+        "moves": [
+          "D1,F3"
+        ]
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Win",
+        "moves": [
+          "D1,F3",
+          "A7,A6",
+          "F3,H5"
+        ]
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Win",
+        "moves": [
+          "E2,E3"
+        ]
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Defeat",
+        "moves": [
+          "E2,E3"
+        ]
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Win",
+        "moves": []
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Win",
+        "moves": []
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Draw",
+        "moves": []
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Draw",
+        "moves": [
+          "H2,H4",
+          "H7,H5",
+          "G2,G3",
+          "F7,F6"
+        ]
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Draw",
+        "moves": []
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Defeat",
+        "moves": []
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Draw",
+        "moves": []
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Defeat",
+        "moves": []
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Draw",
+        "moves": [
+          "H2,H3"
+        ]
+      },
+      {
+        "oppUserStr": "VS gust",
+        "result": "Win",
+        "moves": []
       }
     ]
   }

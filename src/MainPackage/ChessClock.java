@@ -16,6 +16,7 @@ public class ChessClock {
 	private long seconds;
 	private long startMinutes;
 	private long startSeconds;
+	static public int winner = 0;
 	public ChessBoardBASE game;
 	public int side;
 	public GameActions result = new GameActions();
@@ -42,8 +43,8 @@ public class ChessClock {
 			timeLabel.setText(minutes_string + ":" + seconds_string);
 			if(finishedCheck())
 			{
-				game.gameResult = false;
-				result.showResult(-side);
+				winner = -side;
+				game.game.Clock("no");
 			}
 		}
 	});

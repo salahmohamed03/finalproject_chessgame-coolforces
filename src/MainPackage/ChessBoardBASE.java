@@ -8,8 +8,8 @@ import java.awt.event.MouseListener;
 public abstract class ChessBoardBASE implements MouseListener {
     protected JFrame board;
     protected JLayeredPane base = new JLayeredPane();
-    private GameLauncher game;
-    public boolean gameResult;
+    protected GameLauncher game;
+    static public boolean gameResult;
     public static IconsAndColors ic = new IconsAndColors();
     public JButton button;
     public String current;
@@ -127,6 +127,8 @@ public abstract class ChessBoardBASE implements MouseListener {
             public void actionPerformed(ActionEvent e) {
                 JButton temp = (JButton)e.getSource();
                 current = temp.getName();
+                ChessBoard.drawOffer = 0;
+                ChessBoard.drawSide = 0;
                 game.Clock(current);
             }
         });

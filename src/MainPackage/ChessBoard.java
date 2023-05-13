@@ -9,6 +9,9 @@ public class ChessBoard extends ChessBoardBASE{
     protected LoginPage l = new LoginPage();
     static protected GameStart gs = new GameStart();
     public JButton resign,draw, resign2,draw2;
+    static int drawOffer;
+    static int drawSide;
+    static boolean offer;
     private User mainUser;
     //private User oppUser;
     public ChessBoard(User mainUser, User oppUser)
@@ -44,18 +47,33 @@ public class ChessBoard extends ChessBoardBASE{
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource() == resign){
-            actions.showResult(1);
+            ChessClock.winner = 1;
+            game.Clock("no");
         } else if(e.getSource() == resign2){
-            actions.showResult(-1);
-        }else if(e.getSource() == draw || e.getSource() == draw2){
-            actions.showResult(0);
-        }else  if(e.getSource()==backBtn){
+            ChessClock.winner = -1;
+            game.Clock("no");
+        }else if(e.getSource() == draw){
+            drawOffer++;
+            if(drawOffer == 2&& drawSide == 2){
+                offer = true;
+                game.Clock("no");
+            }
+            drawSide = 1;
+        }else if(e.getSource() == draw2){
+            drawOffer++;
+            if(drawOffer == 2 && drawSide == 1) {
+                offer = true;
+                game.Clock("no");
+            }
+            drawSide = 2;
+        } else  if(e.getSource()==backBtn){
             board.setVisible(false);
             GameStart.gameRunning = false;
             whiteClock.stop();
             blackClock.stop();
             System.out.println("yy");
-            gs.initializeWithUser(mainUser);
+            gs.initializeWithUser(GameStart.selectedColor?mainUser:oppUser);
+            GameStart.selectedColor = true;
         }
     }
 

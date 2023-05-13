@@ -191,6 +191,7 @@ public class GameLauncher extends dataHandling{
         }
     }
     public void handlingMove(String clickedSquare) {
+        if(clickedSquare.equals("no"))return;
         if (this.getPiece(clickedSquare) == null) {
             if (this.selected != null) {
                 boolean casL = (!Objects.equals(this.selected.castlingLift, clickedSquare) || !this.selected.canCastleLift) ||this.selected.id != 5;
@@ -244,34 +245,34 @@ public class GameLauncher extends dataHandling{
         }
     }
     private void isEndGame(boolean turn){
-        if(checkWinner(turn) == (Object) true || (game.blackClock.finishedCheck()&&isTimer)){
+        if(checkWinner(turn) == (Object) true || ChessClock.winner == 1){
             actions.showResult(1);
             game.whiteClock.stop();
             game.blackClock.stop();
-            game.gameResult = false;
-            result = GameStart.selectedColor?1:-1;
-            Match m1 = new Match(oppUser.getName(), -result, gameMoves);
-            Match m2 = new Match(mainUser.getName(), result, gameMoves);
+            ChessBoardBASE.gameResult = false;
+            Match m1 = new Match(oppUser.getName(), 1, gameMoves);
+            Match m2 = new Match(mainUser.getName(), -1, gameMoves);
             addMatch(mainUser.getName(), m1);
             addMatch(oppUser.getName(), m2);
+            ChessClock.winner = 0;
         }
-        else if(checkWinner(turn) == (Object) false || (game.whiteClock.finishedCheck()&&isTimer)){
+        else if(checkWinner(turn) == (Object) false||ChessClock.winner == -1){
             actions.showResult(-1);
             game.whiteClock.stop();
             game.blackClock.stop();
-            game.gameResult = false;
-            result = GameStart.selectedColor?-1:1;
-            Match m1 = new Match(oppUser.getName(), -result, gameMoves);
-            Match m2 = new Match(mainUser.getName(), result, gameMoves);
+            ChessBoardBASE.gameResult = false;
+            Match m1 = new Match(oppUser.getName(), -1, gameMoves);
+            Match m2 = new Match(mainUser.getName(), 1, gameMoves);
             addMatch(mainUser.getName(), m1);
             addMatch(oppUser.getName(), m2);
+            ChessClock.winner = 0;
         }
         else if(isDraw(turn)){
             actions.showResult(0);
             game.whiteClock.stop();
             game.blackClock.stop();
-            gameStatus = false;
-
+            ChessBoardBASE.gameResult = false;
+            System.out.println("draw");
             Match m1 = new Match(oppUser.getName(), 0, gameMoves);
             Match m2 = new Match(mainUser.getName(), 0, gameMoves);
             addMatch(mainUser.getName(), m1);
@@ -279,6 +280,7 @@ public class GameLauncher extends dataHandling{
         }
     }
     public boolean isDraw(boolean turn){
+        if(ChessBoard.offer){ChessBoard.drawOffer = 0 ;ChessBoard.offer= false; return true;}
         if(pieces.size() == 2)return true;
         if(possession(turn).size() == 0)return true;
         return false;
