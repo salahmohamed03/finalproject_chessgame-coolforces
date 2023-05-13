@@ -198,6 +198,7 @@ public class GameStart extends Window implements MouseListener{
         if (e.getSource()==addPlayerBtn)
         {
             r.previousPage=1;
+            System.out.println(mainUser.getName());
             r.initializeWithUser(mainUser);
             //User mainUser=user;
 //            Register R = new Register(mainUser);

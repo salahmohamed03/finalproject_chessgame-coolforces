@@ -202,18 +202,20 @@ public class HomePage extends Window implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getSource()==newGame){
-            frame.setVisible(false);
-            g.initializeWithUser(mainUser);
-        }
+
         if (e.getSource()==history){
             hist.initialize();
-        }
-       // if (e.getSource()==settings){
-       // }
-        if (e.getSource()==logOut){
+        }else{
             frame.setVisible(false);
-            l.initialize();
+            if (e.getSource()==newGame){
+                g.initializeWithUser(mainUser);
+            }
+            if (e.getSource()==settings){
+                s.initializeWithUser(mainUser);
+            }
+            if (e.getSource()==logOut){
+                l.initialize();
+            }
         }
     }
 

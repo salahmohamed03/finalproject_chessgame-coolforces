@@ -8,17 +8,18 @@ import java.awt.event.MouseListener;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public abstract class Window extends dataHandling implements MouseListener {
-    IconsAndColors ic = new IconsAndColors() ;
+    IconsAndColors ic = new IconsAndColors();
     LoginPage l;
     Register r;
     HomePage h;
     GameStart g;
-    ChessBoard c;
-    GameLauncher gL;
+    Settings s;
     History hist;
+    public JButton pinkColor;
+    public JButton blueColor;
     String test = "ss";
     public JFrame frame;
-    public int width = ic.width, height = ic.height;
+    public int width, height;
     //int u = width/1440;
     protected    JLayeredPane  base;
 
@@ -31,6 +32,9 @@ public abstract class Window extends dataHandling implements MouseListener {
     protected JLabel backG;
 
     protected void initialize(){
+        width = ic.width; height = ic.height;
+        System.out.println(height);
+        System.out.println(ic.height);
         initializeWindow();
         System.out.println(test);
         setupWindow();

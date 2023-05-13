@@ -31,7 +31,7 @@ public class Register extends Window implements MouseListener{
 //    LoginPage l ;
 //    HomePage h;
     public int previousPage;
-    private User mainUser;
+//    private User mainUser;
     public JPasswordField passwordField;
     public JTextField usernameField;
     public JButton submit;
@@ -163,6 +163,7 @@ public class Register extends Window implements MouseListener{
                     if (previousPage==1)
                     {
                         //program will go to gameStart again
+                        System.out.println(mainUser.getName());
                         g.initializeWithUser(mainUser);         
                     }
                     else  // here this is the typical registration
