@@ -210,7 +210,7 @@ public class GameStart extends Window implements MouseListener{
             if(gameRunning)return;
             else gameRunning = true;
             frame.setVisible(false);
-            GameLauncher gL =new GameLauncher(mainUser,oppUser, selectedColor);
+            GameLauncher gL =new GameLauncher((selectedColor)?mainUser:oppUser,(selectedColor)?oppUser:mainUser);
         }
         if (e.getSource()==addPlayerBtn)
         {

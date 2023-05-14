@@ -27,8 +27,8 @@ public abstract class ChessBoardBASE implements MouseListener {
     public String WhitePName="";
     public String BlackPName="";
     public boolean checkingHistory;
-    //public User mainUser;
-    //protected User oppUser;
+    public User mainUser;
+    protected User oppUser;
     JLabel wPawnDead ,wBishopDead ,wKnightDead ,wQueenDead ,wRookDead, bPawnDead ,bBishopDead ,bKnightDead ,bQueenDead ,bRookDead ;
 
     public JButton backBtn = new JButton();
@@ -63,12 +63,12 @@ public abstract class ChessBoardBASE implements MouseListener {
 
         container = new JPanel(null);
         container.setBounds(0,0,width,heigth);
-//        setPlayerInfo(mainUser.getName(),oppUser.getName(), 38); //should get the usernames
-        if (checkingHistory) 
-        {
-            setPlayerInfo(WhitePName, BlackPName, 38);    
-        }
-        else setPlayerInfo(whiteP.getName(),blackP.getName(), 38); //should get the usernames
+        setPlayerInfo(mainUser.getName(),oppUser.getName(), 38); //should get the usernames
+//        if (checkingHistory)
+//        {
+//            setPlayerInfo(WhitePName, BlackPName, 38);
+//        }
+//        else setPlayerInfo(mainUser.getName(),oppUser.getName(), 38); //should get the usernames
         setD(); // for dead panels
 
         base.add(container, Integer.valueOf(0));
@@ -552,12 +552,12 @@ public abstract class ChessBoardBASE implements MouseListener {
 
 
 
-    // Functions to take users from chessboard
-   // public void takeUsers(User mainUser,User oppUser)
-    //{
-      //  this.mainUser=mainUser;
-      //  this.oppUser=oppUser;
-   // }
+//     Functions to take users from chessboard
+    public void takeUsers(User mainUser,User oppUser)
+    {
+        this.mainUser=mainUser;
+        this.oppUser=oppUser;
+    }
 
 
 }

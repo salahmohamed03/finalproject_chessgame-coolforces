@@ -22,12 +22,11 @@ public class GameLauncher extends dataHandling{
     private User mainUser;
     private User oppUser;
     boolean color;
-    public GameLauncher(User mainUser, User oppUser, boolean side)
+    public GameLauncher(User mainUser, User oppUser)
     {
         this.mainUser=mainUser;
         this.oppUser = oppUser;
-        this.color=side;
-        game = new ChessBoard(mainUser,oppUser, side);
+        game = new ChessBoard(mainUser,oppUser);
         start();
         gameMoves = new ArrayList<>();
         game.setClock(this);
@@ -40,6 +39,7 @@ public class GameLauncher extends dataHandling{
         this.turn = true;
         game.gameResult = true;
     }
+
     public void initializePieces() {
         this.pieces = new ArrayList<Piece>();
         this.pieces.add(new bishop(true, "F1", game));
