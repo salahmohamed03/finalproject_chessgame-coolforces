@@ -34,9 +34,10 @@ public class User {
 class Match {
     public String oppUserStr ="";
     public String result="";
+    public String color="";
     public String moves[] ;
     
-    public Match(String oppUserStr,int result, ArrayList <String> moves)
+    public Match(String oppUserStr,int result, ArrayList <String> moves,boolean color)
     {
         this.oppUserStr= "VS " + oppUserStr;
         if (result==1) 
@@ -52,6 +53,14 @@ class Match {
             this.result="Draw";
         }
         this.moves = moves.toArray(new String[moves.size()]);
+        if (color)
+        {
+            this.color="White";
+        }
+        else
+        {
+            this.color="Black";
+        }
     }
 
     public void addResultandMoves()

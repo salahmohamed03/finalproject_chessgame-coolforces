@@ -6,7 +6,8 @@ import java.awt.event.MouseListener;
 
 public class Controller implements MouseListener {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         IconsAndColors icC = new IconsAndColors();
         LoginPage loginControl = new LoginPage();
         Register registerControl = new Register();
@@ -17,7 +18,7 @@ public class Controller implements MouseListener {
 
        // GameLauncher gameLauncherControl = new GameLauncher(); //see it in the GAME LAUNCHER
 
-//        GameActions gameActionsControl = new GameActions();
+     //        GameActions gameActionsControl = new GameActions();
 
         setLink(loginControl , registerControl, icC , homePageControl , gameStartControl, historyControl, settingsControl );
 

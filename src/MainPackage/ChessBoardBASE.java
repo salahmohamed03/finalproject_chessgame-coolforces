@@ -24,8 +24,11 @@ public abstract class ChessBoardBASE implements MouseListener {
     int wP=0, wB=0,  wK=0, wQ=0,  wR=0, bP=0, bB=0, bK=0, bQ=0, bR=0;
     protected static User whiteP ;
     protected static User blackP;
-    private User mainUser;
-    protected User oppUser;
+    public String WhitePName="";
+    public String BlackPName="";
+    public boolean checkingHistory;
+    //public User mainUser;
+    //protected User oppUser;
     JLabel wPawnDead ,wBishopDead ,wKnightDead ,wQueenDead ,wRookDead, bPawnDead ,bBishopDead ,bKnightDead ,bQueenDead ,bRookDead ;
 
     public JButton backBtn = new JButton();
@@ -61,7 +64,11 @@ public abstract class ChessBoardBASE implements MouseListener {
         container = new JPanel(null);
         container.setBounds(0,0,width,heigth);
 //        setPlayerInfo(mainUser.getName(),oppUser.getName(), 38); //should get the usernames
-        setPlayerInfo(whiteP.getName(),blackP.getName(), 38); //should get the usernames
+        if (checkingHistory) 
+        {
+            setPlayerInfo(WhitePName, BlackPName, 38);    
+        }
+        else setPlayerInfo(whiteP.getName(),blackP.getName(), 38); //should get the usernames
         setD(); // for dead panels
 
         base.add(container, Integer.valueOf(0));
@@ -86,7 +93,8 @@ public abstract class ChessBoardBASE implements MouseListener {
                 ChessBoardPanel.add(pos[i][j]);
             }
     }
-    protected JButton createButton(String name,String ref, String filename, int x , int y,String color) {
+    protected JButton createButton(String name,String ref, String filename, int x , int y,String color) 
+    {
         JButton temp = new JButton(name);
         temp.setName(ref);
         temp.setFocusable(false);
@@ -545,11 +553,11 @@ public abstract class ChessBoardBASE implements MouseListener {
 
 
     // Functions to take users from chessboard
-    public void takeUsers(User mainUser,User oppUser)
-    {
-        this.mainUser=mainUser;
-        this.oppUser=oppUser;
-    }
+   // public void takeUsers(User mainUser,User oppUser)
+    //{
+      //  this.mainUser=mainUser;
+      //  this.oppUser=oppUser;
+   // }
 
 
 }

@@ -208,7 +208,7 @@ public class HomePage extends Window implements MouseListener {
     public void mouseClicked(MouseEvent e) {
 
         if (e.getSource()==history){
-            hist.initialize(mainUser.getName());
+            hist.initialize(mainUser);
         }else{
             frame.setVisible(false);
             if (e.getSource()==newGame){

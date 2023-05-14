@@ -17,11 +17,9 @@ public class History extends dataHandling implements MouseListener {
     //matches history
     JPanel matchHistory;
 
-    public ArrayList <Match> matches =  new ArrayList<>();
+    ArrayList <Match> matches =  new ArrayList<>();
     JLabel[] matchArray;
     private User mainUser;
-
-
 
     public static void main(String[] args) {
         History H = new History();
@@ -29,9 +27,8 @@ public class History extends dataHandling implements MouseListener {
     }
     public History (){}
 
-    String mainUserName="";
-    public void initialize(String mainUserName) {
-        this.mainUserName=mainUserName;
+    public void initialize(User mainUser) {
+        this.mainUser=mainUser;
         width =  (ic.width );
         height = (ic.height);
         initializeWindow();
@@ -72,7 +69,7 @@ public class History extends dataHandling implements MouseListener {
         matchHistory.setBorder(BorderFactory.createEmptyBorder(20 * width / 1440, 0, 0, 0));
 
 
-        matches.addAll(getMatches(mainUserName));
+        matches.addAll(getMatches(mainUser.getName()));
         matchArray = new JLabel[matches.size()]; // number of matches
         String results[]=Arrays.copyOf(getResults(matches),matches.size());
         String Opps[]=Arrays.copyOf(getOppsHistory(matches),matches.size());
@@ -141,8 +138,7 @@ public class History extends dataHandling implements MouseListener {
         for (int i = 0; i < matches.size() ; i++) {
             if (e.getSource() == matchArray[i]) //should change
             {
-                System.out.println(true);
-//                ChessBoardHistory j = new ChessBoardHistory(mainUser);
+                ChessBoardHistory j = new ChessBoardHistory(matches.get(i).moves, this.mainUser, matches.get(i).oppUserStr, matches.get(i).color);
                 System.out.println(mainUser.getName());
             }
         }

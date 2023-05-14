@@ -3,9 +3,7 @@ package MainPackage;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
-import static java.awt.Color.decode;
+import java.util.Arrays;
 
 public class ChessBoardHistory extends ChessBoardBASE {
 
@@ -14,11 +12,22 @@ public class ChessBoardHistory extends ChessBoardBASE {
     private int movesCount = 0;
     JButton nextMove;
     JButton previousMove;
-    public ChessBoardHistory(){
+    
+    public ChessBoardHistory(String[] moves,User mainUser,String oppUserName,String side)
+    {
+        
+        if (side.equals("White"))
+        {
+            WhitePName = mainUser.getName();
+            BlackPName=oppUserName;
+        } else {
+            BlackPName = mainUser.getName();
+            WhitePName=oppUserName;
+        }
+        checkingHistory=true;
+        readMoves(moves);
         initialize();
-
         setMovesText();
-
         show();
     }
 
@@ -40,8 +49,9 @@ public class ChessBoardHistory extends ChessBoardBASE {
 
         base.add(movesText, Integer.valueOf(1));
     }
-    public  void readMoves(String[] movesArray){
-        moves=movesArray;
+    public  void readMoves(String[] movesArray)
+    {
+        moves=Arrays.copyOf(movesArray,movesArray.length);
     }
 
     private void writeMoves(){
