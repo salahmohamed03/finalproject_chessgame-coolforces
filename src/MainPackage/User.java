@@ -32,9 +32,9 @@ public class User {
     // use json files to store the data for each instance from this class
 }
 class Match {
-    private String oppUserStr ="";
-    private String result="";
-    String moves[] ;
+    public String oppUserStr ="";
+    public String result="";
+    public String moves[] ;
     
     public Match(String oppUserStr,int result, ArrayList <String> moves)
     {

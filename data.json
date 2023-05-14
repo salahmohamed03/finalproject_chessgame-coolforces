@@ -353,6 +353,11 @@
         "oppUserStr": "VS gust",
         "result": "Win",
         "moves": []
+      },
+      {
+        "oppUserStr": "VS boda",
+        "result": "Win",
+        "moves": []
       }
     ]
   },
@@ -981,5 +986,22 @@
     ],
     "WinRate": 0.0,
     "matches": []
+  },
+  {
+    "Username": "boda",
+    "Password": [
+      "c",
+      "o",
+      "o",
+      "l"
+    ],
+    "WinRate": 0.0,
+    "matches": [
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "moves": []
+      }
+    ]
   }
 ]

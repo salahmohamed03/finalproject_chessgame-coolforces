@@ -26,7 +26,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
-public abstract class dataHandling extends JFrame {
+public abstract class dataHandling extends JFrame 
+{
     List<JsonObject> dataObjs = new ArrayList<>();   
     Gson jsonArr = new GsonBuilder().setPrettyPrinting().create(); 
     JsonArray jsonArray = jsonArr.toJsonTree(dataObjs).getAsJsonArray();
@@ -45,24 +46,18 @@ public abstract class dataHandling extends JFrame {
         try {
             reader=new FileReader("data.json");
             jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
-            //writeJsonArray=readJsonArray;
             reader.close();
         } catch (Exception readError) {
             System.out.println("Reading error occured");
         }   
     }
+    
     //function to write the data after adding new credentials
     public void addAndWriteNewData(User user)
     {      
         jsonObj=gsonObj.toJsonTree(user).getAsJsonObject();
         jsonArray.add(jsonObj); 
-        try {
-            writer=new FileWriter("data.json");
-            jsonArr.toJson(jsonArray, writer);
-            writer.close();
-            } catch (Exception writeError) {
-                System.out.println("Writing error happened");
-            }
+        writeToJsonFile();
     }
 
     //function to check credentials
@@ -129,19 +124,7 @@ public abstract class dataHandling extends JFrame {
         return opponents;
     }
 
-    // function to add match
-    /* 
-    public void addMatch(User mainUser,User oppUser)
-    {
-       Match m1 = new Match(oppUser.getName());
-       mainUser.matches.add(m1);
-       Match m2 = new Match(mainUser.getName());
-       oppUser.matches.add(m2);
-       readExistingData();
-       addAndWriteNewData(mainUser);
-       //readExistingData();
-       //addAndWriteNewData(oppUser); 
-    }*/
+
 
     //function to look for a user
     public User findOppUser(String oppUserName)
@@ -165,7 +148,6 @@ public abstract class dataHandling extends JFrame {
     //function to update the match then write back modification
     public void addMatch(String userName, Match m)
     {
-        //System.out.println("accessed addMatch");
         readExistingData();
         JsonObject objectToModify = null;
         for (int i = 0 ; i < jsonArray.size();i++) 
@@ -174,29 +156,56 @@ public abstract class dataHandling extends JFrame {
         if (obj.get("Username").getAsString().equals(userName))
         {
             objectToModify = obj;
-            //System.out.println("found a user of username");
-            //System.out.println(objectToModify.get("Username").getAsString());
-            //System.out.printf("index is %d\n", i);
             JsonArray matchesJsonArray = objectToModify.getAsJsonArray("matches");
             Gson convert = new Gson();
             JsonObject matchJsonObj=convert.toJsonTree(m).getAsJsonObject();
             matchesJsonArray.add(matchJsonObj);
             jsonArray.set(i, objectToModify);
-            //System.out.println("match added");
             break;
         }
         }
+        writeToJsonFile();
+        
+    }
+
+    //function to write data to the json file
+    public void writeToJsonFile()
+    {
         try {
             writer = new FileWriter("data.json");
             jsonArr.toJson(jsonArray, writer);
             writer.close();
         } catch (Exception e) {
-            System.out.println("error in match update");
+            System.out.println("Writing Error");
         }
     }
 
-    //function to create the match
-
+    //function that will get matches
+    public ArrayList<Match> getMatches(String userName)
+    {
+        readExistingData();
+        Gson gson = new Gson();
+        Match match;
+        ArrayList <Match> historyMatches = new ArrayList<>();
+        JsonObject objectToModify = null;
+        for (int i = 0 ; i < jsonArray.size();i++) 
+        {
+        JsonObject obj = (JsonObject) jsonArray.get(i);
+        if (obj.get("Username").getAsString().equals(userName))
+        {
+            objectToModify = obj;
+            JsonArray matchesJsonArray = objectToModify.getAsJsonArray("matches");
+            for (JsonElement element : matchesJsonArray)
+            {
+                match = gson.fromJson(element, Match.class);
+                historyMatches.add(match);
+            }
+            break;
+        }
+        }
+    return historyMatches;
+    }
+    
 
   
 

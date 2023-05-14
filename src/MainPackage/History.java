@@ -4,9 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Arrays;
 
-public class History extends JFrame implements MouseListener {
+public class History extends dataHandling implements MouseListener {
 
 
     public JFrame frame;
@@ -17,7 +18,7 @@ public class History extends JFrame implements MouseListener {
     JPanel matchHistory;
 
     JLabel[] matchArray;
-    User mainUser;
+    private User mainUser;
 
 
 
@@ -27,17 +28,15 @@ public class History extends JFrame implements MouseListener {
     }
     public History (){}
 
-    public void initialize(User main) {
-
-        width =  (ic.width -50);
-        height = (ic.height -50);
-        mainUser = main;
+    String mainUserName="";
+    public void initialize(String mainUserName) {
+        this.mainUserName=mainUserName;
+        width = (int) (ic.width -50);
+        height = (int) (ic.height -50);
         initializeWindow();
         setMatchHistory();
         createScroll();
         frame.setVisible(true);
-
-
     }
 
     private void initializeWindow() {
@@ -70,10 +69,17 @@ public class History extends JFrame implements MouseListener {
         matchHistory.setOpaque(true);
         matchHistory.setBorder(BorderFactory.createEmptyBorder(20 * width / 1440, 0, 0, 0));
 
-        matchArray = new JLabel[5];
+        ArrayList <Match> matches =  new ArrayList<>();
+        matches.addAll(getMatches(mainUserName));
+        matchArray = new JLabel[matches.size()]; // number of matches
+        String results[]=Arrays.copyOf(getResults(matches),matches.size());
+        String Opps[]=Arrays.copyOf(getOppsHistory(matches),matches.size());
 
-        for (int i = 0; i < 4 + 1; i++) {
-            matchArray[i] = createMatch("Opponent", 1); //Only 15 characters!!!
+
+        matchArray = new JLabel[matches.size()];
+
+        for (int i = 0; i < matches.size(); i++) {
+            matchArray[i] = createMatch(Opps[i], results[i]); //Only 15 characters!!!
             matchArray[i].addMouseListener(this);
             matchHistory.add(matchArray[i]);
         }
@@ -81,7 +87,7 @@ public class History extends JFrame implements MouseListener {
         frame.add(matchHistory);
     }
 
-    private JLabel createMatch(String opp, int result) {
+    private JLabel createMatch(String opp, String result) {
         ImageIcon win = new ImageIcon("src/Mat/Comp/hist/win.png");
         ImageIcon draw = new ImageIcon("src/Mat/Comp/hist/draw.png");
         ImageIcon lose = new ImageIcon("src/Mat/Comp/hist/lose.png");
@@ -89,13 +95,13 @@ public class History extends JFrame implements MouseListener {
         block = new JLabel(makeOppLeft(opp));
 
         switch (result) {
-            case 1:
+            case "Win":
                 block.setIcon(ic.resizeWithRatio(win));
                 break;
-            case 0:
+            case "Draw":
                 block.setIcon(ic.resizeWithRatio(draw));
                 break;
-            case -1:
+            case "Defeat":
                 block.setIcon(ic.resizeWithRatio(lose));
                 break;
         }
@@ -139,6 +145,32 @@ public class History extends JFrame implements MouseListener {
             }
         }
     }
+
+
+    //function to get the result of the matches
+    public String[] getResults(ArrayList <Match> matches)
+    {
+        ArrayList <String> results =  new ArrayList<>();
+        for (int i = 0; i < matches.size(); i++) 
+        {
+            results.add(matches.get(i).result);
+        }
+        String arr[]= results.toArray(new String[results.size()]);
+        return arr;
+    }
+
+    //function to get opponents
+    public String[] getOppsHistory(ArrayList <Match> matches)
+    {
+        ArrayList <String> Opps =  new ArrayList<>();
+        for (int i = 0; i < matches.size(); i++) 
+        {
+                Opps.add(matches.get(i).oppUserStr);
+        }
+        String arr[]= Opps.toArray(new String[Opps.size()]);
+        return arr;
+    }
+
 
     @Override
     public void mousePressed(MouseEvent e) {

@@ -12,7 +12,8 @@ public class ChessBoardHistory extends ChessBoardBASE {
     public JTextArea movesText;
     private String[] moves;
     private int movesCount = 0;
-
+    JButton nextMove;
+    JButton previousMove;
     public ChessBoardHistory(){
         initialize();
 
