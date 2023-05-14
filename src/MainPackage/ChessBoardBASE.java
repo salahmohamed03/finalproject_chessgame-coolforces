@@ -15,17 +15,17 @@ public abstract class ChessBoardBASE implements MouseListener {
     public String current;
     public ChessClock whiteClock;
     public ChessClock blackClock;
-    public Icon drag;
-    public String previous;
     protected JPanel container;
     private JPanel ChessBoardPanel;
 
-    private int xPosInfo = 1015;
+    private final int xPosInfo = 1015;
     private JPanel blackDeadPanel;
     private JPanel whiteDeadPanel;
     int wP=0, wB=0,  wK=0, wQ=0,  wR=0, bP=0, bB=0, bK=0, bQ=0, bR=0;
-    public User mainUser;
-    public User oppUser;
+    protected static User whiteP ;
+    protected static User blackP;
+    private User mainUser;
+    protected User oppUser;
     JLabel wPawnDead ,wBishopDead ,wKnightDead ,wQueenDead ,wRookDead, bPawnDead ,bBishopDead ,bKnightDead ,bQueenDead ,bRookDead ;
 
     public JButton backBtn = new JButton();
@@ -51,17 +51,20 @@ public abstract class ChessBoardBASE implements MouseListener {
     private void initialize_board(){
         width = ic.width; heigth = ic.height;
         board = new JFrame();
+
+        board.setTitle("chess");
+        board.setSize(width,heigth+30);
+        board.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        board.setLocationRelativeTo(null);
+        board.setResizable(true);
+
         container = new JPanel(null);
         container.setBounds(0,0,width,heigth);
-        setPlayerInfo(mainUser.getName(),oppUser.getName(), 38); //should get the usernames
+//        setPlayerInfo(mainUser.getName(),oppUser.getName(), 38); //should get the usernames
+        setPlayerInfo(whiteP.getName(),blackP.getName(), 38); //should get the usernames
         setD(); // for dead panels
 
         base.add(container, Integer.valueOf(0));
-        board.setTitle("chess");
-        board.setSize(width,heigth);
-        board.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        board.setLocationRelativeTo(null);
-        board.setResizable(false);
         board.add(base);
     }
     private void draw_chessBoard(){
@@ -276,7 +279,7 @@ public abstract class ChessBoardBASE implements MouseListener {
     }
     public Object isAlly(String p1, String p2){
         if(getSide(p2) == null)return null;
-        return (boolean) (getSide(p1) == getSide(p2));
+        return getSide(p1) == getSide(p2);
     }
     public JButton getButton(String pos) {
         return (JButton) ChessBoardPanel.getComponent(getPosition(pos));
@@ -291,8 +294,6 @@ public abstract class ChessBoardBASE implements MouseListener {
         boolean empty = getButton(pos).getIcon() == null;
         ImageIcon temp1 = new ImageIcon("src/Mat/Comp/game/avMove.png");
         Image av = temp1.getImage().getScaledInstance(30 *width/870,30 *width/870,Image.SCALE_SMOOTH);
-        ImageIcon temp2 = new ImageIcon("src/Mat/Comp/game/noMove.png");
-        Image no = temp2.getImage().getScaledInstance(30 *width/870,30 *width/870,Image.SCALE_SMOOTH);
         if(flag){
             if(empty)
                 getButton(pos).setIcon(new ImageIcon(av));
@@ -315,8 +316,7 @@ public abstract class ChessBoardBASE implements MouseListener {
         getButton(pos).setIcon(threatened(getButton(pos).getIcon()));
     }
     public boolean Empty(String pos){
-        if(getButton(pos).getIcon() == null)return true;
-        return false;
+        return getButton(pos).getIcon() == null;
     }
     public void setPlayerInfo(String w, String b, int size /* double wRate , double bRate*/){
         createNameLabel(b, size , false );
@@ -361,23 +361,23 @@ public abstract class ChessBoardBASE implements MouseListener {
             switch (id){
                 case 1:
                     wR++;
-                    wRookDead.setText("X" + String.valueOf(wR));
+                    wRookDead.setText("X" + wR);
                     break;
                 case 2:
                     wK++;
-                    wKnightDead.setText("X" + String.valueOf(wK));
+                    wKnightDead.setText("X" + wK);
                     break;
                 case 3:
                     wB++;
-                    wBishopDead.setText("X" + String.valueOf(wB));
+                    wBishopDead.setText("X" + wB);
                     break;
                 case 4:
                     wQ++;
-                    wQueenDead.setText("X" + String.valueOf(wQ));
+                    wQueenDead.setText("X" + wQ);
                     break;
                 case 6:
                     wP++;
-                    wPawnDead.setText("X" + String.valueOf(wP));
+                    wPawnDead.setText("X" + wP);
 
                     break;
             }
@@ -385,23 +385,23 @@ public abstract class ChessBoardBASE implements MouseListener {
             switch (id){
                 case 1:
                     bR++;
-                    bRookDead.setText("X" + String.valueOf(bR));
+                    bRookDead.setText("X" + bR);
                     break;
                 case 2:
                     bK++;
-                    bKnightDead.setText("X" + String.valueOf(bK));
+                    bKnightDead.setText("X" + bK);
                     break;
                 case 3:
                     bB++;
-                    bBishopDead.setText("X" + String.valueOf(bB));
+                    bBishopDead.setText("X" + bB);
                     break;
                 case 4:
                     bQ++;
-                    bQueenDead.setText("X" + String.valueOf(bQ));
+                    bQueenDead.setText("X" + bQ);
                     break;
                 case 6:
                     bP++;
-                    bPawnDead.setText("X" + String.valueOf(bP));
+                    bPawnDead.setText("X" + bP);
                     break;
             }
 
@@ -456,7 +456,7 @@ public abstract class ChessBoardBASE implements MouseListener {
     private JLabel setDeadIcon(ImageIcon dIcon , int number){
 
 
-        JLabel dLabel = new JLabel("X" + String.valueOf(number));
+        JLabel dLabel = new JLabel("X" + number);
 
         dLabel.setIcon(ic.resizeWithRatio(dIcon));
         dLabel.setFont(new Font("Space Grotesk", Font.BOLD, 20 *width/1440));
@@ -480,9 +480,9 @@ public abstract class ChessBoardBASE implements MouseListener {
         }
         else {
             char[] input = GameStart.timerInput.toCharArray();
-            String minuteString = new StringBuilder().append(input[0]).append(input[1]).toString();
+            String minuteString = String.valueOf(input[0]) + input[1];
             minutesInput = Integer.parseInt(minuteString);
-            String secondString = new StringBuilder().append(input[3]).append(input[4]).toString();
+            String secondString = String.valueOf(input[3]) + input[4];
             secondsInput = Integer.parseInt(secondString);
         }
 
@@ -498,6 +498,11 @@ public abstract class ChessBoardBASE implements MouseListener {
         blackClockLabel.setFont(new Font("Space Grotesk", Font.BOLD, 80 *width/1440));
         blackClockLabel.setBounds(1020 *width/1440, 192 *width/1440, 334 *width/1440, 92 *width/1440);
         blackClockLabel.setForeground(ic.white);
+
+        if(!GameStart.timerOn.isSelected()){
+            whiteClockLabel.setForeground(Color.LIGHT_GRAY);
+            blackClockLabel.setForeground(Color.LIGHT_GRAY);
+        }
 
         base.add(whiteClockLabel, Integer.valueOf(1));
         base.add(blackClockLabel, Integer.valueOf(1));

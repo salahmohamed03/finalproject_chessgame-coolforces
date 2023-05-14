@@ -17,6 +17,7 @@ public class History extends dataHandling implements MouseListener {
     //matches history
     JPanel matchHistory;
 
+    public ArrayList <Match> matches =  new ArrayList<>();
     JLabel[] matchArray;
     private User mainUser;
 
@@ -31,8 +32,8 @@ public class History extends dataHandling implements MouseListener {
     String mainUserName="";
     public void initialize(String mainUserName) {
         this.mainUserName=mainUserName;
-        width = (int) (ic.width -50);
-        height = (int) (ic.height -50);
+        width =  (ic.width );
+        height = (ic.height);
         initializeWindow();
         setMatchHistory();
         createScroll();
@@ -41,7 +42,7 @@ public class History extends dataHandling implements MouseListener {
 
     private void initializeWindow() {
         frame = new JFrame();
-        frame.setSize(width + 30, height);
+        frame.setSize(width -30 , height);
         frame.setTitle("Chess game");
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
@@ -64,12 +65,13 @@ public class History extends dataHandling implements MouseListener {
     public void setMatchHistory() {
         matchHistory = new JPanel();
         matchHistory.setBackground(ic.black);
-        matchHistory.setLayout(new GridLayout(15 + 1, 1, 0, 20 * width / 1440));  //rows should be variables +1 is important
-
+        matchHistory.setLayout(new GridLayout(0, 1, 0, 10 * width / 1440));  //rows should be variables +1 is important
+            //ROWS EQUAL ZERO SO IT CAN GET ANY NUMBER OF LABELS
+        matchHistory.setBounds(0,0,width,matches.size()*80);
         matchHistory.setOpaque(true);
         matchHistory.setBorder(BorderFactory.createEmptyBorder(20 * width / 1440, 0, 0, 0));
 
-        ArrayList <Match> matches =  new ArrayList<>();
+
         matches.addAll(getMatches(mainUserName));
         matchArray = new JLabel[matches.size()]; // number of matches
         String results[]=Arrays.copyOf(getResults(matches),matches.size());
@@ -136,7 +138,7 @@ public class History extends dataHandling implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        for (int i = 0; i < 5 ; i++) {
+        for (int i = 0; i < matches.size() ; i++) {
             if (e.getSource() == matchArray[i]) //should change
             {
                 System.out.println(true);

@@ -14,13 +14,22 @@ public class ChessBoard extends ChessBoardBASE{
     static boolean offer;
     private User mainUser;
     //private User oppUser;
-    public ChessBoard(User mainUser, User oppUser)
+    public ChessBoard(User mainUser, User oppUser, boolean side)
     {
+        if (side){
+            whiteP = mainUser;
+            blackP = oppUser;
+        } else {
+            whiteP = oppUser;
+            blackP = mainUser;
+        }
+
         this.mainUser = mainUser;
         //this.oppUser = oppUser;
         //Passing users to chess board
         takeUsers(mainUser,oppUser);
         initialize();
+        board.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     @Override

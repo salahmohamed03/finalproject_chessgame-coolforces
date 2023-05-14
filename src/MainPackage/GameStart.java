@@ -16,7 +16,7 @@ public class GameStart extends Window implements MouseListener{
     JRadioButton blackBtn;
     public JButton addPlayerBtn;
     public JTextField timerSet;
-    public JCheckBox timerOn;
+    public static JCheckBox timerOn;
     public static String timerInput;
     public JButton startBtn;
     static boolean selectedColor = true;
@@ -51,7 +51,7 @@ public class GameStart extends Window implements MouseListener{
 
 
     private void setHeader(){
-        JLabel youPlay = createLabel(mainUser.getName() +" color", 83 ); // testing for main user
+        JLabel youPlay = createLabel("You play as", 83 ); // testing for main user
         youPlay.setHorizontalAlignment(JLabel.CENTER);
         youPlay.setBounds(470 *width/1440,81 *width/1440,545 *width/1440,132 *width/1440);
         base.add(youPlay, Integer.valueOf(1));
@@ -128,13 +128,14 @@ public class GameStart extends Window implements MouseListener{
         JLabel timerLabel = createLabel("Timer",60 *width/1440);
         timerLabel.setBounds(350 *width/1440,760 *width/1440,310 *width/1440,50 *width/1440);
 
-        timerSet = createTextField("00:00", 40);
+        timerSet = createTextField("10:00", 40);
         timerSet.setBounds(865 *width/1440,770 *width/1440,171 *width/1440,40 *width/1440);
 
         ImageIcon on =  new ImageIcon ("src/Mat/Buttons/timerOnBtn.png");
         ImageIcon off =  new ImageIcon ("src/Mat/Buttons/timerOffBtn.png");
         timerOn = new JCheckBox(ic.resizeWithRatio(off));
         timerOn.setSelectedIcon(ic.resizeWithRatio(on));
+        timerOn.setSelected(true);
         timerOn.setBounds(1100 *width/1440,767 *width/1440,146 *width/1440,47 *width/1440);
         timerOn.setOpaque(false);
         timerOn.setBackground(ic.black);
@@ -172,6 +173,16 @@ public class GameStart extends Window implements MouseListener{
             System.out.println("yy");
             h.initializeWithUser(mainUser);
         }
+        if(e.getSource()==timerOn){
+            if(timerOn.isSelected()){
+                timerSet.setForeground(ic.mainColor);
+                timerSet.setEditable(true);
+            }else {
+                timerSet.setForeground(Color.GRAY);
+                timerSet.setEditable(false);
+            }
+
+        }
         if (e.getSource()==blackBtn){
             blackBtn.setIcon(ic.resizeWithRatio(blackIconS));
             whiteBtn.setIcon(ic.resizeWithRatio(whiteIcon));
@@ -184,7 +195,7 @@ public class GameStart extends Window implements MouseListener{
         }
         if(e.getSource()==startBtn){
             //Checks if the timer is on or off so we choose to use the input or not
-            if (timerOn.getSelectedObjects() == null) {
+            if (!timerOn.isSelected()) {
                 timerInput = null;
             }
             else {
@@ -193,7 +204,7 @@ public class GameStart extends Window implements MouseListener{
             if(gameRunning)return;
             else gameRunning = true;
             frame.setVisible(false);
-            GameLauncher gL =new GameLauncher((selectedColor)?mainUser:oppUser,(selectedColor)?oppUser:mainUser);
+            GameLauncher gL =new GameLauncher(mainUser,oppUser, selectedColor);
         }
         if (e.getSource()==addPlayerBtn)
         {

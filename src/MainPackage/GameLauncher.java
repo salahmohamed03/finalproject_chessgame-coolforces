@@ -15,17 +15,17 @@ public class GameLauncher extends dataHandling{
     public String posProm;
     public boolean turnProm;
     public boolean gameStatus;
-    public GameActions actions;
+    static public GameActions actions;
     public int result;
     public ArrayList<String> gameMoves;
     public boolean turn;
     private User mainUser;
     private User oppUser;
-    public GameLauncher(User mainUser, User oppUser)
+    public GameLauncher(User mainUser, User oppUser, boolean side)
     {
         this.mainUser=mainUser;
         this.oppUser = oppUser;
-        game = new ChessBoard(mainUser,oppUser);
+        game = new ChessBoard(mainUser,oppUser, side);
         start();
         gameMoves = new ArrayList<>();
         game.setClock(this);
