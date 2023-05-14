@@ -1,6 +1,6 @@
 [
   {
-    "Username": "boda",
+    "Username": "guest",
     "Password": [
       "c",
       "o",
@@ -8,19 +8,7 @@
       "l"
     ],
     "WinRate": 0.0,
-    "matches": [
-      {
-        "oppUserStr": "VS salo7a",
-        "result": "Defeat",
-        "color": "White",
-        "moves": [
-          "F2,F4",
-          "D7,D5",
-          "H2,H4",
-          "B7,B5"
-        ]
-      }
-    ]
+    "matches": []
   },
   {
     "Username": "salo7a",
@@ -31,17 +19,6 @@
     ],
     "WinRate": 0.0,
     "matches": [
-      {
-        "oppUserStr": "VS boda",
-        "result": "Win",
-        "color": "Black",
-        "moves": [
-          "F2,F4",
-          "D7,D5",
-          "H2,H4",
-          "B7,B5"
-        ]
-      }
     ]
   },
   {
@@ -57,6 +34,7 @@
       "r"
     ],
     "WinRate": 0.0,
-    "matches": []
+    "matches": [
+    ]
   }
 ]

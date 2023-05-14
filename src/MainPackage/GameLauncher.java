@@ -252,8 +252,8 @@ public class GameLauncher extends dataHandling{
             game.whiteClock.stop();
             game.blackClock.stop();
             ChessBoardBASE.gameResult = false;
-            Match m1 = new Match(oppUser.getName(), 1, gameMoves,color);
-            Match m2 = new Match(mainUser.getName(), -1, gameMoves,!color);
+            Match m1 = new Match(oppUser.getName(), 1, gameMoves,!color);
+            Match m2 = new Match(mainUser.getName(), -1, gameMoves,color);
             addMatch(mainUser.getName(), m1);
             addMatch(oppUser.getName(), m2);
             ChessClock.winner = 0;
@@ -263,8 +263,8 @@ public class GameLauncher extends dataHandling{
             game.whiteClock.stop();
             game.blackClock.stop();
             ChessBoardBASE.gameResult = false;
-            Match m1 = new Match(oppUser.getName(), -1, gameMoves,color);
-            Match m2 = new Match(mainUser.getName(), 1, gameMoves,!color);
+            Match m1 = new Match(oppUser.getName(), -1, gameMoves,!color);
+            Match m2 = new Match(mainUser.getName(), 1, gameMoves,color);
             addMatch(mainUser.getName(), m1);
             addMatch(oppUser.getName(), m2);
             ChessClock.winner = 0;
@@ -275,8 +275,8 @@ public class GameLauncher extends dataHandling{
             game.blackClock.stop();
             ChessBoardBASE.gameResult = false;
             System.out.println("draw");
-            Match m1 = new Match(oppUser.getName(), 0, gameMoves,color);
-            Match m2 = new Match(mainUser.getName(), 0, gameMoves,!color);
+            Match m1 = new Match(oppUser.getName(), 0, gameMoves,!color);
+            Match m2 = new Match(mainUser.getName(), 0, gameMoves,color);
             addMatch(mainUser.getName(), m1);
             addMatch(oppUser.getName(), m2);
         }
