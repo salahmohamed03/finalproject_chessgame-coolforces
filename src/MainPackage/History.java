@@ -17,6 +17,7 @@ public class History extends JFrame implements MouseListener {
     JPanel matchHistory;
 
     JLabel[] matchArray;
+    User mainUser;
 
 
 
@@ -26,11 +27,11 @@ public class History extends JFrame implements MouseListener {
     }
     public History (){}
 
-    public void initialize() {
+    public void initialize(User main) {
 
-        width = (int) (ic.width -50);
-        height = (int) (ic.height -50);
-
+        width =  (ic.width -50);
+        height = (ic.height -50);
+        mainUser = main;
         initializeWindow();
         setMatchHistory();
         createScroll();
@@ -69,9 +70,9 @@ public class History extends JFrame implements MouseListener {
         matchHistory.setOpaque(true);
         matchHistory.setBorder(BorderFactory.createEmptyBorder(20 * width / 1440, 0, 0, 0));
 
-        matchArray = new JLabel[15];
+        matchArray = new JLabel[5];
 
-        for (int i = 0; i < 14 + 1; i++) {
+        for (int i = 0; i < 4 + 1; i++) {
             matchArray[i] = createMatch("Opponent", 1); //Only 15 characters!!!
             matchArray[i].addMouseListener(this);
             matchHistory.add(matchArray[i]);
@@ -129,9 +130,13 @@ public class History extends JFrame implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        for (int i = 0; i < 14 + 1; i++) {
+        for (int i = 0; i < 5 ; i++) {
             if (e.getSource() == matchArray[i]) //should change
+            {
                 System.out.println(true);
+//                ChessBoardHistory j = new ChessBoardHistory(mainUser);
+                System.out.println(mainUser.getName());
+            }
         }
     }
 
