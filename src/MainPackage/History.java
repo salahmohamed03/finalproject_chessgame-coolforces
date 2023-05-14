@@ -42,7 +42,7 @@ public class History extends dataHandling implements MouseListener {
 
     private void initializeWindow() {
         frame = new JFrame();
-        frame.setSize(width -30 , height);
+        frame.setSize(width -10*width/1440 , height);
         frame.setTitle("Chess game");
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
@@ -65,7 +65,7 @@ public class History extends dataHandling implements MouseListener {
     public void setMatchHistory() {
         matchHistory = new JPanel();
         matchHistory.setBackground(ic.black);
-        matchHistory.setLayout(new GridLayout(0, 1, 0, 10 * width / 1440));  //rows should be variables +1 is important
+        matchHistory.setLayout(new GridLayout(0, 1, 0, 10 * ic.width / 1440));  //rows should be variables +1 is important
             //ROWS EQUAL ZERO SO IT CAN GET ANY NUMBER OF LABELS
         matchHistory.setBounds(0,0,width,matches.size()*80);
         matchHistory.setOpaque(true);
@@ -113,7 +113,7 @@ public class History extends dataHandling implements MouseListener {
     }
 
     private String makeOppLeft(String opponent) {
-        int size = 145;
+        int size = 140;
         char[] spaces = new char[size];
         Arrays.fill(spaces, ' ');
         //System.out.println(opponent.length());
