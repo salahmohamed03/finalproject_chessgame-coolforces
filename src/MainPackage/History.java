@@ -16,6 +16,7 @@ public class History extends dataHandling implements MouseListener {
     public int width , height;
     //matches history
     JPanel matchHistory;
+    JPanel  container;
 
     ArrayList <Match> matches =  new ArrayList<>();
     JLabel[] matchArray;
@@ -33,6 +34,7 @@ public class History extends dataHandling implements MouseListener {
         height = (ic.height);
         initializeWindow();
         setMatchHistory();
+
         createScroll();
         frame.setVisible(true);
     }
@@ -51,21 +53,26 @@ public class History extends dataHandling implements MouseListener {
 
     private void createScroll() {
 
-        JScrollPane scroll = new JScrollPane(matchHistory);
+        JScrollPane scroll = new JScrollPane(container);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.getViewport().setBackground(ic.black);
-        frame.getContentPane().add(scroll);
+
+        frame.add(scroll);
 
     }
 
     public void setMatchHistory() {
+        container = new JPanel();
+        container.setBackground(Color.BLACK);
+        container.setOpaque(false);
         matchHistory = new JPanel();
         matchHistory.setBackground(ic.black);
-        matchHistory.setLayout(new GridLayout(0, 1, 0, 10 * ic.width / 1440));  //rows should be variables +1 is important
+        matchHistory.setLayout(new GridLayout(0, 1, 0, 10));  //rows should be variables +1 is important
             //ROWS EQUAL ZERO SO IT CAN GET ANY NUMBER OF LABELS
-        matchHistory.setBounds(0,0,width,matches.size()*80);
-        matchHistory.setOpaque(true);
+        matchHistory.setBounds(0,0,width,180*matches.size() *width/1440);
+        matchHistory.setBackground(Color.red);
+        matchHistory.setOpaque(false);
         matchHistory.setBorder(BorderFactory.createEmptyBorder(20 * width / 1440, 0, 0, 0));
 
 
@@ -82,14 +89,15 @@ public class History extends dataHandling implements MouseListener {
             matchArray[i].addMouseListener(this);
             matchHistory.add(matchArray[i]);
         }
+        container.add(matchHistory);
+        frame.add(container);
 
-        frame.add(matchHistory);
     }
 
     private JLabel createMatch(String opp, String result) {
-        ImageIcon win = new ImageIcon("src/Mat/Comp/hist/win.png");
-        ImageIcon draw = new ImageIcon("src/Mat/Comp/hist/draw.png");
-        ImageIcon lose = new ImageIcon("src/Mat/Comp/hist/lose.png");
+        ImageIcon win = new ImageIcon(ic.colorPath+"Comp/hist/win.png");
+        ImageIcon draw = new ImageIcon(ic.colorPath+"Comp/hist/draw.png");
+        ImageIcon lose = new ImageIcon(ic.colorPath+"Comp/hist/lose.png");
         // BE CAREFUL THERE ARE SPACES !!!!!!!
         block = new JLabel(makeOppLeft(opp));
 

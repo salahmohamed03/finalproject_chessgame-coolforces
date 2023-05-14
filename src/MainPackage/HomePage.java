@@ -50,7 +50,7 @@ public class HomePage extends Window implements MouseListener {
 
     @Override
     protected void setupWindow() {
-        setBackG("src/Mat/BackG/main.png");
+        setBackG(ic.colorPath+"BackG/main.png");
         setLogo();
         setWelcome();
         setStats();
@@ -59,9 +59,9 @@ public class HomePage extends Window implements MouseListener {
     }
 
     public void setLogo(){
-         ImageIcon logo = new ImageIcon("src/Mat/Comp/main/logo.png");
+         ImageIcon logo = new ImageIcon(ic.colorPath+"Comp/main/logo.png");
          JLabel logoLabel = new JLabel(ic.resizeWithRatio(logo));
-         logoLabel.setBounds(1043*width/1440, 96*height/1024, 188*width/1440, 188*height/1024);
+         logoLabel.setBounds(1020*width/1440, 96*height/1024, 250*width/1440, 250*height/1024);
          base.add(logoLabel, Integer.valueOf(1));
     }
 
@@ -94,39 +94,42 @@ public class HomePage extends Window implements MouseListener {
 
     public void setStatsPanel(JPanel typePanel){
         label = new JLabel();
-        ArrayList <Match> dispMatches = new ArrayList<>();
-        dispMatches.addAll(getMatches(mainUser.getName()));
-        float winRateAndWins[] = Arrays.copyOf(getWinRateAndWins(dispMatches),2);
+
         setStatsPanelLook(typePanel);
         if (typePanel == matchesPanel){
             getStats(matches);
-            label.setText(Integer.toString(dispMatches.size()));
+            label.setText("Matches");
         } else if (typePanel == winCountPanel) {
             getStats(winCount);
-            label.setText(Integer.toString((int)winRateAndWins[1]));
+            label.setText("Wins");
         } else if (typePanel == winRatePanel) {
             getStats(winRate);
-            label.setText(Float.toString(winRateAndWins[0]));
+            label.setText("Win Rate");
         }
 
         stats.add(typePanel);
     }
 
     public void getStats (JLabel type){
+        ArrayList <Match> dispMatches = new ArrayList<>();
+        dispMatches.addAll(getMatches(mainUser.getName()));
+        float winRateAndWins[] = Arrays.copyOf(getWinRateAndWins(dispMatches),2);
         if (type == matches) {
-            matches = new JLabel("# matches"); //Just a value for Gui (needs to be changed)
+            matches = new JLabel(Integer.toString(dispMatches.size())); //Just a value for Gui (needs to be changed)
             setStatsLook(matches, "number");
 
             matchesPanel.add(matches,BorderLayout.CENTER);
         } else if (type == winCount) {
-            winCount = new JLabel("15"); //Just a value for Gui (needs to be changed)
+            winCount = new JLabel(Integer.toString((int)winRateAndWins[1])); //Just a value for Gui (needs to be changed)
             setStatsLook(winCount, "number");
 
             winCountPanel.add(winCount,BorderLayout.CENTER);
             //stats.add(winCount,BorderLayout.NORTH);
         } else if (type == winRate) {
-            winRate = new JLabel("50%"); //Just a value for Gui (needs to be changed)
+            winRate = new JLabel(Float.toString(winRateAndWins[0])); //Just a value for Gui (needs to be changed)
             setStatsLook(winRate, "number");
+            setStatsLook(winRate, "number");
+            winRate.setFont(new Font("Space Grotesk", Font.BOLD, 40*width/1440));
 
             winRatePanel.add(winRate,BorderLayout.CENTER);
         }
@@ -192,7 +195,7 @@ public class HomePage extends Window implements MouseListener {
 //        //design//
 //        button.setFont(new Font("Space Grotesk", Font.BOLD, 55*width/1440));
 //        //button.setBounds(80,30,120,40);
-//        ImageIcon buttonBackG = new ImageIcon("src/Mat/Buttons/pinkBtn2.png");
+//        ImageIcon buttonBackG = new ImageIcon(ic.colorPath+"Buttons/pinkBtn2.png");
 //        button.setIcon(ic.resizeWithRatio(buttonBackG));
 //        button.setHorizontalTextPosition(JButton.CENTER);
 //        button.setVerticalTextPosition(JButton.CENTER);

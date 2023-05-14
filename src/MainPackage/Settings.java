@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
+import static java.awt.Color.*;
+
 public class Settings extends Window {
 
     public JButton bigScreenSize;
@@ -17,7 +19,7 @@ public class Settings extends Window {
 
     @Override
     protected void setupWindow() {
-        setBackG("src/Mat/BackG/nGameSett.png");
+        setBackG(ic.colorPath+"/BackG/nGameSett.png");
         setHeader();
         set_backBtn();
         setBtns();
@@ -74,11 +76,11 @@ public class Settings extends Window {
         colorsPanel.setLayout(new GridLayout(1, 2, 30 *width/1440, 0));
         colorsPanel.setBounds(460*width/1440, 600*width/1440, 540*width/1440, 150*width/1440);
 
-        ImageIcon pink =  new ImageIcon ("src/Mat/Buttons/color1.png");
+        ImageIcon pink =  new ImageIcon (ic.colorPath+"/Buttons/color1.png");
         pinkColor = new JButton(ic.resizeWithRatio(pink));
         setColorBtnLook(pinkColor);
 
-        ImageIcon blue =  new ImageIcon ("src/Mat/Buttons/color2.png");
+        ImageIcon blue =  new ImageIcon (ic.colorPath+"Buttons/color2.png");
         blueColor = new JButton(ic.resizeWithRatio(blue));
         setColorBtnLook(blueColor);
 
@@ -130,13 +132,16 @@ public class Settings extends Window {
         if(e.getSource() == pinkColor){
             System.out.println("pink press");
             frame.setVisible(false);
-            ic.mainColor=new Color(0x3F0D2B);
+            ic.colorPath = "src/Mat/";
+            ic.mainColor =  Color.decode("#FF006E");
+            ic.secondColor =  Color.decode("#AE2965");
             frame.setVisible(true);
 
         } else if(e.getSource() == blueColor){
-            frame.setVisible(false);
-            ic.mainColor=new Color(0x0F1194);
-            frame.setVisible(true);
+
+            ic.mainColor =  Color.decode("#118ab2");
+            ic.secondColor =  Color.decode("#15637D");
+            ic.colorPath = "src/MatB/";
 
         }
 

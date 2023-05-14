@@ -28,6 +28,7 @@ public abstract class Window extends dataHandling implements MouseListener {
     protected JButton backBtn;
     public User mainUser;
 
+
     private int refDim = 1440;
     protected JLabel backG;
 
@@ -126,10 +127,10 @@ public abstract class Window extends dataHandling implements MouseListener {
 
         //design//
         button.setFont(new Font("Space Grotesk", Font.BOLD, 36*width/1440));
-        ImageIcon settingsBtn = new ImageIcon("src/Mat/Buttons/settingsBtn.png");
-        ImageIcon pinkBtn = new ImageIcon("src/Mat/Buttons/pinkBtn.png");
-        ImageIcon whiteBtn = new ImageIcon("src/Mat/Buttons/whiteBtn.png");
-        ImageIcon homeBtn = new ImageIcon("src/Mat/Buttons/pinkBtn2.png");
+        ImageIcon settingsBtn = new ImageIcon(ic.colorPath+"Buttons/settingsBtn.png");
+        ImageIcon pinkBtn = new ImageIcon(ic.colorPath+"Buttons/pinkBtn.png");
+        ImageIcon whiteBtn = new ImageIcon(ic.colorPath+"Buttons/whiteBtn.png");
+        ImageIcon homeBtn = new ImageIcon(ic.colorPath+"Buttons/pinkBtn2.png");
 
         switch (btn) {
             case 0 -> {

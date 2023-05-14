@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class IconsAndColors {
+    public String colorPath ;
     public Icon black_bishop;
     public Icon black_king;
     public Icon black_knight;
@@ -75,7 +76,7 @@ public class IconsAndColors {
         height = (int) screenSize.getHeight();
         width = 1440 *height/1024 ;
 
-
+        colorPath = "src/Mat/";
 
         ImageIcon temp1 = new ImageIcon("src/Mat/Comp/game/Black/bishop.png");
         black_bishop =new ImageIcon( temp1.getImage().getScaledInstance(42, 45, Image.SCALE_SMOOTH));
@@ -154,9 +155,7 @@ public class IconsAndColors {
         whiteQueenP = new ImageIcon("src/Mat/Comp/game/promote/WhiteQueenP.png");
         whiteRookP = new ImageIcon("src/Mat/Comp/game/promote/WhiteRookP.png");
 
-        wWin = new ImageIcon("src/Mat/Comp/game/Wwin.png");
-        bWin = new ImageIcon("src/Mat/Comp/game/bWin.png");
-        draw = new ImageIcon("src/Mat/Comp/game/draw.png");
+
     }
 
     public ImageIcon Resize(ImageIcon icon, int width, int height){

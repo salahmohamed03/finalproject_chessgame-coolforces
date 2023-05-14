@@ -21,7 +21,7 @@ public class LoginPage extends Window implements MouseListener {
 
     @Override
     protected void setupWindow() {
-        setBackG("src/Mat/BackG/loginFields.png");
+        setBackG(ic.colorPath+"BackG/loginFields.png");
         setHeader();
         setFields();
         setBtns();

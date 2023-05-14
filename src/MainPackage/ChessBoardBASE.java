@@ -115,7 +115,7 @@ public abstract class ChessBoardBASE implements MouseListener {
     protected abstract void setButtons();
     private void set_backgrounds() {
 
-        ImageIcon temp1 = new ImageIcon("src/Mat/BackG/rgameFields.png");
+        ImageIcon temp1 = new ImageIcon(ic.colorPath+"BackG/rgameFields.png");
         JLabel background = new JLabel();
         background.setIcon(ic.resizeWithRatio(temp1, 870));
         background.setBounds(0,0,864 *width/870,614 *width/870);
@@ -300,7 +300,7 @@ public abstract class ChessBoardBASE implements MouseListener {
     }
     public void boardLight(String pos , boolean flag){
         boolean empty = getButton(pos).getIcon() == null;
-        ImageIcon temp1 = new ImageIcon("src/Mat/Comp/game/avMove.png");
+        ImageIcon temp1 = new ImageIcon(ic.colorPath+"Comp/game/avMove.png");
         Image av = temp1.getImage().getScaledInstance(30 *width/870,30 *width/870,Image.SCALE_SMOOTH);
         if(flag){
             if(empty)
@@ -528,7 +528,7 @@ public abstract class ChessBoardBASE implements MouseListener {
         }
     }
     protected void set_backBtn(){
-        ImageIcon backImg = new ImageIcon("src/Mat/Buttons/backBtn.png");
+        ImageIcon backImg = new ImageIcon(ic.colorPath+"Buttons/backBtn.png");
         backBtn = new JButton(ic.resizeWithRatio(backImg));
         backBtn.setOpaque(false);
         backBtn.setFocusable(false);

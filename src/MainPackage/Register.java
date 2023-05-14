@@ -60,7 +60,7 @@ public class Register extends Window implements MouseListener{
 
     @Override
     protected void setupWindow() {
-        setBackG("src/Mat/BackG/registerFields.png");
+        setBackG(ic.colorPath+"BackG/registerFields.png");
         set_backBtn();
         setHeader();
         setFields();

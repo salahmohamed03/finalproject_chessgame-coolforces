@@ -16,7 +16,7 @@ public class GameActions implements MouseListener{
         public GameLauncher gl;
         private JButton queenP, bishopP, rookP, knightP;
         public int selected = 4;
-        IconsAndColors ic = new IconsAndColors();
+        static IconsAndColors ic = new IconsAndColors();
         private JPanel btnsPromote;
         private  JLabel resultLabel;
         private final int width = ic.width;
@@ -108,7 +108,7 @@ public class GameActions implements MouseListener{
 
         }
         private void setPromoteBackG(){
-            ImageIcon pBackG = new ImageIcon("src/Mat/Comp/game/promote/BackG.png");
+            ImageIcon pBackG = new ImageIcon(ic.colorPath+"Comp/game/promote/BackG.png");
             promoteBackG = new JLabel();
             promoteBackG.setIcon(ic.resizeWithRatio(pBackG));
             promoteBackG.setBounds(0,0, 435 *width/1440, 256 *width/1440);
@@ -185,17 +185,20 @@ public class GameActions implements MouseListener{
         }
         private void checkResult(int r) {
             //1 white win // 0 draw // -1 black wins
+           ImageIcon wWin = new ImageIcon(ic.colorPath+"Comp/game/Wwin.png");
+            ImageIcon bWin = new ImageIcon(ic.colorPath+"Comp/game/bWin.png");
+            ImageIcon draw = new ImageIcon(ic.colorPath+"Comp/game/draw.png");
             resultLabel = new JLabel();
             resultLabel.addMouseListener(this);
             switch (r){
                 case 1:
-                    resultLabel.setIcon(ic.resizeWithRatio(ic.wWin));
+                    resultLabel.setIcon(ic.resizeWithRatio(wWin));
                     break;
                 case 0:
-                    resultLabel.setIcon(ic.resizeWithRatio(ic.draw));
+                    resultLabel.setIcon(ic.resizeWithRatio(draw));
                     break;
                 case -1:
-                    resultLabel.setIcon(ic.resizeWithRatio(ic.bWin));
+                    resultLabel.setIcon(ic.resizeWithRatio(bWin));
                     break;
             }
             frame.add(resultLabel);

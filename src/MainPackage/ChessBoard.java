@@ -34,11 +34,11 @@ public class ChessBoard extends ChessBoardBASE{
     protected void setButtons() {
 
         //black buttons
-            resign = createButton("Resign","re1","src/Mat/Buttons/drawBtn.png",635 *width/870,250 *width/870,"#FF006E");
-            draw = createButton("Draw","dr1","src/Mat/Buttons/resignBtn.png",725 *width/870,250 *width/870,"#5F5F5F");//5F5F5F
+            resign = createButton("Resign","re1",ic.colorPath+"Buttons/drawBtn.png",635 *width/870,250 *width/870,"#FF006E");
+            draw = createButton("Draw","dr1",ic.colorPath+"Buttons/resignBtn.png",725 *width/870,250 *width/870,"#5F5F5F");//5F5F5F
         //white buttons
-            resign2 = createButton("Resign","re2","src/Mat/Buttons/drawBtn.png",635 *width/870,340 *width/870,"#FF006E");
-            draw2 = createButton("Draw","dr2","src/Mat/Buttons/resignBtn.png",725 *width/870,340 *width/870,"#5F5F5F");
+            resign2 = createButton("Resign","re2",ic.colorPath+"Buttons/drawBtn.png",635 *width/870,340 *width/870,"#FF006E");
+            draw2 = createButton("Draw","dr2",ic.colorPath+"Buttons/resignBtn.png",725 *width/870,340 *width/870,"#5F5F5F");
 
             resign.addMouseListener(this);
             resign2.addMouseListener(this);

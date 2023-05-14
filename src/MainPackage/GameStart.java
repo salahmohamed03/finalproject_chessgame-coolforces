@@ -7,10 +7,11 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class GameStart extends Window implements MouseListener{
-    public ImageIcon whiteIcon = new ImageIcon("src/Mat/Buttons/selectWBtn.png");
-    public ImageIcon whiteIconS = new ImageIcon("src/Mat/Buttons/selectedWBtn.png");
-    public ImageIcon blackIcon = new ImageIcon("src/Mat/Buttons/selectBBtn.png");
-    public ImageIcon blackIconS = new ImageIcon("src/Mat/Buttons/selectedBBtn.png") ;
+    public ImageIcon whiteIcon ;
+    public ImageIcon whiteIconS;
+    public ImageIcon blackIcon ;
+    public ImageIcon blackIconS;
+
     static public boolean gameRunning = false;
     JRadioButton whiteBtn;
     JRadioButton blackBtn;
@@ -34,7 +35,7 @@ public class GameStart extends Window implements MouseListener{
 
     @Override
     protected void setupWindow() {
-        setBackG("src/Mat/BackG/nGameSettFields.png");
+        setBackG(ic.colorPath+"BackG/nGameSettFields.png");
         set_backBtn();
         setHeader();
         setBlackOrWhite();
@@ -59,6 +60,11 @@ public class GameStart extends Window implements MouseListener{
     }
 
     private void setBlackOrWhite(){
+          whiteIcon = new ImageIcon(ic.colorPath+"Buttons/selectWBtn.png");
+          whiteIconS = new ImageIcon(ic.colorPath+"Buttons/selectedWBtn.png");
+          blackIcon = new ImageIcon(ic.colorPath+"Buttons/selectBBtn.png");
+          blackIconS = new ImageIcon(ic.colorPath+"Buttons/selectedBBtn.png") ;
+
         ButtonGroup wORb = new ButtonGroup();
 
         whiteBtn = new JRadioButton();
@@ -109,7 +115,7 @@ public class GameStart extends Window implements MouseListener{
         playerList.setForeground(ic.mainColor);
         playerList.setBackground(ic.white);
 
-        ImageIcon add =  new ImageIcon ("src/Mat/Buttons/addBtn.png");
+        ImageIcon add =  new ImageIcon (ic.colorPath+"Buttons/addBtn.png");
         addPlayerBtn = new JButton(ic.resizeWithRatio(add));
         addPlayerBtn.setBounds(1150 *width/1440,685 *width/1440,82 *width/1440,47 *width/1440);
         addPlayerBtn.setOpaque(false);
@@ -131,8 +137,8 @@ public class GameStart extends Window implements MouseListener{
         timerSet = createTextField("10:00", 40);
         timerSet.setBounds(865 *width/1440,770 *width/1440,171 *width/1440,40 *width/1440);
 
-        ImageIcon on =  new ImageIcon ("src/Mat/Buttons/timerOnBtn.png");
-        ImageIcon off =  new ImageIcon ("src/Mat/Buttons/timerOffBtn.png");
+        ImageIcon on =  new ImageIcon (ic.colorPath+"Buttons/timerOnBtn.png");
+        ImageIcon off =  new ImageIcon (ic.colorPath+"Buttons/timerOffBtn.png");
         timerOn = new JCheckBox(ic.resizeWithRatio(off));
         timerOn.setSelectedIcon(ic.resizeWithRatio(on));
         timerOn.setSelected(true);
