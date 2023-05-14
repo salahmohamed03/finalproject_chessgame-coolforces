@@ -207,6 +207,24 @@ public abstract class dataHandling extends JFrame
     }
     
 
-  
+  //function to calculate winRate & wins
+  public float[] getWinRateAndWins(ArrayList <Match> matches)
+  {
+    float winRate;
+        int counter=0;
+        for (int i = 0; i < matches.size(); i++) 
+        {
+            if (matches.get(i).result.equals("Win"))  
+            {
+                counter++;
+            }  
+        }   
+        winRate = (float) counter/matches.size();
+        float arr[]=new float[2];
+        arr[0]=winRate;
+        arr[1]=counter;
+        return arr;
+  }
 
+  
 }

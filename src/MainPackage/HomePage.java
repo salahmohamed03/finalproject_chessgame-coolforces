@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class HomePage extends Window implements MouseListener {
     //LoginPage l;
@@ -25,6 +27,8 @@ public class HomePage extends Window implements MouseListener {
     public  JButton history;
     public  JButton settings;
     public JButton logOut;
+
+    public int winsCounter;
 
 //    private User mainUser;
 
@@ -90,17 +94,19 @@ public class HomePage extends Window implements MouseListener {
 
     public void setStatsPanel(JPanel typePanel){
         label = new JLabel();
-        //System.out.println("true"); // for testing
+        ArrayList <Match> dispMatches = new ArrayList<>();
+        dispMatches.addAll(getMatches(mainUser.getName()));
+        float winRateAndWins[] = Arrays.copyOf(getWinRateAndWins(dispMatches),2);
         setStatsPanelLook(typePanel);
         if (typePanel == matchesPanel){
             getStats(matches);
-            label.setText("Matches");
+            label.setText(Integer.toString(dispMatches.size()));
         } else if (typePanel == winCountPanel) {
             getStats(winCount);
-            label.setText("Wins");
+            label.setText(Integer.toString((int)winRateAndWins[1]));
         } else if (typePanel == winRatePanel) {
             getStats(winRate);
-            label.setText("Win Rate%");
+            label.setText(Float.toString(winRateAndWins[0]));
         }
 
         stats.add(typePanel);
