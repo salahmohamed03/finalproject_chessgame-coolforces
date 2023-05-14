@@ -9,13 +9,15 @@ public class ChessBoardHistory extends ChessBoardBASE {
 
     public JTextArea movesText;
     private String[] moves;
+    dataHandling d;
     private int movesCount = 0;
     JButton nextMove;
     JButton previousMove;
     
     public ChessBoardHistory(String[] moves,User mainUser,String oppUserName,String side)
     {
-        
+        isgame = false;
+        this.mainUser = mainUser;
         if (side.equals("White"))
         {
             WhitePName = mainUser.getName();

@@ -8,7 +8,16 @@
       "l"
     ],
     "WinRate": 0.0,
-    "matches": []
+    "matches": [
+      {
+        "oppUserStr": "VS salo7a",
+        "result": "Defeat",
+        "color": "Black",
+        "moves": [
+          "D2,D4"
+        ]
+      }
+    ]
   },
   {
     "Username": "salo7a",
@@ -19,6 +28,14 @@
     ],
     "WinRate": 0.0,
     "matches": [
+      {
+        "oppUserStr": "VS guest",
+        "result": "Win",
+        "color": "White",
+        "moves": [
+          "D2,D4"
+        ]
+      }
     ]
   },
   {
@@ -34,7 +51,6 @@
       "r"
     ],
     "WinRate": 0.0,
-    "matches": [
-    ]
+    "matches": []
   }
 ]

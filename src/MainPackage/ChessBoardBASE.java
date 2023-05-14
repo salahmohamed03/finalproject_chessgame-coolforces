@@ -9,6 +9,7 @@ public abstract class ChessBoardBASE implements MouseListener {
     protected JFrame board;
     protected JLayeredPane base = new JLayeredPane();
     protected GameLauncher game;
+    public boolean isgame;
     static public boolean gameResult;
     public static IconsAndColors ic = new IconsAndColors();
     public JButton button;
@@ -63,7 +64,7 @@ public abstract class ChessBoardBASE implements MouseListener {
 
         container = new JPanel(null);
         container.setBounds(0,0,width,heigth);
-        setPlayerInfo(mainUser.getName(),oppUser.getName(), 38); //should get the usernames
+        setPlayerInfo(WhitePName,BlackPName, 38); //should get the usernames
 //        if (checkingHistory)
 //        {
 //            setPlayerInfo(WhitePName, BlackPName, 38);
@@ -506,8 +507,11 @@ public abstract class ChessBoardBASE implements MouseListener {
         blackClockLabel.setFont(new Font("Space Grotesk", Font.BOLD, 80 *width/1440));
         blackClockLabel.setBounds(1020 *width/1440, 192 *width/1440, 334 *width/1440, 92 *width/1440);
         blackClockLabel.setForeground(ic.white);
-
-        if(!GameStart.timerOn.isSelected()){
+        if(!isgame){
+            whiteClockLabel.setForeground(Color.LIGHT_GRAY);
+            blackClockLabel.setForeground(Color.LIGHT_GRAY);
+        }
+        else if(!GameStart.timerOn.isSelected()){
             whiteClockLabel.setForeground(Color.LIGHT_GRAY);
             blackClockLabel.setForeground(Color.LIGHT_GRAY);
         }

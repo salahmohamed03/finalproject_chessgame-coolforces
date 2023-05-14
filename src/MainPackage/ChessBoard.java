@@ -16,7 +16,10 @@ public class ChessBoard extends ChessBoardBASE{
 //    private User oppUser;
     public ChessBoard(User mainUser, User oppUser)
     {
+        isgame = true;
         this.mainUser = mainUser;
+        WhitePName = mainUser.getName();
+        BlackPName = oppUser.getName();
         //this.oppUser = oppUser;
         //Passing users to chess board
         takeUsers(mainUser,oppUser);
