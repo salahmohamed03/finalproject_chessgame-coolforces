@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseListener;
 
 public abstract class ChessBoardBASE implements MouseListener {
-    protected JFrame board;
+    protected JFrame  board;
     protected JLayeredPane base = new JLayeredPane();
     protected GameLauncher game;
     public boolean isgame;
@@ -39,7 +39,7 @@ public abstract class ChessBoardBASE implements MouseListener {
         ic = newIconsAndColors;
     }
     public void initialize() {
-        
+        //
         initialize_board();
         setButtons();
         draw_chessBoard();
