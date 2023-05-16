@@ -50,27 +50,10 @@ public class LoginPage extends Window implements MouseListener {
         fieldsPanel.setLayout(new GridLayout(2,1,0,55*width/1440));
 
 
-         usernameField = createTextField("username", 40);
-         passwordField = createPassField();
+        usernameField = createTextField("username", 40);
+        passwordField = createPassField();
 
-         //function to prevent Spaces
-         passwordField.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == ' ') {
-                    e.consume();
-                    System.out.println("Spaces are not allowed in password"); 
-                    //ya talalinho 7ot deh fel gui
-                }
-            }
-            @Override
-            public void keyPressed(KeyEvent e) {
-            }
 
-            @Override
-            public void keyReleased(KeyEvent e) {
-            }
-        });
 
         fieldsPanel.add(usernameField);
         fieldsPanel.add(passwordField);
@@ -127,7 +110,7 @@ public class LoginPage extends Window implements MouseListener {
             // If he already exists, his name will be in the combobox
             String passwordStr = new String (passwordField.getPassword());
             User logUser=new User(usernameField.getText(),passwordStr);
-            if (checkCredentials(logUser.getName().trim() , logUser.getPass()))
+            if (checkCredentials(logUser.getName() , logUser.getPass()))
             {
                 frame.setVisible(false);
                 System.out.println("true");
@@ -139,7 +122,7 @@ public class LoginPage extends Window implements MouseListener {
                 denyAccess();
                 System.out.println("deny");
             }
-            
+
         }
         if (e.getSource()==registerBtn){
             frame.setVisible(false);

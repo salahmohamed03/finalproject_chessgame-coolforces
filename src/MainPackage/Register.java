@@ -30,18 +30,18 @@ import java.io.Writer;
 
 public class Register extends Window implements MouseListener{
 
-//    LoginPage l ;
+    //    LoginPage l ;
 //    HomePage h;
     public int previousPage;
-//    private User mainUser;
+    //    private User mainUser;
     public JPasswordField passwordField;
     public JTextField usernameField;
     public JButton submit;
 
 
     // The following three code will create an empty JSON array of objects
-    
-    
+
+
     //JsonWriter arrWriter=new JsonWriter(writer);
     //Gson gsonWriter =  new Gson(); // object used to writer the array
 
@@ -52,7 +52,7 @@ public class Register extends Window implements MouseListener{
 //        //this constructor will be called from GameStart
 //        //it takes the main user so it keeps his authority
 //    }
-    
+
 
 //    public Register(){
 //        initialize();
@@ -74,6 +74,7 @@ public class Register extends Window implements MouseListener{
     public void setBtns() {
 
         submit = createButton("Submit",1);
+        submit.requestFocusInWindow();
         submit.setBounds(626*width/1440, 720*height/1024, 188*width/1440, 52*height/1024);
         submit.addMouseListener(this);
         base.add(submit, Integer.valueOf(1));
@@ -97,27 +98,8 @@ public class Register extends Window implements MouseListener{
         fieldsPanel.setLayout(new GridLayout(2,1,0,58 *width/1440));
 
 
-         usernameField = createTextField("username", 50);
-         passwordField = createPassField();
-         //function to prevent Spaces
-         passwordField.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == ' ') {
-                    e.consume();
-                    System.out.println("Spaces are not allowed in password"); 
-                    //ya talalinho 7ot deh fel gui
-                }
-            }
-            @Override
-            public void keyPressed(KeyEvent e) {
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-            }
-        });
-
+        usernameField = createTextField("username", 50);
+        passwordField = createPassField();
 
         fieldsPanel.add(usernameField);
         fieldsPanel.add(passwordField);
@@ -160,56 +142,73 @@ public class Register extends Window implements MouseListener{
             }
             if( previousPage==1)
             {
-               // GameStart c =new GameStart(mainUser);
+                // GameStart c =new GameStart(mainUser);
             }
         }
 
         //this block saves the data to a json file upon clicking on submit
-        
+        ///////we should tell the user not to include spaces as they will be already neglected
         if(e.getSource()== submit)
         {
-            if (!usernameField.getText().equals("username"))
-           {
+            if (valid())
+            {
                 String passwordStr = new String (passwordField.getPassword());
-                User regUser=new User(usernameField.getText() , passwordStr);
-               if (checkCredentials(regUser.getName().trim(), regUser.getPass()))
-               {
-                    System.out.println("This player already exists.Login instead."); 
-               }
-               else if (checkUsername(regUser.getName().trim()))
-               {
+                User regUser=new User(usernameField.getText().trim() , passwordStr);
+                if (checkCredentials(regUser.getName(), regUser.getPass()))
+                {
+                    System.out.println("This player already exists.Login instead.");
+                }
+                else if (checkUsername(regUser.getName()))
+                {
                     addAndWriteNewData(regUser);
                     //g.initializeWithUser(mainUser);
-                    // If coming from gamestart main user is passed again to keep his authority 
+                    // If coming from gamestart main user is passed again to keep his authority
                     //and the regUser is also passed as an opponent
-                        frame.setVisible(false);
+                    frame.setVisible(false);
                     if (previousPage==1)
                     {
                         //program will go to gameStart again
                         System.out.println(mainUser.getName());
-                        g.initializeWithUser(mainUser);         
+                        g.initializeWithUser(mainUser);
                     }
                     else  // here this is the typical registration
                     //the regUser will be the mainUser
                     {
-                      //HomePage H=new HomePage(regUser);
+                        //HomePage H=new HomePage(regUser);
                         h.initializeWithUser(regUser);
                     }
                     this.dispose();
-               }
-               else
-               {
-                   denyAccess(0);
+                }
+                else
+                {
+                    denyAccess(0);
                     System.out.println("Username is taken.Try using another username");
-               }
-           }
+                }
+            }
+            else {
+                System.out.println("Username field cannot be empty nor be (username)");
+                System.out.println("password can not be empty nor be (password)");
+                /////// shoud appear in the gui
+            }
         }
     }
 
-    
-    
-    
-    
+
+
+    //function to check the validity of the submission
+    public boolean valid()
+    {
+        String comparedPass= new String (passwordField.getPassword());
+        if (!usernameField.getText().equals("username") && !usernameField.getText().isEmpty())
+        {
+            if (!comparedPass.isEmpty() && !comparedPass.equals("password"))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     @Override
     public void mousePressed(MouseEvent e) {

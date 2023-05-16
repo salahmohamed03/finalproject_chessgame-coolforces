@@ -3,6 +3,11 @@ package MainPackage;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
@@ -61,10 +66,10 @@ public abstract class Window extends dataHandling implements MouseListener {
         base = new JLayeredPane();
         frame.add(base);
     }
-     public void setBackG(String fileName){
-         backG_image = new ImageIcon(fileName);
-         System.out.println("ss");
-     }
+    public void setBackG(String fileName){
+        backG_image = new ImageIcon(fileName);
+        System.out.println("ss");
+    }
     public void setBackG(String fileName, int ref){ //overloading for diffrent dimensions
         backG_image = new ImageIcon(fileName);
         System.out.println("backg window");
@@ -85,10 +90,24 @@ public abstract class Window extends dataHandling implements MouseListener {
     {
         JTextField textField = new JTextField(placeHolder);
 
-        //Function to retrieve data from text field
-        // A function to check if value changed and user pressed enter
+        //function to control the behavior of the place holder
+        textField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e)
+            {
+                if (textField.getText().equals(placeHolder)) {
+                    textField.setText("");
+                }
+            }
 
-
+            @Override
+            public void focusLost(FocusEvent e) {
+                // Restore the placeholder text if no text is entered
+                if (textField.getText().isEmpty()) {
+                    textField.setText(placeHolder);
+                }
+            }
+        });
 
 
         //text field design Login 40 size
@@ -102,14 +121,57 @@ public abstract class Window extends dataHandling implements MouseListener {
         return textField;
     }
     public JPasswordField createPassField(){
-       JPasswordField passField = new JPasswordField("password",8);
-
+        JPasswordField passField = new JPasswordField("password",8);
+        passField.setEchoChar((char)0);
         //text field design
         passField.setFont(new Font("Space Grotesk", Font.PLAIN, 40*width/1440));
         passField.setBackground(ic.white);
         passField.setForeground(ic.mainColor);
         passField.setOpaque(true);
         passField.setBorder(BorderFactory.createEmptyBorder());
+
+        //function to prevent Spaces
+        passField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (e.getKeyChar() == ' ') {
+                    e.consume();
+                    System.out.println("Spaces are not allowed in password");
+                    //ya talalinho 7ot deh fel gui
+                }
+            }
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+        //function to manage the masking of the password placeholder
+
+        passField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                String password = new String(passField.getPassword());
+                if (password.equals("password")) {
+                    passField.setText(""); // Clear the text field if the default value "password" is present
+                }
+                passField.setEchoChar('\u25CF'); // Set the echo character to a bullet (●) to mask the password
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                String password = new String(passField.getPassword());
+                if (password.isEmpty()) {
+                    passField.setEchoChar((char) 0); // Set the echo character to 0 to demask the password if the field is empty
+                    passField.setText("password"); // Set the default value "password" if the field is empty
+                }
+            }
+        });
+
+
+
 
         return passField;
     }

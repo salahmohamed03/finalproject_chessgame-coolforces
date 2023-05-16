@@ -1,55 +1,99 @@
 [
   {
     "Username": "guest",
-    "Password": [
-      "c",
-      "o",
-      "o",
-      "l"
-    ],
+    "Password": "coool",
     "WinRate": 0.0,
     "matches": [
       {
-        "oppUserStr": "VS salo7a",
+        "oppUserStr": "VS salah",
+        "result": "Win",
+        "color": "White",
+        "moves": [
+          "E2,E4",
+          "B8,D5",
+          "E4,PxD5,k",
+          "D8,F6",
+          "G1,E4",
+          "F6,QxF2,P",
+          "E1,KxF2,Q",
+          "E7,E5",
+          "E4,kxG7,P",
+          "F8,BxG7,k",
+          "D5,D6",
+          "C7,PxD6,P",
+          "F2,G3"
+        ]
+      },
+      {
+        "oppUserStr": "VS salah",
         "result": "Defeat",
         "color": "Black",
         "moves": [
-          "D2,D4"
+          "D2,D4",
+          "F7,F5",
+          "D1,F3",
+          "F5,F4",
+          "F3,QxF4,P",
+          "H7,H5",
+          "F1,C4",
+          "H5,H4",
+          "F4,F7"
+        ]
+      }
+    ]
+  },
+  {
+    "Username": "salah",
+    "Password": "wow",
+    "WinRate": 0.0,
+    "matches": [
+      {
+        "oppUserStr": "VS guest",
+        "result": "Defeat",
+        "color": "Black",
+        "moves": [
+          "E2,E4",
+          "B8,D5",
+          "E4,PxD5,k",
+          "D8,F6",
+          "G1,E4",
+          "F6,QxF2,P",
+          "E1,KxF2,Q",
+          "E7,E5",
+          "E4,kxG7,P",
+          "F8,BxG7,k",
+          "D5,D6",
+          "C7,PxD6,P",
+          "F2,G3"
+        ]
+      },
+      {
+        "oppUserStr": "VS guest",
+        "result": "Win",
+        "color": "White",
+        "moves": [
+          "D2,D4",
+          "F7,F5",
+          "D1,F3",
+          "F5,F4",
+          "F3,QxF4,P",
+          "H7,H5",
+          "F1,C4",
+          "H5,H4",
+          "F4,F7"
         ]
       }
     ]
   },
   {
     "Username": "salo7a",
-    "Password": [
-      "w",
-      "o",
-      "w"
-    ],
+    "Password": "wow",
     "WinRate": 0.0,
-    "matches": [
-      {
-        "oppUserStr": "VS guest",
-        "result": "Win",
-        "color": "White",
-        "moves": [
-          "D2,D4"
-        ]
-      }
-    ]
+    "matches": []
   },
   {
-    "Username": "talal",
-    "Password": [
-      "d",
-      "e",
-      "s",
-      "i",
-      "g",
-      "n",
-      "e",
-      "r"
-    ],
+    "Username": "salo7aa",
+    "Password": "mohamed",
     "WinRate": 0.0,
     "matches": []
   }

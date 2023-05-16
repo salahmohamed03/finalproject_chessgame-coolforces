@@ -8,7 +8,7 @@ public class User {
     private String Password;
     public double WinRate;
     public ArrayList<Match> matches = new ArrayList<>();
-    
+
     //Constructor to intialize username and password
     public User(String Username, String Password)
     {
@@ -26,7 +26,7 @@ public class User {
         return Password;
     }
 
-    
+
     // make function to add match to the history
     // function to calculate the win rate
     // use json files to store the data for each instance from this class
@@ -36,13 +36,13 @@ class Match {
     public String result="";
     public String color="";
     public String moves[] ;
-    
+
     public Match(String oppUserStr,int result, ArrayList <String> moves,boolean color)
     {
         this.oppUserStr= "VS " + oppUserStr;
-        if (result==1) 
+        if (result==1)
         {
-            this.result= "Win";    
+            this.result= "Win";
         }
         else if (result==-1)
         {
@@ -68,7 +68,7 @@ class Match {
 
     }
 
-    
+
     // make the constructor to initialize the players.
     // make function to add move to the arraylist moves.
     // arraylist moves is array to store the flow of the game like -  1.E4 , E5 - so that the fist one

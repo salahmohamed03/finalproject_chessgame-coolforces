@@ -26,10 +26,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
-public abstract class dataHandling extends JFrame 
+public abstract class dataHandling extends JFrame
 {
-    List<JsonObject> dataObjs = new ArrayList<>();   
-    Gson jsonArr = new GsonBuilder().setPrettyPrinting().create(); 
+    List<JsonObject> dataObjs = new ArrayList<>();
+    Gson jsonArr = new GsonBuilder().setPrettyPrinting().create();
     JsonArray jsonArray = jsonArr.toJsonTree(dataObjs).getAsJsonArray();
     //////////////////////////////////////////////////////////////////////////
     Gson gsonObj = new Gson(); // each user will be converted to a gsonobj
@@ -38,8 +38,8 @@ public abstract class dataHandling extends JFrame
     FileWriter writer;
     FileReader reader;
 
-    
-    
+
+
     //function to read the JSON file
     public void readExistingData()
     {
@@ -49,14 +49,14 @@ public abstract class dataHandling extends JFrame
             reader.close();
         } catch (Exception readError) {
             System.out.println("Reading error occured");
-        }   
+        }
     }
-    
+
     //function to write the data after adding new credentials
     public void addAndWriteNewData(User user)
-    {      
+    {
         jsonObj=gsonObj.toJsonTree(user).getAsJsonObject();
-        jsonArray.add(jsonObj); 
+        jsonArray.add(jsonObj);
         writeToJsonFile();
     }
 
@@ -72,15 +72,12 @@ public abstract class dataHandling extends JFrame
                 inspectedUsername="";
                 inspectedPassword="";
                 inspectedUsername=jsonElement.getAsJsonObject().get("Username").getAsString();
-                JsonArray passwordArray = jsonElement.getAsJsonObject().get("Password").getAsJsonArray();
-                for (JsonElement element : passwordArray) {
-                    inspectedPassword += element.getAsString();
-                }
+                inspectedPassword=jsonElement.getAsJsonObject().get("Password").getAsString();
                 if (inspectedUsername.equals(inputUsername) && inspectedPassword.equals(inputPassword))
                 {
                     return true;
                 }
-            }   
+            }
         } catch (Exception credentials) {
             //
         }
@@ -114,9 +111,9 @@ public abstract class dataHandling extends JFrame
         readExistingData();
         for (JsonElement jsonElement : jsonArray)
         {
-            if (user.getName().equals(jsonElement.getAsJsonObject().get("Username").getAsString())) 
+            if (user.getName().equals(jsonElement.getAsJsonObject().get("Username").getAsString()))
             {
-                continue;   
+                continue;
             }
             opponents.add(jsonElement.getAsJsonObject().get("Username").getAsString());
         }
@@ -141,7 +138,7 @@ public abstract class dataHandling extends JFrame
             }
         }
         return null;
-        
+
     }
 
     //function to update the match then write back modification
@@ -149,22 +146,22 @@ public abstract class dataHandling extends JFrame
     {
         readExistingData();
         JsonObject objectToModify = null;
-        for (int i = 0 ; i < jsonArray.size();i++) 
+        for (int i = 0 ; i < jsonArray.size();i++)
         {
-        JsonObject obj = (JsonObject) jsonArray.get(i);
-        if (obj.get("Username").getAsString().equals(userName))
-        {
-            objectToModify = obj;
-            JsonArray matchesJsonArray = objectToModify.getAsJsonArray("matches");
-            Gson convert = new Gson();
-            JsonObject matchJsonObj=convert.toJsonTree(m).getAsJsonObject();
-            matchesJsonArray.add(matchJsonObj);
-            jsonArray.set(i, objectToModify);
-            break;
-        }
+            JsonObject obj = (JsonObject) jsonArray.get(i);
+            if (obj.get("Username").getAsString().equals(userName))
+            {
+                objectToModify = obj;
+                JsonArray matchesJsonArray = objectToModify.getAsJsonArray("matches");
+                Gson convert = new Gson();
+                JsonObject matchJsonObj=convert.toJsonTree(m).getAsJsonObject();
+                matchesJsonArray.add(matchJsonObj);
+                jsonArray.set(i, objectToModify);
+                break;
+            }
         }
         writeToJsonFile();
-        
+
     }
 
     //function to write data to the json file
@@ -187,43 +184,43 @@ public abstract class dataHandling extends JFrame
         Match match;
         ArrayList <Match> historyMatches = new ArrayList<>();
         JsonObject objectToModify = null;
-        for (int i = 0 ; i < jsonArray.size();i++) 
+        for (int i = 0 ; i < jsonArray.size();i++)
         {
-        JsonObject obj = (JsonObject) jsonArray.get(i);
-        if (obj.get("Username").getAsString().equals(userName))
-        {
-            objectToModify = obj;
-            JsonArray matchesJsonArray = objectToModify.getAsJsonArray("matches");
-            for (JsonElement element : matchesJsonArray)
+            JsonObject obj = (JsonObject) jsonArray.get(i);
+            if (obj.get("Username").getAsString().equals(userName))
             {
-                match = gson.fromJson(element, Match.class);
-                historyMatches.add(match);
+                objectToModify = obj;
+                JsonArray matchesJsonArray = objectToModify.getAsJsonArray("matches");
+                for (JsonElement element : matchesJsonArray)
+                {
+                    match = gson.fromJson(element, Match.class);
+                    historyMatches.add(match);
+                }
+                break;
             }
-            break;
         }
-        }
-    return historyMatches;
+        return historyMatches;
     }
-    
 
-  //function to calculate winRate & wins
-  public float[] getWinRateAndWins(ArrayList <Match> matches)
-  {
-    float winRate;
+
+    //function to calculate winRate & wins
+    public float[] getWinRateAndWins(ArrayList <Match> matches)
+    {
+        float winRate;
         int counter=0;
-        for (int i = 0; i < matches.size(); i++) 
+        for (int i = 0; i < matches.size(); i++)
         {
-            if (matches.get(i).result.equals("Win"))  
+            if (matches.get(i).result.equals("Win"))
             {
                 counter++;
-            }  
-        }   
+            }
+        }
         winRate = (float) counter/matches.size();
         float arr[]=new float[2];
         arr[0]=winRate;
         arr[1]=counter;
         return arr;
-  }
+    }
 
-  
+
 }
