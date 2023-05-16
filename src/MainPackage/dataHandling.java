@@ -61,12 +61,11 @@ public abstract class dataHandling extends JFrame
     }
 
     //function to check credentials
-    public Boolean checkCredentials(String inputUsername, char[] inputPassword)
+    public Boolean checkCredentials(String inputUsername, String inputPassword)
     {
         readExistingData();
         String inspectedUsername;
         String inspectedPassword;
-        String passwordStr = new String(inputPassword);
         try {
             for (JsonElement jsonElement : jsonArray)
             {
@@ -77,7 +76,7 @@ public abstract class dataHandling extends JFrame
                 for (JsonElement element : passwordArray) {
                     inspectedPassword += element.getAsString();
                 }
-                if (inspectedUsername.equals(inputUsername) && inspectedPassword.equals(passwordStr))
+                if (inspectedUsername.equals(inputUsername) && inspectedPassword.equals(inputPassword))
                 {
                     return true;
                 }
