@@ -3,17 +3,21 @@ package MainPackage;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ChessBoardHistory extends ChessBoardBASE {
 
     public JTextArea movesText;
+    public IconsAndColors icon = new IconsAndColors();
     private String[] moves;
     dataHandling d;
     private int movesCount = 0;
     JButton nextMove;
     JButton previousMove;
-    
+    private boolean turn = true;
+
     public ChessBoardHistory(String[] moves,User mainUser,String oppUserName,String side)
     {
         isgame = false;
@@ -31,9 +35,43 @@ public class ChessBoardHistory extends ChessBoardBASE {
         initialize();
         setMovesText();
         show();
+        initializePieces();
     }
 
-
+    private void initializePieces() {
+        this.getButton("A2").setIcon(this.icon.white_pawn);
+        this.getButton("B2").setIcon(this.icon.white_pawn);
+        this.getButton("C2").setIcon(this.icon.white_pawn);
+        this.getButton("D2").setIcon(this.icon.white_pawn);
+        this.getButton("E2").setIcon(this.icon.white_pawn);
+        this.getButton("F2").setIcon(this.icon.white_pawn);
+        this.getButton("G2").setIcon(this.icon.white_pawn);
+        this.getButton("H2").setIcon(this.icon.white_pawn);
+        this.getButton("A7").setIcon(this.icon.black_pawn);
+        this.getButton("B7").setIcon(this.icon.black_pawn);
+        this.getButton("C7").setIcon(this.icon.black_pawn);
+        this.getButton("D7").setIcon(this.icon.black_pawn);
+        this.getButton("E7").setIcon(this.icon.black_pawn);
+        this.getButton("F7").setIcon(this.icon.black_pawn);
+        this.getButton("G7").setIcon(this.icon.black_pawn);
+        this.getButton("H7").setIcon(this.icon.black_pawn);
+        this.getButton("A8").setIcon(this.icon.black_rook);
+        this.getButton("B8").setIcon(this.icon.black_knight);
+        this.getButton("C8").setIcon(this.icon.black_bishop);
+        this.getButton("D8").setIcon(this.icon.black_queen);
+        this.getButton("E8").setIcon(this.icon.black_king);
+        this.getButton("F8").setIcon(this.icon.black_bishop);
+        this.getButton("G8").setIcon(this.icon.black_knight);
+        this.getButton("H8").setIcon(this.icon.black_rook);
+        this.getButton("A1").setIcon(this.icon.white_rook);
+        this.getButton("B1").setIcon(this.icon.white_knight);
+        this.getButton("C1").setIcon(this.icon.white_bishop);
+        this.getButton("D1").setIcon(this.icon.white_queen);
+        this.getButton("E1").setIcon(this.icon.white_king);
+        this.getButton("F1").setIcon(this.icon.white_bishop);
+        this.getButton("G1").setIcon(this.icon.white_knight);
+        this.getButton("H1").setIcon(this.icon.white_rook);
+    }
 
     public void setMovesText(){
 
@@ -44,7 +82,7 @@ public class ChessBoardHistory extends ChessBoardBASE {
         movesText.setForeground(ic.mainColor);
         movesText.setFont(new Font("Space Grotesk", Font.BOLD, 15*width/1440));
 
-        movesText.setText(moves[0]+" ");
+        movesText.setText(" ");
 
 //        JScrollPane scroll = new JScrollPane (movesText,
 //                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -57,31 +95,15 @@ public class ChessBoardHistory extends ChessBoardBASE {
     }
 
     private void writeMoves(){
-            movesText.selectAll();
-            movesText.replaceSelection(moves[0]+" ");
-        for (int i = 1 ; i<= movesCount; i++) {
+        movesText.selectAll();
+        movesText.replaceSelection(" ");
+        for (int i = 0 ; i < movesCount; i++) {
             movesText.append(moves[i] + " ");
 //            movesCount++;
             System.out.println(i);
             if (i == 8) movesText.append("\n");
         }
 
-    }
-
-
-    public static void main(String []args)
-    {
-//        ChessBoardHistory c = new ChessBoardHistory();
-//
-//        c.setDead(6,true);
-//        c.setDead(6,true);
-//        c.setDead(2,false);
-//        c.setDead(6,true);
-//        c.setDead(3,false);
-//        String[] movey=new String[] {"jbfbs", "jbfsb", "665fn"};
-//
-//        c.readMoves(movey);
-//        c.show();
     }
     @Override
     protected void setButtons() {
@@ -102,34 +124,66 @@ public class ChessBoardHistory extends ChessBoardBASE {
         base.add(nextMove, Integer.valueOf(3));
         container.add(previousMove);
     }
-
+    public void reviewMove(String move){
+        ArrayList<String> moveInfo = new ArrayList<>(List.of(move.split(",")));
+        if(moveInfo.size() == 2){
+            move_piece(moveInfo.get(0),moveInfo.get(1));
+        }
+        else{
+            ArrayList<String> eat =new ArrayList<>(List.of(moveInfo.get(1).split("x")));
+            move_piece(moveInfo.get(0),eat.get(1));
+            setDead(getPieceId(moveInfo.get(2)),!turn);
+        }
+        turn = !turn;
+    }
+    public void backTrack(String move){
+        ArrayList<String> threeInfos = new ArrayList<>(List.of(move.split(",")));
+        if(threeInfos.size() == 2){
+            move_piece(threeInfos.get(1),threeInfos.get(0));
+        }
+        else{
+            ArrayList<String> eat =new ArrayList<>(List.of(threeInfos.get(1).split("x")));
+            move_piece(eat.get(1),threeInfos.get(0));
+            getButton(eat.get(1)).setIcon(PieceIcon(threeInfos.get(2),turn));
+        }
+        turn = !turn;
+    }
+    public int getPieceId(String name){
+        return switch (name) {
+            case "R" -> 1;
+            case "k" -> 2;
+            case "B" -> 3;
+            case "Q" -> 4;
+            case "K" -> 5;
+            default -> 6;
+        };
+    }
     @Override
-        public void mouseClicked(MouseEvent e) {
-            if(e.getSource() == nextMove){
-
-
-                System.out.println("it's me MAARIOOOO");
-                movesCount++;
-
-            }
+    public void mouseClicked(MouseEvent e) {
+        if(e.getSource() == nextMove){
+            if(movesCount == moves.length)return;
+            reviewMove(moves[movesCount]);
+            movesCount++;
+        }
         if(e.getSource() == previousMove){
-            System.out.println("it's me MAARIOOOO");
+            if(movesCount == 0)return;
             movesCount--;
+            backTrack(moves[movesCount]);
 
         }
 
-        if (movesCount >= moves.length-1){
+        if (movesCount >= moves.length){
             nextMove.setForeground(Color.gray);
             nextMove.setEnabled(false);
-            movesCount = 5;
-        }else if (movesCount<moves.length-1){
+            //movesCount = 5;
+        }else {
             nextMove.setEnabled(true);
             nextMove.setForeground(Color.decode("#FF006E"));
         }
         if(movesCount<=0){
             previousMove.setEnabled(false);
             previousMove.setForeground(Color.gray);
-            movesCount=0;
+            // movesCount=0;
         }else {
             previousMove.setEnabled(true);
             previousMove.setForeground(Color.decode("#FF006E"));

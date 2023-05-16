@@ -4,9 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseListener;
+import java.util.Objects;
 
 public abstract class ChessBoardBASE implements MouseListener {
-    protected JFrame  board;
+    protected JFrame board;
     protected JLayeredPane base = new JLayeredPane();
     protected GameLauncher game;
     public boolean isgame;
@@ -39,7 +40,7 @@ public abstract class ChessBoardBASE implements MouseListener {
         ic = newIconsAndColors;
     }
     public void initialize() {
-        //
+
         initialize_board();
         setButtons();
         draw_chessBoard();
@@ -94,7 +95,7 @@ public abstract class ChessBoardBASE implements MouseListener {
                 ChessBoardPanel.add(pos[i][j]);
             }
     }
-    protected JButton createButton(String name,String ref, String filename, int x , int y,String color) 
+    protected JButton createButton(String name,String ref, String filename, int x , int y,String color)
     {
         JButton temp = new JButton(name);
         temp.setName(ref);
@@ -133,15 +134,22 @@ public abstract class ChessBoardBASE implements MouseListener {
     public void setClock(GameLauncher gl){
         this.game = gl;
     }
+
+    public void reviewMove() {
+
+    }
+
     private void action() {
         button.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton temp = (JButton)e.getSource();
                 current = temp.getName();
-                ChessBoard.drawOffer = 0;
-                ChessBoard.drawSide = 0;
-                game.Clock(current);
+                if(isgame){
+                    ChessBoard.drawOffer = 0;
+                    ChessBoard.drawSide = 0;
+                    game.Clock(current);
+                }
             }
         });
     }
@@ -367,51 +375,50 @@ public abstract class ChessBoardBASE implements MouseListener {
     public void setDead(int id , boolean side){
 
         if(side){
-            switch (id){
-                case 1:
+            switch (id) {
+                case 1 -> {
                     wR++;
                     wRookDead.setText("X" + wR);
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     wK++;
                     wKnightDead.setText("X" + wK);
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     wB++;
                     wBishopDead.setText("X" + wB);
-                    break;
-                case 4:
+                }
+                case 4 -> {
                     wQ++;
                     wQueenDead.setText("X" + wQ);
-                    break;
-                case 6:
+                }
+                case 6 -> {
                     wP++;
                     wPawnDead.setText("X" + wP);
-
-                    break;
+                }
             }
         } else {
-            switch (id){
-                case 1:
+            switch (id) {
+                case 1 -> {
                     bR++;
                     bRookDead.setText("X" + bR);
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     bK++;
                     bKnightDead.setText("X" + bK);
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     bB++;
                     bBishopDead.setText("X" + bB);
-                    break;
-                case 4:
+                }
+                case 4 -> {
                     bQ++;
                     bQueenDead.setText("X" + bQ);
-                    break;
-                case 6:
+                }
+                case 6 -> {
                     bP++;
                     bPawnDead.setText("X" + bP);
-                    break;
+                }
             }
 
         }
@@ -546,17 +553,36 @@ public abstract class ChessBoardBASE implements MouseListener {
 
     }
     public String toPieceChar(int id){
-             if(id == 1)return "R";
-             else if(id == 2)return "k";
-             else if(id == 3)return "B";
-             else if(id == 4)return "Q";
-             else if(id == 5)return "K";
+        if(id == 1)return "R";
+        else if(id == 2)return "k";
+        else if(id == 3)return "B";
+        else if(id == 4)return "Q";
+        else if(id == 5)return "K";
         return "P";
     }
-
-
-
-//     Functions to take users from chessboard
+    public Icon PieceIcon(String piece , boolean side){
+        if(Objects.equals(piece, "P")){
+            if(side)return ic.white_pawn;
+            else return ic.black_pawn;
+        }if(Objects.equals(piece, "Q")){
+            if(side)return ic.white_queen;
+            else return ic.black_queen;
+        }if(Objects.equals(piece, "K")){
+            if(side)return ic.white_king;
+            else return ic.black_king;
+        }if(Objects.equals(piece, "k")){
+            if(side)return ic.white_knight;
+            else return ic.black_knight;
+        }if(Objects.equals(piece, "B")){
+            if(side)return ic.white_bishop;
+            else return ic.black_bishop;
+        }if(Objects.equals(piece, "R")){
+            if(side)return ic.white_rook;
+            else return ic.black_rook;
+        }
+        return null;
+    }
+    //     Functions to take users from chessboard
     public void takeUsers(User mainUser,User oppUser)
     {
         this.mainUser=mainUser;
