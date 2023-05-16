@@ -2,6 +2,8 @@ package MainPackage;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -50,6 +52,26 @@ public class LoginPage extends Window implements MouseListener {
 
          usernameField = createTextField("username", 40);
          passwordField = createPassField();
+
+         //function to prevent Spaces
+         passwordField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (e.getKeyChar() == ' ') {
+                    e.consume();
+                    System.out.println("Spaces are not allowed in password"); 
+                    //ya talalinho 7ot deh fel gui
+                }
+            }
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+
         fieldsPanel.add(usernameField);
         fieldsPanel.add(passwordField);
 
@@ -103,8 +125,9 @@ public class LoginPage extends Window implements MouseListener {
             //this user is simply the one logging in and will always be the main user
             // because no need for the user who wants to be added from gamestart to log in
             // If he already exists, his name will be in the combobox
-            User logUser=new User(usernameField.getText(),passwordField.getPassword());
-            if (checkCredentials(logUser.getName(), logUser.getPass()))
+            String passwordStr = new String (passwordField.getPassword());
+            User logUser=new User(usernameField.getText(),passwordStr);
+            if (checkCredentials(logUser.getName().trim() , logUser.getPass()))
             {
                 frame.setVisible(false);
                 System.out.println("true");

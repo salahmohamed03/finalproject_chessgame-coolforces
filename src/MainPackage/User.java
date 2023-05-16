@@ -5,12 +5,12 @@ import java.util.Arrays;
 
 public class User {
     private String Username;
-    private char[] Password;
+    private String Password;
     public double WinRate;
     public ArrayList<Match> matches = new ArrayList<>();
     
     //Constructor to intialize username and password
-    public User(String Username, char[] Password)
+    public User(String Username, String Password)
     {
         this.Username=Username;
         this.Password=Password;
@@ -21,7 +21,7 @@ public class User {
         return Username;
     }
 
-    public char[] getPass()
+    public String getPass()
     {
         return Password;
     }

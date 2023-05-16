@@ -6,6 +6,8 @@ import java.util.List;
 import javax.print.DocFlavor.READER;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -97,6 +99,26 @@ public class Register extends Window implements MouseListener{
 
          usernameField = createTextField("username", 50);
          passwordField = createPassField();
+         //function to prevent Spaces
+         passwordField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (e.getKeyChar() == ' ') {
+                    e.consume();
+                    System.out.println("Spaces are not allowed in password"); 
+                    //ya talalinho 7ot deh fel gui
+                }
+            }
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+
+
         fieldsPanel.add(usernameField);
         fieldsPanel.add(passwordField);
 
@@ -148,12 +170,13 @@ public class Register extends Window implements MouseListener{
         {
             if (!usernameField.getText().equals("username"))
            {
-               User regUser=new User(usernameField.getText(),passwordField.getPassword());
-               if (checkCredentials(regUser.getName(), regUser.getPass()))
+                String passwordStr = new String (passwordField.getPassword());
+                User regUser=new User(usernameField.getText() , passwordStr);
+               if (checkCredentials(regUser.getName().trim(), regUser.getPass()))
                {
                     System.out.println("This player already exists.Login instead."); 
                }
-               else if (checkUsername(regUser.getName()))
+               else if (checkUsername(regUser.getName().trim()))
                {
                     addAndWriteNewData(regUser);
                     //g.initializeWithUser(mainUser);
@@ -184,7 +207,8 @@ public class Register extends Window implements MouseListener{
     }
 
     
-
+    
+    
     
 
     @Override
