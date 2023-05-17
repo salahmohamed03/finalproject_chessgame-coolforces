@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import data.*;
+import gamePlay.*;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -21,18 +22,18 @@ public abstract class Window extends dataHandling implements MouseListener {
     public GameStart gameStartLocal;
     public Settings settingsLocal;
     public History historyLocal;
-    protected JButton pinkColor;
-    protected JButton blueColor;
-    JFrame frame;
-    int width, height;
+    public JButton pinkColor;
+    public JButton blueColor;
+    public JFrame frame;
+    public int width, height;
 //    int u = width/1440;
 
-    JLayeredPane  base;
+    protected    JLayeredPane  base;
 
 
-    private ImageIcon backG_image;
-    private JLabel backG;
-    JButton backBtn;
+    protected ImageIcon backG_image;
+    protected JLabel backG;
+    protected JButton backBtn;
     public User mainUser;
 
 
@@ -130,8 +131,8 @@ public abstract class Window extends dataHandling implements MouseListener {
             public void keyTyped(KeyEvent e) {
                 if (e.getKeyChar() == ' ') {
                     e.consume();
-                    registerLocal.denyAccess();
-                    registerLocal.incrorrect.setText("Spaces are not allowed in password");
+                    System.out.println("Spaces are not allowed in password");
+                    //ya talalinho 7ot deh fel gui
                 }
             }
             @Override
