@@ -37,6 +37,7 @@ public abstract class Piece {
     }
     public String transport(String p2,ArrayList<Piece> pieces,boolean enemy){
         String move = position;
+        String castlingMove = "";
         if(enemy){
             int Id = Board.getPieceInfo(p2).id;
             boolean Side = Board.getPieceInfo(p2).side;
@@ -75,6 +76,7 @@ public abstract class Piece {
             String rookPos = pieceSide?"H1":"H8";
             String rookPosA = pieceSide?"F1":"F8";
             Board.move_piece(rookPos,rookPosA);
+            castlingMove = rookPos +","+ rookPosA;
             for(Piece p:pieces){
                 if(pieceSide == p.pieceSide && p.position.equals(rookPos)){
                     p.position = rookPosA;
@@ -89,6 +91,7 @@ public abstract class Piece {
             String rookPos = pieceSide?"A1":"A8";
             String rookPosA = pieceSide?"D1":"D8";
             Board.move_piece(rookPos,rookPosA);
+            castlingMove = rookPos +","+ rookPosA;
             for(Piece p:pieces){
                 if(pieceSide == p.pieceSide && p.position.equals(rookPos)){
                     p.position = rookPosA;
@@ -150,6 +153,7 @@ public abstract class Piece {
         if(!enemy){
             move += "," + position;
         }
+        move = (castlingMove.equals(""))? move : move + "," + castlingMove;
         return move;
     }
     public abstract ArrayList<String> ValidMoves();

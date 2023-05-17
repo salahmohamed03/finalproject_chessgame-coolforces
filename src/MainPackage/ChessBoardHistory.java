@@ -126,27 +126,74 @@ public class ChessBoardHistory extends ChessBoardBASE {
     }
     public void reviewMove(String move){
         ArrayList<String> moveInfo = new ArrayList<>(List.of(move.split(",")));
-        if(moveInfo.size() == 2){
+        if(moveInfo.size() == 2){ //normal move
             move_piece(moveInfo.get(0),moveInfo.get(1));
         }
-        else{
+
+        if(moveInfo.get(1).length() == 4){ // eating move
             ArrayList<String> eat =new ArrayList<>(List.of(moveInfo.get(1).split("x")));
             move_piece(moveInfo.get(0),eat.get(1));
             setDead(getPieceId(moveInfo.get(2)),!turn);
         }
+        else if(moveInfo.size() == 3){ // normal move promotion
+            move_piece(moveInfo.get(0),moveInfo.get(1));
+            getButton(moveInfo.get(1)).setIcon(PieceIcon(moveInfo.get(2),turn));
+        }
+
+         if(moveInfo.size() == 4){
+            if(moveInfo.get(3).length() == 2){ // castling
+                move_piece(moveInfo.get(0),moveInfo.get(1));
+                move_piece(moveInfo.get(2),moveInfo.get(3));
+            }
+            else { // promotion eating
+                ArrayList<String> eat =new ArrayList<>(List.of(moveInfo.get(1).split("x")));
+                getButton(eat.get(1)).setIcon(PieceIcon(moveInfo.get(3),turn));
+            }
+        }
         turn = !turn;
     }
     public void backTrack(String move){
-        ArrayList<String> threeInfos = new ArrayList<>(List.of(move.split(",")));
-        if(threeInfos.size() == 2){
-            move_piece(threeInfos.get(1),threeInfos.get(0));
+
+        ArrayList<String> moveInfo = new ArrayList<>(List.of(move.split(",")));
+        if(moveInfo.size() == 2){ //normal move
+            move_piece(moveInfo.get(1),moveInfo.get(0));
         }
-        else{
-            ArrayList<String> eat =new ArrayList<>(List.of(threeInfos.get(1).split("x")));
-            move_piece(eat.get(1),threeInfos.get(0));
-            getButton(eat.get(1)).setIcon(PieceIcon(threeInfos.get(2),turn));
+
+        if(moveInfo.get(1).length() == 4){ // eating move
+            ArrayList<String> eat =new ArrayList<>(List.of(moveInfo.get(1).split("x")));
+            move_piece(moveInfo.get(0),eat.get(1));
+            setDead(getPieceId(moveInfo.get(2)),!turn);
         }
-        turn = !turn;
+        else if(moveInfo.size() == 3){ // normal move promotion
+            move_piece(moveInfo.get(0),moveInfo.get(1));
+            getButton(moveInfo.get(1)).setIcon(PieceIcon(moveInfo.get(2),turn));
+        }
+
+        if(moveInfo.size() == 4){
+            if(moveInfo.get(3).length() == 2){ // castling
+                move_piece(moveInfo.get(0),moveInfo.get(1));
+                move_piece(moveInfo.get(2),moveInfo.get(3));
+            }
+            else { // promotion eating
+                ArrayList<String> eat =new ArrayList<>(List.of(moveInfo.get(1).split("x")));
+                getButton(eat.get(1)).setIcon(PieceIcon(moveInfo.get(3),turn));
+            }
+        }
+
+
+
+
+
+//        ArrayList<String> threeInfos = new ArrayList<>(List.of(move.split(",")));
+//        if(threeInfos.size() == 2){ // normal
+//            move_piece(threeInfos.get(1),threeInfos.get(0));
+//        }
+//        else{
+//            ArrayList<String> eat =new ArrayList<>(List.of(threeInfos.get(1).split("x")));
+//            move_piece(eat.get(1),threeInfos.get(0));
+//            getButton(eat.get(1)).setIcon(PieceIcon(threeInfos.get(2),turn));
+//        }
+//        turn = !turn;
     }
     public int getPieceId(String name){
         return switch (name) {

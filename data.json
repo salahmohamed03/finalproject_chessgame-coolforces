@@ -39,6 +39,74 @@
           "H5,H4",
           "F4,F7"
         ]
+      },
+      {
+        "oppUserStr": "VS i,",
+        "result": "Win",
+        "color": "Black",
+        "moves": [
+          "F2,F4",
+          "F7,F5",
+          "D1,F3"
+        ]
+      },
+      {
+        "oppUserStr": "VS salah",
+        "result": "Win",
+        "color": "Black",
+        "moves": [
+          "H2,H4",
+          "G7,G5",
+          "H4,H5",
+          "G5,G4",
+          "H5,H6",
+          "G4,G3",
+          "H6,PxH7,P",
+          "G3,PxG2,P",
+          "H7,PxH8,R,Q"
+        ]
+      },
+      {
+        "oppUserStr": "VS salah",
+        "result": "Defeat",
+        "color": "Black",
+        "moves": [
+          "F1,D3,",
+          "E7,E5,",
+          "G1,E4,",
+          "E5,PxE4,k,",
+          "E1,G1"
+        ]
+      },
+      {
+        "oppUserStr": "VS salah",
+        "result": "Defeat",
+        "color": "Black",
+        "moves": [
+          "F1,D3",
+          "H7,H5",
+          "G1,E4",
+          "H5,H4",
+          "E1,G1,H1F1"
+        ]
+      },
+      {
+        "oppUserStr": "VS salah",
+        "result": "Defeat",
+        "color": "Black",
+        "moves": [
+          "H2,H4",
+          "G8,D6",
+          "H4,H5",
+          "F8,C5",
+          "H5,H6",
+          "E8,G8,H8,F8",
+          "H1,H5",
+          "G7,G6",
+          "H6,PxH7,P",
+          "G8,G7",
+          "H7,H8,Q"
+        ]
       }
     ]
   },
@@ -82,6 +150,64 @@
           "H5,H4",
           "F4,F7"
         ]
+      },
+      {
+        "oppUserStr": "VS guest",
+        "result": "Defeat",
+        "color": "White",
+        "moves": [
+          "H2,H4",
+          "G7,G5",
+          "H4,H5",
+          "G5,G4",
+          "H5,H6",
+          "G4,G3",
+          "H6,PxH7,P",
+          "G3,PxG2,P",
+          "H7,PxH8,R,Q"
+        ]
+      },
+      {
+        "oppUserStr": "VS guest",
+        "result": "Win",
+        "color": "White",
+        "moves": [
+          "F1,D3,",
+          "E7,E5,",
+          "G1,E4,",
+          "E5,PxE4,k,",
+          "E1,G1"
+        ]
+      },
+      {
+        "oppUserStr": "VS guest",
+        "result": "Win",
+        "color": "White",
+        "moves": [
+          "F1,D3",
+          "H7,H5",
+          "G1,E4",
+          "H5,H4",
+          "E1,G1,H1F1"
+        ]
+      },
+      {
+        "oppUserStr": "VS guest",
+        "result": "Win",
+        "color": "White",
+        "moves": [
+          "H2,H4",
+          "G8,D6",
+          "H4,H5",
+          "F8,C5",
+          "H5,H6",
+          "E8,G8,H8,F8",
+          "H1,H5",
+          "G7,G6",
+          "H6,PxH7,P",
+          "G8,G7",
+          "H7,H8,Q"
+        ]
       }
     ]
   },
@@ -96,5 +222,22 @@
     "Password": "mohamed",
     "WinRate": 0.0,
     "matches": []
+  },
+  {
+    "Username": "i,",
+    "Password": "th",
+    "WinRate": 0.0,
+    "matches": [
+      {
+        "oppUserStr": "VS guest",
+        "result": "Defeat",
+        "color": "White",
+        "moves": [
+          "F2,F4",
+          "F7,F5",
+          "D1,F3"
+        ]
+      }
+    ]
   }
 ]

@@ -212,24 +212,40 @@ public class GameActions implements MouseListener{
                     selected = 3;
                     gl.gameStatus = true;
                     gl.promote(gl.posProm,gl.turnProm,selected);
+                    String temp = gl.gameMoves.get(gl.gameMoves.size()-1);
+                    temp+= ",B";
+                    gl.gameMoves.remove(gl.gameMoves.size()-1);
+                    gl.gameMoves.add(temp);
                     promoteDispose();
                 } else if (e.getSource() == queenP) {
                     System.out.println("Queen");
                     selected = 4;
                     gl.gameStatus = true;
                     gl.promote(gl.posProm,gl.turnProm,selected);
+                    String temp = gl.gameMoves.get(gl.gameMoves.size()-1);
+                    temp+= ",Q";
+                    gl.gameMoves.remove(gl.gameMoves.size()-1);
+                    gl.gameMoves.add(temp);
                     promoteDispose();
                 } else if (e.getSource() == knightP) {
                     System.out.println("Knight");
                     selected = 2;
                     gl.gameStatus = true;
                     gl.promote(gl.posProm,gl.turnProm,selected);
+                    String temp = gl.gameMoves.get(gl.gameMoves.size()-1);
+                    temp+= ",k";
+                    gl.gameMoves.remove(gl.gameMoves.size()-1);
+                    gl.gameMoves.add(temp);
                     promoteDispose();
                 } else if (e.getSource() == rookP) {
                     System.out.println("Rook");
                     selected = 1;
                     gl.gameStatus = true;
                     gl.promote(gl.posProm,gl.turnProm,selected);
+                    String temp = gl.gameMoves.get(gl.gameMoves.size()-1);
+                    temp+= ",R";
+                    gl.gameMoves.remove(gl.gameMoves.size()-1);
+                    gl.gameMoves.add(temp);
                     promoteDispose();
                 }
                 if ((e.getSource() == resultLabel)) {
