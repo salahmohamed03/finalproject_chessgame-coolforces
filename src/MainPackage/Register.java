@@ -30,34 +30,10 @@ import java.io.Writer;
 
 public class Register extends Window implements MouseListener{
 
-    //    LoginPage l ;
-//    HomePage h;
     public int previousPage;
-    //    private User mainUser;
-    public JPasswordField passwordField;
-    public JTextField usernameField;
-    public JButton submit;
-
-
-    // The following three code will create an empty JSON array of objects
-
-
-    //JsonWriter arrWriter=new JsonWriter(writer);
-    //Gson gsonWriter =  new Gson(); // object used to writer the array
-
-//    public Register(User mainUser)
-//    {
-//        initialize();
-//        this.mainUser = mainUser;
-//        //this constructor will be called from GameStart
-//        //it takes the main user so it keeps his authority
-//    }
-
-
-//    public Register(){
-//        initialize();
-//        //this one will be called from LoginPage
-//    }
+    private JPasswordField passwordField;
+    private JTextField usernameField;
+    private JButton submit;
 
 
     @Override
@@ -138,11 +114,11 @@ public class Register extends Window implements MouseListener{
             frame.setVisible(false);
             if( previousPage==0)
             {
-                l.initialize();
+                loginLocal.initialize();
             }
             if( previousPage==1)
             {
-                // GameStart c =new GameStart(mainUser);
+                this.frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             }
         }
 
@@ -169,13 +145,13 @@ public class Register extends Window implements MouseListener{
                     {
                         //program will go to gameStart again
                         System.out.println(mainUser.getName());
-                        g.initializeWithUser(mainUser);
+                        gameStartLocal.initializeWithUser(mainUser);
                     }
                     else  // here this is the typical registration
                     //the regUser will be the mainUser
                     {
                         //HomePage H=new HomePage(regUser);
-                        h.initializeWithUser(regUser);
+                        homeLocal.initializeWithUser(regUser);
                     }
                     this.dispose();
                 }

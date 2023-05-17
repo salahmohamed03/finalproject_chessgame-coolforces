@@ -108,7 +108,7 @@ public class Settings extends Window {
     public void mouseClicked(MouseEvent e) {
         if(e.getSource()==backBtn){
             frame.setVisible(false);
-            h.initializeWithUser(mainUser);
+            homeLocal.initializeWithUser(mainUser);
         }
         //SCREEN SIZE
         if(e.getSource() == bigScreenSize){

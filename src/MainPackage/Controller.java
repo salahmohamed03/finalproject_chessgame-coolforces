@@ -15,16 +15,11 @@ public class Controller implements MouseListener {
         GameStart gameStartControl = new GameStart();
         Settings settingsControl = new Settings();
         GameActions.ic=icC;
-       // GameLauncher gameLauncherControl = new GameLauncher(); //see it in the GAME LAUNCHER
-
-//        GameActions gameActionsControl = new GameActions();
 
         setLink(loginControl , registerControl, icC , homePageControl , gameStartControl, historyControl, settingsControl );
 
 
         loginControl.initialize();
-
-        System.out.println("done");
 
 
     }
@@ -32,16 +27,22 @@ public class Controller implements MouseListener {
         //XC for the page in this method
         //.x small is th page referance in each window
         // names will be change soon but to make it easier in typing
+
+
         loginLink.ic = registerLink.ic= homepageLink.ic= gameStartLink.ic=  historyLink.ic=settingsLink.ic= iconsColorsLink;
-        homepageLink.g = registerLink.g =  gameStartLink;
+
+
+
+        homepageLink.gameStartLocal = registerLink.gameStartLocal =  gameStartLink;
+
 //        ChessBoard.setGameStart(gameStartLink);
-        loginLink.h=registerLink.h=gameStartLink.h=settingsLink.h= homepageLink;
-        homepageLink.hist = historyLink;
-        registerLink.l= homepageLink.l = loginLink;
-        loginLink.r = homepageLink.r= gameStartLink.r = registerLink;
+        loginLink.homeLocal=registerLink.homeLocal=gameStartLink.homeLocal=settingsLink.homeLocal= homepageLink;
+        homepageLink.historyLocal = historyLink;
+        registerLink.loginLocal= homepageLink.loginLocal = loginLink;
+        loginLink.registerLocal = homepageLink.registerLocal= gameStartLink.registerLocal = registerLink;
         ChessBoardBASE.setIconsAndColors(iconsColorsLink);
         ChessBoard.gs= gameStartLink;
-        homepageLink.s=settingsLink;
+        homepageLink.settingsLocal=settingsLink;
 
 //        gameStartLink.gL= gameActionsLink.gl=gameLauncherLink;
 //        gameLauncherLink.actions = gameActionsLink;

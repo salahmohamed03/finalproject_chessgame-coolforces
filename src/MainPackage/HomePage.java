@@ -217,17 +217,17 @@ public class HomePage extends Window implements MouseListener {
     public void mouseClicked(MouseEvent e) {
 
         if (e.getSource()==history){
-            hist.initialize(mainUser);
+            historyLocal.initialize(mainUser);
         }else{
             frame.setVisible(false);
             if (e.getSource()==newGame){
-                g.initializeWithUser(mainUser);
+                gameStartLocal.initializeWithUser(mainUser);
             }
             if (e.getSource()==settings){
-                s.initializeWithUser(mainUser);
+                settingsLocal.initializeWithUser(mainUser);
             }
             if (e.getSource()==logOut){
-                l.initialize();
+                loginLocal.initialize();
             }
         }
     }

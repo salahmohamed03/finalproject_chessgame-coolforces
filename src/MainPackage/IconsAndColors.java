@@ -102,6 +102,7 @@ public class IconsAndColors {
         white_queen =new ImageIcon( temp55.getImage().getScaledInstance(42, 45, Image.SCALE_SMOOTH));
         ImageIcon temp66 = new ImageIcon("src/Mat/Comp/game/White/rock.png");
         white_rook =new ImageIcon( temp66.getImage().getScaledInstance(42, 45, Image.SCALE_SMOOTH));
+
         black_pawnN   = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/pawnN.png"),66  *width/870,57 *width/870);
         black_bishopN = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/bishopN.png"),66 *width/870,57 *width/870);
         black_kingN   = this.Resize(new ImageIcon("src/Mat/Comp/game/Black/kingN.png"),66 *width/870,57 *width/870);
