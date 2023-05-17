@@ -139,6 +139,53 @@
           "G8,D6",
           "H7,H8,k"
         ]
+      },
+      {
+        "oppUserStr": "VS salah",
+        "result": "Win",
+        "color": "Black",
+        "moves": [
+          "G2,G4",
+          "F7,F5",
+          "G4,G5",
+          "G8,D6",
+          "G5,G6",
+          "F8,C5",
+          "G6,PxG7,P",
+          "F5,F4",
+          "G7,G8,Q",
+          "H8,RxG8,Q",
+          "G1,E4",
+          "G8,G1",
+          "H1,RxG1,R",
+          "D6,G4",
+          "G1,RxG4,k",
+          "C5,D4",
+          "F2,F3",
+          "F4,PxF3,P",
+          "E4,H6",
+          "E8,F8",
+          "G4,G5",
+          "D4,F2"
+        ]
+      },
+      {
+        "oppUserStr": "VS salah",
+        "result": "Defeat",
+        "color": "White",
+        "moves": [
+          "D1,G4",
+          "G7,G5",
+          "G1,E4"
+        ]
+      },
+      {
+        "oppUserStr": "VS salah",
+        "result": "Defeat",
+        "color": "White",
+        "moves": [
+          "H2,H4"
+        ]
       }
     ]
   },
@@ -271,6 +318,53 @@
           "H6,H7",
           "G8,D6",
           "H7,H8,k"
+        ]
+      },
+      {
+        "oppUserStr": "VS guest",
+        "result": "Defeat",
+        "color": "White",
+        "moves": [
+          "G2,G4",
+          "F7,F5",
+          "G4,G5",
+          "G8,D6",
+          "G5,G6",
+          "F8,C5",
+          "G6,PxG7,P",
+          "F5,F4",
+          "G7,G8,Q",
+          "H8,RxG8,Q",
+          "G1,E4",
+          "G8,G1",
+          "H1,RxG1,R",
+          "D6,G4",
+          "G1,RxG4,k",
+          "C5,D4",
+          "F2,F3",
+          "F4,PxF3,P",
+          "E4,H6",
+          "E8,F8",
+          "G4,G5",
+          "D4,F2"
+        ]
+      },
+      {
+        "oppUserStr": "VS guest",
+        "result": "Win",
+        "color": "Black",
+        "moves": [
+          "D1,G4",
+          "G7,G5",
+          "G1,E4"
+        ]
+      },
+      {
+        "oppUserStr": "VS guest",
+        "result": "Win",
+        "color": "Black",
+        "moves": [
+          "H2,H4"
         ]
       }
     ]
