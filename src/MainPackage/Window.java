@@ -20,18 +20,18 @@ public abstract class Window extends dataHandling implements MouseListener {
     GameStart gameStartLocal;
     Settings settingsLocal;
     History historyLocal;
-    public JButton pinkColor;
-    public JButton blueColor;
-    public JFrame frame;
-    public int width, height;
+    protected JButton pinkColor;
+    protected JButton blueColor;
+     JFrame frame;
+     int width, height;
 //    int u = width/1440;
 
-    protected    JLayeredPane  base;
+        JLayeredPane  base;
 
 
-    protected ImageIcon backG_image;
-    protected JLabel backG;
-    protected JButton backBtn;
+     private ImageIcon backG_image;
+    private JLabel backG;
+     JButton backBtn;
     public User mainUser;
 
 
@@ -129,8 +129,8 @@ public abstract class Window extends dataHandling implements MouseListener {
             public void keyTyped(KeyEvent e) {
                 if (e.getKeyChar() == ' ') {
                     e.consume();
-                    System.out.println("Spaces are not allowed in password");
-                    //ya talalinho 7ot deh fel gui
+                    registerLocal.denyAccess();
+                    registerLocal.incrorrect.setText("Spaces are not allowed in password");
                 }
             }
             @Override

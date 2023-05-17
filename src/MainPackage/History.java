@@ -189,8 +189,6 @@ public class History extends dataHandling implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
-
     }
 
     @Override

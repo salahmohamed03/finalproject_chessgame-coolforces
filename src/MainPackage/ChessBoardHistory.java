@@ -84,9 +84,6 @@ public class ChessBoardHistory extends ChessBoardBASE {
 
         movesText.setText(" ");
 
-//        JScrollPane scroll = new JScrollPane (movesText,
-//                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-
         base.add(movesText, Integer.valueOf(1));
     }
     public  void readMoves(String[] movesArray)
@@ -99,8 +96,6 @@ public class ChessBoardHistory extends ChessBoardBASE {
         movesText.replaceSelection(" ");
         for (int i = 0 ; i < movesCount; i++) {
             movesText.append(moves[i] + " ");
-//            movesCount++;
-            System.out.println(i);
             if (i == 8) movesText.append("\n");
         }
 
@@ -108,18 +103,12 @@ public class ChessBoardHistory extends ChessBoardBASE {
     @Override
     protected void setButtons() {
 
-//        JPanel btns = new JPanel();
-//        btns.setLayout(new GridLayout(1, 2 ,10 * width/1440,0));
-//
-//        btns.setBackground(ic.black);
+
         previousMove = createButton("Prev","pM","src/Mat/Buttons/drawBtn.png",635 *width/870,340 *width/870,"#FF006E");
         nextMove = createButton("Next","nM","src/Mat/Buttons/resignBtn.png",725 *width/870,340 *width/870,"#FF006E");
-        nextMove.setForeground(Color.BLUE);
 
         nextMove.addMouseListener(this);
         previousMove.addMouseListener(this);
-//        movesPanel.add(nextMove);
-//        movesPanel.add(previousMove);
 
         base.add(nextMove, Integer.valueOf(3));
         container.add(previousMove);
@@ -185,17 +174,6 @@ public class ChessBoardHistory extends ChessBoardBASE {
 
 
 
-
-//        ArrayList<String> threeInfos = new ArrayList<>(List.of(move.split(",")));
-//        if(threeInfos.size() == 2){ // normal
-//            move_piece(threeInfos.get(1),threeInfos.get(0));
-//        }
-//        else{
-//            ArrayList<String> eat =new ArrayList<>(List.of(threeInfos.get(1).split("x")));
-//            move_piece(eat.get(1),threeInfos.get(0));
-//            getButton(eat.get(1)).setIcon(PieceIcon(threeInfos.get(2),turn));
-//        }
-//        turn = !turn;
     }
     public int getPieceId(String name){
         return switch (name) {
@@ -219,6 +197,9 @@ public class ChessBoardHistory extends ChessBoardBASE {
             movesCount--;
             backTrack(moves[movesCount]);
 
+        }
+        if(e.getSource()== backBtn){
+            board.setVisible(false);
         }
 
         if (movesCount >= moves.length){

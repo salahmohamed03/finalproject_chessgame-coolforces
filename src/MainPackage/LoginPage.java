@@ -14,10 +14,11 @@ public class LoginPage extends Window implements MouseListener {
 
     private JButton loginBtn;
     private JButton registerBtn;
+    protected JLabel incrorrect;
 
     @Override
     protected void setupWindow() {
-        setBackG(ic.colorPath+"BackG/loginFields.png"); //"src/Mat/Backg..........."
+        setBackG(ic.colorPath+"BackG/loginFields.png");
         setHeader();
         setFields();
         setBtns();
@@ -73,8 +74,8 @@ public class LoginPage extends Window implements MouseListener {
         base.add(btnsPanel, Integer.valueOf(2));
     }
 
-    public void denyAccess(){
-        JLabel incrorrect = new JLabel("Credentials are incorrect");
+    protected void denyAccess(){
+        incrorrect = new JLabel("Credentials are incorrect");
         incrorrect.setHorizontalAlignment(SwingConstants.CENTER);
         incrorrect.setFont(new Font("Space Grotesk", Font.BOLD, 25*width/1440));
         incrorrect.setForeground(ic.mainColor);
@@ -83,6 +84,7 @@ public class LoginPage extends Window implements MouseListener {
         base.add(incrorrect, Integer.valueOf(1));
 
     }
+
 
     public static void main(String []args)
     {

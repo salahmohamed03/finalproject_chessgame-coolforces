@@ -28,26 +28,6 @@ public class HomePage extends Window implements MouseListener {
     public  JButton settings;
     public JButton logOut;
 
-    public int winsCounter;
-
-//    private User mainUser;
-
-
-//    public HomePage(User mainUser) // This constructor will always accept a main user
-//    {
-//        this.mainUser=mainUser;
-//        initialize();
-//    }
-//    public void initializeWithUser(User mainUser) // This constructor will always accept a main user
-//    {
-//        this.mainUser=mainUser;
-//        initialize();
-//    }
-//
-//    public HomePage(){
-//        initialize();
-//    }
-
     @Override
     protected void setupWindow() {
         setBackG(ic.colorPath+"BackG/main.png");
@@ -188,29 +168,6 @@ public class HomePage extends Window implements MouseListener {
 
         base.add(logOut, Integer.valueOf(1));
 
-    }
-//    private JButton createButton(String name){
-//        JButton button = new JButton(name);
-//        button.setFocusable(false);
-//        //design//
-//        button.setFont(new Font("Space Grotesk", Font.BOLD, 55*width/1440));
-//        //button.setBounds(80,30,120,40);
-//        ImageIcon buttonBackG = new ImageIcon(ic.colorPath+"Buttons/pinkBtn2.png");
-//        button.setIcon(ic.resizeWithRatio(buttonBackG));
-//        button.setHorizontalTextPosition(JButton.CENTER);
-//        button.setVerticalTextPosition(JButton.CENTER);
-//        button.setBackground(ic.black);
-//        button.setForeground(ic.white);
-//        button.setOpaque(false);
-//        button.setBorder(BorderFactory.createEmptyBorder());
-//        button.addMouseListener(this);
-//        return button;
-//    }
-
-
-    public static void main(String []args)
-    {
-        HomePage H = new HomePage();
     }
 
     @Override

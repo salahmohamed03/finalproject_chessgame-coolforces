@@ -34,6 +34,7 @@ public class Register extends Window implements MouseListener{
     private JPasswordField passwordField;
     private JTextField usernameField;
     private JButton submit;
+    protected JLabel incrorrect;
 
 
     @Override
@@ -43,6 +44,8 @@ public class Register extends Window implements MouseListener{
         setHeader();
         setFields();
         setBtns();
+
+        denyAccess();
 
     }
 
@@ -83,14 +86,11 @@ public class Register extends Window implements MouseListener{
 
         base.add(fieldsPanel, Integer.valueOf(1));
     }
-    public void denyAccess(int i){
-        JLabel incrorrect = new JLabel();
+    protected void denyAccess(){
+        incrorrect = new JLabel();
         incrorrect.setHorizontalAlignment(SwingConstants.CENTER);
         incrorrect.setFont(new Font("Space Grotesk", Font.BOLD, 25*width/1440));
         incrorrect.setForeground(ic.white);
-
-        if (i == 0) incrorrect.setText("Username is taken.Try using another username");
-        else if (i == 1) incrorrect.setText("Username should have 9 characters Maximum");
 
         incrorrect.setBounds(310*width/1440, 655*height/1024, 820*width/1440, 80*height/1024);
         base.add(incrorrect, Integer.valueOf(2));
@@ -132,7 +132,7 @@ public class Register extends Window implements MouseListener{
                 User regUser=new User(usernameField.getText().trim() , passwordStr);
                 if (checkCredentials(regUser.getName(), regUser.getPass()))
                 {
-                    System.out.println("This player already exists.Login instead.");
+                    incrorrect.setText("This player already exists.Login instead.");
                 }
                 else if (checkUsername(regUser.getName()))
                 {
@@ -150,21 +150,17 @@ public class Register extends Window implements MouseListener{
                     else  // here this is the typical registration
                     //the regUser will be the mainUser
                     {
-                        //HomePage H=new HomePage(regUser);
                         homeLocal.initializeWithUser(regUser);
                     }
                     this.dispose();
                 }
                 else
                 {
-                    denyAccess(0);
-                    System.out.println("Username is taken.Try using another username");
+                    incrorrect.setText("Username is taken.Try using another username");
                 }
             }
             else {
-                System.out.println("Username field cannot be empty nor be (username)");
-                System.out.println("password can not be empty nor be (password)");
-                /////// shoud appear in the gui
+                incrorrect.setText("Fields cannot be empty");
             }
         }
     }
