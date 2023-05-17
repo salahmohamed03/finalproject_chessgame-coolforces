@@ -177,7 +177,7 @@ public class GameStart extends Window implements MouseListener{
         if(e.getSource()==backBtn){
             frame.setVisible(false);
             System.out.println("yy");
-            h.initializeWithUser(mainUser);
+            homeLocal.initializeWithUser(mainUser);
         }
         if(e.getSource()==timerOn){
             if(timerOn.isSelected()){
@@ -214,13 +214,9 @@ public class GameStart extends Window implements MouseListener{
         }
         if (e.getSource()==addPlayerBtn)
         {
-            r.previousPage=1;
-            System.out.println(mainUser.getName());
-            r.initializeWithUser(mainUser);
-            //User mainUser=user;
-//            Register R = new Register(mainUser);
-//            R.previousPage="GameStart";
-//            R.setDefaultCloseOperation(DISPOSE_ON_CLOSE); //submit action need to be changed
+            registerLocal.previousPage=1;
+            registerLocal.initializeWithUser(mainUser);
+
         }
 
     }

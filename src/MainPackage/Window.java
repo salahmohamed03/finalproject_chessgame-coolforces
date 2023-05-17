@@ -14,35 +14,32 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public abstract class Window extends dataHandling implements MouseListener {
     IconsAndColors ic = new IconsAndColors();
-    LoginPage l;
-    Register r;
-    HomePage h;
-    GameStart g;
-    Settings s;
-    History hist;
+    LoginPage loginLocal;
+    Register registerLocal;
+    HomePage homeLocal;
+    GameStart gameStartLocal;
+    Settings settingsLocal;
+    History historyLocal;
     public JButton pinkColor;
     public JButton blueColor;
-    String test = "ss";
     public JFrame frame;
     public int width, height;
-    //int u = width/1440;
+//    int u = width/1440;
+
     protected    JLayeredPane  base;
 
 
     protected ImageIcon backG_image;
+    protected JLabel backG;
     protected JButton backBtn;
     public User mainUser;
 
 
     private int refDim = 1440;
-    protected JLabel backG;
 
     protected void initialize(){
         width = ic.width; height = ic.height;
-        System.out.println(height);
-        System.out.println(ic.height);
-        initializeWindow();
-        System.out.println(test);
+        initializeFrame();
         setupWindow();
         putBackG();
         frame.setVisible(true);
@@ -55,10 +52,11 @@ public abstract class Window extends dataHandling implements MouseListener {
     }
     abstract protected void setupWindow();
 
-    protected void initializeWindow() {
+    protected void initializeFrame() {
         frame = new JFrame();
         frame.setSize(width , height);
-        frame.setTitle("Chess game");
+        frame.setTitle("7ambolla");
+        frame.setIconImage(new ImageIcon (ic.colorPath+"Comp/main/logo.png").getImage());
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -68,13 +66,8 @@ public abstract class Window extends dataHandling implements MouseListener {
     }
     public void setBackG(String fileName){
         backG_image = new ImageIcon(fileName);
-        System.out.println("ss");
     }
-    public void setBackG(String fileName, int ref){ //overloading for diffrent dimensions
-        backG_image = new ImageIcon(fileName);
-        System.out.println("backg window");
-        refDim = ref;
-    }
+
     protected void putBackG(){
         backG = new JLabel(ic.resizeWithRatio(backG_image, refDim));
         if(refDim==870)
@@ -112,7 +105,7 @@ public abstract class Window extends dataHandling implements MouseListener {
 
         //text field design Login 40 size
         //Reg 50 size
-        textField.setFont(new Font("Space Grotesk", Font.PLAIN, size*width/1440));
+        textField.setFont(new Font("Space Grotesk", Font.PLAIN, size *width/1440));
         textField.setBackground(ic.white);
         textField.setForeground(ic.mainColor);
         textField.setOpaque(true);
@@ -183,7 +176,7 @@ public abstract class Window extends dataHandling implements MouseListener {
         return label;
     }
 
-    protected JButton createButton(String name, int btn){
+    protected JButton createButton(String name, int type){
         JButton button = new JButton(name);
         button.setFocusable(false);
 
@@ -194,7 +187,7 @@ public abstract class Window extends dataHandling implements MouseListener {
         ImageIcon whiteBtn = new ImageIcon(ic.colorPath+"Buttons/whiteBtn.png");
         ImageIcon homeBtn = new ImageIcon(ic.colorPath+"Buttons/pinkBtn2.png");
 
-        switch (btn) {
+        switch (type) {
             case 0 -> {
                 button.setIcon(ic.resizeWithRatio(settingsBtn));
                 button.setForeground(ic.white);
@@ -222,24 +215,6 @@ public abstract class Window extends dataHandling implements MouseListener {
         button.addMouseListener(this);
 
         return button;
-    }
-    //Salah method (OverLoading)
-    protected JButton createButton(String name,String ref, String filename, int x , int y,String color) {
-        JButton temp = new JButton(name);
-        temp.setName(ref);
-        temp.setFocusable(false);
-        temp.setFont(new Font("Space Grotesk Light",Font.BOLD,20 *width/870));
-        temp.setBackground(Color.red);
-        temp.setForeground(Color.decode(color));
-        ImageIcon temp1 = new ImageIcon(filename);//src/Mat/Buttons/resignBtn.png
-        Image btnBG = temp1.getImage().getScaledInstance(75 *width/870,35 *width/870,Image.SCALE_SMOOTH);
-        temp.setIcon(new ImageIcon (btnBG));
-        temp.setHorizontalTextPosition(JButton.CENTER);
-        temp.setVerticalTextPosition(JButton.CENTER);
-        temp.setOpaque(false);
-        temp.setBorder(BorderFactory.createEmptyBorder());
-        temp.setBounds(x,y,75 *width/870,35 *width/870);
-        return temp;
     }
     protected void set_backBtn(){
         ImageIcon backImg = new ImageIcon("src/Mat/Buttons/backBtn.png");

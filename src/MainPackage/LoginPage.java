@@ -9,25 +9,18 @@ import java.awt.event.MouseListener;
 
 public class LoginPage extends Window implements MouseListener {
 
-//    Register r ;
-//    HomePage h ;
+    private JTextField usernameField;
+    private JPasswordField passwordField;
 
-    public JTextField usernameField;
-    public JPasswordField passwordField;
-
-    public JButton loginBtn;
-    public JButton registerBtn;
-//    public LoginPage(){
-//        initialize();
-//    }
+    private JButton loginBtn;
+    private JButton registerBtn;
 
     @Override
     protected void setupWindow() {
-        setBackG(ic.colorPath+"BackG/loginFields.png");
+        setBackG(ic.colorPath+"BackG/loginFields.png"); //"src/Mat/Backg..........."
         setHeader();
         setFields();
         setBtns();
-//        checkInput();
     }
 
 
@@ -79,10 +72,6 @@ public class LoginPage extends Window implements MouseListener {
 
         base.add(btnsPanel, Integer.valueOf(2));
     }
-//    public void checkInput(){
-//        //should be if statement
-//        denyAccess();
-//    }
 
     public void denyAccess(){
         JLabel incrorrect = new JLabel("Credentials are incorrect");
@@ -110,25 +99,22 @@ public class LoginPage extends Window implements MouseListener {
             // If he already exists, his name will be in the combobox
             String passwordStr = new String (passwordField.getPassword());
             User logUser=new User(usernameField.getText(),passwordStr);
+
             if (checkCredentials(logUser.getName() , logUser.getPass()))
             {
                 frame.setVisible(false);
-                System.out.println("true");
-                h.initializeWithUser(logUser);
+                homeLocal.initializeWithUser(logUser);
             }
             else
             {
-                //frame.setVisible(true);
                 denyAccess();
-                System.out.println("deny");
             }
 
         }
         if (e.getSource()==registerBtn){
             frame.setVisible(false);
-            r.initialize();
-            r.previousPage=0;
-            System.out.println(r.previousPage);
+            registerLocal.initialize();
+            registerLocal.previousPage=0;
         }
     }
 

@@ -22,58 +22,6 @@ public class GameActions implements MouseListener{
         private final int width = ic.width;
     private final int height = ic.height;
 
-    /*public  promotio(int color){
-
-        initializeWindow();
-        setPromoteBackG();
-        setPromotePanel();
-        setpromoteHeader();
-        setBtns( color );
-
-
-        frame.add(base);
-
-
-        frame.setVisible(true);
-
-    }*/
-
-        //    public  Promote() {
-//        promotePanel = new JFrame();
-//        promotePanel.setUndecorated(true);
-//        promotePanel.setLocation(500 *width/1440, 397 *width/1440);
-//        promotePanel.setLayout(new BorderLayout());
-//        promotePanel.setSize(435 *width/1440, 256 *width/1440);
-//        promotePanel.getContentPane().setBackground( Color.white );
-//        promotePanel.setAlwaysOnTop(true);
-//        setpromoteHeader();
-//        setBtns();
-//    }
-//    public  Promote(int color) {
-//
-//        frame = new JFrame();
-//        frame.setUndecorated(true);
-//        frame.setSize(435 *width/1440, 256 *width/1440);
-//        //frame.setBackground(new Color(1.0f,1.0f,1.0f,0.5f));
-//        frame.setLocation(500 *width/1440, 397 *width/1440);
-//
-//        //base.setBounds(0,0,width,height);
-//
-//        promotePanel = new JPanel();
-//        promotePanel.setBounds(0,0,width,height);
-//        promotePanel.setBackground(new Color(1.0f,1.0f,1.0f,0.5f));
-//        promotePanel.setLocation(500 *width/1440, 397 *width/1440);
-//        promotePanel.setLayout(new BorderLayout());
-//        //promotePanel.getContentPane().setBackground( Color.white );
-//
-//        setPromoteBackG();
-//        setpromoteHeader();
-//        setBtns( color );
-//        frame.add(base);
-//        //base.add(promotePanel, Integer.valueOf(1));
-//        frame.setAlwaysOnTop(true);
-//        frame.setVisible(true);
-//    }
         public void promotionWindow(boolean side){
             initializeWindow();
             setPromoteBackG();
