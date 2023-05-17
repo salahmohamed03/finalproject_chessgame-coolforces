@@ -131,8 +131,6 @@ public abstract class Window extends dataHandling implements MouseListener {
             public void keyTyped(KeyEvent e) {
                 if (e.getKeyChar() == ' ') {
                     e.consume();
-                    System.out.println("Spaces are not allowed in password");
-                    //ya talalinho 7ot deh fel gui
                 }
             }
             @Override
