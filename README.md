@@ -11,7 +11,7 @@ https://github.com/bodaalaa2003 , https://github.com/TalalEmara ,  https://githu
 
 -The game has some uncommon but cool modifications made to the rules of chess. 
 For example, The knight can still moves in L-Shape, but can now move 2 squares horizontally then 3 vertically or 3 horizontally and then 2 vertically. The following picture shows the available moves for the knight when it is selected.
-![knight moves](Knight moves.png)
+![knight moves](Screenshot (521).png)
 
 ### Important Feautures
 -The game is highly functional and provides a friendly interface and smooth registration and login processes.
