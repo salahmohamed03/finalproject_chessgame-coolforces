@@ -161,25 +161,27 @@ public class ChessBoardHistory extends ChessBoardBASE {
 
         if(moveInfo.get(1).length() == 4){ // eating move
             ArrayList<String> eat =new ArrayList<>(List.of(moveInfo.get(1).split("x")));
-            move_piece(moveInfo.get(0),eat.get(1));
-            setDead(getPieceId(moveInfo.get(2)),!turn);
+            move_piece(eat.get(1),moveInfo.get(0));
+            getButton(eat.get(1)).setIcon(PieceIcon(moveInfo.get(2),turn));
+            setAlive(getPieceId(moveInfo.get(2)),turn);
         }
         else if(moveInfo.size() == 3){ // normal move promotion
-            move_piece(moveInfo.get(0),moveInfo.get(1));
-            getButton(moveInfo.get(1)).setIcon(PieceIcon(moveInfo.get(2),turn));
+            move_piece(moveInfo.get(1),moveInfo.get(0));
+            getButton(moveInfo.get(0)).setIcon(PieceIcon("P",!turn));
         }
 
         if(moveInfo.size() == 4){
             if(moveInfo.get(3).length() == 2){ // castling
-                move_piece(moveInfo.get(0),moveInfo.get(1));
-                move_piece(moveInfo.get(2),moveInfo.get(3));
+                move_piece(moveInfo.get(1),moveInfo.get(0));
+                move_piece(moveInfo.get(3),moveInfo.get(2));
             }
             else { // promotion eating
                 ArrayList<String> eat =new ArrayList<>(List.of(moveInfo.get(1).split("x")));
-                getButton(eat.get(1)).setIcon(PieceIcon(moveInfo.get(3),turn));
+                getButton(moveInfo.get(0)).setIcon(PieceIcon("P",!turn));
+               // getButton(moveInfo.get(0)).setIcon(PieceIcon(moveInfo.get(2), turn));
             }
         }
-
+        turn = !turn;
 
 
 

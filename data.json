@@ -107,6 +107,38 @@
           "G8,G7",
           "H7,H8,Q"
         ]
+      },
+      {
+        "oppUserStr": "VS salah",
+        "result": "Defeat",
+        "color": "Black",
+        "moves": [
+          "H2,H4",
+          "C8,E6",
+          "H4,H5",
+          "D8,B6",
+          "H5,H6",
+          "B8,D5",
+          "H6,PxH7,P",
+          "E8,C8,A8,D8",
+          "H7,PxH8,R,k"
+        ]
+      },
+      {
+        "oppUserStr": "VS salah",
+        "result": "Defeat",
+        "color": "Black",
+        "moves": [
+          "H2,H4",
+          "H7,H5",
+          "H4,PxH5,P",
+          "H8,H6",
+          "H5,PxH6,R",
+          "G7,G6",
+          "H6,H7",
+          "G8,D6",
+          "H7,H8,k"
+        ]
       }
     ]
   },
@@ -207,6 +239,38 @@
           "H6,PxH7,P",
           "G8,G7",
           "H7,H8,Q"
+        ]
+      },
+      {
+        "oppUserStr": "VS guest",
+        "result": "Win",
+        "color": "White",
+        "moves": [
+          "H2,H4",
+          "C8,E6",
+          "H4,H5",
+          "D8,B6",
+          "H5,H6",
+          "B8,D5",
+          "H6,PxH7,P",
+          "E8,C8,A8,D8",
+          "H7,PxH8,R,k"
+        ]
+      },
+      {
+        "oppUserStr": "VS guest",
+        "result": "Win",
+        "color": "White",
+        "moves": [
+          "H2,H4",
+          "H7,H5",
+          "H4,PxH5,P",
+          "H8,H6",
+          "H5,PxH6,R",
+          "G7,G6",
+          "H6,H7",
+          "G8,D6",
+          "H7,H8,k"
         ]
       }
     ]

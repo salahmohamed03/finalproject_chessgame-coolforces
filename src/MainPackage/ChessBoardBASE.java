@@ -424,6 +424,58 @@ public abstract class ChessBoardBASE implements MouseListener {
         }
 
     }
+    public void setAlive(int id , boolean side){
+
+        if(side){
+            switch (id) {
+                case 1 -> {
+                    wR--;
+                    wRookDead.setText("X" + wR);
+                }
+                case 2 -> {
+                    wK--;
+                    wKnightDead.setText("X" + wK);
+                }
+                case 3 -> {
+                    wB--;
+                    wBishopDead.setText("X" + wB);
+                }
+                case 4 -> {
+                    wQ--;
+                    wQueenDead.setText("X" + wQ);
+                }
+                case 6 -> {
+                    wP--;
+                    wPawnDead.setText("X" + wP);
+                }
+            }
+        } else {
+            switch (id) {
+                case 1 -> {
+                    bR--;
+                    bRookDead.setText("X" + bR);
+                }
+                case 2 -> {
+                    bK--;
+                    bKnightDead.setText("X" + bK);
+                }
+                case 3 -> {
+                    bB--;
+                    bBishopDead.setText("X" + bB);
+                }
+                case 4 -> {
+                    bQ--;
+                    bQueenDead.setText("X" + bQ);
+                }
+                case 6 -> {
+                    bP--;
+                    bPawnDead.setText("X" + bP);
+                }
+            }
+
+        }
+
+    }
     private void setDeadpanels(){
         blackDeadPanel = new JPanel();
         blackDeadPanel.setBounds(1012 *width/1440, 314 *width/1440, 354 * width/1440, 71 *width/1440);
