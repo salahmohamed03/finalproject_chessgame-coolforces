@@ -57,7 +57,7 @@ public abstract class Window extends dataHandling implements MouseListener {
     protected void initializeFrame() {
         frame = new JFrame();
         frame.setSize(width , height);
-        frame.setTitle("7ambolla");
+        frame.setTitle("CHESSA");
         frame.setIconImage(new ImageIcon (ic.colorPath+"Comp/main/logo.png").getImage());
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);

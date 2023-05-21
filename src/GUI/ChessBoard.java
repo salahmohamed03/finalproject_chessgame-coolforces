@@ -7,8 +7,7 @@ import gamePlay.*;
 
 
 public class ChessBoard extends ChessBoardBASE{
-    private final GameActions actions = new GameActions();
-    protected LoginPage l = new LoginPage();
+
     static protected GameStart gs = new GameStart();
     public JButton resign,draw, resign2,draw2;
     public static int drawOffer;

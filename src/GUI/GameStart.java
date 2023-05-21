@@ -212,9 +212,11 @@ public class GameStart extends Window implements MouseListener{
             else gameRunning = true;
             frame.setVisible(false);
             GameLauncher gL =new GameLauncher((selectedColor)?mainUser:oppUser,(selectedColor)?oppUser:mainUser);
+            Controller.phase++;
         }
         if (e.getSource()==addPlayerBtn)
         {
+            frame.setVisible(false);
             registerLocal.previousPage=1;
             registerLocal.initializeWithUser(mainUser);
 

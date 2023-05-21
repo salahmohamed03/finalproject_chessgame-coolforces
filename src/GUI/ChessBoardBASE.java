@@ -4,11 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Objects;
 import data.*;
 import gamePlay.*;
 
-public abstract class ChessBoardBASE implements MouseListener {
+public abstract class ChessBoardBASE extends dataHandling implements MouseListener {
     protected JFrame board;
     protected JLayeredPane base = new JLayeredPane();
     public GameLauncher game;
@@ -26,8 +27,6 @@ public abstract class ChessBoardBASE implements MouseListener {
     private JPanel blackDeadPanel;
     private JPanel whiteDeadPanel;
     int wP=0, wB=0,  wK=0, wQ=0,  wR=0, bP=0, bB=0, bK=0, bQ=0, bR=0;
-    protected static User whiteP ;
-    protected static User blackP;
     public String WhitePName="";
     public String BlackPName="";
     public boolean checkingHistory;
@@ -68,12 +67,7 @@ public abstract class ChessBoardBASE implements MouseListener {
         container = new JPanel(null);
         container.setBounds(0,0,width,heigth);
         setPlayerInfo(WhitePName,BlackPName, 38); //should get the usernames
-//        if (checkingHistory)
-//        {
-//            setPlayerInfo(WhitePName, BlackPName, 38);
-//        }
-//        else setPlayerInfo(mainUser.getName(),oppUser.getName(), 38); //should get the usernames
-        setD(); // for dead panels
+          setD(); // for dead panels
 
         base.add(container, Integer.valueOf(0));
         board.add(base);
@@ -338,10 +332,19 @@ public abstract class ChessBoardBASE implements MouseListener {
         return getButton(pos).getIcon() == null;
     }
     public void setPlayerInfo(String w, String b, int size /* double wRate , double bRate*/){
+
+        ArrayList <Match>  matches = new ArrayList<>();
+        matches.addAll(getMatches(BlackPName));
+        float winRate1 = getWinRateAndWins(matches)[0];
+        matches.clear();
+        matches.addAll(getMatches(WhitePName));
+        float winRate2 = getWinRateAndWins(matches)[0];
+        matches.clear();
+
         createNameLabel(b, size , false );
-        createWinRateLabel(50,20,false);
+        createWinRateLabel(winRate1,20,false);
         createNameLabel(w,size , true);
-        createWinRateLabel(36.55,20,true);
+        createWinRateLabel(winRate2,20,true);
     }
     private  void createNameLabel(String text, int s , boolean side ){
         JLabel label = new JLabel(text);

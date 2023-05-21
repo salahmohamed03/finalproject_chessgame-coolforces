@@ -33,7 +33,10 @@ public class GameLauncher extends dataHandling{
         gameMoves = new ArrayList<>();
         game.setClock(this);
         isTimer = !game.blackClock.finishedCheck();
-        this.initializePieces();
+
+
+        initializePieces();
+
         this.turn = true;
         ChessBoardBASE.gameResult = true;
     }
@@ -91,6 +94,75 @@ public class GameLauncher extends dataHandling{
 //        this.pieces.add(new king(false,"D6",game));
 //        this.pieces.add(new bishop(false,"D3",game));
 //        this.pieces.add(new king(true,"F8",game));
+
+        updateValidMoves(true);
+        updateCapture(true);
+        updateValidMoves(false);
+        updateCapture(false);
+        kingEscape(turn);
+        kingChecked(turn);
+    }
+    public void castling(){
+        this.pieces = new ArrayList<Piece>();
+        this.pieces.add(new pawn(true, "H2", game));
+        this.pieces.add(new pawn(true, "F2", game));
+        this.pieces.add(new pawn(true, "G2", game));
+        this.pieces.add(new king(true, "E1", game));
+        this.pieces.add(new rook(true, "H1", game));
+        this.pieces.add(new rook(true,"A1",game));
+        this.pieces.add(new rook(false,"A8",game));
+        this.pieces.add(new pawn(false, "A7", game));
+        this.pieces.add(new pawn(false, "B7", game));
+        this.pieces.add(new pawn(false, "C7", game));
+        this.pieces.add(new king(false, "E8", game));
+        this.pieces.add(new rook(false, "H8", game));
+
+
+        updateValidMoves(true);
+        updateCapture(true);
+        updateValidMoves(false);
+        updateCapture(false);
+        kingEscape(turn);
+        kingChecked(turn);
+    }
+    public void block(){
+        this.pieces = new ArrayList<Piece>();
+        this.pieces.add(new king(true, "E2", game));
+        this.pieces.add(new queen(true, "E3", game));
+        this.pieces.add(new knight(false, "E5", game));
+        this.pieces.add(new king(false, "E6", game));
+        this.pieces.add(new bishop(false, "F8", game));
+
+        updateValidMoves(true);
+        updateCapture(true);
+        updateValidMoves(false);
+        updateCapture(false);
+        kingEscape(turn);
+        kingChecked(turn);
+    }
+    public void stalemate(){
+        this.pieces = new ArrayList<Piece>();
+        this.pieces.add(new king(false, "A8", game));
+        this.pieces.add(new queen(true, "D7", game));
+       // this.pieces.add(new knight(false, "E5", game));
+        this.pieces.add(new king(true, "E2", game));
+        //this.pieces.add(new bishop(false, "F8", game));
+
+        updateValidMoves(true);
+        updateCapture(true);
+        updateValidMoves(false);
+        updateCapture(false);
+        kingEscape(turn);
+        kingChecked(turn);
+    }
+    public void promotion(){
+        this.pieces = new ArrayList<Piece>();
+        this.pieces.add(new pawn(true, "G7", game));
+        this.pieces.add(new pawn(false, "A7", game));
+        this.pieces.add(new pawn(false, "B7", game));
+        this.pieces.add(new pawn(false, "C7", game));
+        this.pieces.add(new king(false, "B8", game));
+        this.pieces.add(new king(true, "E2", game));
 
         updateValidMoves(true);
         updateCapture(true);

@@ -119,7 +119,7 @@ public class Register extends Window implements MouseListener{
             }
             if( previousPage==1)
             {
-                this.frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+               gameStartLocal.initializeWithUser(mainUser);
             }
         }
 
@@ -142,7 +142,7 @@ public class Register extends Window implements MouseListener{
                     // If coming from gamestart main user is passed again to keep his authority
                     //and the regUser is also passed as an opponent
                     frame.setVisible(false);
-                    if (previousPage==1)
+                    if (previousPage==1) //1 = game start page
                     {
                         //program will go to gameStart again
                         System.out.println(mainUser.getName());

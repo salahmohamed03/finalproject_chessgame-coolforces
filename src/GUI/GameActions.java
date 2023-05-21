@@ -165,8 +165,10 @@ public class GameActions implements MouseListener{
                     String temp = gl.gameMoves.get(gl.gameMoves.size()-1);
                     temp+= ",B";
                     gl.gameMoves.remove(gl.gameMoves.size()-1);
+
                     gl.gameMoves.add(temp);
                     promoteDispose();
+                    gl.Clock("no");
                 } else if (e.getSource() == queenP) {
                     System.out.println("Queen");
                     selected = 4;
@@ -177,6 +179,7 @@ public class GameActions implements MouseListener{
                     gl.gameMoves.remove(gl.gameMoves.size()-1);
                     gl.gameMoves.add(temp);
                     promoteDispose();
+                    gl.Clock("no");
                 } else if (e.getSource() == knightP) {
                     System.out.println("Knight");
                     selected = 2;
@@ -187,6 +190,7 @@ public class GameActions implements MouseListener{
                     gl.gameMoves.remove(gl.gameMoves.size()-1);
                     gl.gameMoves.add(temp);
                     promoteDispose();
+                    gl.Clock("no");
                 } else if (e.getSource() == rookP) {
                     System.out.println("Rook");
                     selected = 1;
@@ -197,6 +201,7 @@ public class GameActions implements MouseListener{
                     gl.gameMoves.remove(gl.gameMoves.size()-1);
                     gl.gameMoves.add(temp);
                     promoteDispose();
+                    gl.Clock("no");
                 }
                 if ((e.getSource() == resultLabel)) {
                     frame.dispose();

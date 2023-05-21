@@ -94,7 +94,7 @@ public class HomePage extends Window implements MouseListener {
     public void getStats (JLabel type){
         ArrayList <Match> dispMatches = new ArrayList<>();
         dispMatches.addAll(getMatches(mainUser.getName()));
-        float[] winRateAndWins = Arrays.copyOf(getWinRateAndWins(dispMatches),2);
+        int[] winRateAndWins = Arrays.copyOf(getWinRateAndWins(dispMatches),2);
         if (type == matches) {
             matches = new JLabel(Integer.toString(dispMatches.size())); //Just a value for Gui (needs to be changed)
             setStatsLook(matches, "number");
@@ -107,7 +107,7 @@ public class HomePage extends Window implements MouseListener {
             winCountPanel.add(winCount,BorderLayout.CENTER);
             //stats.add(winCount,BorderLayout.NORTH);
         } else if (type == winRate) {
-            winRate = new JLabel(Float.toString(winRateAndWins[0])); //Just a value for Gui (needs to be changed)
+            winRate = new JLabel(Integer.toString(winRateAndWins[0])); //Just a value for Gui (needs to be changed)
             setStatsLook(winRate, "number");
             setStatsLook(winRate, "number");
             winRate.setFont(new Font("Space Grotesk", Font.BOLD, 40*width/1440));

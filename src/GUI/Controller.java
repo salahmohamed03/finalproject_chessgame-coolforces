@@ -7,9 +7,12 @@ import data.*;
 import gamePlay.*;
 
 public class Controller implements MouseListener {
+    public static int phase = 0;
 
     public static void main(String[] args) {
         IconsAndColors icC = new IconsAndColors();
+        icC.width= 1125;
+        icC.height= 800;
         LoginPage loginControl = new LoginPage();
         Register registerControl = new Register();
         HomePage homePageControl = new HomePage();
@@ -26,9 +29,6 @@ public class Controller implements MouseListener {
 
     }
     private static void setLink(LoginPage loginLink, Register registerLink, IconsAndColors iconsColorsLink,HomePage homepageLink , GameStart gameStartLink ,  History historyLink, Settings settingsLink){
-        //XC for the page in this method
-        //.x small is th page referance in each window
-        // names will be change soon but to make it easier in typing
 
 
         loginLink.ic = registerLink.ic= homepageLink.ic= gameStartLink.ic=  historyLink.ic=settingsLink.ic= iconsColorsLink;

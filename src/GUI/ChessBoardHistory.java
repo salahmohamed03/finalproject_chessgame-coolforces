@@ -97,7 +97,7 @@ public class ChessBoardHistory extends ChessBoardBASE {
         movesText.replaceSelection(" ");
         for (int i = 0 ; i < movesCount; i++) {
             movesText.append(moves[i] + " ");
-            if (i == 8) movesText.append("\n");
+            if (i == 7) movesText.append("\n");
         }
 
     }
