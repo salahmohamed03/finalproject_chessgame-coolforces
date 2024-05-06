@@ -23,9 +23,6 @@ For example, The knight can still moves in L-Shape, but can now move 2 squares h
 and this user has his whole history of matches recorded ; each matched was played againest whom , moves , color and the ability to replay the match.
 ![history](history.png)
 
-### Potential & Already Known Glitches
--As mentioned before, the game is highly functional , so to claim complete functionality would require our team to do more testing. But overall,we expect you will encounter few glithces and maybe even go unnoticed.
 
-Add glitches here
+https://github.com/salahmohamed03/DrBassil-website/assets/93553073/f502980c-e2c3-4987-8404-a018fc316505
 
--If you encountered any glitch, feel free to contact any of the team members through git hub accounds provided above.
